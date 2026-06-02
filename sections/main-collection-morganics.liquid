@@ -1,0 +1,96 @@
+{% liquid
+  assign fallback_copy = section.settings.fallback_copy
+  assign fallback_banner = section.settings.fallback_banner_asset | default: 'morganics/banners/nuts-dry-fruits.jpg'
+%}
+
+{% render 'morganics-collection-hero', collection: collection, fallback_copy: fallback_copy, fallback_banner: fallback_banner %}
+
+<section class="category-intro">
+  <div class="intro-card">
+    <span class="eyebrow">{{ section.settings.intro_eyebrow }}</span>
+    <h2>{{ collection.metafields.custom.ritual | default: section.settings.intro_heading }}</h2>
+    <p>{{ collection.metafields.custom.usage | default: section.settings.intro_text }}</p>
+  </div>
+</section>
+
+{% paginate collection.products by section.settings.products_per_page %}
+  {% render 'morganics-sort-filter-bar', collection: collection, search_mode: false, button_label: section.settings.sort_button_label %}
+
+  <section class="shop-layout" id="collectionProducts">
+    {% if section.settings.show_filters and collection.filters.size > 0 %}
+      <aside class="filter-panel" aria-label="Collection filters">
+        <h3>{{ section.settings.filter_heading }}</h3>
+        <form method="get" action="{{ collection.url }}">
+          {% if collection.sort_by != blank %}
+            <input type="hidden" name="sort_by" value="{{ collection.sort_by }}">
+          {% endif %}
+          {% for filter in collection.filters %}
+            <details class="filter-group" {% if forloop.first %}open{% endif %}>
+              <summary>{{ filter.label }}</summary>
+              <div class="filter-values">
+                {% case filter.type %}
+                  {% when 'boolean', 'list' %}
+                    {% for value in filter.values %}
+                      <label class="filter-check">
+                        <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                        <span>{{ value.label }} <small>{{ value.count }}</small></span>
+                      </label>
+                    {% endfor %}
+                  {% when 'price_range' %}
+                    <label class="filter-price">Min <input name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency }}" inputmode="decimal"></label>
+                    <label class="filter-price">Max <input name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency }}" inputmode="decimal"></label>
+                {% endcase %}
+              </div>
+            </details>
+          {% endfor %}
+          <button class="btn ghost" type="submit">{{ section.settings.filter_button_label }}</button>
+        </form>
+      </aside>
+    {% endif %}
+
+    <div class="collection-results">
+      <div class="shop-count">Showing {{ collection.products_count }} products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
+
+      {% if collection.products.size > 0 %}
+        <div class="product-grid shop-grid">
+          {% for product in collection.products %}
+            {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-collection">
+          <h2>{{ section.settings.empty_heading }}</h2>
+          <p>{{ section.settings.empty_text }}</p>
+          <a class="btn" href="{{ routes.all_products_collection_url }}">Open full shop</a>
+        </div>
+      {% endif %}
+
+      {% if paginate.pages > 1 %}
+        <nav class="pagination" role="navigation" aria-label="Pagination">
+          {{ paginate | default_pagination }}
+        </nav>
+      {% endif %}
+    </div>
+  </section>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Morganics collection",
+  "settings": [
+    { "type": "textarea", "id": "fallback_copy", "label": "Fallback collection copy", "default": "Explore Morganics pantry products with practical usage, storage guidance, and careful product information." },
+    { "type": "text", "id": "fallback_banner_asset", "label": "Fallback banner asset", "default": "morganics/banners/nuts-dry-fruits.jpg" },
+    { "type": "text", "id": "intro_eyebrow", "label": "Intro eyebrow", "default": "Best for" },
+    { "type": "text", "id": "intro_heading", "label": "Intro heading fallback", "default": "Daily pantry, wellness and gifting." },
+    { "type": "textarea", "id": "intro_text", "label": "Intro text fallback", "default": "Choose the ingredient, understand its daily use, and add it to your kitchen, wellness routine or gift box." },
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "checkbox", "id": "show_filters", "label": "Show Shopify filters", "default": true },
+    { "type": "text", "id": "filter_heading", "label": "Filter heading", "default": "Filters" },
+    { "type": "text", "id": "filter_button_label", "label": "Filter button label", "default": "Apply Filters" },
+    { "type": "text", "id": "sort_button_label", "label": "Sort button label", "default": "Apply Sort" },
+    { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add on cards", "default": true },
+    { "type": "text", "id": "empty_heading", "label": "Empty heading", "default": "No products found." },
+    { "type": "textarea", "id": "empty_text", "label": "Empty text", "default": "This collection is ready for Shopify products. Add products or adjust filters to continue." }
+  ]
+}
+{% endschema %}

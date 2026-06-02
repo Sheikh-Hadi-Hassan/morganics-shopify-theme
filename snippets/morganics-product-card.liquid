@@ -1,0 +1,44 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign card_meta = product.type | default: product.vendor | default: 'Morganics'
+%}
+
+<div class="product-card-wrap">
+  <a class="product-card" href="{{ product.url }}">
+    <div class="product-img">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}
+      {% else %}
+        <img src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="{{ product.title | escape }}" width="700" height="700" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="product-info">
+      <small class="product-meta">{{ card_meta }}{% if current_variant.sku != blank %} · {{ current_variant.sku }}{% endif %}</small>
+      <b class="product-name">{{ product.title }}</b>
+      {% if product.metafields.custom.urdu_name != blank %}
+        <span class="urdu-line">{{ product.metafields.custom.urdu_name }}</span>
+      {% endif %}
+      <div class="price-row">
+        <span class="price">{{ product.price | money }}</span>
+        {% if product.available %}
+          <span class="chip">Available</span>
+        {% else %}
+          <span class="chip chip-muted">Sold out</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+
+  {% if show_quick_add and product.available %}
+    {% form 'product', product, class: 'card-actions' %}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+      <button class="card-cart-btn" type="submit">Add to Cart</button>
+      <a class="card-view-btn" href="{{ product.url }}">View</a>
+    {% endform %}
+  {% elsif show_quick_add %}
+    <div class="card-actions">
+      <button class="card-cart-btn" type="button" disabled>Sold Out</button>
+      <a class="card-view-btn" href="{{ product.url }}">View</a>
+    </div>
+  {% endif %}
+</div>

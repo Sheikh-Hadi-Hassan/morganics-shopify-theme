@@ -1,0 +1,21 @@
+{% liquid
+  assign banner_image = collection.image | default: collection.featured_image
+  assign hero_title = collection.metafields.custom.category_title | default: collection.title
+  assign hero_copy = collection.metafields.custom.category_copy | default: collection.description | strip_html
+  if hero_copy == blank
+    assign hero_copy = fallback_copy
+  endif
+%}
+
+<section class="category-hero" {% if banner_image %}style="--banner:url({{ banner_image | image_url: width: 1800 }})"{% else %}style="--banner:url({{ fallback_banner | asset_url }})"{% endif %}>
+  <div>
+    <a class="crumb" href="{{ routes.collections_url }}">← All collections</a>
+    <span class="eyebrow">{{ collection.products_count }} products</span>
+    <h1>{{ hero_title }}</h1>
+    {% if hero_copy != blank %}<p>{{ hero_copy }}</p>{% endif %}
+    <div class="hero-actions">
+      <a class="btn primary" href="#collectionProducts">Shop {{ collection.title }}</a>
+      <a class="btn ghost" href="{{ routes.all_products_collection_url }}">Open full shop</a>
+    </div>
+  </div>
+</section>

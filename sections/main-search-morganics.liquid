@@ -1,0 +1,65 @@
+<section class="shop-hero">
+  <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+  <h1>{{ section.settings.heading }}</h1>
+  <p>{{ section.settings.text }}</p>
+</section>
+
+{% render 'morganics-sort-filter-bar', search_mode: true, search: search, search_placeholder: section.settings.search_placeholder, button_label: section.settings.button_label %}
+
+<section class="shop-layout">
+  <aside class="filter-panel">
+    <h3>{{ section.settings.side_heading }}</h3>
+    <p>{{ section.settings.side_text }}</p>
+  </aside>
+
+  <div class="collection-results">
+    {% if search.performed %}
+      <div class="shop-count">Showing {{ search.results_count }} results for "{{ search.terms | escape }}"</div>
+      {% paginate search.results by section.settings.results_per_page %}
+        {% if search.results_count > 0 %}
+          <div class="product-grid shop-grid">
+            {% for result in search.results %}
+              {% if result.object_type == 'product' %}
+                {% render 'morganics-product-card', product: result, show_quick_add: section.settings.show_quick_add %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-collection">
+            <h2>{{ section.settings.empty_heading }}</h2>
+            <p>{{ section.settings.empty_text }}</p>
+          </div>
+        {% endif %}
+        {% if paginate.pages > 1 %}
+          <nav class="pagination" role="navigation" aria-label="Pagination">{{ paginate | default_pagination }}</nav>
+        {% endif %}
+      {% endpaginate %}
+    {% else %}
+      <div class="empty-collection">
+        <h2>{{ section.settings.initial_heading }}</h2>
+        <p>{{ section.settings.initial_text }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics search",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Search Morganics" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your ingredient." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Search by product, category, SKU, Urdu name or use case where Shopify product data supports it." },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search: almond, ajwain, honey..." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Search" },
+    { "type": "text", "id": "side_heading", "label": "Side heading", "default": "Search Tips" },
+    { "type": "textarea", "id": "side_text", "label": "Side text", "default": "Use Shopify product titles, descriptions, tags and metafields to improve search results." },
+    { "type": "range", "id": "results_per_page", "label": "Results per page", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add", "default": true },
+    { "type": "text", "id": "empty_heading", "label": "Empty heading", "default": "No products found." },
+    { "type": "textarea", "id": "empty_text", "label": "Empty text", "default": "Try another product name, category, or ingredient spelling." },
+    { "type": "text", "id": "initial_heading", "label": "Initial heading", "default": "Search Morganics products." },
+    { "type": "textarea", "id": "initial_text", "label": "Initial text", "default": "Enter a product or ingredient name to start." }
+  ]
+}
+{% endschema %}

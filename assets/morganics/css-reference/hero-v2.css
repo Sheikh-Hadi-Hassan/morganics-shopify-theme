@@ -1,0 +1,1853 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   MORGANICS HERO v2 — Desktop Fix (loads last, beats mob-hero-fix.css)
+   Strategy: Override CSS variables AND positioning to match reference screenshot.
+   Reference: Pouch centered on stone, pile on stone, left text, right cards.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DESKTOP ≥ 1195px — FULL REDESIGN to match reference screenshot
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 1195px) {
+
+  /* ── 1. CSS VARIABLES — override mob-hero-fix defaults ─────────────── */
+  /* Hero section acts as the absolute-positioning context.
+     Products are centered at 50% of the section width.
+     All sizes are per the user's exact spec.                             */
+  body[data-page="home"] {
+    /* Product center X: 50% = true horizontal center of section */
+    --mhf-product-x:    50%;
+
+    /* Product sizes per user spec */
+    --mhf-pouch-w:      clamp(240px, 21vw, 340px);
+    --mhf-stone-w:      clamp(460px, 38vw, 700px);
+    --mhf-pile-w:       clamp(330px, 28vw, 520px);
+
+    /* Vertical positions (bottom from hero bottom edge).
+       Hero is 100svh. Using bottom-from-section-bottom:
+       - Stone:  30px to 80px from bottom → base sits low
+       - Pile:   bottom of stone + stone_height/2 (stone center ~22% from bottom)
+       - Pouch:  above pile                                                */
+    --mhf-stone-bottom: clamp(30px,  5vh,  80px);
+    --mhf-pile-bottom:  clamp(155px, 20vh, 240px);
+    --mhf-pouch-bottom: clamp(300px, 38vh, 480px);
+    --mhf-shadow-w:     clamp(110px, 13vw, 200px);
+    --mhf-shadow-bottom: calc(var(--mhf-pouch-bottom) - 22px);
+
+    /* Text copy block — left side */
+    --mhf-copy-x:       clamp(180px, 16vw, 300px); /* left from section left */
+    --mhf-copy-top:     50%;
+    --mhf-copy-w:       clamp(260px, 22vw, 400px);
+  }
+
+  /* ── 2. SECTION HEIGHT ─────────────────────────────────────────────── */
+  body[data-page="home"] .morganics-hero {
+    height:     100svh  !important;
+    min-height: 700px   !important;
+    max-height: 1000px  !important;
+    overflow:   hidden  !important;
+    position:   relative !important;
+  }
+
+  /* ── 3. INNER + STAGE — keep absolute/inset:0 (works with variable system) */
+  /* We don't fight the absolute layout — we just set the RIGHT variables.    */
+  body[data-page="home"] .hero-inner,
+  body[data-page="home"] .hero-main-wrapper {
+    position: absolute !important;
+    inset:    0        !important;
+    pointer-events: none !important;
+  }
+  body[data-page="home"] .hero-product-stage,
+  body[data-page="home"] .hero-product-wrapper {
+    position: absolute !important;
+    inset:    0        !important;
+    pointer-events: none !important;
+  }
+
+  /* ── 4. PRODUCT IMAGES — high-specificity override of mob-hero-fix ─── */
+  /* mob-hero-fix sets: position:absolute, left:62%, transform:translateX(-50%), bottom:VAR
+     We override to:    position:absolute, left:50%, transform:translateX(-50%), bottom:VAR
+     This is the same pattern but with correct variables set above.        */
+
+  /* All three product images: centered horizontally */
+  body[data-page="home"] .morganics-hero .hero-product-stage .hero-pouch .pouch-img,
+  body[data-page="home"] .morganics-hero .hero-product-stage .pouch-wrapper .pouch-img {
+    position:  absolute !important;
+    left:      50%      !important;
+    right:     auto     !important;
+    top:       auto     !important;
+    transform: translateX(-50%) !important;
+    width:     var(--mhf-pouch-w)      !important;
+    bottom:    var(--mhf-pouch-bottom) !important;
+    max-width: 340px    !important;
+    min-width: 0        !important;
+    height:    auto     !important;
+    display:   block    !important;
+    object-fit:contain  !important;
+    z-index:   4        !important;
+  }
+
+  body[data-page="home"] .morganics-hero .hero-product-stage .hero-stone .stone-img,
+  body[data-page="home"] .morganics-hero .hero-product-stage .stone-wrapper .stone-img {
+    position:  absolute !important;
+    left:      50%      !important;
+    right:     auto     !important;
+    top:       auto     !important;
+    transform: translateX(-50%) !important;
+    width:     var(--mhf-stone-w)      !important;
+    bottom:    var(--mhf-stone-bottom) !important;
+    max-width: 700px    !important;
+    min-width: 0        !important;
+    height:    auto     !important;
+    display:   block    !important;
+    object-fit:contain  !important;
+    z-index:   3        !important;
+  }
+
+  body[data-page="home"] .morganics-hero .hero-product-stage .hero-pile .pile-img,
+  body[data-page="home"] .morganics-hero .hero-product-stage .dryfruits-wrapper .pile-img {
+    position:  absolute !important;
+    left:      50%      !important;
+    right:     auto     !important;
+    top:       auto     !important;
+    transform: translateX(-50%) !important;
+    width:     var(--mhf-pile-w)      !important;
+    bottom:    var(--mhf-pile-bottom) !important;
+    max-width: 520px    !important;
+    min-width: 0        !important;
+    height:    auto     !important;
+    display:   block    !important;
+    object-fit:contain  !important;
+    z-index:   5        !important;
+  }
+
+  /* Contact shadow */
+  body[data-page="home"] .morganics-hero .hero-product-stage .product-contact-shadow,
+  body[data-page="home"] .morganics-hero .hero-product-stage .contact-shadow {
+    position:      absolute !important;
+    left:          50%      !important;
+    right:         auto     !important;
+    top:           auto     !important;
+    transform:     translateX(-50%) !important;
+    width:         var(--mhf-shadow-w)      !important;
+    bottom:        var(--mhf-shadow-bottom) !important;
+    height:        clamp(18px, 2.5vw, 36px)  !important;
+    border-radius: 999px    !important;
+    background:    radial-gradient(ellipse at center,
+      rgba(0,0,0,.44) 0%, rgba(0,0,0,.22) 38%, transparent 72%
+    ) !important;
+    filter:        blur(10px) !important;
+    opacity:       0.50    !important;
+    z-index:       3       !important;
+    pointer-events:none    !important;
+  }
+
+  /* ── 5. TEXT BLOCK — left side ─────────────────────────────────────── */
+  /* mob-hero-fix positions text at --mhf-copy-x, --mhf-copy-top.
+     We override to left-aligned using left offset not percentage.        */
+  body[data-page="home"] .morganics-hero .hero-ui,
+  body[data-page="home"] .morganics-hero .hero-copy,
+  body[data-page="home"] .morganics-hero .hero-text-wrapper {
+    position:       absolute !important;
+    inset:          0        !important;
+    display:        block    !important;
+    pointer-events: none     !important;
+  }
+  body[data-page="home"] .morganics-hero .hero-ui *,
+  body[data-page="home"] .morganics-hero .hero-copy * {
+    pointer-events: auto !important;
+  }
+
+  body[data-page="home"] .morganics-hero .ui-text-left {
+    position:       absolute !important;
+    left:           clamp(40px, 5vw, 90px) !important;
+    top:            50%     !important;
+    right:          auto    !important;
+    bottom:         auto    !important;
+    width:          clamp(260px, 22vw, 400px) !important;
+    max-width:      400px   !important;
+    transform:      translateY(-50%) !important;
+    text-align:     left    !important;
+    display:        flex    !important;
+    flex-direction: column  !important;
+    align-items:    flex-start !important;
+    padding:        0       !important;
+  }
+
+  /* ── 6. RIGHT SIDE: Category cards + Wellness ──────────────────────── */
+  body[data-page="home"] .morganics-hero .hero-ui .ui-cards,
+  body[data-page="home"] .morganics-hero .ui-cards {
+    position:       absolute    !important;
+    top:            50%         !important;
+    right:          clamp(28px, 4vw, 72px) !important;
+    left:           auto        !important;
+    bottom:         auto        !important;
+    transform:      translateY(-62%) !important;
+    width:          min(230px, 22vw)  !important;
+    display:        flex        !important;
+    flex-direction: column      !important;
+    gap:            11px        !important;
+    z-index:        20          !important;
+    opacity:        1           !important;
+    animation:      none        !important;
+    max-height:     none        !important;
+  }
+
+  body[data-page="home"] .morganics-hero .ui-text-br {
+    display:    block   !important;
+    visibility: visible !important;
+    position:   absolute !important;
+    bottom:     clamp(28px, 4vh, 56px) !important;
+    right:      clamp(28px, 4vw, 72px) !important;
+    left:       auto    !important;
+    top:        auto    !important;
+    transform:  none    !important;
+    text-align: right   !important;
+    z-index:    20      !important;
+  }
+
+  /* ── 7. TYPOGRAPHY ─────────────────────────────────────────────────── */
+  body[data-page="home"] .morganics-hero .tl-sm {
+    font-size:  clamp(18px, 2vw, 30px) !important;
+    text-align: left !important;
+  }
+  body[data-page="home"] .morganics-hero .tl-lg {
+    font-size:      clamp(60px, 7vw, 110px) !important;
+    line-height:    0.86     !important;
+    letter-spacing: -0.04em  !important;
+    text-align:     left     !important;
+  }
+  body[data-page="home"] .morganics-hero .title-rule {
+    margin-left:  0    !important;
+    margin-right: auto !important;
+    margin-top:   16px !important;
+    margin-bottom:14px !important;
+  }
+  body[data-page="home"] .morganics-hero .hero-desc {
+    text-align:   left  !important;
+    margin:       0     !important;
+    font-size:    clamp(13px, 1.1vw, 16px) !important;
+    max-width:    clamp(200px, 20vw, 320px) !important;
+    line-height:  1.6   !important;
+  }
+  body[data-page="home"] .morganics-hero .tbr-sm {
+    font-size:  clamp(14px, 1.4vw, 22px) !important;
+    line-height: 1.2   !important;
+    font-weight: 700   !important;
+    display:    block  !important;
+  }
+  body[data-page="home"] .morganics-hero .tbr-lg {
+    font-size:      clamp(34px, 4.2vw, 66px) !important;
+    line-height:    0.9     !important;
+    letter-spacing: -0.03em !important;
+    font-weight:    950     !important;
+    display:        block   !important;
+  }
+
+  /* ── 8. BENEFIT CARDS ──────────────────────────────────────────────── */
+  body[data-page="home"] .morganics-hero .hero-ui .benefit-card,
+  body[data-page="home"] .morganics-hero .benefit-card {
+    display:        flex          !important;
+    flex-direction: row           !important;
+    align-items:    center        !important;
+    justify-content:flex-start    !important;
+    gap:            10px          !important;
+    min-height:     54px          !important;
+    border-radius:  16px          !important;
+    padding:        9px 13px      !important;
+    background:     rgba(247,241,230,0.11) !important;
+    border:         1px solid rgba(247,241,230,0.20) !important;
+    backdrop-filter:blur(18px)    !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    color:          #F7F1E6       !important;
+    text-decoration:none          !important;
+    font-weight:    800           !important;
+    cursor:         pointer       !important;
+    transition:     background 200ms ease, border-color 200ms ease, transform 200ms ease !important;
+    box-shadow:     0 4px 20px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06) !important;
+    width:          100%          !important;
+    opacity:        1             !important;
+    animation:      none          !important;
+    pointer-events: auto          !important;
+  }
+  body[data-page="home"] .morganics-hero .benefit-card:hover {
+    background:   rgba(247,241,230,0.18) !important;
+    border-color: rgba(223,165,36,0.55)  !important;
+    transform:    translateX(-3px)       !important;
+  }
+  body[data-page="home"] .morganics-hero .benefit-card.active {
+    background:   rgba(247,233,192,0.18) !important;
+    border-color: rgba(223,165,36,0.62)  !important;
+  }
+
+  /* ── 9. BENEFIT CARD ICONS ─────────────────────────────────────────── */
+  body[data-page="home"] .morganics-hero .hero-ui .bc-icon,
+  body[data-page="home"] .morganics-hero .bc-icon {
+    width:        38px   !important;
+    height:       38px   !important;
+    min-width:    38px   !important;
+    border-radius:11px   !important;
+    background:   rgba(223,165,36,0.12) !important;
+    border:       1px solid rgba(223,165,36,0.22) !important;
+    display:      flex   !important;
+    align-items:  center !important;
+    justify-content: center !important;
+    flex-shrink:  0      !important;
+  }
+  body[data-page="home"] .morganics-hero .hero-ui .bc-icon svg,
+  body[data-page="home"] .morganics-hero .bc-icon svg {
+    width:  22px !important;
+    height: 22px !important;
+  }
+  body[data-page="home"] .morganics-hero .hero-ui .bc-label,
+  body[data-page="home"] .morganics-hero .bc-label {
+    font-size:   clamp(11px, 1vw, 14px) !important;
+    line-height: 1.15   !important;
+    color:       #F7F1E6 !important;
+    white-space: normal  !important;
+  }
+
+  /* ── 10. FLOATERS ─────────────────────────────────────────────────── */
+  /* Floaters positioned absolutely within hero-product-stage (inset:0) */
+  .morganics-hero .f-pistachio     { left: 14%;  top: 18%;  position: absolute; }
+  .morganics-hero .f-almond        { right: 20%; top: 14%;  position: absolute; }
+  .morganics-hero .f-cashew        { left: 10%;  top: 46%;  position: absolute; }
+  .morganics-hero .f-walnut        { right: 18%; top: 42%;  position: absolute; }
+  .morganics-hero .f-golden-raisin { left: 30%;  top: 10%;  position: absolute; }
+  .morganics-hero .f-date          { right: 26%; top: 54%;  position: absolute; }
+  .morganics-hero .f-fig           { left: 23%;  top: 30%;  position: absolute; }
+  .morganics-hero .f-black-raisin  { right: 22%; top: 22%;  position: absolute; }
+
+  .morganics-hero .f-pistachio img    { width: clamp(30px, 2.8vw, 48px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-almond img      { width: clamp(28px, 2.5vw, 44px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-cashew img      { width: clamp(28px, 2.6vw, 46px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-walnut img      { width: clamp(34px, 3.2vw, 54px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-golden-raisin img{ width: clamp(20px, 2vw,   34px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-date img        { width: clamp(26px, 2.4vw, 42px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-fig img         { width: clamp(20px, 1.9vw, 32px) !important; height: auto !important; display: block !important; }
+  .morganics-hero .f-black-raisin img{ width: clamp(18px, 1.8vw, 30px) !important; height: auto !important; display: block !important; }
+
+  /* ── 11. PLANTS ────────────────────────────────────────────────────── */
+  .morganics-hero .plant-left  { left: -2%; bottom: 0;    width: clamp(180px, 18vw, 310px); opacity: 0.82; }
+  .morganics-hero .plant-right { right: 0;  bottom: 5%;   width: clamp(150px, 15vw, 260px); opacity: 0.72; }
+  .morganics-hero .plant-top   { top: 0;    left: 0;      width: clamp(130px, 13vw, 220px); opacity: 0.65; }
+  .morganics-hero .plant-rb    { right: 0;  bottom: -4%;  width: clamp(120px, 12vw, 200px); opacity: 0.60; }
+  .morganics-hero .plant-img   { width: 100%; height: auto; display: block; }
+
+  /* ── 12. GPU HINTS ─────────────────────────────────────────────────── */
+  body[data-page="home"] .morganics-hero .hero-pouch,
+  body[data-page="home"] .morganics-hero .pouch-wrapper  { will-change: transform; }
+  body[data-page="home"] .morganics-hero .hero-pile,
+  body[data-page="home"] .morganics-hero .dryfruits-wrapper { will-change: transform; }
+  body[data-page="home"] .morganics-hero .hero-stone,
+  body[data-page="home"] .morganics-hero .stone-wrapper  { will-change: transform; }
+  body[data-page="home"] .morganics-hero .floating-fruits-layer,
+  body[data-page="home"] .morganics-hero .hero-floaters  { will-change: transform; }
+  body[data-page="home"] .morganics-hero .hero-plants    { will-change: transform; }
+
+} /* end ≥ 1195px */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TABLET LANDSCAPE 835–1194px (size corrections only, layout from mob-hero-fix)
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 835px) and (max-width: 1194px) and (orientation: landscape) {
+  body[data-page="home"] {
+    --mhf-product-x:    61%;
+    --mhf-pouch-w:      clamp(220px, 26vw, 310px);
+    --mhf-stone-w:      clamp(420px, 54vw, 680px);
+    --mhf-pile-w:       clamp(300px, 40vw, 520px);
+    --mhf-pouch-bottom: clamp(160px, 20vh, 230px);
+    --mhf-stone-bottom: clamp(-60px, -5vh, -20px);
+    --mhf-pile-bottom:  clamp(28px,  5vh,  60px);
+    --mhf-shadow-w:     clamp(90px,  10vw, 160px);
+    --mhf-shadow-bottom: calc(var(--mhf-pouch-bottom) - 18px);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FLOATING CART FAB — fixed, hidden on mobile
+   ═══════════════════════════════════════════════════════════════════════ */
+.cart-fab,
+.floating-cart {
+  position: fixed    !important;
+  right:    clamp(16px, 3vw, 36px) !important;
+  bottom:   calc(clamp(16px, 3vw, 36px) + env(safe-area-inset-bottom, 0px)) !important;
+  z-index:  80       !important;
+}
+@media (max-width: 900px) {
+  .cart-fab,
+  .floating-cart { display: none !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE ≤ 767px — compact styles only (mob-hero-fix.css handles layout)
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .morganics-hero .desktop-floater { display: none !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   NO HORIZONTAL SCROLL
+   ═══════════════════════════════════════════════════════════════════════ */
+.morganics-hero { overflow-x: hidden !important; }
+
+.floating-cart.is-context-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(12px) !important;
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   HERO v3 LOFI STRUCTURE
+   Active wrapper-based hero layout: copy | stage | actions. Product assets are
+   locked inside .product-core so pouch, dry fruits, and stone move as one unit.
+   ========================================================================== */
+body[data-page="home"] .morganics-hero.hero-v3 {
+  --hero-nav-space: 118px;
+  --hero-stage-w: clamp(520px, 44vw, 760px);
+  --hero-stage-h: clamp(540px, 68vh, 720px);
+  --hero-pouch-h: clamp(320px, 42vw, 520px);
+  --hero-stone-w: clamp(500px, 40vw, 700px);
+  --hero-dryfruit-w: clamp(360px, 30vw, 520px);
+  --hero-side-pad: clamp(28px, 4vw, 72px);
+  position: relative !important;
+  min-height: 100svh !important;
+  padding: var(--hero-nav-space) var(--hero-side-pad) 32px !important;
+  overflow: hidden !important;
+  background: #07160f !important;
+  isolation: isolate !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-bg,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-bg .bg-img,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-bg .bg-vignette,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-bg .bg-tint {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-bg {
+  z-index: 0 !important;
+  overflow: hidden !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .bg-img {
+  object-fit: cover !important;
+  object-position: center !important;
+  opacity: 1 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-inner {
+  position: relative !important;
+  z-index: 2 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 28%) minmax(0, 44%) minmax(0, 28%) !important;
+  align-items: center !important;
+  width: min(100%, 1720px) !important;
+  min-height: calc(100svh - var(--hero-nav-space) - 32px) !important;
+  margin: 0 auto !important;
+  gap: 0 !important;
+  overflow: visible !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-copy,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-actions {
+  position: relative !important;
+  z-index: 5 !important;
+  min-width: 0 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-copy {
+  align-self: center !important;
+  justify-self: start !important;
+  width: min(100%, 420px) !important;
+  transform: translateY(clamp(18px, 5vh, 56px)) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-title {
+  margin: 0 !important;
+  max-width: none !important;
+  color: #F7F1E6 !important;
+  font-family:var(--font-ui)!important;
+  letter-spacing: -0.055em !important;
+  text-transform: uppercase !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-title-sm,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-title-lg {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0.86 !important;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.36) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-title-sm {
+  font-size: clamp(34px, 3.2vw, 58px) !important;
+  font-weight: 950 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-title-lg {
+  font-size: clamp(62px, 6vw, 112px) !important;
+  font-weight: 950 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-rule {
+  width: clamp(38px, 4vw, 76px) !important;
+  height: 2px !important;
+  margin: 22px 0 18px !important;
+  background: rgba(247, 241, 230, 0.52) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-desc {
+  margin: 0 !important;
+  max-width: 260px !important;
+  color: rgba(247, 241, 230, 0.78) !important;
+  font-size: clamp(14px, 1.25vw, 18px) !important;
+  line-height: 1.55 !important;
+  font-weight: 650 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-stage {
+  position: relative !important;
+  justify-self: center !important;
+  align-self: center !important;
+  width: min(100%, var(--hero-stage-w)) !important;
+  height: var(--hero-stage-h) !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  transform: none !important;
+  transition: none !important;
+  isolation: isolate !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-stage::before,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-stage::after {
+  display: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-plants {
+  position: absolute !important;
+  inset: -4% -10% 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .plant-el,
+body[data-page="home"] .morganics-hero.hero-v3 .floater {
+  position: absolute !important;
+  inset: auto !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .plant-left { left: 1% !important; top: 24% !important; width: clamp(150px, 17vw, 290px) !important; opacity: 0.7 !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .plant-right { right: -6% !important; bottom: 16% !important; width: clamp(150px, 16vw, 280px) !important; opacity: 0.64 !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .plant-top { left: 28% !important; top: 6% !important; width: clamp(110px, 10vw, 180px) !important; opacity: 0.52 !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .plant-rb { right: -10% !important; bottom: 4% !important; width: clamp(120px, 13vw, 220px) !important; opacity: 0.38 !important; }
+
+body[data-page="home"] .morganics-hero.hero-v3 .plant-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .floating-zone {
+  position: absolute !important;
+  top: 8% !important;
+  bottom: 18% !important;
+  width: 26% !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .floating-left { left: 0 !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .floating-right { right: 0 !important; }
+
+body[data-page="home"] .morganics-hero.hero-v3 .fi {
+  display: block !important;
+  width: clamp(28px, 3vw, 56px) !important;
+  height: auto !important;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.26)) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .f-pistachio { left: 44%; top: 6%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-cashew { left: 12%; top: 34%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-golden-raisin { left: 54%; top: 58%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-fig { left: 20%; top: 76%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-almond { right: 38%; top: 8%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-walnut { right: 12%; top: 34%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-date { right: 42%; top: 58%; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-black-raisin { right: 18%; top: 76%; }
+
+body[data-page="home"] .morganics-hero.hero-v3 .product-core {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: clamp(14px, 3vh, 38px) !important;
+  z-index: 3 !important;
+  width: min(100%, var(--hero-stage-w)) !important;
+  height: min(100%, var(--hero-stage-h)) !important;
+  transform: translateX(-50%) !important;
+  pointer-events: auto !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-pouch,
+body[data-page="home"] .morganics-hero.hero-v3 .stage-dryfruits,
+body[data-page="home"] .morganics-hero.hero-v3 .stage-stone {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  display: block !important;
+  max-width: none !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  object-fit: contain !important;
+  transform: translateX(-50%) !important;
+  transform-origin: center bottom !important;
+  mix-blend-mode: screen !important;
+  animation: none !important;
+  transition: transform 520ms cubic-bezier(0.19, 1, 0.22, 1), filter 520ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-stone {
+  bottom: 0 !important;
+  width: var(--hero-stone-w) !important;
+  z-index: 1 !important;
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.22)) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-dryfruits {
+  bottom: clamp(58px, 8vh, 92px) !important;
+  width: var(--hero-dryfruit-w) !important;
+  z-index: 4 !important;
+  filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.22)) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-pouch {
+  bottom: clamp(96px, 13vh, 142px) !important;
+  width: auto !important;
+  height: var(--hero-pouch-h) !important;
+  z-index: 3 !important;
+  cursor: pointer !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-shadow {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: clamp(106px, 13vh, 148px) !important;
+  z-index: 2 !important;
+  width: clamp(180px, 18vw, 300px) !important;
+  height: clamp(18px, 2vw, 34px) !important;
+  border-radius: 999px !important;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.18) 44%, transparent 74%) !important;
+  filter: blur(10px) !important;
+  opacity: 0.52 !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-actions {
+  align-self: center !important;
+  justify-self: stretch !important;
+  display: grid !important;
+  grid-template-rows: 1fr auto !important;
+  min-height: min(600px, 68vh) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-quicklinks {
+  align-self: center !important;
+  justify-self: end !important;
+  display: grid !important;
+  gap: 12px !important;
+  width: min(100%, 214px) !important;
+  margin: 0 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .benefit-card {
+  min-height: 74px !important;
+  display: grid !important;
+  grid-template-columns: 52px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 11px 14px !important;
+  border-radius: 20px !important;
+  text-decoration: none !important;
+  color: #F7F1E6 !important;
+  background: rgba(247, 241, 230, 0.10) !important;
+  border: 1px solid rgba(247, 241, 230, 0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .bc-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 16px !important;
+  display: grid !important;
+  place-items: center !important;
+  background: rgba(223, 165, 36, 0.14) !important;
+  border: 1px solid rgba(223, 165, 36, 0.35) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .bc-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .bc-label {
+  color: #F7F1E6 !important;
+  font-size: clamp(14px, 1.1vw, 17px) !important;
+  line-height: 1.08 !important;
+  font-weight: 900 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-tagline {
+  align-self: end !important;
+  justify-self: end !important;
+  text-align: right !important;
+  margin: 0 0 clamp(26px, 4vh, 52px) !important;
+  color: rgba(247, 241, 230, 0.96) !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .tagline-sm,
+body[data-page="home"] .morganics-hero.hero-v3 .tagline-lg {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0.86 !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.06em !important;
+  text-shadow: 0 6px 34px rgba(0, 0, 0, 0.34) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .tagline-sm { font-size: clamp(30px, 3vw, 56px) !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .tagline-lg { font-size: clamp(50px, 5.2vw, 92px) !important; }
+
+/* Laptop: keep the LOFI 3-column structure, reduce stage assets slightly. */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-nav-space: 106px;
+    --hero-side-pad: clamp(18px, 2.8vw, 36px);
+    --hero-stage-w: clamp(470px, 44vw, 560px);
+    --hero-stage-h: clamp(470px, 62vh, 590px);
+    --hero-pouch-h: clamp(270px, 31vw, 360px);
+    --hero-stone-w: clamp(420px, 39vw, 520px);
+    --hero-dryfruit-w: clamp(315px, 30vw, 410px);
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-inner {
+    grid-template-columns: minmax(0, 27%) minmax(0, 46%) minmax(0, 27%) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-title-sm { font-size: clamp(28px, 3vw, 42px) !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-title-lg { font-size: clamp(54px, 6vw, 78px) !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-quicklinks { width: min(100%, 176px) !important; }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .benefit-card {
+    min-height: 66px !important;
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+    padding: 9px 11px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .bc-icon {
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+
+/* Tablet: stack copy, centered product stage, then horizontal quick links. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-nav-space: 84px;
+    --hero-side-pad: clamp(22px, 4vw, 44px);
+    --hero-stage-w: min(100%, 720px);
+    --hero-stage-h: clamp(560px, 58svh, 690px);
+    --hero-pouch-h: clamp(330px, 50vw, 440px);
+    --hero-stone-w: min(92%, 680px);
+    --hero-dryfruit-w: min(68%, 500px);
+    min-height: auto !important;
+    padding-top: var(--hero-nav-space) !important;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: auto !important;
+    gap: clamp(12px, 2.4svh, 24px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-copy {
+    width: min(100%, 620px) !important;
+    transform: none !important;
+    text-align: center !important;
+    align-self: center !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-rule {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-desc {
+    margin-inline: auto !important;
+    max-width: 430px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage {
+    width: var(--hero-stage-w) !important;
+    height: var(--hero-stage-h) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .plant-top,
+  body[data-page="home"] .morganics-hero.hero-v3 .plant-rb,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-fig,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-black-raisin {
+    display: none !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-actions {
+    display: block !important;
+    width: min(100%, 620px) !important;
+    min-height: 0 !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-quicklinks {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .benefit-card {
+    min-height: 58px !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    border-radius: 18px !important;
+    padding: 8px 10px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .bc-icon {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 13px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .bc-label { font-size: 13px !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-tagline { display: none !important; }
+}
+
+/* Mobile: single-column LOFI structure with compact stage and pills below. */
+@media (max-width: 767px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-nav-space: 82px;
+    --hero-side-pad: 14px;
+    --hero-stage-w: 100%;
+    --hero-stage-h: clamp(390px, 52svh, 500px);
+    --hero-pouch-h: clamp(260px, 72vw, 380px);
+    --hero-stone-w: min(96%, 440px);
+    --hero-dryfruit-w: min(76%, 360px);
+    min-height: auto !important;
+    padding: var(--hero-nav-space) var(--hero-side-pad) calc(132px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    min-height: 0 !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-copy {
+    width: 100% !important;
+    transform: none !important;
+    text-align: center !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-title-sm { font-size: clamp(26px, 8vw, 38px) !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-title-lg { font-size: clamp(48px, 16vw, 70px) !important; }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-rule {
+    margin: 12px auto 10px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-desc {
+    max-width: 310px !important;
+    margin-inline: auto !important;
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage {
+    width: 100% !important;
+    height: var(--hero-stage-h) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .product-core { bottom: clamp(44px, 7svh, 68px) !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .stage-pouch { bottom: clamp(86px, 13svh, 116px) !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .stage-dryfruits { bottom: clamp(8px, 2svh, 20px) !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .stage-shadow { bottom: clamp(54px, 8svh, 78px) !important; }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .floating-zone {
+    top: 10% !important;
+    bottom: 24% !important;
+    width: 24% !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .fi { width: clamp(20px, 7vw, 32px) !important; }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .plant-top,
+  body[data-page="home"] .morganics-hero.hero-v3 .plant-rb,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-golden-raisin,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-date,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-fig,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-black-raisin {
+    display: none !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .f-pistachio { left: 12%; top: 8%; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-cashew { left: 4%; top: 38%; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-almond { right: 12%; top: 9%; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-walnut { right: 4%; top: 38%; }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-actions {
+    display: block !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-quicklinks {
+    width: min(100%, 360px) !important;
+    margin-inline: auto !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    transform: translateY(-14px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .benefit-card {
+    min-height: 50px !important;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    gap: 4px !important;
+    padding: 7px 6px !important;
+    border-radius: 16px !important;
+    text-align: center !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .bc-icon {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 10px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .bc-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .bc-label {
+    font-size: 10px !important;
+    line-height: 1.08 !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-tagline {
+    display: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-stage-h: clamp(372px, 50svh, 470px);
+    --hero-stone-w: min(94%, 390px);
+    --hero-dryfruit-w: min(74%, 330px);
+  }
+}
+
+@media (max-width: 767px) {
+  .cart-fab.floating-cart,
+  .floating-cart {
+    display: inline-flex !important;
+    right: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    min-width: 72px !important;
+    height: 48px !important;
+    padding: 0 12px !important;
+    gap: 8px !important;
+  }
+
+  .floating-cart svg,
+  .floating-cart .svg-ico {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .floating-cart-count {
+    min-width: 24px !important;
+    height: 24px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* ==========================================================================
+   HERO v3 focused cleanup
+   Keeps the hero design intact while fixing asset layering, grounded base,
+   decorative spacing, and the cleaner mobile hero requested for production.
+   ========================================================================== */
+body[data-page="home"] .morganics-hero.hero-v3 .hero-copy {
+  transform: translateY(clamp(-74px, -8vh, -36px)) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 {
+  --hero-stage-w: clamp(620px, 50vw, 890px) !important;
+  --hero-stage-h: clamp(620px, 74vh, 810px) !important;
+  --hero-pouch-h: clamp(380px, 46vw, 600px) !important;
+  --hero-stone-w: clamp(600px, 46vw, 820px) !important;
+  --hero-dryfruit-w: clamp(430px, 36vw, 620px) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-title,
+body[data-page="home"] .morganics-hero.hero-v3 .tagline-sm,
+body[data-page="home"] .morganics-hero.hero-v3 .tagline-lg {
+  font-family:var(--font-display)!important;
+  letter-spacing: -0.045em !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .product-core {
+  bottom: clamp(-26px, -2.4vh, -8px) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-pouch,
+body[data-page="home"] .morganics-hero.hero-v3 .stage-dryfruits,
+body[data-page="home"] .morganics-hero.hero-v3 .stage-stone {
+  opacity: 1 !important;
+  visibility: visible !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
+  will-change: transform !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-stone {
+  z-index: 1 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-pouch {
+  z-index: 3 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-dryfruits {
+  z-index: 5 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .stage-shadow {
+  z-index: 2 !important;
+  opacity: 0.42 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .floating-zone {
+  top: 10% !important;
+  bottom: 24% !important;
+  width: 24% !important;
+  z-index: 4 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .fi {
+  width: clamp(54px, 5.4vw, 96px) !important;
+  animation: heroFruitOrbit 7.5s ease-in-out infinite !important;
+  transform-origin: center !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .f-pistachio { left: 18% !important; top: 4% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-cashew { left: 0% !important; top: 36% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-golden-raisin { left: 34% !important; top: 58% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-fig { left: 4% !important; top: 78% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-date-soft { left: 54% !important; top: 20% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-berry-soft { left: 55% !important; top: 82% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-almond { right: 18% !important; top: 6% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-walnut { right: 0% !important; top: 36% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-date { right: 34% !important; top: 58% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-black-raisin { right: 4% !important; top: 78% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-golden-soft { right: 54% !important; top: 22% !important; }
+body[data-page="home"] .morganics-hero.hero-v3 .f-fig-soft { right: 55% !important; top: 82% !important; }
+
+body[data-page="home"] .morganics-hero.hero-v3 .f-cashew .fi,
+body[data-page="home"] .morganics-hero.hero-v3 .f-date .fi,
+body[data-page="home"] .morganics-hero.hero-v3 .f-golden-soft .fi {
+  animation-delay: -1.8s !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .f-fig .fi,
+body[data-page="home"] .morganics-hero.hero-v3 .f-walnut .fi,
+body[data-page="home"] .morganics-hero.hero-v3 .f-berry-soft .fi {
+  animation-delay: -3.4s !important;
+}
+
+@keyframes heroFruitOrbit {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  35% { transform: translate3d(7px, -9px, 0) rotate(5deg); }
+  68% { transform: translate3d(-6px, 7px, 0) rotate(-4deg); }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage {
+    perspective: 1100px !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .stage-pouch {
+    transform: translateX(-50%) translateY(-10px) rotateX(3deg) rotateY(-4deg) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .stage-dryfruits {
+    transform: translateX(-50%) translateY(-6px) scale(1.018) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .stage-stone {
+    transform: translateX(-50%) translateY(-3px) scale(1.008) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .floater {
+    transform: translate3d(0, -8px, 0) !important;
+  }
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-el {
+  position: absolute !important;
+  inset: auto !important;
+  pointer-events: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  mix-blend-mode: normal !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-left {
+  left: clamp(-120px, -7vw, -64px) !important;
+  top: clamp(86px, 13vh, 154px) !important;
+  width: clamp(250px, 25vw, 430px) !important;
+  opacity: 0.74 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-top {
+  left: clamp(-124px, -8vw, -68px) !important;
+  top: auto !important;
+  bottom: clamp(-118px, -8vw, -60px) !important;
+  width: clamp(240px, 23vw, 400px) !important;
+  opacity: 0.62 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-right {
+  right: clamp(-150px, -9vw, -72px) !important;
+  bottom: clamp(-112px, -7vw, -54px) !important;
+  width: clamp(280px, 26vw, 470px) !important;
+  opacity: 0.68 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-rb {
+  display: none !important;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-stage-w: min(100%, 780px) !important;
+    --hero-stage-h: clamp(620px, 62svh, 760px) !important;
+    --hero-pouch-h: clamp(390px, 55vw, 520px) !important;
+    --hero-stone-w: min(98%, 760px) !important;
+    --hero-dryfruit-w: min(78%, 590px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-copy {
+    transform: none !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .product-core {
+    bottom: clamp(-20px, -1.8svh, -6px) !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-stage-w: clamp(560px, 47vw, 740px) !important;
+    --hero-stage-h: clamp(540px, 68vh, 680px) !important;
+    --hero-pouch-h: clamp(340px, 39vw, 520px) !important;
+    --hero-stone-w: clamp(540px, 43vw, 690px) !important;
+    --hero-dryfruit-w: clamp(400px, 34vw, 540px) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body[data-page="home"] .morganics-hero.hero-v3 {
+    --hero-nav-space: 96px !important;
+    --hero-stage-h: clamp(458px, 56svh, 560px) !important;
+    --hero-pouch-h: clamp(320px, 86vw, 430px) !important;
+    --hero-stone-w: min(108%, 520px) !important;
+    --hero-dryfruit-w: min(88%, 430px) !important;
+    min-height: 100svh !important;
+    padding: calc(86px + env(safe-area-inset-top, 0px)) var(--hero-side-pad) calc(92px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-inner {
+    min-height: calc(100svh - 178px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) !important;
+    justify-content: center !important;
+    gap: clamp(16px, 2.8svh, 24px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-copy {
+    transform: none !important;
+    padding-top: clamp(8px, 1.4svh, 18px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .product-core {
+    bottom: clamp(18px, 3svh, 34px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .stage-pouch,
+  body[data-page="home"] .morganics-hero.hero-v3 .stage-dryfruits,
+  body[data-page="home"] .morganics-hero.hero-v3 .stage-stone {
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+    filter: none !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .floating-zone {
+    top: 8% !important;
+    bottom: 30% !important;
+    width: 24% !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .fi {
+    width: clamp(42px, 13vw, 58px) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .f-pistachio { left: 4% !important; top: 8% !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-cashew { left: -12% !important; top: 42% !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-golden-raisin {
+    display: block !important;
+    left: 20% !important;
+    top: 72% !important;
+  }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-fig,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-date-soft,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-berry-soft,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-black-raisin,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-golden-soft,
+  body[data-page="home"] .morganics-hero.hero-v3 .f-fig-soft {
+    display: none !important;
+  }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-almond { right: 4% !important; top: 9% !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-walnut { right: -12% !important; top: 42% !important; }
+  body[data-page="home"] .morganics-hero.hero-v3 .f-date {
+    display: block !important;
+    right: 20% !important;
+    top: 72% !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-left {
+    left: -86px !important;
+    top: 74px !important;
+    width: clamp(190px, 52vw, 260px) !important;
+    opacity: 0.54 !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-top {
+    left: -92px !important;
+    bottom: -70px !important;
+    width: clamp(180px, 50vw, 250px) !important;
+    opacity: 0.48 !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 > .hero-corner-plants.stage-plants .plant-right {
+    right: -106px !important;
+    bottom: -72px !important;
+    width: clamp(210px, 58vw, 290px) !important;
+    opacity: 0.5 !important;
+  }
+
+  body[data-page="home"].hero-in-view .mob-bottom-nav,
+  body[data-page="home"] .mob-bottom-nav {
+    display: grid !important;
+    left: max(14px, env(safe-area-inset-left, 0px)) !important;
+    right: max(14px, env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    min-height: 58px !important;
+    padding: 6px 8px !important;
+    border-radius: 24px !important;
+    background: rgba(247, 241, 230, 0.82) !important;
+    border: 1px solid rgba(247, 241, 230, 0.42) !important;
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.62) !important;
+    backdrop-filter: blur(18px) saturate(1.08) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    z-index: 120 !important;
+  }
+
+  body[data-page="home"] .mob-bottom-nav a {
+    border-radius: 18px !important;
+    min-height: 44px !important;
+    color: #285D53 !important;
+  }
+
+  body[data-page="home"] .mob-bottom-nav svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body[data-page="home"] .morganics-hero.hero-v3 .product-core {
+    bottom: clamp(24px, 4svh, 38px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .morganics-hero.hero-v3 .fi {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   Hero Ingredient Spotlight Add-On
+   Non-destructive overlay: hotspots, active clone, and one reusable card only.
+   ========================================================================== */
+body[data-page="home"] .morganics-hero.hero-v3 .floater {
+  pointer-events: auto !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-hotspot {
+  position: absolute !important;
+  inset: -18% !important;
+  z-index: 18 !important;
+  display: block !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-hotspot:focus-visible {
+  outline: 2px solid rgba(223, 165, 36, 0.9) !important;
+  outline-offset: 8px !important;
+  box-shadow: 0 0 0 10px rgba(223, 165, 36, 0.16) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-spotlight-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 100 !important;
+  pointer-events: none !important;
+  overflow: visible !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-spotlight-clone {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  object-fit: contain !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  transform-origin: center !important;
+  mix-blend-mode: normal !important;
+  filter: drop-shadow(0 28px 34px rgba(0, 0, 0, 0.34)) drop-shadow(0 0 22px rgba(223, 165, 36, 0.18)) !important;
+  transition: opacity 260ms ease, transform 430ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-spotlight-clone.is-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .hero-copy,
+body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .hero-actions,
+body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active > .hero-corner-plants,
+body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .hero-bg,
+body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .product-core,
+body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .floating-zone {
+  filter: blur(4px) !important;
+  opacity: 0.58 !important;
+  transition: filter 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 360ms ease !important;
+}
+
+body[data-page="home"] .hero-spotlight-card {
+  position: absolute !important;
+  z-index: 122 !important;
+  width: min(320px, calc(100vw - 32px)) !important;
+  padding: 18px !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(circle at top left, rgba(223,165,36,0.16), transparent 34%),
+    rgba(255, 249, 237, 0.9) !important;
+  border: 1px solid rgba(223,165,36,0.34) !important;
+  box-shadow:
+    0 28px 70px rgba(18, 60, 51, 0.28),
+    inset 0 1px 0 rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  color: #123C33 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(10px) scale(0.96) !important;
+  transition: opacity 320ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body[data-page="home"] .hero-spotlight-card.is-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+body[data-page="home"] .hero-spotlight-close {
+  position: absolute !important;
+  right: 12px !important;
+  top: 12px !important;
+  width: 34px !important;
+  height: 34px !important;
+  border: 1px solid rgba(132, 99, 69, 0.18) !important;
+  border-radius: 12px !important;
+  display: grid !important;
+  place-items: center !important;
+  background: rgba(247, 241, 230, 0.74) !important;
+  color: #285D53 !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+}
+
+body[data-page="home"] .hero-spotlight-card h3 {
+  margin: 13px 40px 8px 0 !important;
+  font-family:var(--font-display)!important;
+  font-size: 28px !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.035em !important;
+  color: #123C33 !important;
+}
+
+body[data-page="home"] .hero-spotlight-card p {
+  margin: 0 !important;
+  color: rgba(31, 43, 39, 0.68) !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  font-weight: 750 !important;
+}
+
+body[data-page="home"] .hero-spotlight-foot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-top: 16px !important;
+}
+
+body[data-page="home"] .hero-spotlight-foot strong {
+  color: #846345 !important;
+  font-size: 14px !important;
+  line-height: 1.15 !important;
+  font-weight: 950 !important;
+}
+
+body[data-page="home"] .hero-spotlight-cta {
+  min-height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 16px !important;
+  border-radius: 16px !important;
+  background: #285D53 !important;
+  color: #F7F1E6 !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 767px) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-hotspot {
+    inset: -26% !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-card {
+    position: fixed !important;
+    left: 14px !important;
+    right: 14px !important;
+    top: auto !important;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+    width: auto !important;
+    padding: 16px !important;
+    border-radius: 24px !important;
+    transform: translateY(16px) scale(0.98) !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-card.is-visible {
+    transform: translateY(0) scale(1) !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-card h3 {
+    font-size: 25px !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-foot {
+    align-items: stretch !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-spotlight-clone,
+  body[data-page="home"] .hero-spotlight-card,
+  body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .hero-copy,
+  body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .hero-actions,
+  body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active > .hero-corner-plants,
+  body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .hero-bg,
+  body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .product-core,
+  body[data-page="home"] .morganics-hero.hero-v3.is-spotlight-active .floating-zone {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Hero product stack lock + refined ingredient spotlight
+   Keeps the existing hero layout intact while making stone the shared reference.
+   ========================================================================== */
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack {
+  --stone-w: var(--hero-stone-w);
+  --pouch-w: calc(var(--stone-w) * 0.62);
+  --dryfruits-w: calc(var(--stone-w) * 0.78);
+  --pouch-bottom: calc(var(--stone-w) * 0.18);
+  --dryfruits-bottom: calc(var(--stone-w) * 0.105);
+  --shadow-w: calc(var(--stone-w) * 0.4);
+  --shadow-bottom: calc(var(--stone-w) * 0.17);
+  width: var(--stone-w) !important;
+  height: calc(var(--stone-w) * 1.08) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .stone-layer,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .pouch-layer,
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .dryfruits-layer {
+  left: 50% !important;
+  top: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
+  object-fit: contain !important;
+  transform-origin: center bottom !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .stone-layer {
+  width: var(--stone-w) !important;
+  bottom: 0 !important;
+  z-index: 1 !important;
+  transform: translateX(-50%) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .pouch-layer {
+  width: var(--pouch-w) !important;
+  bottom: var(--pouch-bottom) !important;
+  z-index: 3 !important;
+  transform: translateX(-50%) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .contact-shadow-layer {
+  left: 50% !important;
+  top: auto !important;
+  width: var(--shadow-w) !important;
+  height: calc(var(--stone-w) * 0.09) !important;
+  bottom: var(--shadow-bottom) !important;
+  z-index: 4 !important;
+  opacity: 0.48 !important;
+  mix-blend-mode: normal !important;
+  transform: translateX(-50%) !important;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.34) 0%, rgba(18, 60, 51, 0.18) 46%, transparent 72%) !important;
+  filter: blur(3px) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack .dryfruits-layer {
+  width: var(--dryfruits-w) !important;
+  bottom: var(--dryfruits-bottom) !important;
+  z-index: 5 !important;
+  transform: translateX(-50%) !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .floating-zone {
+  z-index: 6 !important;
+}
+
+body[data-page="home"] .morganics-hero.hero-v3 .hero-spotlight-layer {
+  z-index: 130 !important;
+}
+
+@media (min-width: 1200px) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack {
+    --pouch-w: calc(var(--stone-w) * 0.6);
+    --dryfruits-w: calc(var(--stone-w) * 0.76);
+    --pouch-bottom: calc(var(--stone-w) * 0.175);
+    --dryfruits-bottom: calc(var(--stone-w) * 0.102);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack {
+    --pouch-w: calc(var(--stone-w) * 0.61);
+    --dryfruits-w: calc(var(--stone-w) * 0.78);
+    --pouch-bottom: calc(var(--stone-w) * 0.18);
+    --dryfruits-bottom: calc(var(--stone-w) * 0.106);
+  }
+}
+
+@media (max-width: 767px) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-product-stack {
+    --pouch-w: calc(var(--stone-w) * 0.6);
+    --dryfruits-w: calc(var(--stone-w) * 0.82);
+    --pouch-bottom: calc(var(--stone-w) * 0.18);
+    --dryfruits-bottom: calc(var(--stone-w) * 0.102);
+    --shadow-w: calc(var(--stone-w) * 0.42);
+    height: calc(var(--stone-w) * 1.07) !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .hero-product-stack .pouch-layer {
+    transform: translateX(-50%) translateY(-10px) rotateX(3deg) rotateY(-4deg) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .hero-product-stack .dryfruits-layer {
+    transform: translateX(-50%) translateY(-6px) scale(1.018) !important;
+  }
+
+  body[data-page="home"] .morganics-hero.hero-v3 .hero-stage:hover .hero-product-stack .stone-layer {
+    transform: translateX(-50%) translateY(-3px) scale(1.008) !important;
+  }
+}
+
+body[data-page="home"] .hero-spotlight-card {
+  width: min(364px, calc(100vw - 32px)) !important;
+  padding: 16px !important;
+  border-radius: 26px !important;
+  display: grid !important;
+  grid-template-columns: 94px minmax(0, 1fr) !important;
+  gap: 14px !important;
+  background:
+    linear-gradient(145deg, rgba(247, 241, 230, 0.32), rgba(210, 225, 211, 0.18) 42%, rgba(40, 93, 83, 0.22)),
+    radial-gradient(circle at 14% 10%, rgba(255, 255, 255, 0.42), transparent 30%),
+    rgba(247, 241, 230, 0.24) !important;
+  border: 1px solid rgba(247, 241, 230, 0.34) !important;
+  box-shadow:
+    0 22px 58px rgba(5, 22, 18, 0.24),
+    0 0 0 1px rgba(223, 165, 36, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    inset 0 -18px 42px rgba(18, 60, 51, 0.10) !important;
+  backdrop-filter: blur(22px) saturate(1.05) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.05) !important;
+  color: #FFF9ED !important;
+}
+
+body[data-page="home"] .hero-spotlight-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 1px !important;
+  border-radius: 25px !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 42%),
+    linear-gradient(180deg, rgba(247, 241, 230, 0.10), transparent 58%) !important;
+  opacity: 0.78 !important;
+}
+
+body[data-page="home"] .hero-spotlight-media {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 94px !important;
+  height: 94px !important;
+  border-radius: 22px !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at 45% 20%, rgba(255, 255, 255, 0.50), transparent 35%),
+    rgba(255, 249, 237, 0.30) !important;
+  border: 1px solid rgba(247, 241, 230, 0.36) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.44), 0 14px 26px rgba(7, 24, 20, 0.16) !important;
+}
+
+body[data-page="home"] .hero-spotlight-media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+body[data-page="home"] .hero-spotlight-copy,
+body[data-page="home"] .hero-spotlight-foot {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+body[data-page="home"] .hero-spotlight-copy {
+  padding-right: 30px !important;
+  align-self: center !important;
+}
+
+body[data-page="home"] .hero-spotlight-card h3 {
+  margin: 2px 0 5px !important;
+  color: #FFF9ED !important;
+  font-size: 24px !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.045em !important;
+  text-shadow: 0 8px 20px rgba(7, 24, 20, 0.22) !important;
+}
+
+body[data-page="home"] .hero-spotlight-urdu {
+  display: block !important;
+  margin: 0 0 8px !important;
+  color: rgba(255, 239, 195, 0.90) !important;
+  font-size: 13px !important;
+  line-height: 1.15 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+}
+
+body[data-page="home"] .hero-spotlight-urdu[hidden] {
+  display: none !important;
+}
+
+body[data-page="home"] .hero-spotlight-card p {
+  color: rgba(255, 249, 237, 0.78) !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  font-weight: 650 !important;
+}
+
+body[data-page="home"] .hero-spotlight-foot {
+  grid-column: 1 / -1 !important;
+  margin-top: 0 !important;
+}
+
+body[data-page="home"] .hero-spotlight-foot strong {
+  display: block !important;
+  color: rgba(255, 232, 170, 0.98) !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  margin-bottom: 11px !important;
+  text-shadow: 0 7px 16px rgba(7, 24, 20, 0.16) !important;
+}
+
+body[data-page="home"] .hero-spotlight-actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+body[data-page="home"] .hero-spotlight-add,
+body[data-page="home"] .hero-spotlight-cta {
+  min-height: 43px !important;
+  border-radius: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+body[data-page="home"] .hero-spotlight-add {
+  border: 1px solid rgba(255, 232, 170, 0.50) !important;
+  background: linear-gradient(180deg, rgba(223, 165, 36, 0.94), rgba(214, 151, 28, 0.90)) !important;
+  color: #123C33 !important;
+  box-shadow: 0 12px 22px rgba(7, 24, 20, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+}
+
+body[data-page="home"] .hero-spotlight-add[hidden] {
+  display: none !important;
+}
+
+body[data-page="home"] .hero-spotlight-cta {
+  border: 1px solid rgba(247, 241, 230, 0.32) !important;
+  background: rgba(247, 241, 230, 0.18) !important;
+  color: rgba(255, 249, 237, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+body[data-page="home"] .hero-spotlight-close {
+  z-index: 2 !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 249, 237, 0.18) !important;
+  border-color: rgba(247, 241, 230, 0.24) !important;
+  color: rgba(255, 249, 237, 0.88) !important;
+  font-size: 20px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+@media (max-width: 767px) {
+  body[data-page="home"] .hero-spotlight-card {
+    grid-template-columns: 82px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    padding: 14px !important;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-media {
+    width: 82px !important;
+    height: 82px !important;
+    border-radius: 22px !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-copy {
+    padding-right: 28px !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-card h3 {
+    font-size: 24px !important;
+  }
+
+  body[data-page="home"] .hero-spotlight-actions {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}

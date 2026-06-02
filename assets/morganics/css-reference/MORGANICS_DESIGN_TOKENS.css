@@ -1,0 +1,410 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   MORGANICS DESIGN TOKENS  v1.0 — June 2026
+   Single source of truth for all CSS values on the Morganics website.
+   Import this file FIRST in any stylesheet or <style> block.
+   Usage:  var(--token-name)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ────────────────────────────────────────────────────────────
+     COLOR PALETTE
+     ──────────────────────────────────────────────────────────── */
+
+  /* Brand greens */
+  --color-forest:       #285D53;   /* primary brand — dominant */
+  --color-forest-mid:   #173f36;   /* dark sections, pressed */
+  --color-forest-deep:  #0d2820;   /* darkest hero / ingredient bg */
+  --color-forest-tint:  rgba(40,93,83,0.08);  /* subtle hover fill */
+
+  /* Gold — restrained premium accent */
+  --color-gold:         #DFA524;
+  --color-gold-light:   #f3d77e;   /* hover glow only */
+  --color-gold-tint:    rgba(223,165,36,0.12);
+  --color-gold-border:  rgba(223,165,36,0.30);
+
+  /* Earth — heritage warmth */
+  --color-earth:        #846345;
+  --color-earth-tint:   rgba(132,99,69,0.12);
+  --color-earth-border: rgba(132,99,69,0.18);
+
+  /* Copper — urgent CTA only, use sparingly */
+  --color-copper:       #DF5C23;
+
+  /* Cream / paper — light backgrounds */
+  --color-cream:        #F7F1E6;   /* primary light bg */
+  --color-cream-soft:   #EFE4D2;   /* alternate card / divider */
+  --color-cream-paper:  #fffaf1;   /* pure warm white */
+  --color-cream-deep:   #f4ead8;   /* image placeholder bg */
+
+  /* Text */
+  --color-ink:          #1f2926;   /* primary body text */
+  --color-ink-mid:      #1F2B27;   /* alternate dark text */
+  --color-muted:        #6d7975;   /* secondary / supporting text */
+  --color-muted-light:  rgba(31,41,38,0.52); /* fine print */
+
+  /* UI lines & borders */
+  --color-line:         #e5d8c5;
+  --color-glass:        rgba(255,255,255,0.20);
+  --color-canvas-dark:  #050706;   /* ingredient carousel cinematic canvas */
+
+  /* Semantic */
+  --color-danger:       #e05555;
+  --color-danger-tint:  rgba(224,85,85,0.09);
+  --color-danger-border:rgba(210,70,60,0.28);
+  --color-success:      #285D53;   /* same as forest */
+
+  /* ────────────────────────────────────────────────────────────
+     SECTION BACKGROUNDS (semantic shortcuts)
+     ──────────────────────────────────────────────────────────── */
+  --bg-page:            var(--color-cream-paper);
+  --bg-light:           var(--color-cream);
+  --bg-card:            var(--color-cream-paper);
+  --bg-dark:            var(--color-forest-mid);
+  --bg-darkest:         var(--color-forest-deep);
+  --bg-card-dark:       rgba(247,241,230,0.07);   /* glass card on dark */
+
+  /* ────────────────────────────────────────────────────────────
+     TYPOGRAPHY — FAMILY STACKS
+     ──────────────────────────────────────────────────────────── */
+  --font-display:  'Brownberries', 'Poppins', sans-serif;
+  --font-ui:       'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-hero:     var(--font-display); /* compatibility alias */
+  --font-editorial:var(--font-ui);      /* compatibility alias */
+  --font-urdu:     var(--font-ui);      /* compatibility alias */
+
+  /* ────────────────────────────────────────────────────────────
+     TYPOGRAPHY — FLUID SIZE TOKENS  (clamp: mobile → desktop)
+     ──────────────────────────────────────────────────────────── */
+  --type-display-xl: clamp(38px, 8vw, 108px);   /* 2-4 word hero impact */
+  --type-display-lg: clamp(28px, 5.5vw, 82px);  /* section hero title */
+  --type-display-md: clamp(24px, 4vw, 60px);    /* sub-section title */
+  --type-h1:         clamp(28px, 5.2vw, 76px);  /* page H1 */
+  --type-h2:         clamp(22px, 3.6vw, 54px);  /* section H2 */
+  --type-h3:         clamp(17px, 2vw, 30px);    /* card / component title */
+  --type-h4:         clamp(15px, 1.5vw, 22px);  /* sub-component */
+  --type-h5:         clamp(13px, 1.1vw, 18px);  /* small label heading */
+  --type-h6:         clamp(12px, 1vw, 15px);    /* micro heading */
+  --type-body-lg:    clamp(16px, 1.45vw, 20px); /* lead paragraphs */
+  --type-body-md:    clamp(15px, 1.2vw, 17px);  /* general body copy */
+  --type-body-sm:    clamp(14px, 1vw, 15px);    /* supporting text */
+  --type-caption:    clamp(11px, 0.9vw, 13px);  /* meta, image captions */
+  --type-button:     clamp(13px, 1vw, 15px);    /* button labels */
+  --type-nav:        14px;                       /* nav links — fixed */
+  --type-product-title: clamp(14px, 1.2vw, 17px); /* product card name */
+  --type-product-price: clamp(13px, 1vw, 15px);   /* price display */
+  --type-badge:      clamp(10px, 0.8vw, 11px);  /* badges, pills */
+  --type-overline:   clamp(10px, 0.8vw, 12px);  /* eyebrows — UPPERCASE */
+
+  /* ────────────────────────────────────────────────────────────
+     TYPOGRAPHY — WEIGHT
+     ──────────────────────────────────────────────────────────── */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-heavy:    800;
+  --weight-black:    900;
+
+  /* ────────────────────────────────────────────────────────────
+     TYPOGRAPHY — LINE HEIGHT
+     ──────────────────────────────────────────────────────────── */
+  --lh-tight:    0.88;
+  --lh-snug:     1.04;
+  --lh-normal:   1.25;
+  --lh-relaxed:  1.55;
+  --lh-loose:    1.7;
+  --lh-display:  0.9;
+  --lh-heading:  1.04;
+  --lh-title:    1.18;
+  --lh-body:     1.65;
+  --lh-caption:  1.4;
+  --lh-button:   1;
+
+  /* ────────────────────────────────────────────────────────────
+     SPACING TOKENS
+     ──────────────────────────────────────────────────────────── */
+  --space-2:    2px;
+  --space-4:    4px;
+  --space-6:    6px;
+  --space-8:    8px;
+  --space-12:  12px;
+  --space-16:  16px;
+  --space-20:  20px;
+  --space-24:  24px;
+  --space-32:  32px;
+  --space-40:  40px;
+  --space-48:  48px;
+  --space-64:  64px;
+  --space-80:  80px;
+  --space-96:  96px;
+  --space-120:120px;
+
+  /* Semantic spacing */
+  --section-pad-v:   clamp(44px, 8vh, 80px);
+  --section-pad-h:   clamp(18px, 5vw, 72px);
+  --section-pad-y:   var(--section-pad-v);
+  --section-pad-x:   var(--section-pad-h);
+  --card-pad:        clamp(14px, 1.8vw, 24px);
+  --grid-gap:        clamp(12px, 1.5vw, 18px);
+  --content-gap:     var(--space-24);
+  --heading-gap:     var(--space-16);
+  --button-gap:      var(--space-12);
+  --form-gap:        var(--space-16);
+  --btn-pad-x:       clamp(14px, 2vw, 22px);
+  --btn-pad-y:       clamp(10px, 1vw, 14px);
+
+  /* ────────────────────────────────────────────────────────────
+     BORDER RADIUS TOKENS
+     ──────────────────────────────────────────────────────────── */
+  --radius-xs:   6px;     /* tiny chips, micro tags */
+  --radius-sm:   8px;     /* small inputs, icon boxes */
+  --radius-md:  12px;     /* buttons, form fields, small cards */
+  --radius-lg:  18px;     /* larger cards, drawers panels */
+  --radius-xl:  24px;     /* section-level cards */
+  --radius-2xl: 34px;     /* hero sections, major containers */
+  --radius-3xl: 44px;     /* hero stage, premium cards */
+  --radius-pill:999px;    /* pills, badges, price chips */
+  --radius-circle:50%;    /* avatar, round icon buttons */
+
+  /* ────────────────────────────────────────────────────────────
+     BORDER TOKENS
+     ──────────────────────────────────────────────────────────── */
+  --border-card:   1px solid var(--color-earth-border);
+  --border-glass:  1px solid var(--color-glass);
+  --border-gold:   1px solid var(--color-gold-border);
+  --border-line:   1px solid var(--color-line);
+  --border-focus:  3px solid rgba(40,93,83,0.35);
+
+  /* ────────────────────────────────────────────────────────────
+     SHADOW TOKENS
+     ──────────────────────────────────────────────────────────── */
+  --shadow-premium: 0 24px 70px rgba(31,41,38,0.14);
+  --shadow-card:    0 14px 34px rgba(31,41,38,0.08);
+  --shadow-subtle:  0 10px 24px rgba(31,41,38,0.06);
+  --shadow-dark:    0 30px 90px rgba(23,63,54,0.24);
+  --shadow-float:   0 4px 22px rgba(31,41,38,0.10);
+  --shadow-inset:   inset 0 1px 0 rgba(255,255,255,0.12);
+
+  /* ────────────────────────────────────────────────────────────
+     Z-INDEX SCALE
+     ──────────────────────────────────────────────────────────── */
+  --z-base:       1;
+  --z-raised:    10;
+  --z-dropdown:  50;
+  --z-sticky:    80;
+  --z-drawer:   120;
+  --z-header:   200;
+  --z-overlay:  500;
+  --z-modal:    999;
+
+  /* ────────────────────────────────────────────────────────────
+     TRANSITION TOKENS
+     ──────────────────────────────────────────────────────────── */
+  --transition-fast:   0.15s ease;
+  --transition-base:   0.22s ease;
+  --transition-slow:   0.35s ease;
+  --transition-spring: 0.25s cubic-bezier(0.2,0.8,0.3,1);
+  --transition-bounce: 0.30s cubic-bezier(0.4,0,0.2,1.6);
+
+  /* ────────────────────────────────────────────────────────────
+     LAYOUT — CONTAINER
+     ──────────────────────────────────────────────────────────── */
+  --container-max:   1720px;
+  --container-pad:   clamp(18px, 5vw, 72px);
+  --header-height:   74px;
+  --mob-header-h:    68px;
+
+  /* ────────────────────────────────────────────────────────────
+     BREAKPOINT REFERENCE (for documentation — not usable in CSS)
+     Use these in @media queries:
+       xs:        390px   small mobile
+       sm:        430px   standard mobile
+       md:        480px   large mobile
+       tablet:    768px   tablet portrait
+       tablet-lg: 834px   tablet landscape
+       laptop:   1024px   small laptop / iPad landscape
+       desktop:  1280px   standard desktop
+       xl:       1440px   large desktop
+       2xl:      1920px   ultra-wide
+     ──────────────────────────────────────────────────────────── */
+
+  /* ────────────────────────────────────────────────────────────
+     COMPONENT TOKENS — CARDS
+     ──────────────────────────────────────────────────────────── */
+  --card-radius:    var(--radius-lg);    /* 18px — standard card */
+  --card-radius-lg: var(--radius-xl);   /* 24px — hero/featured cards */
+  --card-bg:        var(--bg-card);
+  --card-border:    var(--border-card);
+  --card-shadow:    var(--shadow-card);
+  --card-pad:       var(--card-pad);
+
+  /* ────────────────────────────────────────────────────────────
+     COMPONENT TOKENS — BUTTONS
+     ──────────────────────────────────────────────────────────── */
+  --btn-radius:     var(--radius-pill);
+  --btn-height:     46px;
+  --btn-height-lg:  52px;
+  --btn-height-sm:  38px;
+  --btn-font:       var(--font-ui);
+  --btn-weight:     var(--weight-heavy);
+  --btn-font-size:  var(--type-button);
+
+  /* Primary button */
+  --btn-primary-bg:    var(--color-forest);
+  --btn-primary-color: var(--color-cream);
+  --btn-primary-hover: var(--color-forest-mid);
+
+  /* Ghost button */
+  --btn-ghost-bg:      transparent;
+  --btn-ghost-color:   var(--color-forest);
+  --btn-ghost-border:  var(--border-line);
+  --btn-ghost-hover:   var(--color-cream);
+
+}
+
+/* ────────────────────────────────────────────────────────────
+   REDUCED MOTION — disable all transitions and animations
+   ──────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast:   0.01ms;
+    --transition-base:   0.01ms;
+    --transition-slow:   0.01ms;
+    --transition-spring: 0.01ms;
+    --transition-bounce: 0.01ms;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   UTILITY CLASSES — design system helpers
+   ──────────────────────────────────────────────────────────── */
+
+/* Focus ring — use on all interactive elements */
+.ds-focus:focus-visible {
+  outline: var(--border-focus);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Text color utilities */
+.ds-text-forest  { color: var(--color-forest); }
+.ds-text-gold    { color: var(--color-gold); }
+.ds-text-muted   { color: var(--color-muted); }
+.ds-text-cream   { color: var(--color-cream); }
+.ds-text-ink     { color: var(--color-ink); }
+
+/* Background utilities */
+.ds-bg-forest  { background: var(--color-forest); }
+.ds-bg-cream   { background: var(--color-cream); }
+.ds-bg-dark    { background: var(--bg-dark); }
+
+/* Overline / eyebrow */
+.ds-overline {
+  font-family: var(--font-ui);
+  font-size: var(--type-overline);
+  font-weight: var(--weight-black);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-earth);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   BRIDGE — v1.1 June 2026
+   Connects the new design token names to the existing site CSS variables
+   so both naming systems work. Code using var(--forest2) and code using
+   var(--color-forest) produce identical results.
+   ══════════════════════════════════════════════════════════════════════ */
+:root {
+  /* ── Existing site vars → design token aliases ─────────────────── */
+  --color-forest:       var(--forest2, #285D53);
+  --color-forest-mid:   var(--forest,  #173f36);
+  --color-forest-deep:  #0d2820;
+  --color-gold:         var(--gold,    #DFA524);
+  --color-earth:        var(--earth,   #846345);
+  --color-cream:        var(--cream,   #F7F1E6);
+  --color-cream-paper:  var(--paper,   #fffaf1);
+  --color-cream-soft:   var(--soft,    #f0e5d2);
+  --color-ink:          var(--ink,     #1f2926);
+  --color-muted:        var(--muted,   #6d7975);
+  --color-line:         var(--line,    #e5d8c5);
+  --color-copper:       #DF5C23;
+  --color-danger:       #e05555;
+
+  /* ── Shadow aliases ────────────────────────────────────────────── */
+  --shadow-premium:  var(--shadow,  0 24px 70px rgba(31,41,38,.14));
+  --shadow-card:     var(--shadow2, 0 12px 34px rgba(31,41,38,.10));
+
+  /* ── Radius aliases ────────────────────────────────────────────── */
+  --radius-pill:  999px;
+  --radius-card:  var(--radius, 28px);
+  --radius-xl:    22px;
+  --radius-lg:    18px;
+  --radius-md:    14px;
+  --radius-sm:    10px;
+  --radius-xs:    8px;
+
+  /* ── Typography — fluid scale using clamp() ───────────────────── */
+  --type-display-xl: clamp(38px, 8vw, 108px);
+  --type-display-lg: clamp(28px, 5.5vw, 82px);
+  --type-display-md: clamp(24px, 4vw, 60px);
+  --type-h1:         clamp(28px, 5.2vw, 76px);
+  --type-h2:         clamp(22px, 3.6vw, 54px);
+  --type-h3:         clamp(17px, 2vw, 30px);
+  --type-h4:         clamp(15px, 1.5vw, 22px);
+  --type-h5:         clamp(13px, 1.1vw, 18px);
+  --type-h6:         clamp(12px, 1vw, 15px);
+  --type-body-lg:    clamp(16px, 1.45vw, 20px);
+  --type-body-md:    clamp(15px, 1.2vw, 17px);
+  --type-body-sm:    clamp(13px, 1vw, 15px);
+  --type-caption:    clamp(11px, 0.9vw, 13px);
+  --type-button:     clamp(13px, 1vw, 15px);
+  --type-overline:   clamp(10px, 0.8vw, 12px);
+  --type-badge:      clamp(10px, 0.8vw, 11px);
+  --type-product-title: clamp(14px, 1.2vw, 17px);
+  --type-product-price: clamp(13px, 1vw, 15px);
+
+  /* ── Font stacks ───────────────────────────────────────────────── */
+  --font-display:   'Brownberries', 'Poppins', sans-serif;
+  --font-ui:        'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-hero:      var(--font-display);
+  --font-editorial: var(--font-ui);
+  --font-urdu:      var(--font-ui);
+
+  /* ── Spacing ────────────────────────────────────────────────────── */
+  --space-2:    2px;   --space-4:    4px;   --space-6:    6px;
+  --space-8:    8px;   --space-12:  12px;   --space-16:  16px;
+  --space-20:  20px;   --space-24:  24px;   --space-32:  32px;
+  --space-40:  40px;   --space-48:  48px;   --space-64:  64px;
+  --space-80:  80px;   --space-96:  96px;   --space-120:120px;
+  --section-v: clamp(44px, 8vh, 80px);
+  --section-h: clamp(18px, 5vw, 72px);
+  --card-pad:  clamp(14px, 1.8vw, 24px);
+  --grid-gap:  clamp(12px, 1.5vw, 18px);
+  --section-pad-y: var(--section-v);
+  --section-pad-x: var(--section-h);
+  --content-gap: var(--space-24);
+  --heading-gap: var(--space-16);
+  --button-gap: var(--space-12);
+  --form-gap: var(--space-16);
+
+  /* ── Z-index scale ──────────────────────────────────────────────── */
+  --z-base:    1;   --z-raised:  10;  --z-dropdown: 50;
+  --z-sticky: 80;   --z-drawer: 120;  --z-header:  200;
+  --z-modal:  999;
+
+  /* ── Transitions ────────────────────────────────────────────────── */
+  --t-fast:   0.15s ease;
+  --t-base:   0.22s ease;
+  --t-slow:   0.35s ease;
+  --t-spring: 0.25s cubic-bezier(0.2,0.8,0.3,1);
+
+  /* ── Focus ring ─────────────────────────────────────────────────── */
+  --border-focus: 3px solid rgba(40,93,83,0.40);
+  --border-card:  1px solid var(--color-earth-border, rgba(132,99,69,0.18));
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root { --t-fast:0.01ms; --t-base:0.01ms; --t-slow:0.01ms; --t-spring:0.01ms; }
+}

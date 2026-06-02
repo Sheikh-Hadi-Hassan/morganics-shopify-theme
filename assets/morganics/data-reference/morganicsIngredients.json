@@ -1,0 +1,1363 @@
+[
+  {
+    "id": 1,
+    "name": "Pista Maghaz",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "pista-maghaz",
+    "alt": "Morganics Pista Maghaz ingredient visual",
+    "directImage": "/assets/products/16-pista-maghaz.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Pista Namkeen",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "pista-namkeen",
+    "alt": "Morganics Pista Namkeen ingredient visual",
+    "directImage": "/assets/products/27-pista-namkeen.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Kajo Sada",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "kajo-sada",
+    "alt": "Morganics Kajo Sada ingredient visual",
+    "directImage": "/assets/products/17-kajo-sada.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Kajo Fry",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "kajo-fry",
+    "alt": "Morganics Kajo Fry ingredient visual",
+    "directImage": "/assets/products/04-kajo-fry.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Kajo Roasted",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "kajo-roasted",
+    "alt": "Morganics Kajo Roasted ingredient visual",
+    "directImage": "/assets/products/02-kajo-roasted.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Badam Sabat",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "badam-sabat",
+    "alt": "Morganics Badam Sabat ingredient visual",
+    "directImage": "/assets/products/14-almond-with-shell.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Maghaz Abdul Wahidi",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "maghaz-abdul-wahidi",
+    "alt": "Morganics Maghaz Abdul Wahidi ingredient visual"
+  },
+  {
+    "id": 8,
+    "name": "Maghaz American",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "maghaz-american",
+    "alt": "Morganics Maghaz American ingredient visual",
+    "directImage": "/assets/products/43-american-almonds.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Maghaz Gurbandi",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "maghaz-gurbandi",
+    "alt": "Morganics Maghaz Gurbandi ingredient visual",
+    "directImage": "/assets/products/34-badam-giri-gurbandi.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Anjeer",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "anjeer",
+    "alt": "Morganics Anjeer ingredient visual",
+    "directImage": "/assets/products/50-anjeer-fig.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Maghaz Akhrot",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "maghaz-akhrot",
+    "alt": "Morganics Maghaz Akhrot ingredient visual",
+    "directImage": "/assets/products/52-maghaz-akhrot-walnut.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Maghaz Chilgoza",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "maghaz-chilgoza",
+    "alt": "Morganics Maghaz Chilgoza ingredient visual",
+    "directImage": "/assets/products/51-maghaz-chilgoza.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Pecan Nuts",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "pecan-nuts",
+    "alt": "Morganics Pecan Nuts ingredient visual",
+    "directImage": "/assets/products/53-pecan-nut.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Brazilian Nuts",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "brazilian-nuts",
+    "alt": "Morganics Brazilian Nuts ingredient visual",
+    "directImage": "/assets/products/54-brazil-nuts.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Banana Dried",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "banana-dried",
+    "alt": "Morganics Banana Dried ingredient visual",
+    "directImage": "/assets/products/55-banana-dried.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Mixed Dried Fruits",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "mixed-dried-fruits",
+    "alt": "Morganics Mixed Dried Fruits ingredient visual",
+    "directImage": "/assets/products/56-mixed-dried-fruits.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Sogi Small Mewa",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "sogi-small-mewa",
+    "alt": "Morganics Sogi Small Mewa ingredient visual",
+    "directImage": "/assets/products/29-sogi-small-mewa.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Sogi Big Mewa",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "sogi-big-mewa",
+    "alt": "Morganics Sogi Big Mewa ingredient visual",
+    "directImage": "/assets/products/15-sogi-big-mewa.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Black Munaqqa",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "black-munaqqa",
+    "alt": "Morganics Black Munaqqa ingredient visual",
+    "directImage": "/assets/products/13-munakka-black.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Zarishk",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "zarishk",
+    "alt": "Morganics Zarishk ingredient visual",
+    "directImage": "/assets/products/01-zarishk.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Khajoor Mabroom",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "khajoor-mabroom",
+    "alt": "Morganics Khajoor Mabroom ingredient visual",
+    "directImage": "/assets/products/57-mabroom-dates.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Khajoor Ajwa",
+    "category": "Nuts & Dry Fruits",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "khajoor-ajwa",
+    "alt": "Morganics Khajoor Ajwa ingredient visual",
+    "directImage": "/assets/products/58-khajoor-ajwa.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Chia Seeds",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "chia-seeds",
+    "alt": "Morganics Chia Seeds ingredient visual"
+  },
+  {
+    "id": 24,
+    "name": "Pumpkin Seeds",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "pumpkin-seeds",
+    "alt": "Morganics Pumpkin Seeds ingredient visual"
+  },
+  {
+    "id": 25,
+    "name": "Sunflower Seeds",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "sunflower-seeds",
+    "alt": "Morganics Sunflower Seeds ingredient visual",
+    "directImage": "/assets/products/59-sunflower-seeds.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Alsi",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "alsi",
+    "alt": "Morganics Alsi ingredient visual",
+    "directImage": "/assets/products/41-alsi.jpg"
+  },
+  {
+    "id": 27,
+    "name": "Til Black",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "til-black",
+    "alt": "Morganics Til Black ingredient visual",
+    "directImage": "/assets/products/24-til-black.jpg"
+  },
+  {
+    "id": 28,
+    "name": "Tukhm Methi",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "tukhm-methi",
+    "alt": "Morganics Tukhm Methi ingredient visual",
+    "directImage": "/assets/products/31-tukhm-methi.jpg"
+  },
+  {
+    "id": 29,
+    "name": "Kalonji",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "kalonji",
+    "alt": "Morganics Kalonji ingredient visual",
+    "directImage": "/assets/products/40-kalonji.jpg"
+  },
+  {
+    "id": 30,
+    "name": "Sarson Black & Yellow",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "sarson-black-yellow",
+    "alt": "Morganics Sarson Black & Yellow ingredient visual",
+    "directImage": "/assets/products/32-mustard-seeds.jpg"
+  },
+  {
+    "id": 31,
+    "name": "Four Seeds / Maghaz",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "four-seeds-maghaz",
+    "alt": "Morganics Four Seeds / Maghaz ingredient visual",
+    "directImage": "/assets/products/28-char-maghaz.jpg"
+  },
+  {
+    "id": 32,
+    "name": "Phool Makhana",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "phool-makhana",
+    "alt": "Morganics Phool Makhana ingredient visual",
+    "directImage": "/assets/products/48-phool-makhana.jpg"
+  },
+  {
+    "id": 33,
+    "name": "Quinoa",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "quinoa",
+    "alt": "Morganics Quinoa ingredient visual",
+    "directImage": "/assets/products/39-quinoa.jpg"
+  },
+  {
+    "id": 34,
+    "name": "Daliya Oats",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "daliya-oats",
+    "alt": "Morganics Daliya Oats ingredient visual",
+    "directImage": "/assets/products/60-daliya-oats.jpg"
+  },
+  {
+    "id": 35,
+    "name": "DarChini Chilka Gol",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "darchini-chilka-gol",
+    "alt": "Morganics DarChini Chilka Gol ingredient visual",
+    "directImage": "/assets/products/46-dar-chini-gil-gol.jpg"
+  },
+  {
+    "id": 36,
+    "name": "Elaichi Sabaz",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "elaichi-sabaz",
+    "alt": "Morganics Elaichi Sabaz ingredient visual",
+    "directImage": "/assets/products/26-elaichi-sabz.jpg"
+  },
+  {
+    "id": 37,
+    "name": "Chilka Isabgol",
+    "category": "Seeds & Grains",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "chilka-isabgol",
+    "alt": "Morganics Chilka Isabgol ingredient visual",
+    "directImage": "/assets/products/25-chilka-ispaghol.jpg"
+  },
+  {
+    "id": 38,
+    "name": "Ashwagandha",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "ashwagandha",
+    "alt": "Morganics Ashwagandha ingredient visual",
+    "directImage": "/assets/products/07-ashwagandha.jpg"
+  },
+  {
+    "id": 39,
+    "name": "Moringa",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "moringa",
+    "alt": "Morganics Moringa ingredient visual",
+    "directImage": "/assets/products/21-moringa.jpg"
+  },
+  {
+    "id": 40,
+    "name": "Rosemary Leaves",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "rosemary-leaves",
+    "alt": "Morganics Rosemary Leaves ingredient visual",
+    "directImage": "/assets/products/36-rosemary-leaves.jpg"
+  },
+  {
+    "id": 41,
+    "name": "Hibiscus",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "hibiscus",
+    "alt": "Morganics Hibiscus ingredient visual",
+    "directImage": "/assets/products/61-hibiscus-herb.jpg"
+  },
+  {
+    "id": 42,
+    "name": "Ajwain",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "ajwain",
+    "alt": "Morganics Ajwain ingredient visual",
+    "directImage": "/assets/products/42-ajwain.jpg"
+  },
+  {
+    "id": 43,
+    "name": "Ginkgo Biloba",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "ginkgo-biloba",
+    "alt": "Morganics Ginkgo Biloba ingredient visual",
+    "directImage": "/assets/products/62-ginkgo-biloba.jpg"
+  },
+  {
+    "id": 44,
+    "name": "Aqarqara",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "aqarqara",
+    "alt": "Morganics Aqarqara ingredient visual",
+    "directImage": "/assets/products/63-aqarqara.jpg"
+  },
+  {
+    "id": 45,
+    "name": "Tukhm-e-Malanga",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "tukhm-e-malanga",
+    "alt": "Morganics Tukhm-e-Malanga ingredient visual"
+  },
+  {
+    "id": 46,
+    "name": "Musabbar",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "musabbar",
+    "alt": "Morganics Musabbar ingredient visual",
+    "directImage": "/assets/products/12-musabbar.jpg"
+  },
+  {
+    "id": 47,
+    "name": "Multani Mitti Powder",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "multani-mitti-powder",
+    "alt": "Morganics Multani Mitti Powder ingredient visual",
+    "directImage": "/assets/products/33-multani-mitti.jpg"
+  },
+  {
+    "id": 48,
+    "name": "Triphala Blend",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "triphala-blend",
+    "alt": "Morganics Triphala Blend ingredient visual",
+    "directImage": "/assets/products/64-triphala-blend.jpg"
+  },
+  {
+    "id": 49,
+    "name": "Sikakai",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "sikakai",
+    "alt": "Morganics Sikakai ingredient visual",
+    "directImage": "/assets/products/18-sikakai.jpg"
+  },
+  {
+    "id": 50,
+    "name": "Amla",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "amla",
+    "alt": "Morganics Amla ingredient visual",
+    "directImage": "/assets/products/20-amla.jpg"
+  },
+  {
+    "id": 51,
+    "name": "Hareer Sabaz",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "hareer-sabaz",
+    "alt": "Morganics Hareer Sabaz ingredient visual",
+    "directImage": "/assets/products/03-hareer-sabaz.jpg"
+  },
+  {
+    "id": 52,
+    "name": "Bheray",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "bheray",
+    "alt": "Morganics Bheray ingredient visual",
+    "directImage": "/assets/products/37-bheray.jpg"
+  },
+  {
+    "id": 53,
+    "name": "Harmal",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "harmal",
+    "alt": "Morganics Harmal ingredient visual",
+    "directImage": "/assets/products/19-harmal.jpg"
+  },
+  {
+    "id": 54,
+    "name": "Guggul",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "guggul",
+    "alt": "Morganics Guggul ingredient visual",
+    "directImage": "/assets/products/35-guggul.jpg"
+  },
+  {
+    "id": 55,
+    "name": "Lobaan",
+    "category": "Herbs & Botanicals",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "lobaan",
+    "alt": "Morganics Lobaan ingredient visual",
+    "directImage": "/assets/products/11-luban.jpg"
+  },
+  {
+    "id": 56,
+    "name": "Moosli Safaid",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "moosli-safaid",
+    "alt": "Morganics Moosli Safaid ingredient visual",
+    "directImage": "/assets/products/30-moosli-white.jpg"
+  },
+  {
+    "id": 57,
+    "name": "Saffron / Zafran",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "saffron-zafran",
+    "alt": "Morganics Saffron / Zafran ingredient visual",
+    "directImage": "/assets/products/47-saffron.jpg"
+  },
+  {
+    "id": 58,
+    "name": "Maca Root",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "maca-root",
+    "alt": "Morganics Maca Root ingredient visual",
+    "directImage": "/assets/products/65-maca-root-whole.jpg"
+  },
+  {
+    "id": 59,
+    "name": "Beetroot Powder",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "beetroot-powder",
+    "alt": "Morganics Beetroot Powder ingredient visual"
+  },
+  {
+    "id": 60,
+    "name": "Salab Misri",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 238,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "salab-misri",
+    "alt": "Morganics Salab Misri ingredient visual",
+    "directImage": "/assets/products/45-salab-misri.jpg"
+  },
+  {
+    "id": 61,
+    "name": "Salab Punja",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "salab-punja",
+    "alt": "Morganics Salab Punja ingredient visual",
+    "directImage": "/assets/products/38-salab-punja.jpg"
+  },
+  {
+    "id": 62,
+    "name": "Konch",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "konch",
+    "alt": "Morganics Konch ingredient visual",
+    "directImage": "/assets/products/09-konch.jpg"
+  },
+  {
+    "id": 63,
+    "name": "Satavar",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "satavar",
+    "alt": "Morganics Satavar ingredient visual",
+    "directImage": "/assets/products/22-satawar.jpg"
+  },
+  {
+    "id": 64,
+    "name": "Salajeet",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "salajeet",
+    "alt": "Morganics Salajeet ingredient visual",
+    "directImage": "/assets/products/67-salajeet.jpg"
+  },
+  {
+    "id": 65,
+    "name": "Chasko Herb",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "chasko-herb",
+    "alt": "Morganics Chasko Herb ingredient visual",
+    "directImage": "/assets/products/05-chasko-herb.jpg"
+  },
+  {
+    "id": 66,
+    "name": "Ginseng Root",
+    "category": "Roots & Adaptogens",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 458,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "ginseng-root",
+    "alt": "Morganics Ginseng Root ingredient visual",
+    "directImage": "/assets/products/44-ginseng-root-red.jpg"
+  },
+  {
+    "id": 67,
+    "name": "Goji Berry",
+    "category": "Berries & Fruits",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "goji-berry",
+    "alt": "Morganics Goji Berry ingredient visual",
+    "directImage": "/assets/products/68-goji-berry.jpg"
+  },
+  {
+    "id": 68,
+    "name": "Mixed Berries",
+    "category": "Berries & Fruits",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "mixed-berries",
+    "alt": "Morganics Mixed Berries ingredient visual",
+    "directImage": "/assets/products/69-mixed-berries.jpg"
+  },
+  {
+    "id": 69,
+    "name": "Cranberry",
+    "category": "Berries & Fruits",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "cranberry",
+    "alt": "Morganics Cranberry ingredient visual",
+    "directImage": "/assets/products/70-cranberry.jpg"
+  },
+  {
+    "id": 70,
+    "name": "Gur",
+    "category": "Natural Sweeteners & Salts",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "gur",
+    "alt": "Morganics Gur ingredient visual",
+    "directImage": "/assets/products/08-gur.jpg"
+  },
+  {
+    "id": 71,
+    "name": "Shakar",
+    "category": "Natural Sweeteners & Salts",
+    "sourceImage": "/morganics/ingredients/batch-5.png",
+    "crop": {
+      "x": 1010,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "shakar",
+    "alt": "Morganics Shakar ingredient visual",
+    "directImage": "/assets/products/71-shakar.jpg"
+  },
+  {
+    "id": 72,
+    "name": "Honey",
+    "category": "Natural Sweeteners & Salts",
+    "sourceImage": "/morganics/ingredients/batch-6.png",
+    "crop": {
+      "x": 1258,
+      "y": 678,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "honey",
+    "alt": "Morganics Honey ingredient visual",
+    "directImage": "/assets/products/72-honey.jpg"
+  },
+  {
+    "id": 73,
+    "name": "Fruit Salt",
+    "category": "Natural Sweeteners & Salts",
+    "sourceImage": "/morganics/ingredients/batch-1.png",
+    "crop": {
+      "x": 18,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "fruit-salt",
+    "alt": "Morganics Fruit Salt ingredient visual",
+    "directImage": "/assets/products/23-fruit-salt.jpg"
+  },
+  {
+    "id": 74,
+    "name": "Premium Cold-Pressed Oils",
+    "category": "Oils, Gums & Specialities",
+    "sourceImage": "/morganics/ingredients/batch-2.png",
+    "crop": {
+      "x": 266,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "premium-cold-pressed-oils",
+    "alt": "Morganics Premium Cold-Pressed Oils ingredient visual"
+  },
+  {
+    "id": 75,
+    "name": "Goond Katira",
+    "category": "Oils, Gums & Specialities",
+    "sourceImage": "/morganics/ingredients/batch-3.png",
+    "crop": {
+      "x": 514,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "goond-katira",
+    "alt": "Morganics Goond Katira ingredient visual",
+    "directImage": "/assets/products/49-goond-katira.jpg"
+  },
+  {
+    "id": 76,
+    "name": "Hazma Churan",
+    "category": "Oils, Gums & Specialities",
+    "sourceImage": "/morganics/ingredients/batch-4.png",
+    "crop": {
+      "x": 762,
+      "y": 18,
+      "width": 190,
+      "height": 170,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "scale": 1
+    },
+    "slug": "hazma-churan",
+    "alt": "Morganics Hazma Churan ingredient visual"
+  }
+]

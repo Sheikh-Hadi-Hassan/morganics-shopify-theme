@@ -1,0 +1,69 @@
+{% liquid
+  assign line_image = item.image
+  assign line_url = item.url | default: item.product.url
+  assign line_key = item.key
+  assign is_drawer = drawer | default: false
+%}
+
+<div class="cart-line{% if is_drawer %} cart-line-drawer{% endif %}" data-cart-line-item data-line-key="{{ line_key }}">
+  <a class="cart-line-image" href="{{ line_url }}">
+    {% if line_image %}
+      {{ line_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: item.product.title }}
+    {% else %}
+      <img src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="{{ item.product.title | escape }}" width="180" height="180" loading="lazy">
+    {% endif %}
+  </a>
+
+  <div class="cart-line-info">
+    <a class="cart-line-title" href="{{ line_url }}">{{ item.product.title }}</a>
+    {% unless item.product.has_only_default_variant %}
+      <span class="cart-line-variant">{{ item.variant.title }}</span>
+    {% endunless %}
+
+    {% if item.properties != blank %}
+      <dl class="cart-line-properties">
+        {% for property in item.properties %}
+          {% assign property_first_char = property.first | slice: 0 %}
+          {% if property.last != blank and property_first_char != '_' %}
+            <div>
+              <dt>{{ property.first }}:</dt>
+              <dd>{{ property.last }}</dd>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </dl>
+    {% endif %}
+
+    {% if item.discounts.size > 0 %}
+      <ul class="cart-line-discounts" aria-label="Discounts">
+        {% for discount in item.discounts %}
+          <li>{{ discount.title }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="qty cart-line-qty">
+      {% if is_drawer %}
+        <button type="button" data-cart-qty data-line-key="{{ line_key }}" data-quantity="{{ item.quantity | minus: 1 }}" aria-label="Decrease {{ item.product.title | escape }} quantity">−</button>
+        <span data-cart-line-quantity>{{ item.quantity }}</span>
+        <button type="button" data-cart-qty data-line-key="{{ line_key }}" data-quantity="{{ item.quantity | plus: 1 }}" aria-label="Increase {{ item.product.title | escape }} quantity">+</button>
+      {% else %}
+        <button type="button" data-cart-page-qty data-step="-1" aria-label="Decrease {{ item.product.title | escape }} quantity">−</button>
+        <input class="cart-qty-input" type="number" min="0" name="updates[]" value="{{ item.quantity }}" aria-label="Quantity for {{ item.product.title | escape }}">
+        <button type="button" data-cart-page-qty data-step="1" aria-label="Increase {{ item.product.title | escape }} quantity">+</button>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="cart-line-price">
+    {% if item.original_line_price != item.final_line_price %}
+      <s>{{ item.original_line_price | money }}</s>
+    {% endif %}
+    <strong>{{ item.final_line_price | money }}</strong>
+    {% if is_drawer %}
+      <button class="cart-del" type="button" data-cart-remove data-line-key="{{ line_key }}" aria-label="Remove {{ item.product.title | escape }}">Remove</button>
+    {% else %}
+      <a class="cart-del" href="{{ item.url_to_remove }}">Remove</a>
+    {% endif %}
+  </div>
+</div>

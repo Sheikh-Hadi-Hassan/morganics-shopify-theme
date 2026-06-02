@@ -1,0 +1,44 @@
+<button class="cart-fab" type="button" data-cart-open aria-label="Open cart">
+  <span>Cart</span>
+  <b data-cart-count>{{ cart.item_count }}</b>
+</button>
+
+<div class="cart-backdrop" data-cart-backdrop data-cart-close aria-hidden="true"></div>
+
+<aside class="cart-drawer" data-cart-drawer aria-labelledby="CartDrawerTitle" aria-hidden="true">
+  <div class="cart-head">
+    <div>
+      <span class="eyebrow">Morganics Cart</span>
+      <h2 id="CartDrawerTitle">Your Selection</h2>
+    </div>
+    <button class="cart-close" type="button" data-cart-close aria-label="Close cart">×</button>
+  </div>
+
+  <div class="cart-body" data-cart-drawer-body>
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        {% render 'morganics-cart-line-item', item: item, drawer: true %}
+      {% endfor %}
+    {% else %}
+      <div class="empty-cart">
+        <h3>Your cart is empty.</h3>
+        <p>Start with pantry essentials, dry fruits, spices, or daily rituals.</p>
+        <a class="btn primary" href="{{ routes.all_products_collection_url }}">Shop Products</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="cart-drawer-footer">
+    <div class="cart-summary">
+      <span>Subtotal</span>
+      <strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+    </div>
+    <p class="cart-note">Shipping, taxes, and discounts are finalized at Shopify checkout.</p>
+    <div class="cart-actions">
+      <a class="btn ghost" href="{{ routes.all_products_collection_url }}" data-cart-close>Continue Shopping</a>
+      <form action="{{ routes.cart_url }}" method="post">
+        <button class="btn primary" type="submit" name="checkout" {% if cart.item_count == 0 %}disabled{% endif %} data-cart-checkout>Checkout</button>
+      </form>
+    </div>
+  </div>
+</aside>

@@ -39,9 +39,12 @@
       {{ content_for_layout }}
     </main>
 
+    {% render 'morganics-cart-drawer' %}
+
     {% sections 'footer-group' %}
 
     <script src="{{ 'morganics-theme.js' | asset_url }}" defer></script>
     <script src="{{ 'morganics-collection.js' | asset_url }}" defer></script>
+    <script src="{{ 'morganics-cart.js' | asset_url }}" defer></script>
   </body>
 </html>

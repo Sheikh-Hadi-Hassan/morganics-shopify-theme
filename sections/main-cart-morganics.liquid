@@ -1,0 +1,86 @@
+<section class="shop-hero cart-hero">
+  <div>
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.copy }}</p>
+  </div>
+</section>
+
+{% if cart.item_count == 0 %}
+  <section class="cart-page cart-empty-page">
+    <div class="empty-cart">
+      <h2>{{ section.settings.empty_heading }}</h2>
+      <p>{{ section.settings.empty_copy }}</p>
+      <a class="btn primary" href="{{ routes.all_products_collection_url }}">{{ section.settings.empty_button_label }}</a>
+    </div>
+  </section>
+{% else %}
+  <section class="cart-page">
+    <form class="cart-list" action="{{ routes.cart_url }}" method="post" data-cart-page-form>
+      {% for item in cart.items %}
+        {% render 'morganics-cart-line-item', item: item %}
+      {% endfor %}
+
+      <div class="cart-page-controls">
+        <button class="btn ghost" type="submit" name="update">{{ section.settings.update_button_label }}</button>
+        <a class="btn ghost" href="{{ routes.all_products_collection_url }}">{{ section.settings.continue_button_label }}</a>
+      </div>
+    </form>
+
+    <aside class="checkout-card">
+      <span class="eyebrow">{{ section.settings.summary_eyebrow }}</span>
+      <h2>{{ section.settings.summary_heading }}</h2>
+
+      <div class="summary-row">
+        <span>Items</span>
+        <strong>{{ cart.item_count }}</strong>
+      </div>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong>{{ cart.items_subtotal_price | money }}</strong>
+      </div>
+
+      {% if cart.cart_level_discount_applications.size > 0 %}
+        <div class="cart-discount-box">
+          {% for discount_application in cart.cart_level_discount_applications %}
+            <div class="summary-row">
+              <span>{{ discount_application.title }}</span>
+              <strong>-{{ discount_application.total_allocated_amount | money }}</strong>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="cart-summary cart-total-row">
+        <span>Total</span>
+        <strong>{{ cart.total_price | money }}</strong>
+      </div>
+
+      <p>{{ section.settings.checkout_note }}</p>
+
+      <form action="{{ routes.cart_url }}" method="post">
+        <button class="btn primary cart-checkout-btn" type="submit" name="checkout">{{ section.settings.checkout_button_label }}</button>
+      </form>
+    </aside>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Morganics cart",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Secure Shopify Cart" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your Morganics cart." },
+    { "type": "textarea", "id": "copy", "label": "Intro copy", "default": "Review your selected pantry products, adjust quantities, and continue to Shopify checkout when ready." },
+    { "type": "text", "id": "empty_heading", "label": "Empty heading", "default": "Your cart is empty." },
+    { "type": "textarea", "id": "empty_copy", "label": "Empty copy", "default": "Browse Morganics essentials and add products to start your order." },
+    { "type": "text", "id": "empty_button_label", "label": "Empty button label", "default": "Shop Products" },
+    { "type": "text", "id": "update_button_label", "label": "Update button label", "default": "Update Cart" },
+    { "type": "text", "id": "continue_button_label", "label": "Continue button label", "default": "Continue Shopping" },
+    { "type": "text", "id": "summary_eyebrow", "label": "Summary eyebrow", "default": "Order Summary" },
+    { "type": "text", "id": "summary_heading", "label": "Summary heading", "default": "Checkout Details" },
+    { "type": "textarea", "id": "checkout_note", "label": "Checkout note", "default": "Shipping, taxes, discounts, inventory validation, and payment are handled by Shopify checkout." },
+    { "type": "text", "id": "checkout_button_label", "label": "Checkout button label", "default": "Checkout Securely" }
+  ]
+}
+{% endschema %}

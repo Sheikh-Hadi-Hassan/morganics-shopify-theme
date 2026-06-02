@@ -1,21 +1,50 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
-  "name": "t:general.footer",
+  "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "shop_menu": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "care_menu": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Customer Care",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "shop_menu",
+        "care_menu"
+      ],
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "brand_text": "Premium natural pantry essentials for Pakistani homes, sourced with care and packed with purity.",
+        "pill_1": "COD Delivery",
+        "pill_2": "Premium Pantry",
+        "pill_3": "Natural Ingredients",
+        "show_trust_strip": true,
+        "trust_1": "Pakistan-wide COD Delivery",
+        "trust_2": "Premium Natural Ingredients",
+        "trust_3": "Freshly Packed",
+        "trust_4": "Custom Sourcing Support",
+        "contact_heading": "Connect",
+        "phone_label": "+92 322 3338110",
+        "phone_tel": "+923223338110",
+        "email": "hello@morganics.store",
+        "support_email": "support@morganics.store",
+        "instagram_url": "",
+        "facebook_url": "",
+        "tiktok_url": "",
+        "youtube_url": "",
+        "bottom_menu": "footer",
+        "copyright_text": "Pure by Nature. Premium by Choice."
       }
     }
   },

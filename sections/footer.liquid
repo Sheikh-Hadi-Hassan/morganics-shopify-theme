@@ -1,56 +1,278 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+{% liquid
+  assign logo_alt = section.settings.logo.alt | default: shop.name | escape
+%}
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+<footer class="premium-footer">
+  {% if section.settings.show_trust_strip %}
+    <div class="footer-trust">
+      <div class="footer-inner">
+        <div class="ft-trust-grid">
+          <div class="ft-trust-item"><span>{{ section.settings.trust_1 }}</span></div>
+          <div class="ft-trust-item"><span>{{ section.settings.trust_2 }}</span></div>
+          <div class="ft-trust-item"><span>{{ section.settings.trust_3 }}</span></div>
+          <div class="ft-trust-item"><span>{{ section.settings.trust_4 }}</span></div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
+  <div class="footer-inner footer-grid-wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand-col">
+        <a href="{{ routes.root_url }}" class="footer-logo-link" aria-label="{{ shop.name }} home">
+          {% if section.settings.logo != blank %}
+            {{ section.settings.logo | image_url: width: 420 | image_tag: class: 'footer-logo', alt: logo_alt, loading: 'lazy' }}
+          {% else %}
+            <img class="footer-logo" src="{{ 'morganics/logos/morganics-logo-footer.png' | asset_url }}" alt="Morganics - Chemistry of Nutrients" width="220" height="96" loading="lazy">
+          {% endif %}
+        </a>
+
+        {% if section.settings.brand_text != blank %}
+          <p class="footer-brand-desc">{{ section.settings.brand_text }}</p>
+        {% endif %}
+
+        <div class="footer-brand-pills">
+          {% if section.settings.pill_1 != blank %}<span>{{ section.settings.pill_1 }}</span>{% endif %}
+          {% if section.settings.pill_2 != blank %}<span>{{ section.settings.pill_2 }}</span>{% endif %}
+          {% if section.settings.pill_3 != blank %}<span>{{ section.settings.pill_3 }}</span>{% endif %}
+        </div>
+      </div>
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'menu_column' %}
+            <div class="footer-col" {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}
+                <h4 class="footer-col-title">{{ block.settings.heading }}</h4>
+              {% endif %}
+              {% if block.settings.menu != blank and block.settings.menu.links.size > 0 %}
+                <nav class="footer-links" aria-label="{{ block.settings.heading | escape }}">
+                  {% for link in block.settings.menu.links %}
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  {% endfor %}
+                </nav>
+              {% endif %}
+            </div>
+
+          {% when 'text_column' %}
+            <div class="footer-col" {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}
+                <h4 class="footer-col-title">{{ block.settings.heading }}</h4>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="footer-richtext">{{ block.settings.text }}</div>
+              {% endif %}
+            </div>
+        {% endcase %}
       {% endfor %}
-    {% endif %}
+
+      <div class="footer-col footer-connect-col">
+        <h4 class="footer-col-title">{{ section.settings.contact_heading }}</h4>
+        <div class="footer-contact-list">
+          {% if section.settings.phone_label != blank %}
+            <a href="tel:{{ section.settings.phone_tel | remove: ' ' }}" class="footer-contact-link">{{ section.settings.phone_label }}</a>
+          {% endif %}
+          {% if section.settings.email != blank %}
+            <a href="mailto:{{ section.settings.email }}" class="footer-contact-link">{{ section.settings.email }}</a>
+          {% endif %}
+          {% if section.settings.support_email != blank %}
+            <a href="mailto:{{ section.settings.support_email }}" class="footer-contact-link">{{ section.settings.support_email }}</a>
+          {% endif %}
+        </div>
+
+        <div class="footer-socials">
+          {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" class="footer-social-pill">Instagram</a>{% endif %}
+          {% if section.settings.facebook_url != blank %}<a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="footer-social-pill">Facebook</a>{% endif %}
+          {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" class="footer-social-pill">TikTok</a>{% endif %}
+          {% if section.settings.youtube_url != blank %}<a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" class="footer-social-pill">YouTube</a>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom-bar">
+    <div class="footer-inner footer-bottom-inner">
+      <span class="footer-copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text }}</span>
+      {% if section.settings.bottom_menu != blank and section.settings.bottom_menu.links.size > 0 %}
+        <nav class="footer-policy-links" aria-label="Footer policies">
+          {% for link in section.settings.bottom_menu.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </nav>
+      {% endif %}
+    </div>
   </div>
 </footer>
 
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
-
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Morganics footer",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "Premium natural pantry essentials for Pakistani homes, sourced with care and packed with purity."
+    },
+    {
+      "type": "text",
+      "id": "pill_1",
+      "label": "Brand pill 1",
+      "default": "COD Delivery"
+    },
+    {
+      "type": "text",
+      "id": "pill_2",
+      "label": "Brand pill 2",
+      "default": "Premium Pantry"
+    },
+    {
+      "type": "text",
+      "id": "pill_3",
+      "label": "Brand pill 3",
+      "default": "Natural Ingredients"
     },
     {
       "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "id": "show_trust_strip",
+      "label": "Show trust strip",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust item 1",
+      "default": "Pakistan-wide COD Delivery"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust item 2",
+      "default": "Premium Natural Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust item 3",
+      "default": "Freshly Packed"
+    },
+    {
+      "type": "text",
+      "id": "trust_4",
+      "label": "Trust item 4",
+      "default": "Custom Sourcing Support"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact heading",
+      "default": "Connect"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone display",
+      "default": "+92 322 3338110"
+    },
+    {
+      "type": "text",
+      "id": "phone_tel",
+      "label": "Phone link value",
+      "default": "+923223338110"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Sales email",
+      "default": "hello@morganics.store"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@morganics.store"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_menu",
+      "label": "Bottom policy menu"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright line",
+      "default": "Pure by Nature. Premium by Choice."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "text_column",
+      "name": "Text column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Customer Care"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Contact Morganics for ingredient guidance, custom sourcing, and support.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics footer",
+      "blocks": [
+        { "type": "menu_column" },
+        { "type": "menu_column" }
+      ]
     }
   ]
 }

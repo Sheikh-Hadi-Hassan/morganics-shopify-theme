@@ -1,76 +1,166 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+{% liquid
+  assign logo_alt = section.settings.logo.alt | default: shop.name | escape
+  assign menu = section.settings.menu
+%}
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+<header class="site-header" data-morganics-header>
+  {% if section.settings.announcement_text != blank %}
+    <div class="announcement-bar">
+      <span>{{ section.settings.announcement_text }}</span>
+    </div>
+  {% endif %}
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
+  <div class="header-shell">
+    <a class="brand logo-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 360 | image_tag: class: 'brand-logo-img header-logo-img', alt: logo_alt, loading: 'eager' }}
+      {% else %}
+        <img
+          class="brand-logo-img header-logo-img"
+          src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}"
+          alt="Morganics - Chemistry of Nutrients"
+          width="178"
+          height="54"
+          loading="eager"
+        >
+      {% endif %}
+    </a>
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+    <nav class="header-nav" aria-label="Primary navigation">
+      {% if menu != blank and menu.links.size > 0 %}
+        {% for link in menu.links %}
+          <a href="{{ link.url }}" {% if link.current %}aria-current="page" class="active"{% endif %}>{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ routes.collections_url }}">Categories</a>
+        <a href="/pages/contact">Contact</a>
+      {% endif %}
+    </nav>
+
+    <div class="header-actions">
+      {% if section.settings.show_search %}
+        <a class="header-icon-link" href="{{ routes.search_url }}" aria-label="Search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        </a>
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+      {% if section.settings.cta_label != blank %}
+        <a class="header-shop-cta" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+
+      <button class="mobile-menu-btn" type="button" data-mobile-menu-toggle aria-controls="MorganicsMobileMenu" aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+<div class="mobile-menu-panel" id="MorganicsMobileMenu" data-mobile-menu-panel hidden>
+  <div class="mobile-menu-top">
+    <a class="brand mobile-panel-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 320 | image_tag: class: 'brand-logo-img', alt: logo_alt, loading: 'lazy' }}
+      {% else %}
+        <img class="brand-logo-img" src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="Morganics - Chemistry of Nutrients" width="150" height="74" loading="lazy">
+      {% endif %}
+    </a>
+    <button class="mobile-close" type="button" data-mobile-menu-close aria-label="Close menu">&times;</button>
+  </div>
+
+  <nav class="mobile-primary-links" aria-label="Mobile navigation">
+    {% if menu != blank and menu.links.size > 0 %}
+      {% for link in menu.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="{{ routes.all_products_collection_url }}">Shop All Products</a>
+      <a href="{{ routes.collections_url }}">Categories</a>
+      <a href="/pages/contact">Contact / Inquiry</a>
+    {% endif %}
+  </nav>
+
+  <section class="mobile-contact-strip" aria-label="Morganics contact links">
+    {% if section.settings.phone_label != blank %}
+      <a href="tel:{{ section.settings.phone_tel | remove: ' ' }}">{{ section.settings.phone_label }}</a>
+    {% endif %}
+    {% if section.settings.email != blank %}
+      <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+    {% endif %}
+    {% if section.settings.whatsapp_url != blank %}
+      <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp Morganics</a>
+    {% endif %}
+  </section>
+
+  {% if section.settings.cta_label != blank %}
+    <a class="mobile-menu-primary" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
+  {% endif %}
+</div>
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Morganics header",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Premium natural pantry essentials for Pakistani homes"
     },
     {
       "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Header CTA label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Header CTA link"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone display",
+      "default": "+92 322 3338110"
+    },
+    {
+      "type": "text",
+      "id": "phone_tel",
+      "label": "Phone link value",
+      "default": "+923223338110"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "hello@morganics.store"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp URL"
     }
   ]
 }

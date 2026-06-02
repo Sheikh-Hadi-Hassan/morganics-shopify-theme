@@ -1,0 +1,80 @@
+<section class="morganics-home-shell">
+  <div class="home-shell-copy">
+    {% if section.settings.eyebrow != blank %}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {% endif %}
+    <h1>{{ section.settings.heading }}</h1>
+    {% if section.settings.text != blank %}
+      <p>{{ section.settings.text }}</p>
+    {% endif %}
+    <div class="home-shell-actions">
+      {% if section.settings.primary_label != blank %}
+        <a class="btn" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>
+      {% endif %}
+      {% if section.settings.secondary_label != blank %}
+        <a class="btn ghost" href="{{ section.settings.secondary_link | default: routes.root_url }}">{{ section.settings.secondary_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="home-shell-visual" aria-hidden="true">
+    <img class="home-shell-bg" src="{{ 'morganics/morganics-hero/bg-gradient.png' | asset_url }}" alt="" width="900" height="900" loading="eager">
+    <img class="home-shell-plant-left" src="{{ 'morganics/morganics-hero/plant-left.png' | asset_url }}" alt="" width="360" height="360" loading="eager">
+    <img class="home-shell-plant-right" src="{{ 'morganics/morganics-hero/plant-right.png' | asset_url }}" alt="" width="360" height="360" loading="eager">
+    <img class="home-shell-pouch" src="{{ 'morganics/morganics-hero/pouch.png' | asset_url }}" alt="" width="520" height="640" loading="eager">
+    <img class="home-shell-pile" src="{{ 'morganics/morganics-hero/dryfruit-pile.png' | asset_url }}" alt="" width="800" height="420" loading="eager">
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics home shell",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Morganics Shopify Shell"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Rooted in Nature."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "The approved Morganics visual shell is now connected to Shopify. Product, collection, cart, and checkout migration will follow in later phases."
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Contact Morganics"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics home shell"
+    }
+  ]
+}
+{% endschema %}

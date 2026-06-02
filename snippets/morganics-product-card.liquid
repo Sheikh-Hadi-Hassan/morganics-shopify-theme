@@ -9,7 +9,7 @@
       {% if product.featured_image %}
         {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}
       {% else %}
-        <img src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="{{ product.title | escape }}" width="700" height="700" loading="lazy">
+        {% render 'morganics-product-image-fallback', product: product, width: 700, height: 700, loading: 'lazy' %}
       {% endif %}
     </div>
     <div class="product-info">

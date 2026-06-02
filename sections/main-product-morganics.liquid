@@ -22,7 +22,7 @@
     {% elsif product.featured_image %}
       {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
     {% else %}
-      <img src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="{{ product.title | escape }}" width="600" height="300" loading="eager">
+      {% render 'morganics-product-image-fallback', product: product, width: 1200, height: 900, loading: 'eager' %}
     {% endif %}
     {% if product.collections.first %}
       <a class="back-chip" href="{{ product.collections.first.url }}">← {{ product.collections.first.title }}</a>
@@ -122,6 +122,8 @@
             <div class="product-img">
               {% if related_product.featured_image %}
                 {{ related_product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: related_product.title }}
+              {% else %}
+                {% render 'morganics-product-image-fallback', product: related_product, width: 700, height: 700, loading: 'lazy' %}
               {% endif %}
             </div>
             <div class="product-info">

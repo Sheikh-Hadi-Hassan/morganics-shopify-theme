@@ -1,0 +1,64 @@
+<section class="routine-section" id="dayCarousel" data-journey-id="daily-needs" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="routine-bg" aria-hidden="true"></div>
+  <div class="routine-overlay" aria-hidden="true"></div>
+  <div class="routine-content reveal">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2 class="routine-heading">{{ section.settings.heading }}</h2>
+    <p class="routine-desc">{{ section.settings.text }}</p>
+    <div class="routine-actions">
+      {% if section.settings.primary_label != blank %}<a class="btn" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>{% endif %}
+      {% if section.settings.secondary_label != blank %}<a class="btn ghost" href="{{ section.settings.secondary_link | default: '#categories' }}">{{ section.settings.secondary_label }}</a>{% endif %}
+    </div>
+    <div class="routine-cards">
+      {% for block in section.blocks %}
+        {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/dry-fruits.png' %}
+        <a class="routine-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          <span class="rc-thumb"><img src="{{ icon_file | asset_url }}" alt="{{ block.settings.nav | escape }} routine" width="96" height="96" loading="lazy"></span>
+          <span class="rc-copy"><small>{{ block.settings.nav }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.text }}</em></span>
+          <span class="rc-arrow">→</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics routines",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Shop Morganics by lifestyle routine" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by Routine" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose what your day needs." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Pick the moment first, then discover Morganics products for energy, healthy snacking, cooling, digestion or gifting." },
+    { "type": "text", "id": "primary_label", "label": "Primary label", "default": "Explore Shop" },
+    { "type": "url", "id": "primary_link", "label": "Primary link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary label", "default": "Explore Categories" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary link" }
+  ],
+  "blocks": [
+    {
+      "type": "routine",
+      "name": "Routine card",
+      "settings": [
+        { "type": "text", "id": "nav", "label": "Label", "default": "Family" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Daily Family Table" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Dates, mewa and nuts for home tables and hospitality" },
+        { "type": "text", "id": "icon_asset", "label": "Icon asset", "default": "morganics/category-icons/dry-fruits.png" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics routine carousel",
+      "blocks": [
+        { "type": "routine", "settings": { "nav": "Family", "title": "Daily Family Table", "text": "Dates, mewa and nuts for home tables and hospitality", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
+        { "type": "routine", "settings": { "nav": "Energy", "title": "Daily Energy", "text": "Badam, chia and dates for breakfast, office and school", "icon_asset": "morganics/category-icons/nuts.png" } },
+        { "type": "routine", "settings": { "nav": "Cooling", "title": "Summer Cooling", "text": "Goond Katira, chia and seeds for hot Pakistani days", "icon_asset": "morganics/category-icons/seeds-grains.png" } },
+        { "type": "routine", "settings": { "nav": "Digestive", "title": "Digestive Pantry", "text": "Ajwain, isabgol and fruit salt for careful daily use", "icon_asset": "morganics/category-icons/herbs-botanicals.png" } },
+        { "type": "routine", "settings": { "nav": "Gifting", "title": "Ramadan & Gifting", "text": "Dates, saffron, honey and mewa for thoughtful occasions", "icon_asset": "morganics/category-icons/natural-sweeteners.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

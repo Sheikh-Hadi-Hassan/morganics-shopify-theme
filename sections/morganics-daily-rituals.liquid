@@ -1,0 +1,50 @@
+<section class="section ritual-section" id="routines" data-journey-id="routines">
+  <div class="section-head reveal">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.text }}</p>
+  </div>
+  <div class="ritual-grid">
+    {% for block in section.blocks %}
+      <a class="ritual-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+        <span>{{ block.settings.kicker }}</span>
+        <h3>{{ block.settings.title }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics daily rituals",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by Daily Ritual" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Natural ingredients for real Pakistani routines." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Build your breakfast bowl, summer drink, iftar table, wellness tea, snack box or premium gift with carefully selected Morganics products." }
+  ],
+  "blocks": [
+    {
+      "type": "ritual",
+      "name": "Ritual",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Breakfast" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Breakfast Bowls" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Nuts, seeds and dry fruits for practical morning routines." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics daily rituals",
+      "blocks": [
+        { "type": "ritual", "settings": { "kicker": "Breakfast", "title": "Breakfast Bowls", "text": "Nuts, seeds and dry fruits for practical morning routines." } },
+        { "type": "ritual", "settings": { "kicker": "Summer", "title": "Cooling Drinks", "text": "Chia, Goond Katira and seeds for hot Pakistani days." } },
+        { "type": "ritual", "settings": { "kicker": "Family", "title": "Tea-time Table", "text": "Dates, mewa and nuts for home serving." } },
+        { "type": "ritual", "settings": { "kicker": "Gifting", "title": "Premium Gift Trays", "text": "Saffron, honey, dates and premium pantry ingredients." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

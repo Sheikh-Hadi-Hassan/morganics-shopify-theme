@@ -1,19 +1,75 @@
 {
   "sections": {
-    "main": {
-      "type": "morganics-home-shell",
-      "settings": {
-        "eyebrow": "Morganics Shopify Shell",
-        "heading": "Rooted in Nature.",
-        "text": "The approved Morganics visual shell is now connected to Shopify. Product, collection, cart, and checkout migration will follow in later phases.",
-        "primary_label": "Shop Now",
-        "primary_link": "",
-        "secondary_label": "Contact Morganics",
-        "secondary_link": ""
-      }
+    "hero": {
+      "type": "morganics-hero",
+      "blocks": {
+        "quick_nuts": { "type": "quick_link", "settings": { "label": "Premium\nNuts", "icon_asset": "morganics/category-icons/nuts.png" } },
+        "quick_dry_fruits": { "type": "quick_link", "settings": { "label": "Dry\nFruits", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
+        "quick_seeds": { "type": "quick_link", "settings": { "label": "Seeds &\nWellness", "icon_asset": "morganics/category-icons/seeds-grains.png" } }
+      },
+      "block_order": ["quick_nuts", "quick_dry_fruits", "quick_seeds"],
+      "settings": {}
+    },
+    "marquee": {
+      "type": "morganics-marquee",
+      "blocks": {
+        "dry_fruits": { "type": "item", "settings": { "text": "Dry Fruits" } },
+        "nuts": { "type": "item", "settings": { "text": "Nuts" } },
+        "seeds": { "type": "item", "settings": { "text": "Seeds" } },
+        "herbs": { "type": "item", "settings": { "text": "Herbs" } },
+        "botanicals": { "type": "item", "settings": { "text": "Botanicals" } },
+        "honey": { "type": "item", "settings": { "text": "Honey" } },
+        "wellness": { "type": "item", "settings": { "text": "Wellness Blends" } },
+        "snacks": { "type": "item", "settings": { "text": "Premium Snacks" } },
+        "gums": { "type": "item", "settings": { "text": "Gums" } },
+        "sweeteners": { "type": "item", "settings": { "text": "Natural Sweeteners" } }
+      },
+      "block_order": ["dry_fruits", "nuts", "seeds", "herbs", "botanicals", "honey", "wellness", "snacks", "gums", "sweeteners"],
+      "settings": {}
+    },
+    "categories": {
+      "type": "morganics-category-grid",
+      "settings": {}
+    },
+    "promises": {
+      "type": "morganics-promise-strip",
+      "settings": {}
+    },
+    "routine": {
+      "type": "morganics-routine-carousel",
+      "settings": {}
+    },
+    "featured": {
+      "type": "morganics-featured-products",
+      "settings": {}
+    },
+    "stories": {
+      "type": "morganics-customer-stories",
+      "settings": {}
+    },
+    "rituals": {
+      "type": "morganics-daily-rituals",
+      "settings": {}
+    },
+    "ingredients": {
+      "type": "morganics-ingredient-library",
+      "settings": {}
+    },
+    "inquiry": {
+      "type": "morganics-mini-inquiry",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "hero",
+    "marquee",
+    "categories",
+    "promises",
+    "routine",
+    "featured",
+    "stories",
+    "rituals",
+    "ingredients",
+    "inquiry"
   ]
 }

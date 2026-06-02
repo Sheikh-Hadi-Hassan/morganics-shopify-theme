@@ -1,0 +1,106 @@
+<section class="morganics-hero hero-v3" id="hero" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="{{ 'morganics/morganics-hero/bg-gradient.png' | asset_url }}" alt="" class="bg-img" width="1600" height="900" loading="eager">
+    <div class="bg-vignette"></div>
+    <div class="bg-tint"></div>
+  </div>
+
+  <div class="hero-corner-plants" aria-hidden="true">
+    <img src="{{ 'morganics/morganics-hero/plant-left.png' | asset_url }}" alt="" class="plant-img plant-left" width="420" height="420" loading="eager">
+    <img src="{{ 'morganics/morganics-hero/plant-right.png' | asset_url }}" alt="" class="plant-img plant-right" width="420" height="420" loading="eager">
+    <img src="{{ 'morganics/morganics-hero/plant-left-top.png' | asset_url }}" alt="" class="plant-img plant-top" width="360" height="360" loading="eager">
+    <img src="{{ 'morganics/morganics-hero/plant-right-bottom.png' | asset_url }}" alt="" class="plant-img plant-rb" width="360" height="360" loading="eager">
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-copy-inner">
+        <h1 class="hero-title">
+          <span class="hero-title-sm">{{ section.settings.title_small }}</span>
+          <span class="hero-title-lg">{{ section.settings.title_large }}</span>
+        </h1>
+        <div class="hero-rule"></div>
+        <p class="hero-desc">{{ section.settings.description }}</p>
+      </div>
+    </div>
+
+    <div class="hero-stage">
+      <div class="floating-zone floating-left" aria-hidden="true">
+        <img class="fi f-pistachio" src="{{ 'morganics/morganics-hero/pistachio.png' | asset_url }}" alt="" width="150" height="150" loading="eager">
+        <img class="fi f-cashew" src="{{ 'morganics/morganics-hero/cashew.png' | asset_url }}" alt="" width="150" height="150" loading="eager">
+        <img class="fi f-golden-raisin" src="{{ 'morganics/morganics-hero/golden-raisin.png' | asset_url }}" alt="" width="140" height="140" loading="eager">
+        <img class="fi f-fig" src="{{ 'morganics/morganics-hero/fig.png' | asset_url }}" alt="" width="145" height="145" loading="eager">
+        <img class="fi f-date-soft" src="{{ 'morganics/morganics-hero/date.png' | asset_url }}" alt="" width="130" height="130" loading="eager">
+      </div>
+
+      <div class="product-core hero-product-stack">
+        <img src="{{ 'morganics/morganics-hero/pouch.png' | asset_url }}" alt="{{ section.settings.pouch_alt | escape }}" class="stage-pouch" width="560" height="680" loading="eager">
+        <div class="stage-shadow" aria-hidden="true"></div>
+        <img src="{{ 'morganics/morganics-hero/dryfruit-pile.png' | asset_url }}" alt="" class="stage-dryfruits" width="780" height="420" loading="eager">
+        <img src="{{ 'morganics/morganics-hero/stone.png' | asset_url }}" alt="" class="stage-stone" width="860" height="300" loading="eager">
+      </div>
+
+      <div class="floating-zone floating-right" aria-hidden="true">
+        <img class="fi f-almond" src="{{ 'morganics/morganics-hero/almond.png' | asset_url }}" alt="" width="145" height="145" loading="eager">
+        <img class="fi f-walnut" src="{{ 'morganics/morganics-hero/fig.png' | asset_url }}" alt="" width="138" height="138" loading="eager">
+        <img class="fi f-date" src="{{ 'morganics/morganics-hero/date.png' | asset_url }}" alt="" width="132" height="132" loading="eager">
+        <img class="fi f-black-raisin" src="{{ 'morganics/morganics-hero/black-raisin.png' | asset_url }}" alt="" width="135" height="135" loading="eager">
+        <img class="fi f-golden-soft" src="{{ 'morganics/morganics-hero/golden-raisin.png' | asset_url }}" alt="" width="126" height="126" loading="eager">
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <div class="hero-quicklinks">
+        {% for block in section.blocks %}
+          {% if block.type == 'quick_link' %}
+            {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/nuts.png' %}
+            <a class="benefit-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+              <span class="bc-icon"><img src="{{ icon_file | asset_url }}" alt="" width="92" height="92" loading="lazy"></span>
+              <span class="bc-label">{{ block.settings.label }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="hero-tagline" aria-hidden="true">
+        <p class="tagline-sm">{{ section.settings.tagline_small }}</p>
+        <p class="tagline-lg">{{ section.settings.tagline_large }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics hero",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Morganics - Rooted in Nature" },
+    { "type": "text", "id": "title_small", "label": "Title small", "default": "Rooted in" },
+    { "type": "text", "id": "title_large", "label": "Title large", "default": "Nature." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Premium nuts, dry fruits\nand wellness essentials for\na healthier tomorrow." },
+    { "type": "text", "id": "pouch_alt", "label": "Pouch alt text", "default": "Morganics Premium Organic Pouch - Chemistry of Nutrients" },
+    { "type": "text", "id": "tagline_small", "label": "Tagline small", "default": "Driven by" },
+    { "type": "text", "id": "tagline_large", "label": "Tagline large", "default": "Wellness." }
+  ],
+  "blocks": [
+    {
+      "type": "quick_link",
+      "name": "Quick link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Premium\nNuts" },
+        { "type": "text", "id": "icon_asset", "label": "Asset file", "default": "morganics/category-icons/nuts.png" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics hero",
+      "blocks": [
+        { "type": "quick_link", "settings": { "label": "Premium\nNuts", "icon_asset": "morganics/category-icons/nuts.png" } },
+        { "type": "quick_link", "settings": { "label": "Dry\nFruits", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
+        { "type": "quick_link", "settings": { "label": "Seeds &\nWellness", "icon_asset": "morganics/category-icons/seeds-grains.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

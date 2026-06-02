@@ -1,0 +1,65 @@
+<section class="home-ingredient-showcase ingredient-library" id="ingredientShowcase" data-journey-id="ingredients-linked" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="ingredient-hero">
+    <span class="ingredient-kicker">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.text }}</p>
+  </div>
+  <div class="ingredient-marquee-section">
+    <div class="ingredient-marquees">
+      <div class="ingredient-row">
+        {% for block in section.blocks %}
+          {% assign image_file = block.settings.image_asset | default: 'morganics/products/01-zarishk.jpg' %}
+          <a class="ingredient-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+            <span class="ingredient-thumb"><img src="{{ image_file | asset_url }}" alt="{{ block.settings.title | escape }}" width="120" height="120" loading="lazy"></span>
+            <span class="ingredient-card-copy"><small>{{ block.settings.category }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.meta }}</em></span>
+          </a>
+        {% endfor %}
+        {% for block in section.blocks %}
+          {% assign image_file = block.settings.image_asset | default: 'morganics/products/01-zarishk.jpg' %}
+          <a class="ingredient-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" aria-hidden="true" tabindex="-1">
+            <span class="ingredient-thumb"><img src="{{ image_file | asset_url }}" alt="" width="120" height="120" loading="lazy"></span>
+            <span class="ingredient-card-copy"><small>{{ block.settings.category }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.meta }}</em></span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics ingredients",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Morganics ingredient product library" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Morganics Ingredient Library" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ingredients linked to real products." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Click any card to open its product page - with price, usage, and same-day order." }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Zarishk" },
+        { "type": "text", "id": "category", "label": "Category", "default": "Dry Fruits" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "View product" },
+        { "type": "text", "id": "image_asset", "label": "Image asset", "default": "morganics/products/01-zarishk.jpg" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics ingredient library",
+      "blocks": [
+        { "type": "ingredient", "settings": { "title": "Zarishk", "category": "Dry Fruits", "image_asset": "morganics/products/01-zarishk.jpg" } },
+        { "type": "ingredient", "settings": { "title": "Kajo", "category": "Nuts", "image_asset": "morganics/products/17-kajo-sada.jpg" } },
+        { "type": "ingredient", "settings": { "title": "Ajwain", "category": "Herbs", "image_asset": "morganics/products/42-ajwain.jpg" } },
+        { "type": "ingredient", "settings": { "title": "Dar Chini", "category": "Botanicals", "image_asset": "morganics/products/46-dar-chini-gil-gol.jpg" } },
+        { "type": "ingredient", "settings": { "title": "Honey", "category": "Natural Sweeteners", "image_asset": "morganics/products/72-honey.jpg" } },
+        { "type": "ingredient", "settings": { "title": "Goond Katira", "category": "Gums & Specialties", "image_asset": "morganics/products/49-goond-katira.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

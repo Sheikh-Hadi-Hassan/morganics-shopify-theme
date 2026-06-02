@@ -1,0 +1,79 @@
+<section class="section featured-products-section" id="featured" data-journey-id="popular-products">
+  <div class="section-head reveal">
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.text }}</p>
+  </div>
+  <div class="product-grid">
+    {% if section.settings.products != blank %}
+      {% for product in section.settings.products limit: section.settings.limit %}
+        <a class="product-card" href="{{ product.url }}">
+          <div class="product-img">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}
+            {% endif %}
+          </div>
+          <div class="product-info">
+            <small>{{ product.type | default: product.vendor }}</small>
+            <b>{{ product.title }}</b>
+            <div class="price-row"><span class="price">{{ product.price | money }}</span></div>
+          </div>
+        </a>
+      {% endfor %}
+    {% else %}
+      {% for block in section.blocks %}
+        {% assign image_file = block.settings.image_asset | default: 'morganics/products/16-pista-maghaz.jpg' %}
+        <a class="product-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          <div class="product-img"><img src="{{ image_file | asset_url }}" alt="{{ block.settings.title | escape }}" width="700" height="700" loading="lazy"></div>
+          <div class="product-info">
+            <small>{{ block.settings.meta }}</small>
+            <b>{{ block.settings.title }}</b>
+            <div class="price-row"><span class="price">{{ block.settings.price }}</span></div>
+          </div>
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+  {% if section.settings.button_label != blank %}
+    <div class="center"><a class="btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a></div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Morganics featured",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured Products" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Popular Morganics essentials." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Quick picks for daily use, thoughtful gifting and wellness routines." },
+    { "type": "product_list", "id": "products", "label": "Shopify products" },
+    { "type": "range", "id": "limit", "label": "Product limit", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Open Full Shop" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "placeholder_product",
+      "name": "Placeholder product",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Pista Maghaz" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "Nuts" },
+        { "type": "text", "id": "price", "label": "Price", "default": "Shop product" },
+        { "type": "text", "id": "image_asset", "label": "Image asset", "default": "morganics/products/16-pista-maghaz.jpg" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics featured products",
+      "blocks": [
+        { "type": "placeholder_product", "settings": { "title": "Pista Maghaz", "meta": "Nuts", "image_asset": "morganics/products/16-pista-maghaz.jpg" } },
+        { "type": "placeholder_product", "settings": { "title": "Kajo Sada", "meta": "Nuts", "image_asset": "morganics/products/17-kajo-sada.jpg" } },
+        { "type": "placeholder_product", "settings": { "title": "Khajoor Ajwa", "meta": "Dry Fruits", "image_asset": "morganics/products/58-khajoor-ajwa.jpg" } },
+        { "type": "placeholder_product", "settings": { "title": "Goond Katira", "meta": "Gums & Specialties", "image_asset": "morganics/products/49-goond-katira.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

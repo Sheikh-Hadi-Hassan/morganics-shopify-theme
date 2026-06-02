@@ -1,0 +1,61 @@
+<section class="ritual-film-section" id="story" data-journey-id="customer-stories" aria-label="{{ section.settings.aria_label | escape }}" data-story-carousel>
+  <div class="ritual-film-glow" aria-hidden="true"></div>
+  <div class="ritual-film-shell">
+    <div class="ritual-film-head reveal">
+      <span class="ritual-film-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <div class="ritual-film-carousel" aria-live="polite">
+      <button class="ritual-film-arrow ritual-film-arrow--prev" type="button" data-carousel-prev aria-label="Previous customer story">‹</button>
+      <div class="ritual-film-track">
+        {% for block in section.blocks %}
+          {% assign image_file = block.settings.image_asset | default: 'morganics/review-images/ayesha-kitchen.jpg' %}
+          <article class="ritual-film-card{% if forloop.first %} is-active{% endif %}" data-carousel-slide {{ block.shopify_attributes }}>
+            <img src="{{ image_file | asset_url }}" alt="{{ block.settings.name | escape }}" width="520" height="640" loading="lazy">
+            <div>
+              <small>{{ block.settings.context }}</small>
+              <h3>{{ block.settings.name }}</h3>
+              <p>{{ block.settings.quote }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+      <button class="ritual-film-arrow ritual-film-arrow--next" type="button" data-carousel-next aria-label="Next customer story">›</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics stories",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Morganics customer ritual stories" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Stories" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real routines. Real Morganics." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Daily wellness, family snacks and clean energy through products people actually use." }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Ayesha" },
+        { "type": "text", "id": "context", "label": "Context", "default": "Kitchen routine" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Morganics fits into our daily home routine with simple, useful pantry staples." },
+        { "type": "text", "id": "image_asset", "label": "Image asset", "default": "morganics/review-images/ayesha-kitchen.jpg" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics customer stories",
+      "blocks": [
+        { "type": "story", "settings": { "name": "Ayesha", "context": "Kitchen routine", "image_asset": "morganics/review-images/ayesha-kitchen.jpg" } },
+        { "type": "story", "settings": { "name": "Ali", "context": "Active lifestyle", "image_asset": "morganics/review-images/ali-athlete.jpg" } },
+        { "type": "story", "settings": { "name": "Dr. Hira", "context": "Nutrition guidance", "image_asset": "morganics/review-images/dr-hira-nutritionist.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

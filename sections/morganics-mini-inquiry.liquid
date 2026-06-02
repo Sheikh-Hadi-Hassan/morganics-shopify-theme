@@ -1,0 +1,38 @@
+<section class="mini-inquiry-section" id="customInquiry" data-journey-id="contact">
+  <div class="mini-inquiry-card reveal">
+    <div class="mini-inquiry-left">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <form class="inquiry-form mini-inquiry-form" aria-label="Quick product inquiry" data-whatsapp-form data-whatsapp-base="{{ section.settings.whatsapp_url }}">
+      <input name="name" placeholder="{{ section.settings.name_placeholder }}" required>
+      <input name="phone" placeholder="{{ section.settings.phone_placeholder }}" required>
+      <input name="need" placeholder="{{ section.settings.need_placeholder }}" required>
+      <div class="mini-inquiry-actions">
+        <button class="btn" type="submit">{{ section.settings.button_label }}</button>
+        {% if section.settings.contact_label != blank %}<a class="btn ghost" href="{{ section.settings.contact_link | default: routes.root_url }}">{{ section.settings.contact_label }}</a>{% endif %}
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics mini inquiry",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Can't Find It?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Need a herb, seed, dry fruit or specialty ingredient not listed? Send your name, number and what you need - we will check availability and guide you." },
+    { "type": "text", "id": "name_placeholder", "label": "Name placeholder", "default": "Your name" },
+    { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "default": "Phone / WhatsApp" },
+    { "type": "text", "id": "need_placeholder", "label": "Need placeholder", "default": "What do you need? (e.g. Tukhm-e-Malanga)" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send on WhatsApp" },
+    { "type": "url", "id": "whatsapp_url", "label": "WhatsApp URL" },
+    { "type": "text", "id": "contact_label", "label": "Contact link label", "default": "Contact page" },
+    { "type": "url", "id": "contact_link", "label": "Contact link" }
+  ],
+  "presets": [
+    { "name": "Morganics mini inquiry" }
+  ]
+}
+{% endschema %}

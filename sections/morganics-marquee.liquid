@@ -1,0 +1,39 @@
+<section class="marquee" aria-label="{{ section.settings.aria_label | escape }}">
+  <div>
+    {% for block in section.blocks %}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {% endfor %}
+    {% for block in section.blocks %}
+      <span aria-hidden="true">{{ block.settings.text }}</span>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics marquee",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Morganics categories" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Dry Fruits" }] }
+  ],
+  "presets": [
+    {
+      "name": "Morganics marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Dry Fruits" } },
+        { "type": "item", "settings": { "text": "Nuts" } },
+        { "type": "item", "settings": { "text": "Seeds" } },
+        { "type": "item", "settings": { "text": "Herbs" } },
+        { "type": "item", "settings": { "text": "Botanicals" } },
+        { "type": "item", "settings": { "text": "Honey" } },
+        { "type": "item", "settings": { "text": "Wellness Blends" } },
+        { "type": "item", "settings": { "text": "Premium Snacks" } },
+        { "type": "item", "settings": { "text": "Gums" } },
+        { "type": "item", "settings": { "text": "Natural Sweeteners" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

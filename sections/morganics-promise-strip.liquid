@@ -1,0 +1,40 @@
+<section class="section promise-strip" aria-label="{{ section.settings.aria_label | escape }}">
+  {% for block in section.blocks %}
+    <div class="promise-card" {{ block.shopify_attributes }}>
+      <span class="icon-badge">{{ block.settings.icon }}</span>
+      <b>{{ block.settings.title }}</b>
+      <small>{{ block.settings.text }}</small>
+    </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Morganics promise strip",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Morganics promises" }
+  ],
+  "blocks": [
+    {
+      "type": "promise",
+      "name": "Promise",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon text", "default": "✓" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Premium Natural Ingredients" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Carefully selected dry fruits, nuts, herbs, seeds and botanicals." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics promise strip",
+      "blocks": [
+        { "type": "promise", "settings": { "icon": "COD", "title": "Pakistan-wide COD Delivery", "text": "Order from anywhere in Pakistan and pay cash on delivery at your door." } },
+        { "type": "promise", "settings": { "icon": "Leaf", "title": "Premium Natural Ingredients", "text": "Carefully selected dry fruits, nuts, herbs, seeds and botanicals." } },
+        { "type": "promise", "settings": { "icon": "Pack", "title": "Freshly Packed", "text": "Products packed fresh to preserve natural quality, aroma and nutrition." } },
+        { "type": "promise", "settings": { "icon": "Chat", "title": "Custom Sourcing Support", "text": "Need a specific ingredient? We will check availability and guide you." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

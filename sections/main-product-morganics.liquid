@@ -1,0 +1,189 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+  assign category_label = product.type | default: product.vendor | default: 'Morganics'
+  assign sku_label = current_variant.sku | default: product.handle
+  assign short_description = product.metafields.custom.short_description | default: product.description | strip_html | truncate: 220
+  assign urdu_name = product.metafields.custom.urdu_name | default: product.metafields.custom.urduName
+  assign use_cases = product.metafields.custom.use_cases | default: product.metafields.custom.useCases
+  assign benefits = product.metafields.custom.benefits
+  assign usage = product.metafields.custom.usage
+  assign storage = product.metafields.custom.storage
+  assign precautions = product.metafields.custom.precautions
+  assign faqs = product.metafields.custom.faqs
+  assign category_copy = product.metafields.custom.category_copy | default: section.settings.category_copy
+  assign category_title = product.metafields.custom.category_title | default: category_label
+%}
+
+<section class="product-detail" data-morganics-product>
+  <div class="detail-image reveal">
+    {% if featured_media %}
+      {{ featured_media | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
+    {% elsif product.featured_image %}
+      {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
+    {% else %}
+      <img src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="{{ product.title | escape }}" width="600" height="300" loading="eager">
+    {% endif %}
+    {% if product.collections.first %}
+      <a class="back-chip" href="{{ product.collections.first.url }}">← {{ product.collections.first.title }}</a>
+    {% else %}
+      <a class="back-chip" href="{{ routes.all_products_collection_url }}">← Shop</a>
+    {% endif %}
+  </div>
+
+  <div class="detail-content reveal">
+    <span class="eyebrow">{{ category_label }} · {{ sku_label }}</span>
+    <h1>{{ product.title }}</h1>
+    {% if urdu_name != blank %}<div class="urdu-name">{{ urdu_name }}</div>{% endif %}
+
+    <div class="detail-price">{% render 'morganics-price', product: product, variant: current_variant %}</div>
+
+    {% if short_description != blank %}
+      <p>{{ short_description }}</p>
+    {% endif %}
+
+    <div class="buy-box">
+      {% form 'product', product %}
+        <h3>Choose Pack</h3>
+
+        {% if product.has_only_default_variant %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {% else %}
+          {% render 'morganics-variant-pills', product: product %}
+        {% endif %}
+
+        {% if section.settings.show_powder_option %}
+          <label class="powder-toggle">
+            <input type="checkbox" name="properties[Powder form required]" value="Yes">
+            <span>{{ section.settings.powder_label }}</span>
+            <small>{{ section.settings.powder_help }}</small>
+          </label>
+        {% endif %}
+
+        <div class="qty-row" data-quantity-row>
+          <button type="button" data-qty-minus aria-label="Decrease quantity">−</button>
+          <input id="Quantity-{{ section.id }}" name="quantity" value="1" type="number" min="1" inputmode="numeric">
+          <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
+        </div>
+
+        <button class="btn primary add-cart-btn" type="submit" {% unless current_variant.available %}disabled{% endunless %} data-add-to-cart>
+          {% if current_variant.available %}Add to Cart{% else %}Sold Out{% endif %}
+        </button>
+
+        {% if section.settings.show_dynamic_checkout %}
+          {{ form | payment_button }}
+        {% endif %}
+      {% endform %}
+    </div>
+
+    <div class="feature-icons">
+      {% for block in section.blocks %}
+        {% if block.type == 'feature' %}
+          <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="detail-grid">
+      {% render 'morganics-info-box', title: section.settings.use_cases_title, list: use_cases, fallback: section.settings.use_cases_fallback %}
+      {% render 'morganics-info-box', title: section.settings.benefits_title, list: benefits, fallback: section.settings.benefits_fallback %}
+      {% render 'morganics-info-box', title: section.settings.usage_title, content: usage, fallback: section.settings.usage_fallback %}
+      {% render 'morganics-info-box', title: section.settings.storage_title, content: storage, fallback: section.settings.storage_fallback %}
+      {% render 'morganics-info-box', title: section.settings.precautions_title, content: precautions, fallback: section.settings.precautions_fallback %}
+    </div>
+
+    {% if product.description != blank %}
+      <div class="description-html">{{ product.description }}</div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="product-category-band" style="--banner:url({{ 'morganics/banners/nuts-dry-fruits.jpg' | asset_url }})">
+  <div>
+    <span class="eyebrow">{{ section.settings.category_eyebrow }} {{ category_label }}</span>
+    <h2>{{ category_title }}</h2>
+    <p>{{ category_copy }}</p>
+    {% if product.collections.first %}
+      <a class="btn ghost" href="{{ product.collections.first.url }}">Open category</a>
+    {% endif %}
+  </div>
+</section>
+
+{% if product.collections.first and section.settings.show_related_products %}
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">{{ section.settings.related_eyebrow }}</span>
+      <h2>{{ section.settings.related_heading }} {{ product.collections.first.title }}</h2>
+    </div>
+    <div class="product-grid">
+      {% for related_product in product.collections.first.products limit: 4 %}
+        {% unless related_product.id == product.id %}
+          <a class="product-card" href="{{ related_product.url }}">
+            <div class="product-img">
+              {% if related_product.featured_image %}
+                {{ related_product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: related_product.title }}
+              {% endif %}
+            </div>
+            <div class="product-info">
+              <small>{{ related_product.type | default: related_product.vendor }}</small>
+              <b>{{ related_product.title }}</b>
+              <div class="price-row"><span class="price">{{ related_product.price | money }}</span></div>
+            </div>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% render 'morganics-faq-accordion', faqs: faqs, section: section, heading: section.settings.faq_heading %}
+
+<script src="{{ 'morganics-product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Morganics product",
+  "settings": [
+    { "type": "checkbox", "id": "show_powder_option", "label": "Show powder form option", "default": true },
+    { "type": "text", "id": "powder_label", "label": "Powder option label", "default": "Powder form required" },
+    { "type": "text", "id": "powder_help", "label": "Powder option help", "default": "If you want this product powdered before packing." },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false },
+    { "type": "text", "id": "use_cases_title", "label": "Use cases title", "default": "Best Use Cases" },
+    { "type": "textarea", "id": "use_cases_fallback", "label": "Use cases fallback", "default": "Daily pantry use\nTea-time serving\nGift-friendly routines" },
+    { "type": "text", "id": "benefits_title", "label": "Benefits title", "default": "Key Benefits" },
+    { "type": "textarea", "id": "benefits_fallback", "label": "Benefits fallback", "default": "Freshness-led packing\nPractical usage guidance\nPremium pantry selection" },
+    { "type": "text", "id": "usage_title", "label": "Usage title", "default": "How to Use" },
+    { "type": "textarea", "id": "usage_fallback", "label": "Usage fallback", "default": "Use in sensible portions according to product type, recipe needs, or qualified professional guidance." },
+    { "type": "text", "id": "storage_title", "label": "Storage title", "default": "Storage" },
+    { "type": "textarea", "id": "storage_fallback", "label": "Storage fallback", "default": "Keep sealed in a cool, dry place away from sunlight, heat and moisture. Use clean, dry utensils." },
+    { "type": "text", "id": "precautions_title", "label": "Precautions title", "default": "Precautions" },
+    { "type": "textarea", "id": "precautions_fallback", "label": "Precautions fallback", "default": "Product information is not medical advice. Ask a qualified professional if pregnant, nursing, medicated, allergic, or managing a condition." },
+    { "type": "text", "id": "category_eyebrow", "label": "Category band eyebrow", "default": "More in" },
+    { "type": "textarea", "id": "category_copy", "label": "Category band fallback copy", "default": "Explore more Morganics pantry products with practical usage, storage guidance, and careful product information." },
+    { "type": "checkbox", "id": "show_related_products", "label": "Show related products", "default": true },
+    { "type": "text", "id": "related_eyebrow", "label": "Related eyebrow", "default": "Related Products" },
+    { "type": "text", "id": "related_heading", "label": "Related heading prefix", "default": "More from" },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Questions about this product" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Natural pantry product" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics product",
+      "blocks": [
+        { "type": "feature", "settings": { "text": "Natural pantry product" } },
+        { "type": "feature", "settings": { "text": "Shopify checkout ready" } },
+        { "type": "feature", "settings": { "text": "Care guidance included" } },
+        { "type": "feature", "settings": { "text": "Gift-friendly category" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

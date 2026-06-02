@@ -1,0 +1,25 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<div class="variant-pills" data-variant-pills>
+  {% for variant in product.variants %}
+    <label class="{% unless variant.available %}is-disabled{% endunless %}">
+      <input
+        type="radio"
+        name="id"
+        value="{{ variant.id }}"
+        {% if variant == current_variant %}checked{% endif %}
+        {% unless variant.available %}disabled{% endunless %}
+        data-variant-input
+        data-variant-price="{{ variant.price | money }}"
+        data-variant-available="{{ variant.available }}"
+      >
+      <span>
+        {{ variant.title }}
+        <b>{{ variant.price | money }}</b>
+        {% unless variant.available %}<em>Sold out</em>{% endunless %}
+      </span>
+    </label>
+  {% endfor %}
+</div>

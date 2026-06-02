@@ -1,0 +1,16 @@
+<div class="info-box">
+  <h3>{{ title }}</h3>
+  {% if list != blank %}
+    {% assign items = list | newline_to_br | split: '<br />' %}
+    <ul>
+      {% for item in items %}
+        {% assign clean_item = item | strip %}
+        {% if clean_item != blank %}<li>{{ clean_item }}</li>{% endif %}
+      {% endfor %}
+    </ul>
+  {% elsif content != blank %}
+    <p>{{ content }}</p>
+  {% else %}
+    <p>{{ fallback }}</p>
+  {% endif %}
+</div>

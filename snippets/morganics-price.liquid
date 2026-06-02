@@ -1,0 +1,12 @@
+{% liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: product.price
+%}
+
+<span class="morganics-price" data-product-price>
+  <span class="morganics-price__regular">{{ price | money }}</span>
+  {% if compare_at_price > price %}
+    <s class="morganics-price__compare">{{ compare_at_price | money }}</s>
+  {% endif %}
+</span>

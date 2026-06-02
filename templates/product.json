@@ -1,16 +1,39 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "product",
+      "type": "main-product-morganics",
+      "blocks": {
+        "feature_natural": {
+          "type": "feature",
+          "settings": {
+            "text": "Natural pantry product"
+          }
+        },
+        "feature_checkout": {
+          "type": "feature",
+          "settings": {
+            "text": "Shopify checkout ready"
+          }
+        },
+        "feature_guidance": {
+          "type": "feature",
+          "settings": {
+            "text": "Care guidance included"
+          }
+        },
+        "feature_gift": {
+          "type": "feature",
+          "settings": {
+            "text": "Gift-friendly category"
+          }
+        }
+      },
+      "block_order": [
+        "feature_natural",
+        "feature_checkout",
+        "feature_guidance",
+        "feature_gift"
+      ],
       "settings": {}
     }
   },

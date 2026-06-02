@@ -1,0 +1,48 @@
+{% liquid
+  assign faq_source = faqs | default: blank
+  assign fallback_one_q = 'Is this a medicine?'
+  assign fallback_one_a = 'No. Morganics product information is for ingredient education and practical ecommerce guidance, not medical advice.'
+  assign fallback_two_q = 'How should I store this product?'
+  assign fallback_two_a = 'Keep sealed in a cool, dry place away from sunlight, heat and moisture. Use clean, dry utensils.'
+%}
+
+<section class="product-faq-section" id="product-faq">
+  <div class="product-faq-container">
+    <p class="section-eyebrow">{{ eyebrow | default: 'Product FAQ' }}</p>
+    <h2>{{ heading | default: 'Questions about this product' }}</h2>
+    <div class="product-faq-accordion" data-faq-accordion>
+      {% if faq_source != blank %}
+        {% assign lines = faq_source | newline_to_br | split: '<br />' %}
+        {% for line in lines %}
+          {% assign item = line | strip %}
+          {% if item != blank %}
+            {% assign parts = item | split: '|' %}
+            {% assign question = parts[0] | default: item | strip %}
+            {% assign answer = parts[1] | default: fallback_one_a | strip %}
+            <div class="product-faq-item">
+              <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-{{ forloop.index }}">
+                <span>{{ question }}</span><span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}" hidden>
+                <p>{{ answer }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="product-faq-item">
+          <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-1">
+            <span>{{ fallback_one_q }}</span><span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="product-faq-answer" id="product-faq-{{ section.id }}-1" hidden><p>{{ fallback_one_a }}</p></div>
+        </div>
+        <div class="product-faq-item">
+          <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-2">
+            <span>{{ fallback_two_q }}</span><span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="product-faq-answer" id="product-faq-{{ section.id }}-2" hidden><p>{{ fallback_two_a }}</p></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

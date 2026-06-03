@@ -41,7 +41,9 @@
     },
     "featured": {
       "type": "morganics-featured-products",
-      "settings": {}
+      "settings": {
+        "limit": 9
+      }
     },
     "stories": {
       "type": "morganics-customer-stories",

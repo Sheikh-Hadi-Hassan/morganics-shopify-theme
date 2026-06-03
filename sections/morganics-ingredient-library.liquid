@@ -6,8 +6,8 @@
   </div>
   <div class="ingredient-marquee-section">
     <div class="ingredient-marquees">
-      <div class="ingredient-row">
-        {% if section.blocks.size > 0 %}
+      {% if section.blocks.size > 0 %}
+        <div class="ingredient-row">
           {% for block in section.blocks %}
             {% assign image_file = block.settings.image_asset | default: 'morganics/products/01-zarishk.jpg' %}
             <a class="ingredient-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
@@ -22,8 +22,10 @@
               <span class="ingredient-card-copy"><small>{{ block.settings.category }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.meta }}</em></span>
             </a>
           {% endfor %}
-        {% elsif collections.all.products.size > 0 %}
-          {% for product in collections.all.products limit: 12 %}
+        </div>
+      {% elsif collections.all.products.size > 0 %}
+        <div class="ingredient-row">
+          {% for product in collections.all.products limit: 24 %}
             <a class="ingredient-card" href="{{ product.url }}">
               <span class="ingredient-thumb">
                 {% if product.featured_image %}
@@ -35,7 +37,7 @@
               <span class="ingredient-card-copy"><small>{{ product.type | default: product.vendor | default: 'Morganics' }}</small><b>{{ product.title }}</b><em>{{ product.price | money }}</em></span>
             </a>
           {% endfor %}
-          {% for product in collections.all.products limit: 12 %}
+          {% for product in collections.all.products limit: 24 %}
             <a class="ingredient-card" href="{{ product.url }}" aria-hidden="true" tabindex="-1">
               <span class="ingredient-thumb">
                 {% if product.featured_image %}
@@ -47,15 +49,69 @@
               <span class="ingredient-card-copy"><small>{{ product.type | default: product.vendor | default: 'Morganics' }}</small><b>{{ product.title }}</b><em>{{ product.price | money }}</em></span>
             </a>
           {% endfor %}
-        {% else %}
+        </div>
+        <div class="ingredient-row ingredient-row--reverse">
+          {% for product in collections.all.products limit: 24 offset: 24 %}
+            <a class="ingredient-card" href="{{ product.url }}">
+              <span class="ingredient-thumb">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: product.title }}
+                {% else %}
+                  {% render 'morganics-product-image-fallback', product: product, width: 240, height: 240, loading: 'lazy' %}
+                {% endif %}
+              </span>
+              <span class="ingredient-card-copy"><small>{{ product.type | default: product.vendor | default: 'Morganics' }}</small><b>{{ product.title }}</b><em>{{ product.price | money }}</em></span>
+            </a>
+          {% endfor %}
+          {% for product in collections.all.products limit: 24 offset: 24 %}
+            <a class="ingredient-card" href="{{ product.url }}" aria-hidden="true" tabindex="-1">
+              <span class="ingredient-thumb">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: product.title }}
+                {% else %}
+                  {% render 'morganics-product-image-fallback', product: product, width: 240, height: 240, loading: 'lazy' %}
+                {% endif %}
+              </span>
+              <span class="ingredient-card-copy"><small>{{ product.type | default: product.vendor | default: 'Morganics' }}</small><b>{{ product.title }}</b><em>{{ product.price | money }}</em></span>
+            </a>
+          {% endfor %}
+        </div>
+        <div class="ingredient-row">
+          {% for product in collections.all.products limit: 24 offset: 48 %}
+            <a class="ingredient-card" href="{{ product.url }}">
+              <span class="ingredient-thumb">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: product.title }}
+                {% else %}
+                  {% render 'morganics-product-image-fallback', product: product, width: 240, height: 240, loading: 'lazy' %}
+                {% endif %}
+              </span>
+              <span class="ingredient-card-copy"><small>{{ product.type | default: product.vendor | default: 'Morganics' }}</small><b>{{ product.title }}</b><em>{{ product.price | money }}</em></span>
+            </a>
+          {% endfor %}
+          {% for product in collections.all.products limit: 24 offset: 48 %}
+            <a class="ingredient-card" href="{{ product.url }}" aria-hidden="true" tabindex="-1">
+              <span class="ingredient-thumb">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: product.title }}
+                {% else %}
+                  {% render 'morganics-product-image-fallback', product: product, width: 240, height: 240, loading: 'lazy' %}
+                {% endif %}
+              </span>
+              <span class="ingredient-card-copy"><small>{{ product.type | default: product.vendor | default: 'Morganics' }}</small><b>{{ product.title }}</b><em>{{ product.price | money }}</em></span>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="ingredient-row">
           <a class="ingredient-card" href="{{ routes.all_products_collection_url }}"><span class="ingredient-thumb"><img src="{{ 'morganics/products/01-zarishk.jpg' | asset_url }}" alt="Zarishk" width="120" height="120" loading="lazy"></span><span class="ingredient-card-copy"><small>Dry Fruits</small><b>Zarishk</b><em>View product</em></span></a>
           <a class="ingredient-card" href="{{ routes.all_products_collection_url }}"><span class="ingredient-thumb"><img src="{{ 'morganics/products/17-kajo-sada.jpg' | asset_url }}" alt="Kajo" width="120" height="120" loading="lazy"></span><span class="ingredient-card-copy"><small>Nuts</small><b>Kajo</b><em>View product</em></span></a>
           <a class="ingredient-card" href="{{ routes.all_products_collection_url }}"><span class="ingredient-thumb"><img src="{{ 'morganics/products/42-ajwain.jpg' | asset_url }}" alt="Ajwain" width="120" height="120" loading="lazy"></span><span class="ingredient-card-copy"><small>Herbs</small><b>Ajwain</b><em>View product</em></span></a>
           <a class="ingredient-card" href="{{ routes.all_products_collection_url }}"><span class="ingredient-thumb"><img src="{{ 'morganics/products/46-dar-chini-gil-gol.jpg' | asset_url }}" alt="Dar Chini" width="120" height="120" loading="lazy"></span><span class="ingredient-card-copy"><small>Botanicals</small><b>Dar Chini</b><em>View product</em></span></a>
           <a class="ingredient-card" href="{{ routes.all_products_collection_url }}"><span class="ingredient-thumb"><img src="{{ 'morganics/products/72-honey.jpg' | asset_url }}" alt="Honey" width="120" height="120" loading="lazy"></span><span class="ingredient-card-copy"><small>Natural Sweeteners</small><b>Honey</b><em>View product</em></span></a>
           <a class="ingredient-card" href="{{ routes.all_products_collection_url }}"><span class="ingredient-thumb"><img src="{{ 'morganics/products/49-goond-katira.jpg' | asset_url }}" alt="Goond Katira" width="120" height="120" loading="lazy"></span><span class="ingredient-card-copy"><small>Gums</small><b>Goond Katira</b><em>View product</em></span></a>
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>

@@ -51,6 +51,22 @@
                     <a href="{{ link.url }}">{{ link.title }}</a>
                   {% endfor %}
                 </nav>
+              {% else %}
+                <nav class="footer-links" aria-label="{{ block.settings.heading | escape }}">
+                  {% if block.settings.heading contains 'Care' %}
+                    <a href="/pages/contact">Search</a>
+                    <a href="/pages/contact">Ordering Help</a>
+                    <a href="/pages/contact">Delivery Support</a>
+                    <a href="/pages/contact">Returns</a>
+                    <a href="/pages/contact">Custom Sourcing</a>
+                  {% else %}
+                    <a href="{{ routes.root_url }}">Home</a>
+                    <a href="{{ routes.all_products_collection_url }}">Shop</a>
+                    <a href="{{ routes.collections_url }}">Categories</a>
+                    <a href="#featured">Featured</a>
+                    <a href="/pages/contact">Contact</a>
+                  {% endif %}
+                </nav>
               {% endif %}
             </div>
 
@@ -81,10 +97,10 @@
         </div>
 
         <div class="footer-socials">
-          {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" class="footer-social-pill">Instagram</a>{% endif %}
-          {% if section.settings.facebook_url != blank %}<a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="footer-social-pill">Facebook</a>{% endif %}
-          {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" class="footer-social-pill">TikTok</a>{% endif %}
-          {% if section.settings.youtube_url != blank %}<a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" class="footer-social-pill">YouTube</a>{% endif %}
+          <a href="{{ section.settings.instagram_url | default: routes.root_url }}" {% if section.settings.instagram_url != blank %}target="_blank" rel="noopener"{% endif %} class="footer-social-pill">Instagram</a>
+          <a href="{{ section.settings.facebook_url | default: routes.root_url }}" {% if section.settings.facebook_url != blank %}target="_blank" rel="noopener"{% endif %} class="footer-social-pill">Facebook</a>
+          <a href="{{ section.settings.tiktok_url | default: routes.root_url }}" {% if section.settings.tiktok_url != blank %}target="_blank" rel="noopener"{% endif %} class="footer-social-pill">TikTok</a>
+          <a href="{{ section.settings.youtube_url | default: routes.root_url }}" {% if section.settings.youtube_url != blank %}target="_blank" rel="noopener"{% endif %} class="footer-social-pill">YouTube</a>
         </div>
         <div class="footer-support-bars">
           {% if section.settings.whatsapp_url != blank %}

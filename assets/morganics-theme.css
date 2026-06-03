@@ -4590,10 +4590,18 @@ body[data-template="index"] .cart-header-btn {
 }
 
 body[data-template="index"] .morganics-hero {
-  height: min(100svh, 860px) !important;
+  width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  height: 100svh !important;
   min-height: 760px !important;
-  max-height: 900px !important;
+  max-height: none !important;
   padding: 84px clamp(18px,4vw,58px) 18px !important;
+}
+
+body[data-template="index"] .morganics-main > .shopify-section > section:not(.morganics-hero),
+body[data-template="index"] .premium-footer {
+  width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
 }
 
 body[data-template="index"] .morganics-hero .hero-inner {
@@ -5043,6 +5051,10 @@ body[data-template="index"] .marquee span {
   animation-duration: 36s !important;
 }
 
+.ingredient-row--reverse {
+  animation-direction: reverse !important;
+}
+
 .ingredient-card {
   width: 244px !important;
   min-height: 58px !important;
@@ -5159,7 +5171,7 @@ body[data-template="index"] .marquee span {
 
 @media (max-width: 1180px) {
   body[data-template="index"] .morganics-hero {
-    height: auto !important;
+    height: 100svh !important;
     max-height: none !important;
   }
 
@@ -5170,7 +5182,7 @@ body[data-template="index"] .marquee span {
 
 @media (max-width: 900px) {
   body[data-template="index"] .morganics-hero {
-    min-height: 760px !important;
+    min-height: 100svh !important;
     padding-top: 84px !important;
   }
 

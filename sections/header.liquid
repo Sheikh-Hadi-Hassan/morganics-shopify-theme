@@ -41,9 +41,9 @@
 
     <div class="header-actions">
       {% if section.settings.show_search %}
-        <a class="header-icon-link" href="{{ routes.search_url }}" aria-label="Search">
+        <button class="header-search-btn" type="button" data-header-search-toggle aria-controls="MorganicsHeaderSearch" aria-expanded="false" aria-label="Search products">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
-        </a>
+        </button>
       {% endif %}
 
       {% if section.settings.cta_label != blank %}
@@ -52,10 +52,27 @@
         </a>
       {% endif %}
 
+      <button class="cart-header-btn" type="button" data-cart-open aria-label="Open cart">
+        <svg class="svg-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h15l-1.5 9h-12z"></path><path d="M6 7 5.2 3H3"></path><circle cx="9" cy="20" r="1.6"></circle><circle cx="18" cy="20" r="1.6"></circle></svg>
+        <span class="cart-text">Cart</span>
+        <b data-cart-count>{{ cart.item_count }}</b>
+      </button>
+
       <button class="mobile-menu-btn" type="button" data-mobile-menu-toggle aria-controls="MorganicsMobileMenu" aria-expanded="false" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
+
+    {% if section.settings.show_search %}
+      <form class="header-search-panel" id="MorganicsHeaderSearch" action="{{ routes.search_url }}" method="get" role="search" aria-hidden="true" data-header-search-panel>
+        <input type="hidden" name="type" value="product">
+        <input class="header-search-input" name="q" autocomplete="off" placeholder="{{ section.settings.search_placeholder }}" type="search" aria-label="Search Morganics products" data-header-search-input>
+        <button class="header-search-submit" type="submit" aria-label="Submit search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        </button>
+        <button class="header-search-close" type="button" data-header-search-close aria-label="Close search">&times;</button>
+      </form>
+    {% endif %}
   </div>
 </header>
 
@@ -83,6 +100,14 @@
       <a href="/pages/contact">Contact / Inquiry</a>
     {% endif %}
   </nav>
+
+  {% if section.settings.show_search %}
+    <form class="mobile-search-form" action="{{ routes.search_url }}" method="get" role="search">
+      <input type="hidden" name="type" value="product">
+      <input name="q" type="search" placeholder="{{ section.settings.search_placeholder }}" aria-label="Search Morganics products">
+      <button type="submit">Search</button>
+    </form>
+  {% endif %}
 
   <section class="mobile-contact-strip" aria-label="Morganics contact links">
     {% if section.settings.phone_label != blank %}
@@ -127,6 +152,12 @@
       "id": "show_search",
       "label": "Show search link",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search: badam, chia, ajwain, honey..."
     },
     {
       "type": "text",

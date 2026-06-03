@@ -5,18 +5,66 @@
     <p>{{ section.settings.text }}</p>
   </div>
   <div class="category-grid">
-    {% for block in section.blocks %}
-      {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/herbs-botanicals.png' %}
-      <a class="category-icon-card" href="{{ block.settings.link | default: routes.collections_url }}" {{ block.shopify_attributes }}>
-        <span class="category-icon-art"><img src="{{ icon_file | asset_url }}" alt="{{ block.settings.title | escape }} icon" width="260" height="220" loading="lazy"></span>
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% liquid
+        assign block_collection = block.settings.collection
+        assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/herbs-botanicals.png'
+        assign card_title = block.settings.title
+        assign card_description = block.settings.description
+        assign card_url = block.settings.link | default: routes.collections_url
+        assign card_kicker = block.settings.kicker
+        if block_collection != blank
+          assign card_title = block_collection.title
+          assign card_description = block_collection.description | strip_html | default: block.settings.description
+          assign card_url = block_collection.url
+          assign card_kicker = block_collection.products_count | append: ' products'
+        endif
+      %}
+      <a class="category-icon-card" href="{{ card_url }}" {{ block.shopify_attributes }}>
+        <span class="category-icon-art">
+          {% if block_collection != blank and block_collection.image %}
+            {{ block_collection.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: card_title }}
+          {% else %}
+            <img src="{{ icon_file | asset_url }}" alt="{{ card_title | escape }} icon" width="260" height="220" loading="lazy">
+          {% endif %}
+        </span>
         <span class="category-icon-copy">
-          <small>{{ block.settings.kicker }}</small>
-          <b>{{ block.settings.title }}</b>
-          <em>{{ block.settings.description }}</em>
+          <small>{{ card_kicker }}</small>
+          <b>{{ card_title }}</b>
+          <em>{{ card_description | truncate: 110 }}</em>
           <span>{{ block.settings.cta }}</span>
         </span>
       </a>
-    {% endfor %}
+      {% endfor %}
+    {% elsif collections.size > 0 %}
+      {% for collection in collections limit: 9 %}
+        {% unless collection.handle == 'frontpage' %}
+          <a class="category-icon-card" href="{{ collection.url }}">
+            <span class="category-icon-art">
+              {% if collection.image %}
+                {{ collection.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: collection.title }}
+              {% else %}
+                <img src="{{ 'morganics/category-icons/herbs-botanicals.png' | asset_url }}" alt="{{ collection.title | escape }} icon" width="260" height="220" loading="lazy">
+              {% endif %}
+            </span>
+            <span class="category-icon-copy">
+              <small>{{ collection.products_count }} products</small>
+              <b>{{ collection.title }}</b>
+              <em>{{ collection.description | strip_html | default: 'Explore Morganics pantry essentials.' | truncate: 110 }}</em>
+              <span>Explore category</span>
+            </span>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    {% else %}
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/dry-fruits.png' | asset_url }}" alt="Dry fruits icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Dry Fruits</b><em>Dates, mewa and traditional pantry staples.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/nuts.png' | asset_url }}" alt="Nuts icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Premium Nuts</b><em>Almonds, cashews, pistachios and walnuts.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/seeds-grains.png' | asset_url }}" alt="Seeds icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Seeds</b><em>Chia, flax, grains and clean daily pantry portions.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/herbs-botanicals.png' | asset_url }}" alt="Herbs icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Herbs</b><em>Traditional herbs presented with modern clarity.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/roots-adaptogens.png' | asset_url }}" alt="Roots icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Roots</b><em>Traditional-use ingredients with careful guidance.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/natural-sweeteners.png' | asset_url }}" alt="Sweeteners icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Sweeteners</b><em>Gur, shakar, honey and natural sweetness.</em><span>Explore category</span></span></a>
+    {% endif %}
   </div>
 </section>
 
@@ -34,6 +82,7 @@
       "name": "Category",
       "settings": [
         { "type": "text", "id": "title", "label": "Title", "default": "Premium Nuts" },
+        { "type": "collection", "id": "collection", "label": "Shopify collection" },
         { "type": "text", "id": "kicker", "label": "Kicker", "default": "Shop category" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "Carefully selected Morganics pantry essentials." },
         { "type": "text", "id": "cta", "label": "CTA", "default": "Explore category" },

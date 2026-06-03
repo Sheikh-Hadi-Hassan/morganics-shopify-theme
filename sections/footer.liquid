@@ -86,6 +86,14 @@
           {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" class="footer-social-pill">TikTok</a>{% endif %}
           {% if section.settings.youtube_url != blank %}<a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" class="footer-social-pill">YouTube</a>{% endif %}
         </div>
+        <div class="footer-support-bars">
+          {% if section.settings.whatsapp_url != blank %}
+            <a class="footer-cta" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp / Order Support</a>
+          {% elsif section.settings.phone_tel != blank %}
+            <a class="footer-cta" href="https://wa.me/{{ section.settings.phone_tel | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">WhatsApp / Order Support</a>
+          {% endif %}
+          <a class="footer-cta footer-cta-muted" href="{{ routes.all_products_collection_url }}">Open Full Shop</a>
+        </div>
       </div>
     </div>
   </div>
@@ -196,6 +204,11 @@
       "id": "support_email",
       "label": "Support email",
       "default": "support@morganics.store"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp URL"
     },
     {
       "type": "url",

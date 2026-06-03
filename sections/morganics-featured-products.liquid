@@ -7,18 +7,15 @@
   <div class="product-grid">
     {% if section.settings.products != blank %}
       {% for product in section.settings.products limit: section.settings.limit %}
-        <a class="product-card" href="{{ product.url }}">
-          <div class="product-img">
-            {% if product.featured_image %}
-              {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}
-            {% endif %}
-          </div>
-          <div class="product-info">
-            <small>{{ product.type | default: product.vendor }}</small>
-            <b>{{ product.title }}</b>
-            <div class="price-row"><span class="price">{{ product.price | money }}</span></div>
-          </div>
-        </a>
+        {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
+      {% endfor %}
+    {% elsif section.settings.collection != blank and section.settings.collection.products.size > 0 %}
+      {% for product in section.settings.collection.products limit: section.settings.limit %}
+        {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
+      {% endfor %}
+    {% elsif collections.all.products.size > 0 %}
+      {% for product in collections.all.products limit: section.settings.limit %}
+        {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
       {% endfor %}
     {% else %}
       {% for block in section.blocks %}
@@ -47,7 +44,9 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Popular Morganics essentials." },
     { "type": "textarea", "id": "text", "label": "Text", "default": "Quick picks for daily use, thoughtful gifting and wellness routines." },
     { "type": "product_list", "id": "products", "label": "Shopify products" },
-    { "type": "range", "id": "limit", "label": "Product limit", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "collection", "id": "collection", "label": "Fallback Shopify collection" },
+    { "type": "range", "id": "limit", "label": "Product limit", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add", "default": true },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Open Full Shop" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],

@@ -5,13 +5,20 @@
     <p>{{ section.settings.text }}</p>
   </div>
   <div class="ritual-grid">
-    {% for block in section.blocks %}
-      <a class="ritual-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-        <span>{{ block.settings.kicker }}</span>
-        <h3>{{ block.settings.title }}</h3>
-        <p>{{ block.settings.text }}</p>
-      </a>
-    {% endfor %}
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <a class="ritual-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.kicker }}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </a>
+      {% endfor %}
+    {% else %}
+      <a class="ritual-card" href="{{ routes.all_products_collection_url }}?q=breakfast"><span>Breakfast</span><h3>Breakfast Bowls</h3><p>Nuts, seeds and dry fruits for practical morning routines.</p></a>
+      <a class="ritual-card" href="{{ routes.all_products_collection_url }}?q=summer"><span>Summer</span><h3>Cooling Drinks</h3><p>Chia, Goond Katira and seeds for hot Pakistani days.</p></a>
+      <a class="ritual-card" href="{{ routes.all_products_collection_url }}?q=family"><span>Family</span><h3>Tea-time Table</h3><p>Dates, mewa and nuts for home serving.</p></a>
+      <a class="ritual-card" href="{{ routes.all_products_collection_url }}?q=gifting"><span>Gifting</span><h3>Premium Gift Trays</h3><p>Saffron, honey, dates and premium pantry ingredients.</p></a>
+    {% endif %}
   </div>
 </section>
 

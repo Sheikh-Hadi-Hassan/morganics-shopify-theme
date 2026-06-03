@@ -9,17 +9,23 @@
     <div class="ritual-film-carousel" aria-live="polite">
       <button class="ritual-film-arrow ritual-film-arrow--prev" type="button" data-carousel-prev aria-label="Previous customer story">‹</button>
       <div class="ritual-film-track">
-        {% for block in section.blocks %}
-          {% assign image_file = block.settings.image_asset | default: 'morganics/review-images/ayesha-kitchen.jpg' %}
-          <article class="ritual-film-card{% if forloop.first %} is-active{% endif %}" data-carousel-slide {{ block.shopify_attributes }}>
-            <img src="{{ image_file | asset_url }}" alt="{{ block.settings.name | escape }}" width="520" height="640" loading="lazy">
-            <div>
-              <small>{{ block.settings.context }}</small>
-              <h3>{{ block.settings.name }}</h3>
-              <p>{{ block.settings.quote }}</p>
-            </div>
-          </article>
-        {% endfor %}
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            {% assign image_file = block.settings.image_asset | default: 'morganics/review-images/ayesha-kitchen.jpg' %}
+            <article class="ritual-film-card{% if forloop.first %} is-active{% endif %}" data-carousel-slide {{ block.shopify_attributes }}>
+              <img src="{{ image_file | asset_url }}" alt="{{ block.settings.name | escape }}" width="520" height="640" loading="lazy">
+              <div>
+                <small>{{ block.settings.context }}</small>
+                <h3>{{ block.settings.name }}</h3>
+                <p>{{ block.settings.quote }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <article class="ritual-film-card is-active" data-carousel-slide><img src="{{ 'morganics/review-images/ayesha-kitchen.jpg' | asset_url }}" alt="Ayesha kitchen routine" width="520" height="640" loading="lazy"><div><small>Kitchen routine</small><h3>Ayesha</h3><p>Morganics fits into our daily home routine with simple, useful pantry staples.</p></div></article>
+          <article class="ritual-film-card" data-carousel-slide><img src="{{ 'morganics/review-images/ali-athlete.jpg' | asset_url }}" alt="Ali active lifestyle" width="520" height="640" loading="lazy"><div><small>Active lifestyle</small><h3>Ali</h3><p>Dates, nuts and seeds keep the snack box cleaner without making the routine complicated.</p></div></article>
+          <article class="ritual-film-card" data-carousel-slide><img src="{{ 'morganics/review-images/dr-hira-nutritionist.jpg' | asset_url }}" alt="Dr Hira nutrition guidance" width="520" height="640" loading="lazy"><div><small>Nutrition guidance</small><h3>Dr. Hira</h3><p>Simple ingredients, clear labels and practical serving ideas make daily choices easier.</p></div></article>
+        {% endif %}
       </div>
       <button class="ritual-film-arrow ritual-film-arrow--next" type="button" data-carousel-next aria-label="Next customer story">›</button>
     </div>

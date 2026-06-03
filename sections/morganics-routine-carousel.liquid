@@ -10,14 +10,22 @@
       {% if section.settings.secondary_label != blank %}<a class="btn ghost" href="{{ section.settings.secondary_link | default: '#categories' }}">{{ section.settings.secondary_label }}</a>{% endif %}
     </div>
     <div class="routine-cards">
-      {% for block in section.blocks %}
-        {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/dry-fruits.png' %}
-        <a class="routine-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-          <span class="rc-thumb"><img src="{{ icon_file | asset_url }}" alt="{{ block.settings.nav | escape }} routine" width="96" height="96" loading="lazy"></span>
-          <span class="rc-copy"><small>{{ block.settings.nav }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.text }}</em></span>
-          <span class="rc-arrow">→</span>
-        </a>
-      {% endfor %}
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/dry-fruits.png' %}
+          <a class="routine-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+            <span class="rc-thumb"><img src="{{ icon_file | asset_url }}" alt="{{ block.settings.nav | escape }} routine" width="96" height="96" loading="lazy"></span>
+            <span class="rc-copy"><small>{{ block.settings.nav }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.text }}</em></span>
+            <span class="rc-arrow">→</span>
+          </a>
+        {% endfor %}
+      {% else %}
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=family"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/dry-fruits.png' | asset_url }}" alt="Family routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Family</small><b>Daily Family Table</b><em>Dates, mewa and nuts for home tables and hospitality</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=energy"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/nuts.png' | asset_url }}" alt="Energy routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Energy</small><b>Daily Energy</b><em>Badam, chia and dates for breakfast, office and school</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=cooling"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/seeds-grains.png' | asset_url }}" alt="Cooling routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Cooling</small><b>Summer Cooling</b><em>Goond Katira, chia and seeds for hot Pakistani days</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=digestive"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/herbs-botanicals.png' | asset_url }}" alt="Digestive routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Digestive</small><b>Digestive Pantry</b><em>Ajwain, isabgol and fruit salt for careful daily use</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=gifting"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/natural-sweeteners.png' | asset_url }}" alt="Gifting routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Gifting</small><b>Ramadan &amp; Gifting</b><em>Dates, saffron, honey and mewa for thoughtful occasions</em></span><span class="rc-arrow">→</span></a>
+      {% endif %}
     </div>
   </div>
 </section>

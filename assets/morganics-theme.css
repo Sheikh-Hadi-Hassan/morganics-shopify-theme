@@ -358,102 +358,6 @@ a {
   width: 100%;
 }
 
-.morganics-home-shell {
-  min-height: 520px;
-  padding: clamp(56px, 8vw, 96px) clamp(18px, 5vw, 72px);
-  display: grid;
-  grid-template-columns: minmax(0, .98fr) minmax(320px, 1.02fr);
-  gap: clamp(28px, 5vw, 72px);
-  align-items: center;
-}
-
-.home-shell-copy {
-  display: grid;
-  gap: 18px;
-}
-
-.home-shell-copy h1 {
-  margin: 0;
-  max-width: 780px;
-  font-family: var(--font-display);
-  font-size: clamp(46px, 8vw, 104px);
-  line-height: .88;
-  letter-spacing: -.055em;
-  color: var(--forest);
-}
-
-.home-shell-copy p {
-  max-width: 650px;
-  margin: 0;
-  color: var(--muted);
-  font-size: clamp(16px, 1.6vw, 20px);
-  line-height: 1.7;
-  font-weight: 600;
-}
-
-.home-shell-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.home-shell-visual {
-  position: relative;
-  min-height: 430px;
-  border-radius: 44px;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 35%, rgba(223,165,36,.18), transparent 46%), linear-gradient(145deg, #123a32, #285D53);
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,.3);
-}
-
-.home-shell-visual img {
-  position: absolute;
-  object-fit: contain;
-  user-select: none;
-  pointer-events: none;
-}
-
-.home-shell-bg {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover !important;
-  opacity: .4;
-}
-
-.home-shell-pouch {
-  width: min(52%, 330px);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -56%);
-  filter: drop-shadow(0 34px 42px rgba(0,0,0,.28));
-  z-index: 3;
-}
-
-.home-shell-pile {
-  width: 78%;
-  left: 50%;
-  bottom: 2%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-
-.home-shell-plant-left {
-  width: 34%;
-  left: -6%;
-  top: -8%;
-  z-index: 1;
-}
-
-.home-shell-plant-right {
-  width: 34%;
-  right: -8%;
-  bottom: -6%;
-  z-index: 1;
-}
-
 .premium-footer {
   margin-top: 0;
   color: #fff;
@@ -587,9 +491,6 @@ a {
     display: inline-flex;
   }
 
-  .morganics-home-shell {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 760px) {
@@ -611,20 +512,6 @@ a {
   .header-icon-link,
   .header-shop-cta {
     display: none;
-  }
-
-  .morganics-home-shell {
-    padding: 42px 18px 56px;
-  }
-
-  .home-shell-copy h1 {
-    font-size: 48px;
-    letter-spacing: -.04em;
-  }
-
-  .home-shell-visual {
-    min-height: 360px;
-    border-radius: 30px;
   }
 
   .ft-trust-grid,
@@ -1067,8 +954,7 @@ a {
 }
 
 .routine-actions,
-.mini-inquiry-actions,
-.home-shell-actions {
+.mini-inquiry-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -5595,5 +5481,250 @@ body[data-template="index"] .promise-card small {
 
   body[data-template="index"] .promise-card small {
     font-size: 12.5px !important;
+  }
+}
+
+/* Phase 9 Shopify font/layout design-system cleanup */
+body,
+button,
+input,
+textarea,
+select,
+.site-header,
+.premium-footer,
+.product-detail,
+.shop-hero,
+.cart-page,
+.cart-drawer,
+.section:not(.morganics-hero),
+.product-card,
+.category-icon-card {
+  font-family: var(--font-ui);
+}
+
+body {
+  font-size: var(--type-body-md);
+  line-height: var(--lh-body);
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+.morganics-main :where(h1, h2, h3, h4, h5, h6):not(.hero-title) {
+  margin-block: 0;
+}
+
+.section-head h2,
+.routine-heading,
+.ingredient-hero h2,
+.product-category-band h2,
+.category-hero h1,
+.shop-hero h1 {
+  font-size: var(--type-display-lg);
+  line-height: var(--lh-display);
+}
+
+.detail-content h1,
+.product-faq-container h2,
+.intro-card h2 {
+  font-family: var(--font-ui);
+  font-size: var(--type-h1);
+  line-height: var(--lh-heading);
+  letter-spacing: -.04em;
+}
+
+.product-category-band h2,
+.category-hero h1,
+.shop-hero h1,
+.ingredient-hero h2,
+.routine-heading {
+  font-family: var(--font-display);
+}
+
+.section-head p,
+.routine-desc,
+.shop-hero p,
+.category-hero p,
+.intro-card p,
+.detail-description,
+.product-faq-answer p,
+.footer-brand-desc,
+.footer-richtext,
+.premium-footer p {
+  font-family: var(--font-ui);
+  font-size: var(--type-body-md);
+  line-height: var(--lh-body);
+}
+
+.eyebrow,
+.product-info small,
+.product-meta,
+.chip,
+.chip-muted,
+.cart-line-variant,
+.cart-line-properties,
+.cart-line-discounts,
+.footer-col-title,
+.footer-bottom-inner {
+  font-family: var(--font-ui);
+  font-size: var(--type-caption);
+  line-height: var(--lh-caption);
+}
+
+.btn,
+.header-shop-cta,
+.mobile-menu-primary,
+.cart-header-btn,
+.card-cart-btn,
+.card-view-btn,
+.product-form button,
+.shopify-payment-button__button,
+.cart-checkout-btn,
+.cart-actions .btn,
+.mini-inquiry-actions .btn,
+.footer-cta,
+.footer-cta-muted {
+  min-height: 44px;
+  gap: var(--button-gap);
+  padding: 12px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-size: var(--type-button);
+  font-weight: 900;
+  line-height: var(--lh-button);
+}
+
+.header-nav a,
+.mobile-panel-nav a,
+.site-header button,
+.site-header a {
+  font-family: var(--font-ui);
+  font-size: var(--type-nav);
+  line-height: var(--lh-button);
+}
+
+.product-name,
+.product-info b,
+.cart-line-title,
+.collection-product-title {
+  font-family: var(--font-ui);
+  font-size: var(--type-product-title);
+  font-weight: 850;
+  line-height: var(--lh-title);
+  letter-spacing: -.015em;
+}
+
+.price,
+.cart-line-price,
+.cart-total-row strong,
+.morganics-price {
+  font-family: var(--font-ui);
+  font-size: var(--type-product-price);
+  font-weight: 900;
+  line-height: var(--lh-button);
+}
+
+.product-card,
+.product-card-wrap .product-card,
+.category-icon-card,
+.promise-card,
+.ritual-card,
+.ingredient-card,
+.home-ing-card,
+.cart-line,
+.info-box,
+.faq-item,
+.product-faq-item {
+  border-radius: var(--radius-xl);
+}
+
+.product-grid,
+.collection-product-grid,
+.ritual-grid,
+.ingredient-marquees,
+.footer-grid,
+.cart-list,
+.product-info-grid {
+  gap: var(--grid-gap);
+}
+
+.product-info,
+.product-card-wrap .product-info,
+.cart-line-info,
+.footer-links,
+.footer-contact-list,
+.mini-inquiry-form,
+.product-form,
+.variant-pills,
+.shop-tools {
+  gap: var(--content-gap);
+}
+
+.product-card,
+.product-card-wrap .product-card,
+.promise-card,
+.ritual-card,
+.cart-line,
+.info-box,
+.product-faq-item {
+  padding: var(--card-pad);
+}
+
+input,
+textarea,
+select,
+.header-search-input,
+.mobile-search-form input,
+.mini-inquiry-form input,
+.shop-tools input,
+.shop-tools select,
+.qty-row input,
+.cart-qty-input {
+  min-height: 42px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-ui);
+  font-size: var(--type-body-sm);
+  line-height: var(--lh-button);
+}
+
+.premium-footer {
+  font-family: var(--font-ui);
+}
+
+.footer-col-title {
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.page-section,
+.template-page .shopify-section,
+body[data-template="page"] .shopify-section,
+body[data-template="article"] .shopify-section,
+body[data-template="blog"] .shopify-section,
+body[data-template="404"] .shopify-section {
+  font-family: var(--font-ui);
+  line-height: var(--lh-body);
+}
+
+@media (max-width: 760px) {
+  .section:not(#categories):not(.morganics-hero),
+  .product-detail,
+  .shop-hero,
+  .cart-page,
+  .product-faq-section,
+  .product-category-band {
+    padding-inline: var(--space-16);
+  }
+
+  .btn,
+  .header-shop-cta,
+  .mobile-menu-primary,
+  .cart-actions .btn,
+  .cart-checkout-btn {
+    min-height: 44px;
+    padding-inline: var(--space-16);
   }
 }

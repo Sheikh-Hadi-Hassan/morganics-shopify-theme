@@ -8,17 +8,21 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
-    "name": "t:general.typography",
+    "name": "Morganics typography",
     "settings": [
       {
         "type": "header",
-        "content": "t:general.fonts"
+        "content": "Approved font loading"
       },
       {
         "type": "font_picker",
         "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
+        "default": "poppins_n4",
+        "label": "Approved UI font"
+      },
+      {
+        "type": "paragraph",
+        "content": "Keep this set to Poppins. Morganics typography is locked to Brownberries for approved display moments and Poppins for all UI, body, commerce, cart, form, footer, and static page text."
       }
     ]
   },

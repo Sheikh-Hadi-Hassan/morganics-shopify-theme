@@ -1,0 +1,107 @@
+/* Morganics Shopify design tokens
+   Active theme rule: only Brownberries and Poppins are allowed. */
+
+:root {
+  --color-forest: #285D53;
+  --color-forest-deep: #173f36;
+  --color-forest-dark: #0d2820;
+  --color-gold: #DFA524;
+  --color-gold-light: #f3d77e;
+  --color-earth: #846345;
+  --color-copper: #DF5C23;
+  --color-cream: #F7F1E6;
+  --color-cream-soft: #EFE4D2;
+  --color-cream-paper: #fffaf1;
+  --color-ink: #1f2926;
+  --color-muted: #6d7975;
+  --color-line: #e5d8c5;
+  --color-danger: #e05555;
+
+  --forest: var(--color-forest-deep);
+  --forest2: var(--color-forest);
+  --earth: var(--color-earth);
+  --cream: var(--color-cream);
+  --paper: var(--color-cream-paper);
+  --gold: var(--color-gold);
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --line: var(--color-line);
+  --soft: var(--color-cream-soft);
+
+  --font-display: 'Brownberries', 'Poppins', sans-serif;
+  --font-ui: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-hero: var(--font-display);
+  --font-editorial: var(--font-ui);
+  --font-urdu: var(--font-ui);
+  --font-primary--family: var(--font-ui);
+  --font-primary--style: normal;
+  --font-primary--weight: 400;
+
+  --type-hero: clamp(58px, 8vw, 142px);
+  --type-display-xl: clamp(38px, 8vw, 108px);
+  --type-display-lg: clamp(28px, 5.5vw, 82px);
+  --type-h1: clamp(28px, 5.2vw, 76px);
+  --type-h2: clamp(22px, 3.6vw, 54px);
+  --type-h3: clamp(17px, 2vw, 30px);
+  --type-h4: clamp(15px, 1.5vw, 22px);
+  --type-h5: clamp(13px, 1.1vw, 18px);
+  --type-h6: clamp(12px, 1vw, 15px);
+  --type-body-lg: clamp(16px, 1.45vw, 20px);
+  --type-body-md: clamp(15px, 1.2vw, 17px);
+  --type-body-sm: clamp(14px, 1vw, 15px);
+  --type-caption: clamp(11px, .9vw, 13px);
+  --type-button: clamp(13px, 1vw, 15px);
+  --type-nav: 14px;
+  --type-product-title: clamp(14px, 1.2vw, 17px);
+  --type-product-price: clamp(13px, 1vw, 15px);
+  --type-badge: clamp(10px, .8vw, 11px);
+
+  --lh-display: .9;
+  --lh-heading: 1.04;
+  --lh-title: 1.18;
+  --lh-body: 1.65;
+  --lh-caption: 1.4;
+  --lh-button: 1;
+
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+
+  --section-pad-y: clamp(44px, 8vh, 80px);
+  --section-pad-x: clamp(18px, 5vw, 72px);
+  --card-pad: clamp(14px, 1.8vw, 24px);
+  --grid-gap: clamp(12px, 1.5vw, 18px);
+  --content-gap: var(--space-24);
+  --heading-gap: var(--space-16);
+  --button-gap: var(--space-12);
+  --form-gap: var(--space-16);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 34px;
+  --radius-pill: 999px;
+
+  --shadow: 0 24px 70px rgba(31,41,38,.14);
+  --shadow2: 0 12px 34px rgba(31,41,38,.10);
+  --shadow-card: 0 14px 34px rgba(31,41,38,.08);
+
+  --page-width: 110rem;
+  --page-margin: 20px;
+  --color-background: var(--color-cream-paper);
+  --color-foreground: var(--color-ink);
+  --style-border-radius-inputs: 10px;
+}

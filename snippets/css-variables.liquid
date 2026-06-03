@@ -1,14 +1,19 @@
 {% style %}
-  {% # Loads all font variantions with display: swap %}
+  {% # Load approved Poppins variants from Shopify CDN only. %}
   {{ settings.type_primary_font | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
   {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
 
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
+    --font-display: 'Brownberries', 'Poppins', sans-serif;
+    --font-ui: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-hero: var(--font-display);
+    --font-editorial: var(--font-ui);
+    --font-urdu: var(--font-ui);
+    --font-primary--family: var(--font-ui);
+    --font-primary--style: normal;
+    --font-primary--weight: 400;
     --page-width: {{ settings.max_page_width }};
     --page-margin: {{ settings.min_page_margin }}px;
     --color-background: {{ settings.background_color }};

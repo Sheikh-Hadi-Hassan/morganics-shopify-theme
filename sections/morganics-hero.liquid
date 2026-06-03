@@ -1,106 +1,252 @@
-<section class="morganics-hero hero-v3" id="hero" aria-label="{{ section.settings.aria_label | escape }}">
+{{ 'morganics-hero.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign nuts_link = section.settings.nuts_link | default: routes.all_products_collection_url
+  assign dry_fruits_link = section.settings.dry_fruits_link | default: routes.all_products_collection_url
+  assign seeds_link = section.settings.seeds_link | default: routes.all_products_collection_url
+
+  assign almond_product = all_products['badam-abdul-wahidi']
+  assign pistachio_product = all_products['pista-maghaz']
+  assign cashew_product = all_products['kajo-sada']
+  assign fig_product = all_products['anjeer']
+  assign date_product = all_products['ajwa-dates']
+  assign black_raisin_product = all_products['munaqqa']
+  assign golden_raisin_product = all_products['sogi-small-kishmish-mewa']
+%}
+
+<section class="morganics-hero hero-v3" id="hero" aria-label="Morganics — Rooted in Nature" data-morganics-hero="{{ section.id }}">
   <div class="hero-bg" aria-hidden="true">
-    <img src="{{ 'morganics/morganics-hero/bg-gradient.png' | asset_url }}" alt="" class="bg-img" width="1600" height="900" loading="eager">
+    <img src="{{ 'bg-gradient.png' | asset_url }}" alt="" class="bg-img" width="1600" height="900" loading="eager" fetchpriority="high">
     <div class="bg-vignette"></div>
     <div class="bg-tint"></div>
   </div>
 
-  <div class="hero-corner-plants" aria-hidden="true">
-    <div class="plant-el plant-left"><img src="{{ 'morganics/morganics-hero/plant-left.png' | asset_url }}" alt="" class="plant-img" width="420" height="420" loading="eager"></div>
-    <div class="plant-el plant-right"><img src="{{ 'morganics/morganics-hero/plant-right.png' | asset_url }}" alt="" class="plant-img" width="420" height="420" loading="eager"></div>
-    <div class="plant-el plant-top"><img src="{{ 'morganics/morganics-hero/plant-left-top.png' | asset_url }}" alt="" class="plant-img plant-img-top" width="360" height="360" loading="eager"></div>
-    <div class="plant-el plant-rb"><img src="{{ 'morganics/morganics-hero/plant-right-bottom.png' | asset_url }}" alt="" class="plant-img" width="360" height="360" loading="eager"></div>
+  <div class="hero-corner-plants stage-plants hero-plants" aria-hidden="true">
+    <div class="plant-el plant-left" data-px="-18" data-py="8">
+      <img src="{{ 'plant-left.png' | asset_url }}" alt="" class="plant-img" width="420" height="420" loading="eager">
+    </div>
+    <div class="plant-el plant-right" data-px="18" data-py="8">
+      <img src="{{ 'plant-right.png' | asset_url }}" alt="" class="plant-img" width="420" height="420" loading="eager">
+    </div>
+    <div class="plant-el plant-top" data-px="0" data-py="-12">
+      <img src="{{ 'plant-left-top.png' | asset_url }}" alt="" class="plant-img plant-img-top" width="360" height="360" loading="eager">
+    </div>
+    <div class="plant-el plant-rb" data-px="14" data-py="10">
+      <img src="{{ 'plant-right-bottom.png' | asset_url }}" alt="" class="plant-img" width="360" height="360" loading="eager">
+    </div>
   </div>
 
   <div class="hero-inner">
     <div class="hero-copy">
       <div class="hero-copy-inner">
         <h1 class="hero-title">
-          <span class="hero-title-sm">{{ section.settings.title_small }}</span>
-          <span class="hero-title-lg">{{ section.settings.title_large }}</span>
+          <span class="hero-title-sm">{{ section.settings.headline_small | escape }}</span>
+          <span class="hero-title-lg">{{ section.settings.headline_large | escape }}</span>
         </h1>
         <div class="hero-rule"></div>
-        <p class="hero-desc">{{ section.settings.description }}</p>
+        <p class="hero-desc">{{ section.settings.description | escape | newline_to_br }}</p>
       </div>
     </div>
 
     <div class="hero-stage">
-      <div class="floating-zone floating-left" aria-hidden="true">
-        <span class="floater f-pistachio"><img class="fi" src="{{ 'morganics/morganics-hero/pistachio.png' | asset_url }}" alt="" width="150" height="150" loading="eager"></span>
-        <span class="floater f-cashew"><img class="fi" src="{{ 'morganics/morganics-hero/cashew.png' | asset_url }}" alt="" width="150" height="150" loading="eager"></span>
-        <span class="floater f-golden-raisin"><img class="fi" src="{{ 'morganics/morganics-hero/golden-raisin.png' | asset_url }}" alt="" width="140" height="140" loading="eager"></span>
-        <span class="floater f-fig"><img class="fi" src="{{ 'morganics/morganics-hero/fig.png' | asset_url }}" alt="" width="145" height="145" loading="eager"></span>
-        <span class="floater f-date-soft"><img class="fi" src="{{ 'morganics/morganics-hero/date.png' | asset_url }}" alt="" width="130" height="130" loading="eager"></span>
+      <div class="floating-zone floating-left">
+        <div class="floater f-pistachio" data-px="-14" data-py="-12">
+          <img src="{{ 'pistachio.png' | asset_url }}" alt="" class="fi" width="150" height="150" loading="eager">
+          <button class="hero-hotspot" data-spotlight="pistachio" aria-label="View Pista Maghaz"></button>
+        </div>
+        <div class="floater f-cashew" data-px="-13" data-py="6">
+          <img src="{{ 'cashew.png' | asset_url }}" alt="" class="fi" width="150" height="150" loading="eager">
+          <button class="hero-hotspot" data-spotlight="cashew" aria-label="View Kajo Sada"></button>
+        </div>
+        <div class="floater f-golden-raisin" data-px="-10" data-py="-10">
+          <img src="{{ 'golden-raisin.png' | asset_url }}" alt="" class="fi" width="140" height="140" loading="eager">
+          <button class="hero-hotspot" data-spotlight="golden-raisin" aria-label="View Golden Raisin"></button>
+        </div>
+        <div class="floater f-fig" data-px="-8" data-py="10">
+          <img src="{{ 'fig.png' | asset_url }}" alt="" class="fi" width="145" height="145" loading="eager">
+          <button class="hero-hotspot" data-spotlight="fig" aria-label="View Anjeer"></button>
+        </div>
+        <div class="floater f-date-soft" data-px="-7" data-py="8">
+          <img src="{{ 'date.png' | asset_url }}" alt="" class="fi" width="130" height="130" loading="eager">
+          <button class="hero-hotspot" data-spotlight="date" aria-label="View Ajwa Khajoor"></button>
+        </div>
+        <div class="floater f-berry-soft" data-px="-9" data-py="-7">
+          <img src="{{ 'black-raisin.png' | asset_url }}" alt="" class="fi" width="135" height="135" loading="eager">
+          <button class="hero-hotspot" data-spotlight="black-raisin" aria-label="View Black Munaqqa"></button>
+        </div>
       </div>
 
       <div class="product-core hero-product-stack">
-        <img src="{{ 'morganics/morganics-hero/pouch.png' | asset_url }}" alt="{{ section.settings.pouch_alt | escape }}" class="stage-pouch pouch-img" width="560" height="680" loading="eager">
-        <div class="stage-shadow" aria-hidden="true"></div>
-        <img src="{{ 'morganics/morganics-hero/dryfruit-pile.png' | asset_url }}" alt="" class="stage-dryfruits pile-img" width="780" height="420" loading="eager">
-        <img src="{{ 'morganics/morganics-hero/stone.png' | asset_url }}" alt="" class="stage-stone stone-img" width="860" height="300" loading="eager">
+        <img src="{{ 'pouch.png' | asset_url }}" alt="Morganics Premium Organic Pouch — Chemistry of Nutrients" class="stage-pouch hero-pouch pouch-img pouch-layer" data-px="0" data-py="-3" width="560" height="680" loading="eager" fetchpriority="high">
+        <div class="stage-shadow contact-shadow contact-shadow-layer" aria-hidden="true"></div>
+        <img src="{{ 'dryfruit-pile.png' | asset_url }}" alt="" class="stage-dryfruits hero-dryfruits pile-img dryfruits-layer" data-px="0" data-py="6" width="780" height="420" loading="eager" aria-hidden="true">
+        <img src="{{ 'stone.png' | asset_url }}" alt="" class="stage-stone hero-stone stone-img stone-layer" data-px="0" data-py="4" width="860" height="300" loading="eager" aria-hidden="true">
       </div>
 
-      <div class="floating-zone floating-right" aria-hidden="true">
-        <span class="floater f-almond"><img class="fi" src="{{ 'morganics/morganics-hero/almond.png' | asset_url }}" alt="" width="145" height="145" loading="eager"></span>
-        <span class="floater f-walnut"><img class="fi" src="{{ 'morganics/morganics-hero/fig.png' | asset_url }}" alt="" width="138" height="138" loading="eager"></span>
-        <span class="floater f-date"><img class="fi" src="{{ 'morganics/morganics-hero/date.png' | asset_url }}" alt="" width="132" height="132" loading="eager"></span>
-        <span class="floater f-black-raisin"><img class="fi" src="{{ 'morganics/morganics-hero/black-raisin.png' | asset_url }}" alt="" width="135" height="135" loading="eager"></span>
-        <span class="floater f-golden-soft"><img class="fi" src="{{ 'morganics/morganics-hero/golden-raisin.png' | asset_url }}" alt="" width="126" height="126" loading="eager"></span>
+      <div class="floating-zone floating-right">
+        <div class="floater f-almond" data-px="12" data-py="-14">
+          <img src="{{ 'almond.png' | asset_url }}" alt="" class="fi" width="145" height="145" loading="eager">
+          <button class="hero-hotspot" data-spotlight="almond" aria-label="View Badam Sabat"></button>
+        </div>
+        <div class="floater f-walnut" data-px="11" data-py="8">
+          <img src="{{ 'fig.png' | asset_url }}" alt="" class="fi" width="138" height="138" loading="eager">
+          <button class="hero-hotspot" data-spotlight="fig" aria-label="View Anjeer"></button>
+        </div>
+        <div class="floater f-date" data-px="9" data-py="12">
+          <img src="{{ 'date.png' | asset_url }}" alt="" class="fi" width="132" height="132" loading="eager">
+          <button class="hero-hotspot" data-spotlight="date" aria-label="View Ajwa Khajoor"></button>
+        </div>
+        <div class="floater f-black-raisin" data-px="10" data-py="-8">
+          <img src="{{ 'black-raisin.png' | asset_url }}" alt="" class="fi" width="135" height="135" loading="eager">
+          <button class="hero-hotspot" data-spotlight="black-raisin" aria-label="View Black Munaqqa"></button>
+        </div>
+        <div class="floater f-golden-soft" data-px="8" data-py="7">
+          <img src="{{ 'golden-raisin.png' | asset_url }}" alt="" class="fi" width="126" height="126" loading="eager">
+          <button class="hero-hotspot" data-spotlight="golden-raisin" aria-label="View Golden Raisin"></button>
+        </div>
+        <div class="floater f-fig-soft" data-px="7" data-py="-6">
+          <img src="{{ 'fig.png' | asset_url }}" alt="" class="fi" width="130" height="130" loading="eager">
+          <button class="hero-hotspot" data-spotlight="fig" aria-label="View Anjeer"></button>
+        </div>
+      </div>
+
+      <div class="hero-spotlight-layer" aria-hidden="true">
+        <img class="hero-spotlight-clone" alt="" width="320" height="320">
       </div>
     </div>
 
     <div class="hero-actions">
       <div class="hero-quicklinks">
-        {% for block in section.blocks %}
-          {% if block.type == 'quick_link' %}
-            {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/nuts.png' %}
-            <a class="benefit-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-              <span class="bc-icon"><img src="{{ icon_file | asset_url }}" alt="" width="92" height="92" loading="lazy"></span>
-              <span class="bc-label">{{ block.settings.label }}</span>
-            </a>
-          {% endif %}
-        {% endfor %}
+        <a class="benefit-card" href="{{ nuts_link }}">
+          <span class="bc-icon" aria-hidden="true">{% render 'morganics-hero-icon-premium-nuts' %}</span>
+          <span class="bc-label">Premium<br>Nuts</span>
+        </a>
+        <a class="benefit-card" href="{{ dry_fruits_link }}">
+          <span class="bc-icon" aria-hidden="true">{% render 'morganics-hero-icon-dry-fruits' %}</span>
+          <span class="bc-label">Dry<br>Fruits</span>
+        </a>
+        <a class="benefit-card" href="{{ seeds_link }}">
+          <span class="bc-icon" aria-hidden="true">{% render 'morganics-hero-icon-seeds-wellness' %}</span>
+          <span class="bc-label">Seeds &amp;<br>Wellness</span>
+        </a>
       </div>
       <div class="hero-tagline" aria-hidden="true">
-        <p class="tagline-sm">{{ section.settings.tagline_small }}</p>
-        <p class="tagline-lg">{{ section.settings.tagline_large }}</p>
+        <p class="tagline-sm">Driven by</p>
+        <p class="tagline-lg">Wellness.</p>
       </div>
     </div>
   </div>
+
+  <article class="hero-spotlight-card" id="heroSpotlightCard-{{ section.id }}" aria-live="polite" aria-hidden="true">
+    <button class="hero-spotlight-close" type="button" aria-label="Close ingredient spotlight">×</button>
+    <div class="hero-spotlight-media"><img alt="" width="188" height="188"></div>
+    <div class="hero-spotlight-copy">
+      <h3></h3>
+      <span class="hero-spotlight-urdu"></span>
+      <p></p>
+    </div>
+    <div class="hero-spotlight-foot">
+      <strong></strong>
+      <div class="hero-spotlight-actions">
+        <button class="hero-spotlight-add" type="button">Add to Cart</button>
+        <a href="{{ routes.all_products_collection_url }}" class="hero-spotlight-cta">View Details</a>
+      </div>
+    </div>
+  </article>
+
+  <script type="application/json" data-hero-spotlight-products>
+    {
+      "almond": {
+        "handle": "badam-abdul-wahidi",
+        "title": "Badam Sabat",
+        "urduTitle": "بادام",
+        "category": "Premium Nuts",
+        "description": "Whole almonds for daily snacking, soaking, family serving, and premium pantry use.",
+        "fallbackImage": {{ 'almond.png' | asset_url | json }},
+        "productImage": {% if almond_product.featured_image %}{{ almond_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if almond_product.selected_or_first_available_variant %}{{ almond_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      },
+      "pistachio": {
+        "handle": "pista-maghaz",
+        "title": "Pista Maghaz",
+        "urduTitle": "پستہ مغز",
+        "category": "Premium Nuts",
+        "description": "Clean pistachio kernels for premium snacking, gifting, desserts, and everyday family routines.",
+        "fallbackImage": {{ 'pistachio.png' | asset_url | json }},
+        "productImage": {% if pistachio_product.featured_image %}{{ pistachio_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if pistachio_product.selected_or_first_available_variant %}{{ pistachio_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      },
+      "cashew": {
+        "handle": "kajo-sada",
+        "title": "Kajo Sada",
+        "urduTitle": "سادہ کاجو",
+        "category": "Premium Nuts",
+        "description": "Creamy cashews with a naturally rich bite for clean snacking, serving, and daily energy routines.",
+        "fallbackImage": {{ 'cashew.png' | asset_url | json }},
+        "productImage": {% if cashew_product.featured_image %}{{ cashew_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if cashew_product.selected_or_first_available_variant %}{{ cashew_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      },
+      "fig": {
+        "handle": "anjeer",
+        "title": "Anjeer",
+        "urduTitle": "انجیر",
+        "category": "Dry Fruits",
+        "description": "Naturally sweet dried figs for clean snacking, breakfast bowls, and everyday nourishment.",
+        "fallbackImage": {{ 'fig.png' | asset_url | json }},
+        "productImage": {% if fig_product.featured_image %}{{ fig_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if fig_product.selected_or_first_available_variant %}{{ fig_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      },
+      "date": {
+        "handle": "ajwa-dates",
+        "title": "Ajwa Khajoor",
+        "urduTitle": "عجوہ کھجور",
+        "category": "Dry Fruits",
+        "description": "Soft premium Ajwa dates for daily nourishment, Ramadan tables, gifting, and traditional routines.",
+        "fallbackImage": {{ 'date.png' | asset_url | json }},
+        "productImage": {% if date_product.featured_image %}{{ date_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if date_product.selected_or_first_available_variant %}{{ date_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      },
+      "black-raisin": {
+        "handle": "munaqqa",
+        "title": "Black Munaqqa",
+        "urduTitle": "منقہ",
+        "category": "Dry Fruits",
+        "description": "Naturally sweet dried grapes for tea-time, family routines, and traditional pantry use.",
+        "fallbackImage": {{ 'black-raisin.png' | asset_url | json }},
+        "productImage": {% if black_raisin_product.featured_image %}{{ black_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if black_raisin_product.selected_or_first_available_variant %}{{ black_raisin_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      },
+      "golden-raisin": {
+        "handle": "sogi-small-kishmish-mewa",
+        "title": "Munaqqa / Golden Raisin",
+        "urduTitle": "کشمش / منقہ",
+        "category": "Dry Fruits",
+        "description": "Naturally sweet golden dried grapes for snacking, breakfast bowls, gifting, and everyday pantry use.",
+        "fallbackImage": {{ 'golden-raisin.png' | asset_url | json }},
+        "productImage": {% if golden_raisin_product.featured_image %}{{ golden_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "variantId": {% if golden_raisin_product.selected_or_first_available_variant %}{{ golden_raisin_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      }
+    }
+  </script>
 </section>
+
+<script src="{{ 'morganics-hero.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
-  "name": "Morganics hero",
+  "name": "Morganics Hero",
+  "tag": "section",
+  "class": "shopify-section-morganics-hero",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Morganics - Rooted in Nature" },
-    { "type": "text", "id": "title_small", "label": "Title small", "default": "Rooted in" },
-    { "type": "text", "id": "title_large", "label": "Title large", "default": "Nature." },
+    { "type": "text", "id": "headline_small", "label": "Headline small", "default": "Rooted in" },
+    { "type": "text", "id": "headline_large", "label": "Headline large", "default": "Nature." },
     { "type": "textarea", "id": "description", "label": "Description", "default": "Premium nuts, dry fruits\nand wellness essentials for\na healthier tomorrow." },
-    { "type": "text", "id": "pouch_alt", "label": "Pouch alt text", "default": "Morganics Premium Organic Pouch - Chemistry of Nutrients" },
-    { "type": "text", "id": "tagline_small", "label": "Tagline small", "default": "Driven by" },
-    { "type": "text", "id": "tagline_large", "label": "Tagline large", "default": "Wellness." }
-  ],
-  "blocks": [
-    {
-      "type": "quick_link",
-      "name": "Quick link",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Premium\nNuts" },
-        { "type": "text", "id": "icon_asset", "label": "Asset file", "default": "morganics/category-icons/nuts.png" },
-        { "type": "url", "id": "link", "label": "Link" }
-      ]
-    }
+    { "type": "url", "id": "nuts_link", "label": "Premium Nuts link" },
+    { "type": "url", "id": "dry_fruits_link", "label": "Dry Fruits link" },
+    { "type": "url", "id": "seeds_link", "label": "Seeds & Wellness link" }
   ],
   "presets": [
-    {
-      "name": "Morganics hero",
-      "blocks": [
-        { "type": "quick_link", "settings": { "label": "Premium\nNuts", "icon_asset": "morganics/category-icons/nuts.png" } },
-        { "type": "quick_link", "settings": { "label": "Dry\nFruits", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
-        { "type": "quick_link", "settings": { "label": "Seeds &\nWellness", "icon_asset": "morganics/category-icons/seeds-grains.png" } }
-      ]
-    }
+    { "name": "Morganics Hero" }
   ]
 }
 {% endschema %}

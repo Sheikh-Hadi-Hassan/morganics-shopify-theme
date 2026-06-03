@@ -13,6 +13,7 @@
         {% unless variant.available %}disabled{% endunless %}
         data-variant-input
         data-variant-price="{{ variant.price | money }}"
+        data-variant-title="{{ variant.title | escape }}"
         data-variant-available="{{ variant.available }}"
       >
       <span>

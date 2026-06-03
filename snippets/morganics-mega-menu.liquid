@@ -1,0 +1,73 @@
+<div class="mega-wrap" data-mega-wrap>
+  <a class="mega-trigger" href="{{ routes.collections_url }}" aria-haspopup="true" aria-expanded="false" data-mega-trigger>Categories</a>
+
+  <div class="mega-menu" aria-hidden="true" data-mega-menu>
+    <div class="mega-panel">
+      <div class="mega-intro">
+        <span class="eyebrow">Shop by Category</span>
+        <h3>Morganics Pantry</h3>
+        <p>Choose by category, routine and product type. Every category uses clean ingredient visuals for faster browsing.</p>
+        <a class="btn primary" href="{{ routes.all_products_collection_url }}">Open Full Shop</a>
+      </div>
+
+      <div class="mega-cats">
+        {% assign rendered_count = 0 %}
+        {% if menu != blank and menu.links.size > 0 %}
+          {% for link in menu.links %}
+            {% if link.type == 'collection_link' and rendered_count < 6 %}
+              {% assign collection = link.object %}
+              {% assign rendered_count = rendered_count | plus: 1 %}
+              <a class="mega-cat" href="{{ collection.url }}">
+                <span class="mega-cat-icon">
+                  {% if collection.image %}
+                    {{ collection.image | image_url: width: 180 | image_tag: loading: 'lazy', alt: collection.title }}
+                  {% else %}
+                    <img src="{{ 'morganics/category-icons/herbs-botanicals-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy">
+                  {% endif %}
+                </span>
+                <span>
+                  <b>{{ collection.title }}</b>
+                  <small>{{ collection.products_count }} products · Shop category</small>
+                </span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if rendered_count == 0 %}
+          {% assign roots_collection = collections['roots-adaptogens'] %}
+          {% assign dry_collection = collections['nuts-dry-fruits'] %}
+          {% assign gums_collection = collections['oil-gums-specialties'] %}
+          {% assign herbs_collection = collections['herbs-botanicals'] %}
+          {% assign sweet_collection = collections['natural-sweetners-salts'] %}
+          {% assign seeds_collection = collections['seeds-grains'] %}
+
+          <a class="mega-cat" href="{% if roots_collection != blank %}{{ roots_collection.url }}{% else %}{{ routes.all_products_collection_url }}?q=roots{% endif %}">
+            <span class="mega-cat-icon"><img src="{{ 'morganics/category-icons/roots-adaptogens-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy"></span>
+            <span><b>Roots & Botanicals</b><small>{% if roots_collection != blank %}{{ roots_collection.products_count }} products{% else %}Shop category{% endif %}</small></span>
+          </a>
+          <a class="mega-cat" href="{% if dry_collection != blank %}{{ dry_collection.url }}{% else %}{{ routes.all_products_collection_url }}?q=dry-fruits{% endif %}">
+            <span class="mega-cat-icon"><img src="{{ 'morganics/category-icons/dry-fruits-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy"></span>
+            <span><b>Dry Fruits & Mewa</b><small>{% if dry_collection != blank %}{{ dry_collection.products_count }} products{% else %}Shop category{% endif %}</small></span>
+          </a>
+          <a class="mega-cat" href="{% if gums_collection != blank %}{{ gums_collection.url }}{% else %}{{ routes.all_products_collection_url }}?q=gums{% endif %}">
+            <span class="mega-cat-icon"><img src="{{ 'morganics/category-icons/oils-gums-specialties-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy"></span>
+            <span><b>Gums & Specialties</b><small>{% if gums_collection != blank %}{{ gums_collection.products_count }} products{% else %}Shop category{% endif %}</small></span>
+          </a>
+          <a class="mega-cat" href="{% if herbs_collection != blank %}{{ herbs_collection.url }}{% else %}{{ routes.all_products_collection_url }}?q=herbs{% endif %}">
+            <span class="mega-cat-icon"><img src="{{ 'morganics/category-icons/herbs-botanicals-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy"></span>
+            <span><b>Herbs & Botanicals</b><small>{% if herbs_collection != blank %}{{ herbs_collection.products_count }} products{% else %}Shop category{% endif %}</small></span>
+          </a>
+          <a class="mega-cat" href="{% if sweet_collection != blank %}{{ sweet_collection.url }}{% else %}{{ routes.all_products_collection_url }}?q=sweeteners{% endif %}">
+            <span class="mega-cat-icon"><img src="{{ 'morganics/category-icons/natural-sweeteners-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy"></span>
+            <span><b>Sweeteners & Salts</b><small>{% if sweet_collection != blank %}{{ sweet_collection.products_count }} products{% else %}Shop category{% endif %}</small></span>
+          </a>
+          <a class="mega-cat" href="{% if seeds_collection != blank %}{{ seeds_collection.url }}{% else %}{{ routes.all_products_collection_url }}?q=seeds{% endif %}">
+            <span class="mega-cat-icon"><img src="{{ 'morganics/category-icons/seeds-grains-icon.png' | asset_url }}" alt="" width="90" height="90" loading="lazy"></span>
+            <span><b>Seeds & Grains</b><small>{% if seeds_collection != blank %}{{ seeds_collection.products_count }} products{% else %}Shop category{% endif %}</small></span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

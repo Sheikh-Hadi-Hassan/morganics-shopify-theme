@@ -1,0 +1,13 @@
+{% if template.name == 'product' and product != blank %}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  <div id="mobProductBar" class="mob-product-bar" aria-label="Add to cart">
+    <div class="mob-product-bar-price">
+      <span class="mob-product-bar-label">Price</span>
+      <span class="mob-product-bar-amount" id="mobBarPrice">{{ current_variant.price | money }}</span>
+      <span class="mob-product-bar-size" id="mobBarSize">{{ product.title }}{% unless current_variant.title == 'Default Title' %} · {{ current_variant.title }}{% endunless %}</span>
+    </div>
+    <button class="mob-product-bar-btn" id="mobBarAddBtn" type="button" aria-label="Add to cart" {% unless current_variant.available %}disabled{% endunless %}>
+      {% if current_variant.available %}Add to Cart{% else %}Sold Out{% endif %}
+    </button>
+  </div>
+{% endif %}

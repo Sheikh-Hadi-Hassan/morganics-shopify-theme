@@ -15,6 +15,7 @@
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'morganics-design-tokens.css' | asset_url | stylesheet_tag }}
     {{ 'morganics-theme.css' | asset_url | stylesheet_tag }}
+    {{ 'morganics-header.css' | asset_url | stylesheet_tag }}
 
     <style>
       @font-face {
@@ -35,16 +36,22 @@
     <div class="grain" aria-hidden="true"></div>
 
     {% sections 'header-group' %}
+    {% render 'morganics-mobile-drawer' %}
 
     <main id="MainContent" class="morganics-main" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
     {% render 'morganics-cart-drawer' %}
+    {% render 'morganics-bottom-app-nav' %}
+    {% if template.name == 'product' %}
+      {% render 'morganics-mobile-product-bar' %}
+    {% endif %}
 
     {% sections 'footer-group' %}
 
     <script src="{{ 'morganics-theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'morganics-header.js' | asset_url }}" defer></script>
     <script src="{{ 'morganics-collection.js' | asset_url }}" defer></script>
     <script src="{{ 'morganics-cart.js' | asset_url }}" defer></script>
   </body>

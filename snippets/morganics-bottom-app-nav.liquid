@@ -1,0 +1,27 @@
+<nav id="mobBottomNav" class="mob-bottom-nav" aria-label="App navigation">
+  <a class="mob-nav-item {% if template.name == 'index' %}active{% endif %}" href="{{ routes.root_url }}" aria-label="Home">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10.5V20h13v-9.5"></path></svg>
+    <span class="mob-nav-label">Home</span>
+  </a>
+
+  <a class="mob-nav-item {% if template.name == 'list-collections' %}active{% endif %}" href="{{ routes.collections_url }}" aria-label="Categories">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5"></rect><rect x="14" y="4" width="6" height="6" rx="1.5"></rect><rect x="4" y="14" width="6" height="6" rx="1.5"></rect><rect x="14" y="14" width="6" height="6" rx="1.5"></rect></svg>
+    <span class="mob-nav-label">Categories</span>
+  </a>
+
+  <a class="mob-nav-item {% if template.name == 'collection' or template.name == 'product' %}active{% endif %}" href="{{ routes.all_products_collection_url }}" aria-label="Shop">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-1.5 9h-12z"></path><path d="M6 7 5.2 3H3"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
+    <span class="mob-nav-label">Shop</span>
+  </a>
+
+  <button class="mob-nav-item mob-nav-wishlist" type="button" id="mobNavWishlistBtn" aria-label="Wishlist" data-wishlist-toggle>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+    <span class="mob-nav-wl-badge" data-wishlist-count hidden>0</span>
+    <span class="mob-nav-label">Wishlist</span>
+  </button>
+
+  <button class="mob-nav-item" type="button" id="mobNavMenuBtn" aria-label="Menu" data-bottom-menu-toggle>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+    <span class="mob-nav-label">Menu</span>
+  </button>
+</nav>

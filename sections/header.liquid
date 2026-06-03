@@ -3,15 +3,15 @@
   assign menu = section.settings.menu
 %}
 
-<header class="site-header" data-morganics-header>
+<header class="site-header mrg-site-header" data-morganics-header>
   {% if section.settings.announcement_text != blank %}
-    <div class="announcement-bar">
+    <div class="announcement-bar mrg-announcement-bar">
       <span>{{ section.settings.announcement_text }}</span>
     </div>
   {% endif %}
 
-  <div class="header-shell">
-    <a class="brand logo-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+  <div class="header-shell mrg-header-shell">
+    <a class="brand logo-brand mrg-header-brand" href="{{ routes.root_url }}" aria-label="Morganics home">
       {% if section.settings.logo != blank %}
         {{ section.settings.logo | image_url: width: 360 | image_tag: class: 'brand-logo-img header-logo-img', alt: logo_alt, loading: 'eager' }}
       {% else %}
@@ -26,25 +26,33 @@
       {% endif %}
     </a>
 
-    <nav class="header-nav" aria-label="Primary navigation">
-      {% if menu != blank and menu.links.size > 0 %}
-        {% for link in menu.links %}
-          <a href="{{ link.url }}" {% if link.current %}aria-current="page" class="active"{% endif %}>{{ link.title }}</a>
-        {% endfor %}
-      {% else %}
-        <a href="{{ routes.root_url }}">Home</a>
-        <a href="{{ routes.all_products_collection_url }}">Shop</a>
-        <a href="{{ routes.collections_url }}">Categories</a>
-        <a href="/pages/contact">Contact</a>
-      {% endif %}
+    <nav class="header-nav mrg-desktop-nav" aria-label="Main navigation">
+      <a href="{{ routes.root_url }}" {% if request.page_type == 'index' %}aria-current="page" class="active"{% endif %}>Home</a>
+      <a href="{{ routes.all_products_collection_url }}" {% if request.page_type == 'collection' %}aria-current="page" class="active"{% endif %}>Shop</a>
+      {% render 'morganics-mega-menu', menu: menu %}
+      <a href="/pages/customer-stories">Reviews</a>
+      <a href="/pages/contact">Contact</a>
+      <a class="nav-pill nav-new-pill" href="{{ routes.collections_url }}/new-arrivals" data-tag="New">New Arrivals</a>
+      <a class="nav-pill nav-sale-pill" href="{{ routes.collections_url }}/summer-sale" data-tag="Sale">Summer Sale</a>
     </nav>
 
-    <div class="header-actions">
+    <div class="header-actions mrg-header-actions">
       {% if section.settings.show_search %}
-        <button class="header-search-btn" type="button" data-header-search-toggle aria-controls="MorganicsHeaderSearch" aria-expanded="false" aria-label="Search products">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        <button class="header-search-btn mrg-icon-btn" type="button" data-header-search-toggle aria-controls="MorganicsHeaderSearch" aria-expanded="false" aria-label="Search products">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
         </button>
       {% endif %}
+
+      <button class="wishlist-header-btn mrg-icon-btn" type="button" data-wishlist-toggle aria-label="Favourites">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+        <b class="wl-badge" data-wishlist-count hidden>0</b>
+      </button>
+
+      <a class="cart-header-btn mrg-cart-btn" href="{{ routes.cart_url }}" data-cart-open aria-label="Open cart">
+        <svg class="svg-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h15l-1.5 9h-12z"></path><path d="M6 7 5.2 3H3"></path><circle cx="9" cy="20" r="1.6"></circle><circle cx="18" cy="20" r="1.6"></circle></svg>
+        <span class="cart-text">Cart</span>
+        <b data-cart-count>{{ cart.item_count }}</b>
+      </a>
 
       {% if section.settings.cta_label != blank %}
         <a class="header-shop-cta" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
@@ -52,79 +60,26 @@
         </a>
       {% endif %}
 
-      <button class="cart-header-btn" type="button" data-cart-open aria-label="Open cart">
-        <svg class="svg-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h15l-1.5 9h-12z"></path><path d="M6 7 5.2 3H3"></path><circle cx="9" cy="20" r="1.6"></circle><circle cx="18" cy="20" r="1.6"></circle></svg>
-        <span class="cart-text">Cart</span>
-        <b data-cart-count>{{ cart.item_count }}</b>
-      </button>
-
       <button class="mobile-menu-btn" type="button" data-mobile-menu-toggle aria-controls="MorganicsMobileMenu" aria-expanded="false" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
 
     {% if section.settings.show_search %}
-      <form class="header-search-panel" id="MorganicsHeaderSearch" action="{{ routes.search_url }}" method="get" role="search" aria-hidden="true" data-header-search-panel>
-        <input type="hidden" name="type" value="product">
-        <input class="header-search-input" name="q" autocomplete="off" placeholder="{{ section.settings.search_placeholder }}" type="search" aria-label="Search Morganics products" data-header-search-input>
-        <button class="header-search-submit" type="submit" aria-label="Submit search">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
-        </button>
-        <button class="header-search-close" type="button" data-header-search-close aria-label="Close search">&times;</button>
-      </form>
+      <div class="header-search-panel" id="MorganicsHeaderSearch" aria-hidden="true" data-header-search-panel>
+        <form action="{{ routes.search_url }}" method="get" role="search">
+          <input type="hidden" name="type" value="product">
+          <input class="header-search-input" name="q" autocomplete="off" placeholder="{{ section.settings.search_placeholder }}" type="search" aria-label="Search Morganics products" data-header-search-input>
+          <button class="header-search-submit" type="submit" aria-label="Submit search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.35-4.35"></path></svg>
+          </button>
+          <button class="header-search-close" type="button" data-header-search-close aria-label="Close search">&times;</button>
+          <div class="header-search-results" role="listbox" aria-label="Search suggestions"></div>
+        </form>
+      </div>
     {% endif %}
   </div>
 </header>
-
-<div class="mobile-menu-panel" id="MorganicsMobileMenu" data-mobile-menu-panel hidden>
-  <div class="mobile-menu-top">
-    <a class="brand mobile-panel-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
-      {% if section.settings.logo != blank %}
-        {{ section.settings.logo | image_url: width: 320 | image_tag: class: 'brand-logo-img', alt: logo_alt, loading: 'lazy' }}
-      {% else %}
-        <img class="brand-logo-img" src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="Morganics - Chemistry of Nutrients" width="150" height="74" loading="lazy">
-      {% endif %}
-    </a>
-    <button class="mobile-close" type="button" data-mobile-menu-close aria-label="Close menu">&times;</button>
-  </div>
-
-  <nav class="mobile-primary-links" aria-label="Mobile navigation">
-    {% if menu != blank and menu.links.size > 0 %}
-      {% for link in menu.links %}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {% endfor %}
-    {% else %}
-      <a href="{{ routes.root_url }}">Home</a>
-      <a href="{{ routes.all_products_collection_url }}">Shop All Products</a>
-      <a href="{{ routes.collections_url }}">Categories</a>
-      <a href="/pages/contact">Contact / Inquiry</a>
-    {% endif %}
-  </nav>
-
-  {% if section.settings.show_search %}
-    <form class="mobile-search-form" action="{{ routes.search_url }}" method="get" role="search">
-      <input type="hidden" name="type" value="product">
-      <input name="q" type="search" placeholder="{{ section.settings.search_placeholder }}" aria-label="Search Morganics products">
-      <button type="submit">Search</button>
-    </form>
-  {% endif %}
-
-  <section class="mobile-contact-strip" aria-label="Morganics contact links">
-    {% if section.settings.phone_label != blank %}
-      <a href="tel:{{ section.settings.phone_tel | remove: ' ' }}">{{ section.settings.phone_label }}</a>
-    {% endif %}
-    {% if section.settings.email != blank %}
-      <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
-    {% endif %}
-    {% if section.settings.whatsapp_url != blank %}
-      <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp Morganics</a>
-    {% endif %}
-  </section>
-
-  {% if section.settings.cta_label != blank %}
-    <a class="mobile-menu-primary" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
-  {% endif %}
-</div>
 
 {% schema %}
 {
@@ -150,14 +105,14 @@
     {
       "type": "checkbox",
       "id": "show_search",
-      "label": "Show search link",
+      "label": "Show search",
       "default": true
     },
     {
       "type": "text",
       "id": "search_placeholder",
       "label": "Search placeholder",
-      "default": "Search: badam, chia, ajwain, honey..."
+      "default": "Search: badam, chia, ajwain..."
     },
     {
       "type": "text",
@@ -169,29 +124,6 @@
       "type": "url",
       "id": "cta_link",
       "label": "Header CTA link"
-    },
-    {
-      "type": "text",
-      "id": "phone_label",
-      "label": "Phone display",
-      "default": "+92 322 3338110"
-    },
-    {
-      "type": "text",
-      "id": "phone_tel",
-      "label": "Phone link value",
-      "default": "+923223338110"
-    },
-    {
-      "type": "text",
-      "id": "email",
-      "label": "Email",
-      "default": "hello@morganics.store"
-    },
-    {
-      "type": "url",
-      "id": "whatsapp_url",
-      "label": "WhatsApp URL"
     }
   ]
 }

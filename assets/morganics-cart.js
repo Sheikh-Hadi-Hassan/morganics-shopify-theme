@@ -184,7 +184,7 @@
     var submitButton = form.querySelector('[type="submit"]');
     if (submitButton) submitButton.disabled = true;
 
-    fetch(form.action, {
+    fetch('/cart/add.js', {
       method: 'POST',
       headers: { Accept: 'application/json' },
       body: new FormData(form)

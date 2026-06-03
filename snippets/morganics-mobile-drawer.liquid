@@ -1,0 +1,55 @@
+<aside class="mobile-menu-panel mobile-drawer" id="MorganicsMobileMenu" data-mobile-menu-panel aria-hidden="true">
+  <div class="mobile-drawer-inner">
+    <div class="mobile-menu-header mobile-menu-top">
+      <a class="brand mobile-panel-brand" href="{{ routes.root_url }}" aria-label="Morganics home">
+        <img class="brand-logo-img" src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="Morganics - Chemistry of Nutrients" width="150" height="74" loading="lazy">
+      </a>
+      <button type="button" class="mobile-menu-close mobile-close" data-mobile-menu-close aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="mobile-nav mobile-primary-links" aria-label="Mobile navigation">
+      <a class="mobile-nav-item" href="{{ routes.root_url }}">Home</a>
+      <a class="mobile-nav-item" href="{{ routes.all_products_collection_url }}">Shop All Products</a>
+      <a class="mobile-nav-item" href="/pages/contact">Contact / Inquiry</a>
+      <a class="mobile-nav-item" href="{{ routes.cart_url }}" data-cart-open><span>Cart</span><b class="mobile-nav-badge" data-cart-count>{{ cart.item_count }}</b></a>
+      <a class="mobile-nav-item" href="/pages/customer-stories">Reviews</a>
+    </nav>
+
+    <div class="mobile-contact mobile-contact-strip" aria-label="Morganics contact links">
+      <a class="mobile-contact-link" href="tel:+923223338110"><span>+92 322 3338110</span></a>
+      <a class="mobile-contact-link" href="mailto:hello@morganics.store"><span>hello@morganics.store</span></a>
+      <a class="mobile-contact-link mobile-whatsapp-link" href="https://wa.me/923223338110?text=Hi%20Morganics%2C%20I%20want%20to%20inquire%20about%20your%20products." target="_blank" rel="noopener"><span>WhatsApp Morganics</span></a>
+    </div>
+
+    <section class="mobile-menu-section" aria-labelledby="mobileCategoriesTitle">
+      <span class="section-kicker" id="mobileCategoriesTitle">Categories</span>
+      <p class="section-helper">Tap any category to shop Morganics products.</p>
+      <div class="mobile-category-list mobile-cat-grid">
+        {% assign category_handles = 'roots-adaptogens|nuts-dry-fruits|oil-gums-specialties|herbs-botanicals|natural-sweetners-salts|seeds-grains' | split: '|' %}
+        {% assign category_labels = 'Roots & Botanicals|Dry Fruits & Mewa|Gums & Specialties|Herbs & Botanicals|Sweeteners & Salts|Seeds & Grains' | split: '|' %}
+        {% assign category_icons = 'roots-adaptogens-icon.png|dry-fruits-icon.png|oils-gums-specialties-icon.png|herbs-botanicals-icon.png|natural-sweeteners-icon.png|seeds-grains-icon.png' | split: '|' %}
+        {% for handle in category_handles %}
+          {% assign collection = collections[handle] %}
+          <a class="mobile-category-card" href="{% if collection != blank %}{{ collection.url }}{% else %}{{ routes.all_products_collection_url }}?q={{ category_labels[forloop.index0] | handleize }}{% endif %}">
+            <span class="mobile-category-img">
+              {% if collection != blank and collection.image %}
+                {{ collection.image | image_url: width: 140 | image_tag: loading: 'lazy', alt: collection.title }}
+              {% else %}
+                <img src="{{ 'morganics/category-icons/' | append: category_icons[forloop.index0] | asset_url }}" alt="" width="70" height="70" loading="lazy">
+              {% endif %}
+            </span>
+            <span>
+              <b class="mobile-category-title">{% if collection != blank %}{{ collection.title }}{% else %}{{ category_labels[forloop.index0] }}{% endif %}</b>
+              <small class="mobile-category-subtitle">{% if collection != blank %}{{ collection.products_count }} products{% else %}Shop category{% endif %}</small>
+            </span>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <div class="mobile-menu-cta">
+      <a class="mobile-menu-primary" href="{{ routes.all_products_collection_url }}">Shop Now</a>
+      <a class="mobile-menu-secondary" href="https://wa.me/923223338110?text=Hi%20Morganics%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">WhatsApp / Contact</a>
+    </div>
+  </div>
+</aside>

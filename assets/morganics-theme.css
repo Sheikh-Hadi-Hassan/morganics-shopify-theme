@@ -4530,3 +4530,690 @@ body[data-template="index"] .tagline-lg {
     height: 52px !important;
   }
 }
+
+/* ==========================================================================
+   Phase 8C surgical pixel-parity fixes
+   Purpose: tighten remaining spacing/crop/card-size mismatches only.
+   ========================================================================== */
+
+img:not([src]),
+img[src=""] {
+  display: none !important;
+}
+
+body[data-template="index"] .site-header {
+  top: 10px !important;
+  left: 18px !important;
+  right: 18px !important;
+  min-height: 56px !important;
+}
+
+body[data-template="index"] .header-shell {
+  min-height: 58px !important;
+  padding: 6px 9px 6px 13px !important;
+  gap: 10px !important;
+}
+
+body[data-template="index"] .site-header .brand-logo-img {
+  height: 42px !important;
+  max-width: 118px !important;
+}
+
+body[data-template="index"] .header-nav {
+  gap: 4px !important;
+  padding: 4px !important;
+}
+
+body[data-template="index"] .header-nav a,
+body[data-template="index"] .header-shop-cta,
+body[data-template="index"] .cart-header-btn,
+body[data-template="index"] .header-search-btn {
+  height: 36px !important;
+  font-size: 12px !important;
+}
+
+body[data-template="index"] .header-nav a {
+  padding: 0 13px !important;
+}
+
+body[data-template="index"] .header-search-btn {
+  width: 36px !important;
+}
+
+body[data-template="index"] .header-shop-cta {
+  padding-inline: 15px !important;
+}
+
+body[data-template="index"] .cart-header-btn {
+  padding-inline: 11px !important;
+  gap: 6px !important;
+}
+
+body[data-template="index"] .morganics-hero {
+  height: min(100svh, 860px) !important;
+  min-height: 760px !important;
+  max-height: 900px !important;
+  padding: 84px clamp(18px,4vw,58px) 18px !important;
+}
+
+body[data-template="index"] .morganics-hero .hero-inner {
+  min-height: 0 !important;
+  height: 100% !important;
+  grid-template-columns: minmax(250px,.72fr) minmax(500px,1.18fr) minmax(210px,.44fr) !important;
+  gap: clamp(8px,1.2vw,20px) !important;
+}
+
+body[data-template="index"] .hero-copy {
+  align-self: center !important;
+  transform: translateY(-8px) !important;
+}
+
+body[data-template="index"] .hero-title-sm {
+  font-size: clamp(38px,4.2vw,68px) !important;
+}
+
+body[data-template="index"] .hero-title-lg {
+  font-size: clamp(70px,8vw,124px) !important;
+}
+
+body[data-template="index"] .hero-rule {
+  margin: 16px 0 !important;
+}
+
+body[data-template="index"] .hero-desc {
+  font-size: clamp(14px,1.12vw,18px) !important;
+  line-height: 1.45 !important;
+  max-width: 360px !important;
+}
+
+body[data-template="index"] .hero-stage {
+  min-height: 0 !important;
+  height: 100% !important;
+  align-self: stretch !important;
+}
+
+body[data-template="index"] .stage-pouch {
+  width: min(31vw,360px) !important;
+  top: 41% !important;
+}
+
+body[data-template="index"] .stage-stone {
+  width: min(58vw,680px) !important;
+  bottom: 2% !important;
+}
+
+body[data-template="index"] .stage-dryfruits {
+  width: min(46vw,560px) !important;
+  bottom: 10% !important;
+}
+
+body[data-template="index"] .floating-zone .fi {
+  width: clamp(42px,5.5vw,92px) !important;
+}
+
+body[data-template="index"] .f-pistachio { left: 3% !important; top: 18% !important; }
+body[data-template="index"] .f-cashew { left: 8% !important; top: 48% !important; }
+body[data-template="index"] .f-golden-raisin { left: 22% !important; top: 11% !important; }
+body[data-template="index"] .f-fig { left: 1% !important; bottom: 22% !important; }
+body[data-template="index"] .f-date-soft { left: 26% !important; bottom: 12% !important; }
+body[data-template="index"] .f-almond { right: 12% !important; top: 15% !important; }
+body[data-template="index"] .f-walnut { right: 5% !important; top: 43% !important; }
+body[data-template="index"] .f-date { right: 18% !important; bottom: 12% !important; }
+body[data-template="index"] .f-black-raisin { right: 27% !important; top: 27% !important; }
+
+body[data-template="index"] .hero-actions {
+  align-self: center !important;
+  transform: translateY(-2px) !important;
+}
+
+body[data-template="index"] .hero-quicklinks {
+  width: 190px !important;
+  gap: 8px !important;
+}
+
+body[data-template="index"] .benefit-card {
+  grid-template-columns: 46px 1fr !important;
+  min-height: 64px !important;
+  padding: 8px !important;
+  border-radius: 16px !important;
+  gap: 8px !important;
+}
+
+body[data-template="index"] .bc-icon {
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+}
+
+body[data-template="index"] .bc-label {
+  font-size: 12px !important;
+}
+
+body[data-template="index"] .hero-tagline {
+  margin-top: 28px !important;
+  transform: translateY(20px) !important;
+}
+
+body[data-template="index"] .tagline-sm {
+  font-size: 18px !important;
+}
+
+body[data-template="index"] .tagline-lg {
+  font-size: clamp(40px,4.2vw,64px) !important;
+}
+
+body[data-template="index"] .marquee {
+  height: 36px !important;
+}
+
+body[data-template="index"] .marquee div {
+  padding: 11px 0 !important;
+  gap: 44px !important;
+}
+
+body[data-template="index"] .marquee span {
+  font-size: 11px !important;
+}
+
+#categories.section {
+  padding: 42px 5vw 34px !important;
+}
+
+#categories .section-head {
+  margin-bottom: 20px !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  width: min(1180px, calc(100vw - 36px)) !important;
+}
+
+#categories .section-head h2 {
+  max-width: 640px !important;
+  font-size: clamp(30px,3.2vw,52px) !important;
+}
+
+#categories .section-head p {
+  max-width: 660px !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+}
+
+#categories .category-grid {
+  width: min(1180px, calc(100vw - 36px)) !important;
+  grid-template-columns: repeat(9,minmax(0,1fr)) !important;
+  gap: 9px !important;
+}
+
+#categories .category-icon-card {
+  height: 128px !important;
+  min-height: 0 !important;
+  padding: 8px 6px !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+#categories .category-icon-art {
+  height: 64px !important;
+}
+
+#categories .category-icon-art img {
+  width: 82px !important;
+  height: 64px !important;
+}
+
+#categories .category-icon-copy b {
+  min-height: 36px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  font-size: 10.5px !important;
+  line-height: 1.12 !important;
+}
+
+.promise-strip {
+  padding: 24px 5vw !important;
+  gap: 12px !important;
+}
+
+.promise-card {
+  min-height: 96px !important;
+  padding: 14px 16px !important;
+  border-radius: 16px !important;
+}
+
+.promise-card .icon-badge {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 11px !important;
+}
+
+.promise-card b {
+  font-size: 14px !important;
+  line-height: 1.18 !important;
+}
+
+.promise-card small {
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+
+.routine-section {
+  margin: 0 !important;
+  min-height: 620px !important;
+  padding: 54px 0 54px clamp(20px,5vw,58px) !important;
+  align-items: center !important;
+  background:
+    linear-gradient(90deg, rgba(247,241,230,.95) 0%, rgba(247,241,230,.83) 34%, rgba(247,241,230,.22) 62%, rgba(247,241,230,.05) 100%),
+    url('morganics/lifestyle/family-routine.png') center right / cover no-repeat !important;
+  color: var(--forest) !important;
+}
+
+.routine-content {
+  width: min(1180px, 100%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.routine-heading {
+  max-width: 440px !important;
+  color: var(--forest) !important;
+  font-size: clamp(42px,5vw,76px) !important;
+}
+
+.routine-desc {
+  max-width: 440px !important;
+  color: var(--muted) !important;
+  font-size: 15px !important;
+  line-height: 1.48 !important;
+}
+
+.routine-actions {
+  margin-top: 16px !important;
+}
+
+.routine-cards {
+  margin-top: 18px !important;
+  width: min(520px, 48vw) !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+}
+
+.routine-card {
+  min-height: 58px !important;
+  grid-template-columns: 38px 1fr 16px !important;
+  gap: 9px !important;
+  padding: 9px 12px !important;
+  border-radius: 12px !important;
+  background: rgba(255,250,241,.92) !important;
+  color: var(--ink) !important;
+  border: 1px solid rgba(132,99,69,.16) !important;
+  box-shadow: 0 8px 20px rgba(31,41,38,.07) !important;
+  backdrop-filter: none !important;
+}
+
+.routine-card .rc-thumb {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 10px !important;
+}
+
+.routine-card .rc-copy small {
+  color: var(--earth) !important;
+  font-size: 8px !important;
+}
+
+.routine-card .rc-copy b {
+  color: var(--forest) !important;
+  font-size: 13px !important;
+  line-height: 1.1 !important;
+}
+
+.routine-card .rc-copy em {
+  color: var(--muted) !important;
+  font-size: 10.5px !important;
+  line-height: 1.25 !important;
+}
+
+.featured-products-section {
+  padding: 58px 5vw 64px !important;
+}
+
+.featured-products-section .section-head {
+  width: min(1180px, calc(100vw - 36px)) !important;
+  margin-inline: auto !important;
+}
+
+.featured-products-section .section-head h2 {
+  font-size: clamp(30px,3vw,50px) !important;
+}
+
+.featured-products-section .section-head p {
+  font-size: 15px !important;
+}
+
+.featured-products-section .product-grid {
+  width: min(1180px, calc(100vw - 36px)) !important;
+  margin-inline: auto !important;
+  grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+  gap: 16px !important;
+}
+
+.featured-products-section .product-card-wrap {
+  min-height: 0 !important;
+  border-radius: 16px !important;
+  gap: 6px !important;
+}
+
+.featured-products-section .product-card-wrap .product-img {
+  aspect-ratio: 1 / .84 !important;
+  min-height: 0 !important;
+}
+
+.featured-products-section .product-card-wrap .product-info {
+  padding: 11px 12px 7px !important;
+}
+
+.featured-products-section .product-card-wrap .product-meta {
+  font-size: 9.5px !important;
+  line-height: 1.1 !important;
+  margin-bottom: 4px !important;
+}
+
+.featured-products-section .product-card-wrap .product-name {
+  min-height: 34px !important;
+  font-size: 14.5px !important;
+  line-height: 1.15 !important;
+}
+
+.featured-products-section .product-card-wrap .urdu-line {
+  font-size: 12px !important;
+  margin-top: 2px !important;
+}
+
+.featured-products-section .product-card-wrap .price-row {
+  margin-top: 6px !important;
+}
+
+.featured-products-section .product-card-wrap .price {
+  font-size: 14px !important;
+}
+
+.featured-products-section .product-card-wrap .chip {
+  font-size: 9px !important;
+  padding: 5px 7px !important;
+}
+
+.featured-products-section .card-actions {
+  padding: 0 10px 10px !important;
+  gap: 6px !important;
+}
+
+.featured-products-section .card-cart-btn,
+.featured-products-section .card-view-btn {
+  min-height: 31px !important;
+  height: 31px !important;
+  font-size: 10.5px !important;
+}
+
+.featured-products-section .center {
+  margin-top: 24px !important;
+}
+
+.ritual-film-section {
+  min-height: 720px !important;
+  padding: 66px 4vw 70px !important;
+}
+
+.ritual-film-head {
+  margin-bottom: 32px !important;
+}
+
+.ritual-film-head h2 {
+  font-size: clamp(42px,5vw,78px) !important;
+}
+
+.ritual-film-track {
+  min-height: 480px !important;
+  grid-template-columns: minmax(110px,.48fr) minmax(0,1.26fr) minmax(110px,.48fr) !important;
+}
+
+.ritual-film-card--active .ritual-film-media,
+.ritual-film-card.is-active img,
+.ritual-film-card img {
+  max-height: 500px !important;
+}
+
+.ritual-film-card {
+  border-radius: 24px !important;
+}
+
+.ritual-section {
+  padding: 54px 5vw 58px !important;
+}
+
+.ritual-section .section-head {
+  margin-bottom: 22px !important;
+}
+
+.ritual-grid {
+  width: min(1180px, calc(100vw - 36px)) !important;
+  margin-inline: auto !important;
+}
+
+.ritual-card {
+  min-height: 142px !important;
+  padding: 18px !important;
+  border-radius: 18px !important;
+}
+
+.home-ingredient-showcase.ingredient-library,
+.ingredient-library {
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 54px 0 48px !important;
+}
+
+.ingredient-hero {
+  padding: 0 18px 22px !important;
+}
+
+.ingredient-hero h2 {
+  font-size: clamp(36px,4.6vw,68px) !important;
+  margin-top: 12px !important;
+  margin-bottom: 10px !important;
+}
+
+.ingredient-hero p {
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+}
+
+.ingredient-marquee-section {
+  padding: 0 0 12px !important;
+}
+
+.ingredient-marquees {
+  display: grid !important;
+  gap: 8px !important;
+}
+
+.ingredient-row {
+  gap: 8px !important;
+  animation-duration: 36s !important;
+}
+
+.ingredient-card {
+  width: 244px !important;
+  min-height: 58px !important;
+  grid-template-columns: 48px 1fr !important;
+  gap: 9px !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+}
+
+.ingredient-thumb {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 10px !important;
+}
+
+.ingredient-card-copy small {
+  font-size: 8px !important;
+  margin-bottom: 2px !important;
+}
+
+.ingredient-card-copy b {
+  font-size: 12px !important;
+  line-height: 1.08 !important;
+}
+
+.ingredient-card-copy em {
+  font-size: 10px !important;
+}
+
+.mini-inquiry-section {
+  min-height: 0 !important;
+  padding: 36px 5vw !important;
+}
+
+.mini-inquiry-card {
+  max-width: 900px !important;
+  grid-template-columns: .86fr 1.14fr !important;
+  gap: 24px !important;
+  padding: 24px 28px !important;
+  border-radius: 18px !important;
+}
+
+.mini-inquiry-form input {
+  height: 38px !important;
+  border-radius: 9px !important;
+  font-size: 13px !important;
+}
+
+.mini-inquiry-actions .btn {
+  height: 38px !important;
+  font-size: 12px !important;
+}
+
+.premium-footer {
+  padding: 46px 5vw 24px !important;
+}
+
+.premium-footer .footer-trust {
+  margin-bottom: 22px !important;
+}
+
+.premium-footer .ft-trust-grid {
+  gap: 8px !important;
+}
+
+.premium-footer .ft-trust-item {
+  min-height: 38px !important;
+  padding: 8px 12px !important;
+}
+
+.premium-footer .footer-grid {
+  gap: 22px !important;
+}
+
+.premium-footer .footer-logo {
+  max-width: 160px !important;
+  height: auto !important;
+}
+
+.footer-brand-desc {
+  font-size: 12.5px !important;
+  line-height: 1.55 !important;
+  margin-block: 10px !important;
+}
+
+.footer-col-title {
+  margin-bottom: 10px !important;
+  font-size: 12px !important;
+}
+
+.footer-links a,
+.footer-contact-link,
+.footer-richtext p,
+.premium-footer a {
+  margin: 6px 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+}
+
+.footer-brand-pills span,
+.footer-social-pill,
+.footer-cta {
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+}
+
+.footer-bottom-bar {
+  margin-top: 24px !important;
+}
+
+.footer-bottom-inner {
+  padding-top: 14px !important;
+}
+
+@media (max-width: 1180px) {
+  body[data-template="index"] .morganics-hero {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .featured-products-section .product-grid {
+    grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-template="index"] .morganics-hero {
+    min-height: 760px !important;
+    padding-top: 84px !important;
+  }
+
+  body[data-template="index"] .morganics-hero .hero-inner {
+    grid-template-columns: 1fr !important;
+  }
+
+  .routine-section {
+    padding: 48px 18px !important;
+    background:
+      linear-gradient(180deg, rgba(247,241,230,.94), rgba(247,241,230,.74)),
+      url('morganics/lifestyle/family-routine.png') center / cover no-repeat !important;
+  }
+
+  .routine-cards {
+    width: 100% !important;
+    max-width: 540px !important;
+  }
+
+  .featured-products-section .product-grid,
+  .ritual-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  #categories.section {
+    padding: 34px 14px 30px !important;
+  }
+
+  #categories .section-head,
+  #categories .category-grid {
+    width: 100% !important;
+  }
+
+  .featured-products-section .product-grid,
+  .ritual-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mini-inquiry-card,
+  .premium-footer .footer-grid,
+  .premium-footer .ft-trust-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -38,8 +38,10 @@
       </a>
       {% endfor %}
     {% elsif collections.size > 0 %}
+      {% assign rendered_count = 0 %}
       {% for collection in collections limit: 9 %}
         {% unless collection.handle == 'frontpage' %}
+          {% assign rendered_count = rendered_count | plus: 1 %}
           <a class="category-icon-card" href="{{ collection.url }}">
             <span class="category-icon-art">
               {% if collection.image %}
@@ -57,6 +59,12 @@
           </a>
         {% endunless %}
       {% endfor %}
+      {% if rendered_count < 8 %}
+        <a class="category-icon-card" href="{{ routes.all_products_collection_url }}?q=pantry"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/oils-gums-specialties.png' | asset_url }}" alt="Pantry staples icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Pantry Staples</b><em>Everyday Morganics table essentials.</em><span>Explore category</span></span></a>
+      {% endif %}
+      {% if rendered_count < 9 %}
+        <a class="category-icon-card" href="{{ routes.all_products_collection_url }}?q=wellness"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/roots-adaptogens.png' | asset_url }}" alt="Wellness blends icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Wellness Blends</b><em>Traditional pantry picks for daily routines.</em><span>Explore category</span></span></a>
+      {% endif %}
     {% else %}
       <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/dry-fruits.png' | asset_url }}" alt="Dry fruits icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Dry Fruits</b><em>Dates, mewa and traditional pantry staples.</em><span>Explore category</span></span></a>
       <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/nuts.png' | asset_url }}" alt="Nuts icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Premium Nuts</b><em>Almonds, cashews, pistachios and walnuts.</em><span>Explore category</span></span></a>

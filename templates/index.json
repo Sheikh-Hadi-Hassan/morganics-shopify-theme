@@ -29,10 +29,153 @@
     },
     "categories": {
       "type": "morganics-category-grid",
+      "blocks": {
+        "roots_traditional": {
+          "type": "category",
+          "settings": {
+            "title": "Roots, Botanicals & Traditional Ingredients",
+            "collection": "roots-adaptogens",
+            "kicker": "Shop category",
+            "description": "Traditional roots, botanicals and everyday pantry ingredients.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/roots-adaptogens-icon.png"
+          }
+        },
+        "dry_fruits": {
+          "type": "category",
+          "settings": {
+            "title": "Dry Fruits & Heritage Mewa",
+            "collection": "nuts-dry-fruits",
+            "kicker": "Shop category",
+            "description": "Dates, figs, raisins and heritage mewa for daily use.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/dry-fruits-icon.png"
+          }
+        },
+        "gums": {
+          "type": "category",
+          "settings": {
+            "title": "Gums & Specialties",
+            "collection": "oil-gums-specialties",
+            "kicker": "Shop category",
+            "description": "Gums, resins and specialty pantry ingredients.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/oils-gums-specialties-icon.png"
+          }
+        },
+        "herbs": {
+          "type": "category",
+          "settings": {
+            "title": "Herbs & Daily Botanicals",
+            "collection": "herbs-botanicals",
+            "kicker": "Shop category",
+            "description": "Daily herbs and botanicals for Pakistani routines.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/herbs-botanicals-icon.png"
+          }
+        },
+        "sweeteners": {
+          "type": "category",
+          "settings": {
+            "title": "Natural Sweeteners & Salts",
+            "collection": "natural-sweetners-salts",
+            "kicker": "Shop category",
+            "description": "Gur, shakar, honey, salts and natural sweetness.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/natural-sweeteners-icon.png"
+          }
+        },
+        "premium_nuts": {
+          "type": "category",
+          "settings": {
+            "title": "Premium Nuts",
+            "collection": "nuts-dry-fruits",
+            "kicker": "Shop category",
+            "description": "Almonds, cashews, pistachios and walnuts.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/nuts-icon.png"
+          }
+        },
+        "premium_snacks": {
+          "type": "category",
+          "settings": {
+            "title": "Premium Snacks & Pantry Staples",
+            "kicker": "Shop category",
+            "description": "Clean pantry staples and snacking essentials.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/seeds-grains-icon.png",
+            "link": "/collections/all?q=snacks"
+          }
+        },
+        "seeds_grains": {
+          "type": "category",
+          "settings": {
+            "title": "Seeds & Functional Grains",
+            "collection": "seeds-grains",
+            "kicker": "Shop category",
+            "description": "Seeds, grains and functional pantry basics.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/seeds-grains-icon.png"
+          }
+        },
+        "wellness_blends": {
+          "type": "category",
+          "settings": {
+            "title": "Wellness Blends",
+            "kicker": "Shop category",
+            "description": "Daily wellness blends and routine-friendly pantry picks.",
+            "cta": "Explore category",
+            "icon_asset": "morganics/category-icons/oils-gums-specialties-icon.png",
+            "link": "/collections/all?q=wellness"
+          }
+        }
+      },
+      "block_order": [
+        "roots_traditional",
+        "dry_fruits",
+        "gums",
+        "herbs",
+        "sweeteners",
+        "premium_nuts",
+        "premium_snacks",
+        "seeds_grains",
+        "wellness_blends"
+      ],
       "settings": {}
     },
     "promises": {
       "type": "morganics-promise-strip",
+      "blocks": {
+        "cod": {
+          "type": "promise",
+          "settings": {
+            "title": "Pakistan-wide COD Delivery",
+            "text": "Order from anywhere in Pakistan — pay cash on delivery at your door."
+          }
+        },
+        "ingredients": {
+          "type": "promise",
+          "settings": {
+            "title": "Premium Natural Ingredients",
+            "text": "Carefully selected dry fruits, nuts, herbs, seeds and botanicals."
+          }
+        },
+        "packed": {
+          "type": "promise",
+          "settings": {
+            "title": "Freshly Packed",
+            "text": "Products packed fresh to preserve natural quality, aroma and nutrition."
+          }
+        },
+        "sourcing": {
+          "type": "promise",
+          "settings": {
+            "title": "Custom Sourcing Support",
+            "text": "Need a specific ingredient? We'll find it, price it and deliver it for you."
+          }
+        }
+      },
+      "block_order": ["cod", "ingredients", "packed", "sourcing"],
       "settings": {}
     },
     "routine": {

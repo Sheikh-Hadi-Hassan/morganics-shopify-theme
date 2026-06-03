@@ -2,16 +2,27 @@
   {% if section.blocks.size > 0 %}
     {% for block in section.blocks %}
       <div class="promise-card" {{ block.shopify_attributes }}>
-        <span class="icon-badge">{{ block.settings.icon }}</span>
+        <span class="icon-badge" aria-hidden="true">
+          {% assign promise_title = block.settings.title | downcase %}
+          {% if promise_title contains 'delivery' %}
+            <svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          {% elsif promise_title contains 'ingredient' %}
+            <svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c8-2 13-7 14-14-7 1-12 6-14 14Z"/><path d="M5 19c3-4 7-7 12-10"/></svg>
+          {% elsif promise_title contains 'packed' %}
+            <svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          {% else %}
+            <svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          {% endif %}
+        </span>
         <b>{{ block.settings.title }}</b>
         <small>{{ block.settings.text }}</small>
       </div>
     {% endfor %}
   {% else %}
-    <div class="promise-card"><span class="icon-badge">COD</span><b>Pakistan-wide COD Delivery</b><small>Order from anywhere in Pakistan and pay cash on delivery at your door.</small></div>
-    <div class="promise-card"><span class="icon-badge">Leaf</span><b>Premium Natural Ingredients</b><small>Carefully selected dry fruits, nuts, herbs, seeds and botanicals.</small></div>
-    <div class="promise-card"><span class="icon-badge">Pack</span><b>Freshly Packed</b><small>Products packed fresh to preserve natural quality, aroma and nutrition.</small></div>
-    <div class="promise-card"><span class="icon-badge">Chat</span><b>Custom Sourcing Support</b><small>Need a specific ingredient? We will check availability and guide you.</small></div>
+    <div class="promise-card"><span class="icon-badge" aria-hidden="true"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span><b>Pakistan-wide COD Delivery</b><small>Order from anywhere in Pakistan — pay cash on delivery at your door.</small></div>
+    <div class="promise-card"><span class="icon-badge" aria-hidden="true"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c8-2 13-7 14-14-7 1-12 6-14 14Z"/><path d="M5 19c3-4 7-7 12-10"/></svg></span><b>Premium Natural Ingredients</b><small>Carefully selected dry fruits, nuts, herbs, seeds and botanicals.</small></div>
+    <div class="promise-card"><span class="icon-badge" aria-hidden="true"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><b>Freshly Packed</b><small>Products packed fresh to preserve natural quality, aroma and nutrition.</small></div>
+    <div class="promise-card"><span class="icon-badge" aria-hidden="true"><svg class="svg-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><b>Custom Sourcing Support</b><small>Need a specific ingredient? We'll find it, price it and deliver it for you.</small></div>
   {% endif %}
 </section>
 

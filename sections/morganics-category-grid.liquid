@@ -15,19 +15,18 @@
         assign card_url = block.settings.link | default: routes.collections_url
         assign card_kicker = block.settings.kicker
         if block_collection != blank
-          assign card_title = block_collection.title
-          assign card_description = block_collection.description | strip_html | default: block.settings.description
           assign card_url = block_collection.url
-          assign card_kicker = block_collection.products_count | append: ' products'
+          if card_description == blank
+            assign card_description = block_collection.description | strip_html
+          endif
+          if card_kicker == blank
+            assign card_kicker = block_collection.products_count | append: ' products'
+          endif
         endif
       %}
       <a class="category-icon-card" href="{{ card_url }}" {{ block.shopify_attributes }}>
         <span class="category-icon-art">
-          {% if block_collection != blank and block_collection.image %}
-            {{ block_collection.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: card_title }}
-          {% else %}
-            <img src="{{ icon_file | asset_url }}" alt="{{ card_title | escape }} icon" width="260" height="220" loading="lazy">
-          {% endif %}
+          <img src="{{ icon_file | asset_url }}" alt="{{ card_title | escape }} icon" width="260" height="220" loading="lazy">
         </span>
         <span class="category-icon-copy">
           <small>{{ card_kicker }}</small>

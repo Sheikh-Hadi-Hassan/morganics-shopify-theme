@@ -2,12 +2,6 @@
   "sections": {
     "hero": {
       "type": "morganics-hero",
-      "blocks": {
-        "quick_nuts": { "type": "quick_link", "settings": { "label": "Premium\nNuts", "icon_asset": "morganics/category-icons/nuts.png" } },
-        "quick_dry_fruits": { "type": "quick_link", "settings": { "label": "Dry\nFruits", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
-        "quick_seeds": { "type": "quick_link", "settings": { "label": "Seeds &\nWellness", "icon_asset": "morganics/category-icons/seeds-grains.png" } }
-      },
-      "block_order": ["quick_nuts", "quick_dry_fruits", "quick_seeds"],
       "settings": {}
     },
     "marquee": {

@@ -57,6 +57,7 @@
             <input type="checkbox" name="properties[Powder form required]" value="Yes">
             <span>{{ section.settings.powder_label }}</span>
             <small>{{ section.settings.powder_help }}</small>
+            <small class="powder-help-urdu" dir="rtl" lang="ur">اگر آپ چاہتے ہیں کہ یہ پروڈکٹ پیکنگ سے پہلے پیس دی جائے۔</small>
           </label>
         {% endif %}
 
@@ -95,6 +96,8 @@
     {% if product.description != blank %}
       <div class="description-html">{{ product.description }}</div>
     {% endif %}
+
+    {%- render 'morganics-faq-accordion', faqs: faqs, section: section, heading: section.settings.faq_heading -%}
   </div>
 </section>
 
@@ -137,8 +140,6 @@
     </div>
   </section>
 {% endif %}
-
-{% render 'morganics-faq-accordion', faqs: faqs, section: section, heading: section.settings.faq_heading %}
 
 <script src="{{ 'morganics-product.js' | asset_url }}" defer></script>
 

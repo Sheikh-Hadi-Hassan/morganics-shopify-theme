@@ -1,8 +1,9 @@
 .morganics-hero.hero-v3 {
   --hero-nav-space: 118px;
-  --hero-stage-w: clamp(520px, 44vw, 760px);
-  --hero-stage-h: clamp(540px, 68vh, 720px);
-  --hero-stone-w: clamp(660px, 48vw, 1040px);
+  --hero-stage-w: clamp(560px, 46vw, 840px);
+  --hero-stage-h: clamp(560px, 70vh, 760px);
+  --hero-stone-w: clamp(620px, 48vw, 940px);
+  --hero-product-anchor: 47.5%;
   --hero-side-pad: clamp(28px, 4vw, 72px);
   position: relative;
   min-height: 100svh;
@@ -41,9 +42,10 @@
 
 .morganics-hero.hero-v3 .bg-vignette {
   background:
-    radial-gradient(circle at 50% 45%, rgba(32, 86, 73, 0.08), transparent 42%),
-    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.18), transparent 46%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.46), transparent 30%, transparent 70%, rgba(0, 0, 0, 0.38));
+    radial-gradient(circle at 52% 46%, rgba(70, 126, 93, 0.16), transparent 34%),
+    radial-gradient(circle at 50% 86%, rgba(223, 165, 36, 0.08), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.22), transparent 48%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.50), transparent 28%, transparent 68%, rgba(0, 0, 0, 0.42));
 }
 
 .morganics-hero.hero-v3 .bg-tint {
@@ -59,8 +61,10 @@
 
 .morganics-hero.hero-v3 .plant-el {
   position: absolute;
-  opacity: 0.86;
-  filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.24));
+  opacity: 0.36;
+  filter: blur(0px) drop-shadow(0 24px 54px rgba(0, 0, 0, 0.34));
+  animation: heroPlantDrift 11s ease-in-out infinite;
+  transform-origin: center;
 }
 
 .morganics-hero.hero-v3 .plant-img {
@@ -70,36 +74,39 @@
 }
 
 .morganics-hero.hero-v3 .plant-left {
-  left: -72px;
-  bottom: -52px;
-  width: clamp(220px, 25vw, 480px);
+  left: clamp(-230px, -10vw, -110px);
+  bottom: clamp(-132px, -6vh, -52px);
+  width: clamp(390px, 37vw, 720px);
 }
 
 .morganics-hero.hero-v3 .plant-right {
-  right: -88px;
-  top: 18%;
-  width: clamp(220px, 24vw, 460px);
+  right: clamp(-250px, -10vw, -116px);
+  top: clamp(54px, 11vh, 140px);
+  width: clamp(380px, 35vw, 680px);
+  animation-delay: -3.5s;
 }
 
 .morganics-hero.hero-v3 .plant-top {
-  left: 48%;
-  top: -128px;
-  width: clamp(190px, 20vw, 360px);
-  opacity: 0.64;
+  left: 40%;
+  top: clamp(-250px, -16vh, -146px);
+  width: clamp(330px, 30vw, 580px);
+  opacity: 0.26;
+  animation-delay: -6s;
 }
 
 .morganics-hero.hero-v3 .plant-rb {
-  right: 0;
-  bottom: -86px;
-  width: clamp(190px, 20vw, 380px);
-  opacity: 0.7;
+  right: clamp(-122px, -4vw, -42px);
+  bottom: clamp(-150px, -8vh, -70px);
+  width: clamp(330px, 30vw, 600px);
+  opacity: 0.30;
+  animation-delay: -8s;
 }
 
 .morganics-hero.hero-v3 .hero-inner {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 28%) minmax(0, 44%) minmax(0, 28%);
+  grid-template-columns: minmax(270px, 31%) minmax(510px, 43%) minmax(220px, 26%);
   align-items: center;
   width: min(100%, 1720px);
   min-height: calc(100svh - var(--hero-nav-space) - 32px);
@@ -112,10 +119,11 @@
   position: relative;
   z-index: 8;
   justify-self: start;
+  transform: translateY(clamp(8px, 2.2vh, 26px));
 }
 
 .morganics-hero.hero-v3 .hero-copy-inner {
-  max-width: 390px;
+  max-width: 410px;
 }
 
 .morganics-hero.hero-v3 .hero-title {
@@ -143,7 +151,7 @@
 .morganics-hero.hero-v3 .hero-rule {
   width: 124px;
   height: 1px;
-  margin: 22px 0 24px;
+  margin: 19px 0 18px;
   background: linear-gradient(90deg, rgba(223, 165, 36, 0.9), transparent);
 }
 
@@ -163,23 +171,25 @@
   height: var(--hero-stage-h);
   overflow: visible;
   isolation: isolate;
+  transform: translate(clamp(12px, 0vw, 34px), clamp(-18px, 2vh, -6px));
 }
 
 .morganics-hero.hero-v3 .hero-product-stack {
   --stone-w: var(--hero-stone-w);
   --pouch-w: calc(var(--stone-w) * 0.62);
   --dryfruits-w: calc(var(--stone-w) * 0.78);
-  --pouch-bottom: calc(var(--stone-w) * 0.18);
-  --dryfruits-bottom: calc(var(--stone-w) * 0.105);
+  --stone-bottom: calc(var(--stone-w) * 0.025);
+  --pouch-bottom: calc(var(--stone-w) * 0.205);
+  --dryfruits-bottom: calc(var(--stone-w) * 0.06);
   --shadow-w: calc(var(--stone-w) * 0.4);
-  --shadow-bottom: calc(var(--stone-w) * 0.17);
+  --shadow-bottom: calc(var(--stone-w) * 0.19);
   position: absolute;
   left: 50%;
-  bottom: clamp(-26px, -2.4vh, -8px);
+  bottom: var(--hero-product-anchor);
   z-index: 3;
   width: var(--stone-w);
   height: calc(var(--stone-w) * 1.08);
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(50%);
   isolation: isolate;
   overflow: visible;
 }
@@ -200,7 +210,7 @@
 
 .morganics-hero.hero-v3 .stone-layer {
   width: var(--stone-w);
-  bottom: 0;
+  bottom: var(--stone-bottom);
   z-index: 1;
 }
 
@@ -244,6 +254,9 @@
   min-width: 44px;
   min-height: 44px;
   pointer-events: auto;
+  transform: rotate(var(--floater-rot, 0deg)) scale(var(--floater-scale, 1));
+  transform-origin: center;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), filter 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease;
 }
 
 .morganics-hero.hero-v3 .fi {
@@ -253,6 +266,21 @@
   animation: heroFruitOrbit 7.5s ease-in-out infinite;
   transform-origin: center;
   filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.26));
+  transition: filter 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.morganics-hero.hero-v3 .floater.is-active,
+.morganics-hero.hero-v3 .floater:hover,
+.morganics-hero.hero-v3 .floater:focus-within {
+  z-index: 135;
+  transform: rotate(var(--floater-rot, 0deg)) scale(calc(var(--floater-scale, 1) * 2));
+  filter: saturate(1.08);
+}
+
+.morganics-hero.hero-v3 .floater.is-active .fi,
+.morganics-hero.hero-v3 .floater:hover .fi,
+.morganics-hero.hero-v3 .floater:focus-within .fi {
+  filter: drop-shadow(0 26px 38px rgba(0, 0, 0, 0.34));
 }
 
 .morganics-hero.hero-v3 .hero-hotspot {
@@ -275,18 +303,18 @@
 }
 
 @media (min-width: 835px) {
-  .morganics-hero.hero-v3 .f-pistachio { left: 34%; top: 12%; }
-  .morganics-hero.hero-v3 .f-almond { right: 27%; top: 9%; }
-  .morganics-hero.hero-v3 .f-cashew { left: 30%; top: 36%; }
-  .morganics-hero.hero-v3 .f-walnut { right: 24%; top: 33%; }
-  .morganics-hero.hero-v3 .f-golden-raisin { left: 40%; top: 8%; display: block; }
-  .morganics-hero.hero-v3 .f-date { right: 25%; top: 54%; display: block; }
-  .morganics-hero.hero-v3 .f-fig { left: 24%; top: 58%; }
-  .morganics-hero.hero-v3 .f-date-soft { left: 19%; top: 50%; }
-  .morganics-hero.hero-v3 .f-berry-soft { left: 19%; top: 21%; }
-  .morganics-hero.hero-v3 .f-black-raisin { right: 28%; top: 21%; }
-  .morganics-hero.hero-v3 .f-golden-soft { right: 16%; top: 46%; }
-  .morganics-hero.hero-v3 .f-fig-soft { right: 18%; top: 16%; }
+  .morganics-hero.hero-v3 .f-pistachio { left: 22%; top: 16%; --floater-rot: -17deg; --floater-scale: .9; }
+  .morganics-hero.hero-v3 .f-almond { right: 12%; top: 15%; --floater-rot: 16deg; --floater-scale: .92; }
+  .morganics-hero.hero-v3 .f-cashew { left: 13%; top: 43%; --floater-rot: 24deg; --floater-scale: 1.03; }
+  .morganics-hero.hero-v3 .f-walnut { right: 8%; top: 38%; --floater-rot: -13deg; --floater-scale: 1.05; }
+  .morganics-hero.hero-v3 .f-golden-raisin { left: 40%; top: 10%; display: block; --floater-rot: 30deg; --floater-scale: .78; }
+  .morganics-hero.hero-v3 .f-date { right: 12%; top: 62%; display: block; --floater-rot: -24deg; --floater-scale: .86; }
+  .morganics-hero.hero-v3 .f-fig { left: 12%; top: 65%; --floater-rot: -8deg; --floater-scale: .96; }
+  .morganics-hero.hero-v3 .f-date-soft { left: 5%; top: 53%; --floater-rot: 19deg; --floater-scale: .72; }
+  .morganics-hero.hero-v3 .f-berry-soft { left: 9%; top: 27%; --floater-rot: -28deg; --floater-scale: .7; }
+  .morganics-hero.hero-v3 .f-black-raisin { right: 22%; top: 24%; --floater-rot: 21deg; --floater-scale: .78; }
+  .morganics-hero.hero-v3 .f-golden-soft { right: 3%; top: 51%; --floater-rot: -18deg; --floater-scale: .72; }
+  .morganics-hero.hero-v3 .f-fig-soft { right: 5%; top: 22%; --floater-rot: 34deg; --floater-scale: .76; }
 }
 
 .morganics-hero.hero-v3 .hero-actions {
@@ -298,7 +326,7 @@
 
 .morganics-hero.hero-v3 .hero-quicklinks {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .morganics-hero.hero-v3 .benefit-card {
@@ -310,20 +338,20 @@
   padding: 12px 14px;
   color: #fff9ed;
   text-decoration: none;
-  border: 1px solid rgba(247, 241, 230, 0.22);
+  border: 1px solid rgba(247, 241, 230, 0.24);
   border-radius: 8px;
   background:
     linear-gradient(145deg, rgba(255, 249, 237, 0.16), rgba(40, 93, 83, 0.2)),
     rgba(7, 22, 15, 0.32);
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px) saturate(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.08);
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), border-color 280ms ease, background 280ms ease;
 }
 
 .morganics-hero.hero-v3 .benefit-card:hover,
 .morganics-hero.hero-v3 .benefit-card:focus-visible {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.02);
   border-color: rgba(223, 165, 36, 0.55);
   background: linear-gradient(145deg, rgba(255, 249, 237, 0.24), rgba(40, 93, 83, 0.28));
   outline: none;
@@ -355,6 +383,7 @@
   font-family: var(--font-display, Brownberries, Georgia, serif);
   line-height: 0.9;
   text-align: right;
+  white-space: nowrap;
 }
 
 .morganics-hero.hero-v3 .tagline-sm,
@@ -363,46 +392,31 @@
 }
 
 .morganics-hero.hero-v3 .tagline-sm {
-  font-size: clamp(32px, 3.2vw, 62px);
+  font-size: clamp(28px, 2.5vw, 54px);
 }
 
 .morganics-hero.hero-v3 .tagline-lg {
-  font-size: clamp(58px, 5.4vw, 106px);
-}
-
-.morganics-hero.hero-v3 .hero-spotlight-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 130;
-  pointer-events: none;
-}
-
-.morganics-hero.hero-v3 .hero-spotlight-clone {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  object-fit: contain;
-  opacity: 0;
-  transform: translate3d(0, 0, 0) scale(1);
-  transform-origin: center;
-  transition: opacity 240ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
-  filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.38));
-}
-
-.morganics-hero.hero-v3 .hero-spotlight-clone.is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1.86);
+  font-size: clamp(48px, 4.3vw, 88px);
 }
 
 .morganics-hero.hero-v3.is-spotlight-active .hero-copy,
 .morganics-hero.hero-v3.is-spotlight-active .hero-actions,
 .morganics-hero.hero-v3.is-spotlight-active > .hero-corner-plants,
 .morganics-hero.hero-v3.is-spotlight-active .hero-bg,
-.morganics-hero.hero-v3.is-spotlight-active .product-core,
-.morganics-hero.hero-v3.is-spotlight-active .floating-zone {
-  filter: blur(2px);
-  opacity: 0.42;
-  transition: opacity 260ms ease, filter 260ms ease;
+.morganics-hero.hero-v3.is-spotlight-active .product-core {
+  filter: blur(2.5px) saturate(0.92);
+  opacity: 0.38;
+  transition: opacity 420ms ease, filter 420ms ease;
+}
+
+.morganics-hero.hero-v3.is-spotlight-active .floater:not(.is-active) {
+  filter: blur(2px) saturate(0.86);
+  opacity: 0.28;
+}
+
+.morganics-hero.hero-v3.is-spotlight-active .floater.is-active {
+  opacity: 1;
+  filter: saturate(1.1);
 }
 
 .morganics-hero.hero-v3 .hero-spotlight-card {
@@ -552,22 +566,28 @@
   68% { transform: translate3d(-6px, 7px, 0) rotate(-4deg); }
 }
 
+@keyframes heroPlantDrift {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  42% { translate: 8px -10px; rotate: 1.8deg; }
+  76% { translate: -7px 7px; rotate: -1.4deg; }
+}
+
 @media (min-width: 1195px) {
-  .morganics-hero.hero-v3 { --hero-stone-w: clamp(660px, 62vw, 1120px); }
+  .morganics-hero.hero-v3 { --hero-stone-w: clamp(640px, 50vw, 960px); }
 }
 
 @media (min-width: 1025px) and (max-width: 1194px) {
   .morganics-hero.hero-v3 {
-    --hero-stone-w: clamp(610px, 70vw, 920px);
-    --hero-stage-w: clamp(560px, 56vw, 720px);
-    --hero-stage-h: clamp(560px, 66vh, 680px);
+    --hero-stone-w: clamp(580px, 56vw, 790px);
+    --hero-stage-w: clamp(540px, 54vw, 700px);
+    --hero-stage-h: clamp(540px, 66vh, 680px);
   }
 }
 
 @media (min-width: 835px) and (max-width: 1024px) {
   .morganics-hero.hero-v3 {
-    --hero-stone-w: clamp(560px, 72vw, 870px);
-    --hero-stage-w: clamp(520px, 58vw, 690px);
+    --hero-stone-w: clamp(520px, 60vw, 700px);
+    --hero-stage-w: clamp(500px, 56vw, 650px);
     --hero-stage-h: clamp(560px, 62vh, 680px);
     --hero-side-pad: clamp(24px, 3vw, 44px);
   }
@@ -576,10 +596,10 @@
 @media (min-width: 835px) and (max-width: 1194px) and (orientation: portrait) {
   .morganics-hero.hero-v3 {
     --hero-nav-space: 124px;
-    --hero-stone-w: clamp(700px, 94vw, 1000px);
+    --hero-stone-w: clamp(620px, 83vw, 860px);
     --hero-stage-w: min(100%, 860px);
-    --hero-stage-h: 58svh;
-    padding-bottom: 42px;
+    --hero-stage-h: 52svh;
+    padding-bottom: calc(42px + env(safe-area-inset-bottom, 0px));
   }
 
   .morganics-hero.hero-v3 .hero-inner {
@@ -658,14 +678,15 @@
 
   .morganics-hero.hero-v3 .hero-stage {
     flex: 1 0 auto;
-    min-height: 392px;
-    margin-top: -6px;
+    min-height: clamp(338px, 48svh, 460px);
+    margin-top: -12px;
+    transform: none;
   }
 
   .morganics-hero.hero-v3 .hero-actions {
     width: min(420px, 100%);
     justify-self: auto;
-    margin: -34px auto 0;
+    margin: -22px auto 0;
   }
 
   .morganics-hero.hero-v3 .hero-quicklinks {
@@ -702,21 +723,24 @@
   }
 
   .morganics-hero.hero-v3 .plant-left {
-    left: -118px;
-    bottom: 6%;
-    width: 260px;
+    left: -160px;
+    bottom: 8%;
+    width: 340px;
+    opacity: 0.25;
   }
 
   .morganics-hero.hero-v3 .plant-right {
-    right: -138px;
-    top: 32%;
-    width: 270px;
+    right: -172px;
+    top: 30%;
+    width: 350px;
+    opacity: 0.24;
   }
 
   .morganics-hero.hero-v3 .plant-rb {
-    width: 210px;
-    right: -60px;
-    bottom: 0;
+    width: 280px;
+    right: -116px;
+    bottom: -42px;
+    opacity: 0.24;
   }
 
   .morganics-hero.hero-v3 .f-golden-raisin,
@@ -731,31 +755,35 @@
   }
 
   .morganics-hero.hero-v3 .f-pistachio {
-    left: clamp(14px, 4vw, 22px);
-    top: 48%;
-    width: clamp(26px, 7.5vw, 42px);
+    left: clamp(20px, 6vw, 44px);
+    top: 45%;
+    width: clamp(34px, 9vw, 52px);
+    --floater-rot: -18deg;
+    --floater-scale: .9;
   }
 
   .morganics-hero.hero-v3 .f-almond {
-    right: clamp(14px, 4vw, 22px);
-    top: 46%;
-    width: clamp(24px, 7vw, 38px);
+    right: clamp(22px, 6vw, 46px);
+    top: 44%;
+    width: clamp(32px, 8vw, 48px);
+    --floater-rot: 17deg;
+    --floater-scale: .9;
   }
 
   .morganics-hero.hero-v3 .f-cashew {
-    left: clamp(10px, 3vw, 18px);
-    top: 62%;
-    width: clamp(26px, 7.5vw, 40px);
+    left: clamp(16px, 5vw, 36px);
+    top: 61%;
+    width: clamp(34px, 9vw, 52px);
+    --floater-rot: 22deg;
+    --floater-scale: .92;
   }
 
   .morganics-hero.hero-v3 .f-walnut {
-    right: clamp(10px, 3vw, 18px);
+    right: clamp(16px, 5vw, 36px);
     top: 60%;
-    width: clamp(30px, 9vw, 46px);
-  }
-
-  .morganics-hero.hero-v3 .hero-spotlight-clone.is-visible {
-    transform: translate3d(0, 0, 0) scale(1.42);
+    width: clamp(38px, 10vw, 58px);
+    --floater-rot: -14deg;
+    --floater-scale: .92;
   }
 
   .morganics-hero.hero-v3 .hero-spotlight-card {
@@ -777,24 +805,27 @@
 }
 
 @media (min-width: 481px) and (max-width: 834px) {
-  .morganics-hero.hero-v3 { --hero-stone-w: clamp(460px, 96vw, 740px); }
+  .morganics-hero.hero-v3 {
+    --hero-stone-w: clamp(460px, 88vw, 680px);
+    --hero-stage-h: 50svh;
+  }
 }
 
 @media (min-width: 431px) and (max-width: 480px) {
-  .morganics-hero.hero-v3 { --hero-stone-w: clamp(392px, 105vw, 515px); }
+  .morganics-hero.hero-v3 { --hero-stone-w: clamp(392px, 98vw, 490px); }
 }
 
 @media (min-width: 391px) and (max-width: 430px) {
-  .morganics-hero.hero-v3 { --hero-stone-w: clamp(366px, 104vw, 480px); }
+  .morganics-hero.hero-v3 { --hero-stone-w: clamp(366px, 96vw, 456px); }
 }
 
 @media (min-width: 361px) and (max-width: 390px) {
-  .morganics-hero.hero-v3 { --hero-stone-w: clamp(338px, 103vw, 445px); }
+  .morganics-hero.hero-v3 { --hero-stone-w: clamp(338px, 94vw, 420px); }
 }
 
 @media (max-width: 360px) {
   .morganics-hero.hero-v3 {
-    --hero-stone-w: clamp(302px, 100vw, 394px);
+    --hero-stone-w: clamp(302px, 91vw, 372px);
     --hero-stage-h: 50svh;
   }
 
@@ -809,5 +840,485 @@
   .morganics-hero.hero-v3 *::after {
     animation: none !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+  height: var(--hero-stage-h) !important;
+  min-height: var(--hero-stage-h) !important;
+  align-self: center !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack {
+  position: absolute !important;
+  inset: auto auto var(--hero-product-anchor) 50% !important;
+  display: block !important;
+  width: var(--stone-w) !important;
+  height: calc(var(--stone-w) * 1.08) !important;
+  transform: translateX(-50%) translateY(50%) !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .stone-layer,
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .pouch-layer,
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .dryfruits-layer {
+  position: absolute !important;
+  left: 50% !important;
+  top: auto !important;
+  right: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  mix-blend-mode: normal !important;
+  transform: translateX(-50%) !important;
+  transform-origin: center bottom !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .stone-layer {
+  width: var(--stone-w) !important;
+  bottom: var(--stone-bottom) !important;
+  z-index: 1 !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .pouch-layer {
+  width: var(--pouch-w) !important;
+  bottom: var(--pouch-bottom) !important;
+  z-index: 3 !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .contact-shadow-layer {
+  position: absolute !important;
+  left: 50% !important;
+  top: auto !important;
+  width: var(--shadow-w) !important;
+  height: calc(var(--stone-w) * 0.09) !important;
+  bottom: var(--shadow-bottom) !important;
+  z-index: 4 !important;
+  transform: translateX(-50%) !important;
+  opacity: 0.48 !important;
+  border-radius: 999px !important;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.34) 0%, rgba(18, 60, 51, 0.18) 46%, transparent 72%) !important;
+  filter: blur(3px) !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .dryfruits-layer {
+  width: var(--dryfruits-w) !important;
+  bottom: var(--dryfruits-bottom) !important;
+  z-index: 5 !important;
+}
+
+@media (min-width: 835px) {
+  body[data-template="index"] .morganics-hero.hero-v3 .f-pistachio { left: 22% !important; top: 16% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-almond { right: 12% !important; top: 15% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-cashew { left: 13% !important; top: 43% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-walnut { right: 8% !important; top: 38% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-golden-raisin { left: 40% !important; top: 10% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-date { right: 12% !important; top: 62% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-fig { left: 12% !important; top: 65% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-date-soft { left: 5% !important; top: 53% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-berry-soft { left: 9% !important; top: 27% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-black-raisin { right: 22% !important; top: 24% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-golden-soft { right: 3% !important; top: 51% !important; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-fig-soft { right: 5% !important; top: 22% !important; }
+}
+
+@media (max-width: 834px) {
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+    height: var(--hero-stage-h) !important;
+    min-height: clamp(338px, 48svh, 460px) !important;
+  }
+}
+
+/* Final hero radius cap: align visible hero UI with the 12px-20px site radius system. */
+body .morganics-hero.hero-v3 :is(
+  .hero-cta,
+  .hero-chip,
+  .hero-hotspot,
+  .benefit-card,
+  .hero-spotlight-card,
+  .hero-spotlight-media,
+  .hero-spotlight-close,
+  .hero-spotlight-action,
+  .hero-spotlight-secondary,
+  .hero-float-card,
+  .bc-icon
+) {
+  border-radius: 20px !important;
+}
+
+body .morganics-hero.hero-v3 :is(
+  .hero-spotlight-close,
+  .hero-spotlight-action,
+  .hero-spotlight-secondary,
+  .bc-icon
+) {
+  border-radius: 16px !important;
+}
+
+/* Morganics hero radius and border design system. */
+body .morganics-hero.hero-v3 :is(
+  .hero-spotlight-card,
+  .hero-float-card,
+  .benefit-card,
+  .hero-hotspot
+) {
+  border: 1px solid rgba(255, 250, 241, .20) !important;
+  border-radius: var(--radius-card, 20px) !important;
+  box-shadow: 0 18px 44px rgba(8, 40, 32, .18), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+body .morganics-hero.hero-v3 :is(
+  .hero-cta,
+  .hero-spotlight-action,
+  .hero-spotlight-secondary,
+  .hero-spotlight-close,
+  .bc-icon
+) {
+  border-radius: var(--radius-button, 16px) !important;
+}
+
+body .morganics-hero.hero-v3 :is(.hero-chip, .hero-spotlight-media) {
+  border-radius: var(--radius-md, 12px) !important;
+}
+
+/* Final responsive hero composition: height-aware product stage, centered stack, unclipped premium floaters. */
+body[data-template="index"] .morganics-hero.hero-v3 {
+  --hero-safe-h: calc(100svh - var(--hero-nav-space) - 34px);
+  --hero-stage-w: min(clamp(520px, 45vw, 820px), calc(var(--hero-safe-h) * 1.08));
+  --hero-stage-h: min(clamp(520px, 68svh, 760px), var(--hero-safe-h));
+  --hero-stone-w: min(clamp(540px, 46vw, 840px), calc(var(--hero-stage-h) * 1.02));
+  --hero-product-anchor: 50%;
+  overflow: hidden !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-inner {
+  grid-template-columns: minmax(260px, 30%) minmax(480px, 44%) minmax(210px, 26%) !important;
+  align-items: center !important;
+  min-height: var(--hero-safe-h) !important;
+  overflow: visible !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+  width: var(--hero-stage-w) !important;
+  max-width: 100% !important;
+  height: var(--hero-stage-h) !important;
+  min-height: var(--hero-stage-h) !important;
+  justify-self: center !important;
+  align-self: center !important;
+  overflow: visible !important;
+  transform: translate3d(0, clamp(-10px, -1.3vh, -3px), 0) !important;
+  filter: drop-shadow(0 36px 70px rgba(0, 0, 0, 0.18));
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack {
+  --stone-w: var(--hero-stone-w);
+  --pouch-w: calc(var(--stone-w) * 0.585);
+  --dryfruits-w: calc(var(--stone-w) * 0.82);
+  --stone-bottom: calc(var(--stone-w) * 0.02);
+  --pouch-bottom: calc(var(--stone-w) * 0.20);
+  --dryfruits-bottom: calc(var(--stone-w) * 0.055);
+  --shadow-w: calc(var(--stone-w) * 0.48);
+  --shadow-bottom: calc(var(--stone-w) * 0.185);
+  left: 50% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: var(--stone-w) !important;
+  height: calc(var(--stone-w) * 1.08) !important;
+  transform: translate3d(-50%, -48%, 0) !important;
+  overflow: visible !important;
+  contain: layout style !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .pouch-layer {
+  width: var(--pouch-w) !important;
+  bottom: var(--pouch-bottom) !important;
+  filter: drop-shadow(0 30px 40px rgba(5, 22, 18, 0.24)) saturate(1.03) contrast(1.02) !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .stone-layer {
+  width: var(--stone-w) !important;
+  bottom: var(--stone-bottom) !important;
+  filter: drop-shadow(0 26px 34px rgba(0, 0, 0, 0.26)) saturate(1.02) !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .dryfruits-layer {
+  width: var(--dryfruits-w) !important;
+  bottom: var(--dryfruits-bottom) !important;
+  filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.24)) saturate(1.08) contrast(1.03) !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack .contact-shadow-layer {
+  width: var(--shadow-w) !important;
+  bottom: var(--shadow-bottom) !important;
+  opacity: 0.42 !important;
+  filter: blur(4px) !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .floater {
+  width: clamp(48px, 4.8vw, 88px) !important;
+  will-change: transform, filter !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .fi {
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.28)) saturate(1.04) !important;
+}
+
+@media (min-width: 1440px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-stage-w: min(clamp(660px, 43vw, 880px), calc(var(--hero-safe-h) * 1.12));
+    --hero-stone-w: min(clamp(700px, 43vw, 900px), calc(var(--hero-stage-h) * 1.06));
+  }
+}
+
+@media (min-width: 1195px) {
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+    transform: translate3d(-25px, clamp(-10px, -1.3vh, -3px), 0) !important;
+  }
+}
+
+@media (min-width: 1200px) and (max-height: 760px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-stage-h: min(590px, var(--hero-safe-h));
+    --hero-stone-w: min(clamp(560px, 42vw, 760px), calc(var(--hero-stage-h) * 0.98));
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack {
+    transform: translate3d(-50%, -50%, 0) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1194px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-stage-w: min(clamp(500px, 50vw, 680px), calc(var(--hero-safe-h) * 1.04));
+    --hero-stage-h: min(clamp(500px, 64svh, 660px), var(--hero-safe-h));
+    --hero-stone-w: min(clamp(500px, 55vw, 690px), calc(var(--hero-stage-h) * 0.99));
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-inner {
+    grid-template-columns: minmax(230px, 30%) minmax(430px, 45%) minmax(190px, 25%) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+    transform: translate3d(-35px, clamp(-10px, -1.3vh, -3px), 0) !important;
+  }
+}
+
+@media (min-width: 835px) and (max-width: 980px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-safe-h: auto;
+    --hero-nav-space: 116px;
+    --hero-stage-w: min(100%, 740px);
+    --hero-stage-h: clamp(470px, 50svh, 620px);
+    --hero-stone-w: min(clamp(520px, 72vw, 720px), calc(var(--hero-stage-h) * 1.02));
+    min-height: max(100svh, 840px) !important;
+    padding-bottom: calc(42px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-inner {
+    grid-template-columns: 1fr !important;
+    align-content: start !important;
+    gap: clamp(14px, 2.2vh, 26px) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-copy {
+    justify-self: center !important;
+    text-align: center !important;
+    transform: none !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-copy-inner {
+    max-width: min(520px, 86vw) !important;
+    margin: 0 auto !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-rule {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+    transform: none !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack {
+    transform: translate3d(-50%, -59%, 0) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-actions {
+    justify-self: center !important;
+    width: min(620px, 92vw) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-quicklinks {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-tagline {
+    display: none !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1194px) and (orientation: portrait) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-safe-h: auto;
+    --hero-stage-w: min(100%, 780px);
+    --hero-stage-h: clamp(480px, 48svh, 640px);
+    --hero-stone-w: min(clamp(560px, 78vw, 760px), calc(var(--hero-stage-h) * 1.02));
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-inner {
+    grid-template-columns: 1fr !important;
+    gap: clamp(14px, 2.2vh, 26px) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+    transform: none !important;
+  }
+}
+
+@media (min-width: 835px) {
+  body[data-template="index"] .morganics-hero.hero-v3 .f-pistachio { left: 18% !important; top: 22% !important; --floater-scale: .88; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-golden-raisin { left: 46% !important; top: 16% !important; --floater-scale: .70; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-berry-soft { left: 8% !important; top: 39% !important; --floater-scale: .76; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-cashew { left: 14% !important; top: 59% !important; --floater-scale: .96; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-fig { left: 4% !important; top: 71% !important; --floater-scale: .92; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-date-soft { left: 30% !important; top: 74% !important; --floater-scale: .70; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-almond { right: 13% !important; top: 24% !important; --floater-scale: .92; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-fig-soft { right: 5% !important; top: 35% !important; --floater-scale: .76; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-black-raisin { right: 24% !important; top: 47% !important; --floater-scale: .82; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-walnut { right: 8% !important; top: 56% !important; --floater-scale: 1.02; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-date { right: 16% !important; top: 72% !important; --floater-scale: .86; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-golden-soft { right: 2% !important; top: 72% !important; --floater-scale: .72; }
+}
+
+@media (max-width: 834px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-nav-space: 92px;
+    --hero-stage-w: min(100%, 560px);
+    --hero-stage-h: clamp(360px, 48svh, 520px);
+    --hero-stone-w: min(clamp(340px, 92vw, 520px), calc(var(--hero-stage-h) * 0.98));
+    min-height: max(100svh, 760px) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-inner {
+    min-height: auto !important;
+    gap: clamp(8px, 2vh, 18px) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-stage {
+    flex: 0 0 var(--hero-stage-h) !important;
+    width: var(--hero-stage-w) !important;
+    height: var(--hero-stage-h) !important;
+    min-height: var(--hero-stage-h) !important;
+    margin: clamp(-10px, -1.4vh, -4px) auto 0 !important;
+    transform: none !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack {
+    transform: translate3d(-50%, -56%, 0) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .floater {
+    width: clamp(34px, 9vw, 54px) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .f-pistachio,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-almond,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-cashew,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-walnut,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-golden-raisin,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-date,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-fig,
+  body[data-template="index"] .morganics-hero.hero-v3 .f-black-raisin {
+    display: block !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .f-pistachio { left: 13% !important; top: 23% !important; --floater-scale: .82; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-almond { right: 13% !important; top: 24% !important; --floater-scale: .84; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-cashew { left: 8% !important; top: 56% !important; --floater-scale: .90; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-walnut { right: 8% !important; top: 55% !important; --floater-scale: .90; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-golden-raisin { left: 46% !important; top: 18% !important; --floater-scale: .62; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-date { right: 17% !important; top: 72% !important; --floater-scale: .72; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-fig { left: 19% !important; top: 73% !important; --floater-scale: .76; }
+  body[data-template="index"] .morganics-hero.hero-v3 .f-black-raisin { right: 30% !important; top: 42% !important; --floater-scale: .66; }
+}
+
+@media (max-width: 430px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-stage-h: clamp(340px, 46svh, 470px);
+    --hero-stone-w: min(clamp(316px, 89vw, 430px), calc(var(--hero-stage-h) * 0.98));
+    min-height: max(100svh, 724px) !important;
+  }
+
+  body[data-template="index"] .morganics-hero.hero-v3 .hero-product-stack {
+    transform: translate3d(-50%, -55%, 0) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body[data-template="index"] .morganics-hero.hero-v3 {
+    --hero-stage-h: clamp(322px, 45svh, 440px);
+    --hero-stone-w: min(clamp(286px, 88vw, 390px), calc(var(--hero-stage-h) * 0.97));
+  }
+}
+
+/* Final hero polish: sharp premium surfaces and no visible border around floating fruit triggers. */
+body[data-template="index"] .morganics-hero.hero-v3 :is(.hero-spotlight-card, .hero-float-card, .benefit-card) {
+  border-radius: 16px !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 :is(.hero-spotlight-media, .hero-spotlight-close, .hero-spotlight-action, .hero-quicklink-icon) {
+  border-radius: 12px !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-hotspot,
+body[data-template="index"] .morganics-hero.hero-v3 .floater,
+body[data-template="index"] .morganics-hero.hero-v3 .floater .fi {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .floater .fi {
+  filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .24)) !important;
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-hotspot:focus-visible {
+  outline: 2px solid rgba(223, 165, 36, .72) !important;
+  outline-offset: 6px !important;
+  border-radius: 50% !important;
+}
+
+/* Final site rail alignment: hero content shares the same boundary as every section below. */
+:root {
+  --mrg-rail-max: 1240px;
+  --mrg-rail-gutter: clamp(18px, 7vw, 112px);
+  --mrg-rail: min(calc(100% - (var(--mrg-rail-gutter) * 2)), var(--mrg-rail-max));
+}
+
+body[data-template="index"] .morganics-hero.hero-v3 .hero-inner {
+  width: var(--mrg-rail) !important;
+  max-width: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --mrg-rail-gutter: clamp(18px, 5vw, 64px);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --mrg-rail-gutter: 16px;
   }
 }

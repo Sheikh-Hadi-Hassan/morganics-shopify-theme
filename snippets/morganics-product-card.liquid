@@ -1,13 +1,30 @@
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
   assign card_meta = product.type | default: product.vendor | default: 'Morganics'
+  assign secondary_image = blank
+  if product.images.size > 1
+    for image in product.images
+      if image.id != product.featured_image.id
+        assign secondary_image = image
+        break
+      endif
+    endfor
+  endif
 %}
 
 <div class="product-card-wrap">
+  <button class="product-card-wishlist" type="button" aria-label="Add {{ product.title | escape }} to wishlist">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.8 4.6c-1.8-1.8-4.7-1.8-6.5 0L12 6.9 9.7 4.6c-1.8-1.8-4.7-1.8-6.5 0s-1.8 4.7 0 6.5L12 20l8.8-8.9c1.8-1.8 1.8-4.7 0-6.5Z"></path>
+    </svg>
+  </button>
   <a class="product-card" href="{{ product.url }}">
-    <div class="product-img">
+    <div class="product-img{% if secondary_image != blank %} has-secondary-image{% endif %}">
       {% if product.featured_image %}
-        {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}
+        {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title, class: 'product-img-primary' }}
+        {% if secondary_image != blank %}
+          {{ secondary_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title, class: 'product-img-secondary' }}
+        {% endif %}
       {% else %}
         {% render 'morganics-product-image-fallback', product: product, width: 700, height: 700, loading: 'lazy' %}
       {% endif %}

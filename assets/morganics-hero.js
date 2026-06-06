@@ -46,16 +46,10 @@
     card.style.bottom = 'auto';
   }
 
-  function positionClone(hero, clone, sourceImage) {
-    var heroRect = hero.getBoundingClientRect();
-    var imgRect = sourceImage.getBoundingClientRect();
-
-    clone.src = sourceImage.currentSrc || sourceImage.src;
-    clone.style.left = (imgRect.left - heroRect.left) + 'px';
-    clone.style.top = (imgRect.top - heroRect.top) + 'px';
-    clone.style.width = imgRect.width + 'px';
-    clone.style.height = imgRect.height + 'px';
-    clone.classList.add('is-visible');
+  function clearActiveFloaters(hero) {
+    hero.querySelectorAll('.floater.is-active').forEach(function (floater) {
+      floater.classList.remove('is-active');
+    });
   }
 
   function openSpotlight(hero, hotspot, products) {
@@ -64,9 +58,11 @@
     var floater = hotspot && hotspot.closest('.floater');
     var sourceImage = floater && floater.querySelector('.fi');
     var card = hero.querySelector('.hero-spotlight-card');
-    var clone = hero.querySelector('.hero-spotlight-clone');
 
-    if (!product || !sourceImage || !card || !clone) return;
+    if (!product || !sourceImage || !card) return;
+
+    clearActiveFloaters(hero);
+    floater.classList.add('is-active');
 
     var parts = getCardParts(card);
     var imageUrl = product.productImage || product.fallbackImage;
@@ -82,25 +78,23 @@
     parts.add.disabled = !product.variantId;
     parts.add.textContent = product.variantId ? 'Add to Cart' : 'View Product';
 
-    var imgRect = sourceImage.getBoundingClientRect();
-    positionCard(hero, card, imgRect);
-    positionClone(hero, clone, sourceImage);
-
     hero.classList.add('is-spotlight-active');
-    card.classList.add('is-visible');
-    card.setAttribute('aria-hidden', 'false');
+
+    window.requestAnimationFrame(function () {
+      var imgRect = sourceImage.getBoundingClientRect();
+      positionCard(hero, card, imgRect);
+      card.classList.add('is-visible');
+      card.setAttribute('aria-hidden', 'false');
+    });
   }
 
   function closeSpotlight(hero) {
     var card = hero.querySelector('.hero-spotlight-card');
-    var clone = hero.querySelector('.hero-spotlight-clone');
     hero.classList.remove('is-spotlight-active');
+    clearActiveFloaters(hero);
     if (card) {
       card.classList.remove('is-visible');
       card.setAttribute('aria-hidden', 'true');
-    }
-    if (clone) {
-      clone.classList.remove('is-visible');
     }
   }
 

@@ -4,12 +4,6 @@
 %}
 
 <header class="site-header mrg-site-header" data-morganics-header>
-  {% if section.settings.announcement_text != blank %}
-    <div class="announcement-bar mrg-announcement-bar">
-      <span>{{ section.settings.announcement_text }}</span>
-    </div>
-  {% endif %}
-
   <div class="header-shell mrg-header-shell">
     <a class="brand logo-brand mrg-header-brand" href="{{ routes.root_url }}" aria-label="Morganics home">
       {% if section.settings.logo != blank %}
@@ -67,6 +61,43 @@
 
     {% if section.settings.show_search %}
       <div class="header-search-panel" id="MorganicsHeaderSearch" aria-hidden="true" data-header-search-panel>
+        <script type="application/json" data-header-search-index>
+          [
+            {% liquid
+              assign category_handles = 'roots-adaptogens|nuts-dry-fruits|oil-gums-specialties|herbs-botanicals|natural-sweetners-salts|nuts-dry-fruits|seeds-grains|all' | split: '|'
+              assign category_titles = 'Roots, Botanicals & Traditional Ingredients|Dry Fruits & Heritage Mewa|Gums & Specialties|Herbs & Daily Botanicals|Natural Sweeteners & Salts|Premium Nuts|Seeds & Functional Grains|Wellness Blends' | split: '|'
+              assign category_meta = 'Hareer Sabaz, Chasko Herb, Ginseng White|Zarishk Imported, Munaqqa, Anjeer|Luban, Guggul, Goond Katira|Ashwagandha, Sikakai, Amla|Gur, Fruit Salt, Shakar|Kajo Roasted, Kajo Fry, Badam Abdul Wahidi|Sarson Black, Til Black, Tukhm Methi|Triphala Blend, Salajeet' | split: '|'
+              assign category_icons = 'roots-adaptogens-icon.png|dry-fruits-icon.png|oils-gums-specialties-icon.png|herbs-botanicals-icon.png|natural-sweeteners-icon.png|nuts-icon.png|seeds-grains-icon.png|oils-gums-specialties-icon.png' | split: '|'
+            %}
+            {% for handle in category_handles %}
+              {% assign collection_item = collections[handle] %}
+              {
+                "title": {{ category_titles[forloop.index0] | json }},
+                "handle": {{ handle | json }},
+                "meta": {{ category_meta[forloop.index0] | json }},
+                "url": {% if handle == 'all' %}{{ routes.all_products_collection_url | json }}{% elsif collection_item != blank %}{{ collection_item.url | json }}{% else %}{{ routes.all_products_collection_url | append: '?q=' | append: category_titles[forloop.index0] | handleize | json }}{% endif %},
+                "image": {{ 'morganics/category-icons/' | append: category_icons[forloop.index0] | asset_url | json }}
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        </script>
+        <script type="application/json" data-header-product-index>
+          [
+            {% for product in collections.all.products limit: 80 %}
+              {% assign current_variant = product.selected_or_first_available_variant %}
+              {
+                "title": {{ product.title | json }},
+                "url": {{ product.url | json }},
+                "type": {{ product.type | default: product.vendor | default: 'Morganics' | json }},
+                "vendor": {{ product.vendor | json }},
+                "sku": {{ current_variant.sku | json }},
+                "price": {{ product.price | money | json }},
+                "available": {{ product.available | json }},
+                "image": {% render 'morganics-product-image-fallback', product: product, output: 'url', width: 160 %}
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        </script>
         <form action="{{ routes.search_url }}" method="get" role="search">
           <input type="hidden" name="type" value="product">
           <input class="header-search-input" name="q" autocomplete="off" placeholder="{{ section.settings.search_placeholder }}" type="search" aria-label="Search Morganics products" data-header-search-input>
@@ -89,12 +120,6 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
-    },
-    {
-      "type": "text",
-      "id": "announcement_text",
-      "label": "Announcement text",
-      "default": "Premium natural pantry essentials for Pakistani homes"
     },
     {
       "type": "link_list",

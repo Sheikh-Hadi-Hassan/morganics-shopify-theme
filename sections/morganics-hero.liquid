@@ -110,9 +110,6 @@
         </div>
       </div>
 
-      <div class="hero-spotlight-layer" aria-hidden="true">
-        <img class="hero-spotlight-clone" alt="" width="320" height="320">
-      </div>
     </div>
 
     <div class="hero-actions">
@@ -132,7 +129,7 @@
       </div>
       <div class="hero-tagline" aria-hidden="true">
         <p class="tagline-sm">Driven by</p>
-        <p class="tagline-lg">Wellness.</p>
+        <p class="tagline-lg">Wellness</p>
       </div>
     </div>
   </div>
@@ -163,7 +160,7 @@
         "category": "Premium Nuts",
         "description": "Whole almonds for daily snacking, soaking, family serving, and premium pantry use.",
         "fallbackImage": {{ 'almond.png' | asset_url | json }},
-        "productImage": {% if almond_product.featured_image %}{{ almond_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if almond_product.featured_image %}{{ almond_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/14-almond-with-shell.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if almond_product.selected_or_first_available_variant %}{{ almond_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       },
       "pistachio": {
@@ -173,7 +170,7 @@
         "category": "Premium Nuts",
         "description": "Clean pistachio kernels for premium snacking, gifting, desserts, and everyday family routines.",
         "fallbackImage": {{ 'pistachio.png' | asset_url | json }},
-        "productImage": {% if pistachio_product.featured_image %}{{ pistachio_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if pistachio_product.featured_image %}{{ pistachio_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/16-pista-maghaz.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if pistachio_product.selected_or_first_available_variant %}{{ pistachio_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       },
       "cashew": {
@@ -183,7 +180,7 @@
         "category": "Premium Nuts",
         "description": "Creamy cashews with a naturally rich bite for clean snacking, serving, and daily energy routines.",
         "fallbackImage": {{ 'cashew.png' | asset_url | json }},
-        "productImage": {% if cashew_product.featured_image %}{{ cashew_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if cashew_product.featured_image %}{{ cashew_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/17-kajo-sada.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if cashew_product.selected_or_first_available_variant %}{{ cashew_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       },
       "fig": {
@@ -193,7 +190,7 @@
         "category": "Dry Fruits",
         "description": "Naturally sweet dried figs for clean snacking, breakfast bowls, and everyday nourishment.",
         "fallbackImage": {{ 'fig.png' | asset_url | json }},
-        "productImage": {% if fig_product.featured_image %}{{ fig_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if fig_product.featured_image %}{{ fig_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/50-anjeer-fig.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if fig_product.selected_or_first_available_variant %}{{ fig_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       },
       "date": {
@@ -203,7 +200,7 @@
         "category": "Dry Fruits",
         "description": "Soft premium Ajwa dates for daily nourishment, Ramadan tables, gifting, and traditional routines.",
         "fallbackImage": {{ 'date.png' | asset_url | json }},
-        "productImage": {% if date_product.featured_image %}{{ date_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if date_product.featured_image %}{{ date_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/58-khajoor-ajwa.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if date_product.selected_or_first_available_variant %}{{ date_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       },
       "black-raisin": {
@@ -213,7 +210,7 @@
         "category": "Dry Fruits",
         "description": "Naturally sweet dried grapes for tea-time, family routines, and traditional pantry use.",
         "fallbackImage": {{ 'black-raisin.png' | asset_url | json }},
-        "productImage": {% if black_raisin_product.featured_image %}{{ black_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if black_raisin_product.featured_image %}{{ black_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/13-munakka-black.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if black_raisin_product.selected_or_first_available_variant %}{{ black_raisin_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       },
       "golden-raisin": {
@@ -223,7 +220,7 @@
         "category": "Dry Fruits",
         "description": "Naturally sweet golden dried grapes for snacking, breakfast bowls, gifting, and everyday pantry use.",
         "fallbackImage": {{ 'golden-raisin.png' | asset_url | json }},
-        "productImage": {% if golden_raisin_product.featured_image %}{{ golden_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}null{% endif %},
+        "productImage": {% if golden_raisin_product.featured_image %}{{ golden_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics/products/29-sogi-small-mewa.jpg' | asset_url | json }}{% endif %},
         "variantId": {% if golden_raisin_product.selected_or_first_available_variant %}{{ golden_raisin_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
       }
     }
@@ -239,8 +236,8 @@
   "class": "shopify-section-morganics-hero",
   "settings": [
     { "type": "text", "id": "headline_small", "label": "Headline small", "default": "Rooted in" },
-    { "type": "text", "id": "headline_large", "label": "Headline large", "default": "Nature." },
-    { "type": "textarea", "id": "description", "label": "Description", "default": "Premium nuts, dry fruits\nand wellness essentials for\na healthier tomorrow." },
+    { "type": "text", "id": "headline_large", "label": "Headline large", "default": "Nature" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Premium nuts, dry fruits\nand wellness essentials for\na healthier tomorrow" },
     { "type": "url", "id": "nuts_link", "label": "Premium Nuts link" },
     { "type": "url", "id": "dry_fruits_link", "label": "Dry Fruits link" },
     { "type": "url", "id": "seeds_link", "label": "Seeds & Wellness link" }

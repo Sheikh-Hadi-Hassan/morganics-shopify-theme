@@ -10,7 +10,7 @@
     {% if line_image %}
       {{ line_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: item.product.title }}
     {% else %}
-      <img src="{{ 'morganics/logos/morganics-logo-header.png' | asset_url }}" alt="{{ item.product.title | escape }}" width="180" height="180" loading="lazy">
+      {% render 'morganics-product-image-fallback', product: item.product, width: 180, height: 180, loading: 'lazy' %}
     {% endif %}
   </a>
 

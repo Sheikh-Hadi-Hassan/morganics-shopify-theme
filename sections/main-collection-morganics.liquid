@@ -5,20 +5,68 @@
 
 {% render 'morganics-collection-hero', collection: collection, fallback_copy: fallback_copy, fallback_banner: fallback_banner %}
 
+{% if section.settings.show_categories %}
+  <section class="morganics-category-strip" aria-label="{{ section.settings.category_heading | escape }}">
+    <div class="morganics-category-strip__head">
+      <span class="eyebrow">{{ section.settings.category_eyebrow }}</span>
+      <h2>{{ section.settings.category_heading }}</h2>
+    </div>
+
+    <div class="morganics-category-list">
+      <a class="morganics-category-chip{% if collection.handle == 'all' %} is-active{% endif %}" href="{{ routes.all_products_collection_url }}">
+        <span class="morganics-category-chip__icon" aria-hidden="true">All</span>
+        <span>All Products</span>
+      </a>
+
+      {% if section.settings.category_menu != blank and linklists[section.settings.category_menu].links.size > 0 %}
+        {% for link in linklists[section.settings.category_menu].links %}
+          <a class="morganics-category-chip{% if link.active or link.current %} is-active{% endif %}" href="{{ link.url }}">
+            <span class="morganics-category-chip__icon" aria-hidden="true">{{ link.title | slice: 0, 2 | upcase }}</span>
+            <span>{{ link.title }}</span>
+          </a>
+        {% endfor %}
+      {% elsif section.settings.fallback_to_all_collections %}
+        {% for category_collection in collections limit: 12 %}
+          <a class="morganics-category-chip{% if category_collection.handle == collection.handle %} is-active{% endif %}" href="{{ category_collection.url }}">
+            <span class="morganics-category-chip__icon" aria-hidden="true">
+              {% assign category_image = category_collection.image | default: category_collection.featured_image %}
+              {% if section.settings.show_category_images and category_image %}
+                {{ category_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: category_collection.title }}
+              {% else %}
+                {{ category_collection.title | slice: 0, 2 | upcase }}
+              {% endif %}
+            </span>
+            <span>{{ category_collection.title }}</span>
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% if section.settings.show_intro_card %}
 <section class="category-intro">
   <div class="intro-card">
-    <span class="eyebrow">{{ section.settings.intro_eyebrow }}</span>
-    <h2>{{ collection.metafields.custom.ritual | default: section.settings.intro_heading }}</h2>
-    <p>{{ collection.metafields.custom.usage | default: section.settings.intro_text }}</p>
+    <div>
+      <span class="eyebrow">{{ section.settings.intro_eyebrow }}</span>
+      <h2>{{ collection.metafields.custom.ritual | default: section.settings.intro_heading }}</h2>
+      <p>{{ collection.metafields.custom.usage | default: section.settings.intro_text }}</p>
+    </div>
+    <div class="intro-benefits" aria-label="Collection benefits">
+      {% if section.settings.benefit_1 != blank %}<span>{{ section.settings.benefit_1 }}</span>{% endif %}
+      {% if section.settings.benefit_2 != blank %}<span>{{ section.settings.benefit_2 }}</span>{% endif %}
+      {% if section.settings.benefit_3 != blank %}<span>{{ section.settings.benefit_3 }}</span>{% endif %}
+    </div>
   </div>
 </section>
+{% endif %}
 
 {% paginate collection.products by section.settings.products_per_page %}
   {% render 'morganics-sort-filter-bar', collection: collection, search_mode: false, button_label: section.settings.sort_button_label %}
 
   <section class="shop-layout" id="collectionProducts">
     {% if section.settings.show_filters and collection.filters.size > 0 %}
-      <aside class="filter-panel" aria-label="Collection filters">
+      <aside class="filter-panel" id="collectionFilters" aria-label="Collection filters">
         <h3>{{ section.settings.filter_heading }}</h3>
         <form method="get" action="{{ collection.url }}">
           {% if collection.sort_by != blank %}
@@ -43,13 +91,45 @@
               </div>
             </details>
           {% endfor %}
-          <button class="btn ghost" type="submit">{{ section.settings.filter_button_label }}</button>
+          <div class="filter-actions">
+            <button class="btn ghost" type="submit">{{ section.settings.filter_button_label }}</button>
+            <a class="filter-clear-link" href="{{ collection.url }}">Clear all</a>
+          </div>
         </form>
       </aside>
     {% endif %}
 
     <div class="collection-results">
-      <div class="shop-count">Showing {{ collection.products_count }} products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
+      <div class="collection-results-toolbar">
+        <div class="shop-count">Showing {{ collection.products_count }} products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
+        {% if section.settings.show_filters and collection.filters.size > 0 %}
+          <a class="morganics-mobile-filter-button" href="#collectionFilters">Filters</a>
+        {% endif %}
+      </div>
+
+      {% assign active_filter_count = 0 %}
+      {% capture active_filter_chips %}
+        {% for filter in collection.filters %}
+          {% if filter.type == 'price_range' %}
+            {% if filter.min_value.value != blank or filter.max_value.value != blank %}
+              {% assign active_filter_count = active_filter_count | plus: 1 %}
+              <a class="active-filter-chip" href="{{ filter.url_to_remove }}">{{ filter.label }}: {{ filter.min_value.value | money }} - {{ filter.max_value.value | money }} ×</a>
+            {% endif %}
+          {% else %}
+            {% for value in filter.active_values %}
+              {% assign active_filter_count = active_filter_count | plus: 1 %}
+              <a class="active-filter-chip" href="{{ value.url_to_remove }}">{{ value.label }} ×</a>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endcapture %}
+
+      {% if active_filter_count > 0 %}
+        <div class="active-filter-row" aria-label="Active filters">
+          {{ active_filter_chips }}
+          <a class="active-filter-clear" href="{{ collection.url }}">Clear all</a>
+        </div>
+      {% endif %}
 
       {% if collection.products.size > 0 %}
         <div class="product-grid shop-grid">
@@ -58,10 +138,17 @@
           {% endfor %}
         </div>
       {% else %}
-        <div class="empty-collection">
+        <div class="empty-collection morganics-empty-state">
+          <span class="morganics-empty-state__icon" aria-hidden="true">M</span>
           <h2>{{ section.settings.empty_heading }}</h2>
           <p>{{ section.settings.empty_text }}</p>
-          <a class="btn" href="{{ routes.all_products_collection_url }}">Open full shop</a>
+          <div class="morganics-empty-actions">
+            <a class="btn primary" href="{{ routes.all_products_collection_url }}">Open full shop</a>
+            <a class="btn ghost" href="{{ routes.collections_url }}">View all categories</a>
+            {% if active_filter_count > 0 %}
+              <a class="btn ghost" href="{{ collection.url }}">Clear filters</a>
+            {% endif %}
+          </div>
         </div>
       {% endif %}
 
@@ -80,9 +167,19 @@
   "settings": [
     { "type": "textarea", "id": "fallback_copy", "label": "Fallback collection copy", "default": "Explore Morganics pantry products with practical usage, storage guidance, and careful product information." },
     { "type": "text", "id": "fallback_banner_asset", "label": "Fallback banner asset", "default": "morganics/banners/nuts-dry-fruits.jpg" },
+    { "type": "checkbox", "id": "show_categories", "label": "Show all categories", "default": true },
+    { "type": "text", "id": "category_eyebrow", "label": "Category eyebrow", "default": "Shop categories" },
+    { "type": "text", "id": "category_heading", "label": "Category heading", "default": "Browse Morganics categories" },
+    { "type": "link_list", "id": "category_menu", "label": "Collection categories menu" },
+    { "type": "checkbox", "id": "fallback_to_all_collections", "label": "Fallback to all collections", "default": true },
+    { "type": "checkbox", "id": "show_category_images", "label": "Show collection images in category chips", "default": true },
+    { "type": "checkbox", "id": "show_intro_card", "label": "Show intro card", "default": true },
     { "type": "text", "id": "intro_eyebrow", "label": "Intro eyebrow", "default": "Best for" },
     { "type": "text", "id": "intro_heading", "label": "Intro heading fallback", "default": "Daily pantry, wellness and gifting." },
     { "type": "textarea", "id": "intro_text", "label": "Intro text fallback", "default": "Choose the ingredient, understand its daily use, and add it to your kitchen, wellness routine or gift box." },
+    { "type": "text", "id": "benefit_1", "label": "Benefit chip 1", "default": "Daily Pantry" },
+    { "type": "text", "id": "benefit_2", "label": "Benefit chip 2", "default": "Wellness Essentials" },
+    { "type": "text", "id": "benefit_3", "label": "Benefit chip 3", "default": "Gift-ready Ingredients" },
     { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 },
     { "type": "checkbox", "id": "show_filters", "label": "Show Shopify filters", "default": true },
     { "type": "text", "id": "filter_heading", "label": "Filter heading", "default": "Filters" },

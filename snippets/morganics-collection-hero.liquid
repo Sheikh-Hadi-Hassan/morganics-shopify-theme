@@ -7,10 +7,38 @@
   endif
 %}
 
-<section class="category-hero" {% if banner_image %}style="--banner:url({{ banner_image | image_url: width: 1800 }})"{% else %}style="--banner:url({{ fallback_banner | asset_url }})"{% endif %}>
-  <div>
-    <a class="crumb" href="{{ routes.collections_url }}">← All collections</a>
-    <span class="eyebrow">{{ collection.products_count }} products</span>
+<section class="category-hero morganics-collection-hero">
+  <div class="morganics-collection-hero__media" aria-hidden="true">
+    {% if banner_image %}
+      <img
+        src="{{ banner_image | image_url: width: 1600 }}"
+        srcset="
+          {{ banner_image | image_url: width: 900 }} 900w,
+          {{ banner_image | image_url: width: 1400 }} 1400w,
+          {{ banner_image | image_url: width: 1900 }} 1900w
+        "
+        sizes="100vw"
+        alt=""
+        width="{{ banner_image.width }}"
+        height="{{ banner_image.height }}"
+        loading="eager"
+      >
+    {% else %}
+      <img
+        src="{{ fallback_banner | asset_url }}"
+        alt=""
+        width="1800"
+        height="1000"
+        loading="eager"
+      >
+    {% endif %}
+  </div>
+
+  <div class="morganics-collection-hero__content">
+    <div class="morganics-collection-hero__meta">
+      <a class="crumb" href="{{ routes.collections_url }}">← All collections</a>
+      <span class="eyebrow">{{ collection.products_count }} products</span>
+    </div>
     <h1>{{ hero_title }}</h1>
     {% if hero_copy != blank %}<p>{{ hero_copy }}</p>{% endif %}
     <div class="hero-actions">

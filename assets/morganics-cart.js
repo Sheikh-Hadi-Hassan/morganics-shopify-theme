@@ -8,6 +8,19 @@
 
   if (!drawer || !body) return;
 
+  function getImageFallbacks() {
+    var fallbackNode = document.getElementById('MorganicsCartImageFallbacks');
+    if (!fallbackNode) return {};
+
+    try {
+      return JSON.parse(fallbackNode.textContent || '{}') || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  var imageFallbacks = getImageFallbacks();
+
   function formatMoney(cents) {
     if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
       return window.Shopify.formatMoney(cents);
@@ -24,6 +37,32 @@
     var div = document.createElement('div');
     div.textContent = value == null ? '' : String(value);
     return div.innerHTML;
+  }
+
+  function normalizeImageUrl(image) {
+    if (!image) return '';
+    if (typeof image === 'string') return image;
+    if (typeof image === 'object') return image.url || image.src || '';
+    return '';
+  }
+
+  function productHandle(item) {
+    if (item.handle) return item.handle;
+    if (item.product_handle) return item.product_handle;
+
+    var url = item.url || '';
+    var match = url.match(/\/products\/([^/?#]+)/);
+    return match ? match[1] : '';
+  }
+
+  function imageForLineItem(item) {
+    var image = normalizeImageUrl(item.image || item.featured_image);
+    var handle = productHandle(item);
+
+    if (image) return image;
+    if (handle && imageFallbacks[handle]) return imageFallbacks[handle];
+
+    return imageFallbacks['ajwa-dates'] || '';
   }
 
   function openCart() {
@@ -57,8 +96,9 @@
   }
 
   function renderLineItem(item) {
-    var image = item.image
-      ? '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.product_title) + '" width="180" height="180" loading="lazy">'
+    var imageUrl = imageForLineItem(item);
+    var image = imageUrl
+      ? '<img src="' + escapeHtml(imageUrl) + '" alt="' + escapeHtml(item.product_title) + '" width="180" height="180" loading="lazy">'
       : '';
     var variant = item.variant_title && item.variant_title !== 'Default Title'
       ? '<span class="cart-line-variant">' + escapeHtml(item.variant_title) + '</span>'
@@ -194,6 +234,10 @@
         return response.json();
       })
       .then(function () {
+        document.dispatchEvent(new CustomEvent('cart:refresh'));
+        document.dispatchEvent(new CustomEvent('cart:open'));
+        document.dispatchEvent(new CustomEvent('morganics:cart-updated'));
+        if (submitButton) submitButton.classList.add('is-success');
         return refreshCart(true);
       })
       .catch(function () {
@@ -201,7 +245,18 @@
       })
       .finally(function () {
         if (submitButton) submitButton.disabled = false;
+        if (submitButton) {
+          window.setTimeout(function () { submitButton.classList.remove('is-success'); }, 900);
+        }
       });
+  });
+
+  document.addEventListener('cart:refresh', function () {
+    refreshCart(false);
+  });
+
+  document.addEventListener('cart:open', function () {
+    refreshCart(true);
   });
 
   document.addEventListener('keydown', function (event) {

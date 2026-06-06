@@ -1966,3 +1966,52 @@ body .mrg-site-header :is(.header-shop-cta, .cart-header-btn, .header-search-btn
   transform: translate3d(0, -1px, 0) !important;
   box-shadow: 0 12px 24px rgba(23, 63, 54, .12), inset 0 1px 0 rgba(255, 255, 255, .86) !important;
 }
+
+/* Phase 29: compact product sticky purchase bar. */
+body[data-template="product"] .mob-product-bar {
+  width: min(calc(100% - 24px), 430px) !important;
+  right: 12px !important;
+  left: 12px !important;
+  margin-inline: auto !important;
+  padding: 10px 12px !important;
+  border-radius: 15px !important;
+  gap: 12px !important;
+  box-shadow: 0 16px 34px rgba(11, 38, 32, .18) !important;
+}
+
+body[data-template="product"] .mob-product-bar-label {
+  font-size: 10px !important;
+  line-height: 1 !important;
+  letter-spacing: .12em !important;
+}
+
+body[data-template="product"] .mob-product-bar-amount {
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+body[data-template="product"] .mob-product-bar-size {
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+}
+
+body[data-template="product"] .mob-product-bar-btn {
+  min-height: 50px !important;
+  padding: 0 18px !important;
+  border-radius: 13px !important;
+  font-size: 15px !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 380px) {
+  body[data-template="product"] .mob-product-bar {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    padding: 9px 10px !important;
+  }
+
+  body[data-template="product"] .mob-product-bar-btn {
+    min-height: 46px !important;
+    padding-inline: 14px !important;
+    font-size: 14px !important;
+  }
+}

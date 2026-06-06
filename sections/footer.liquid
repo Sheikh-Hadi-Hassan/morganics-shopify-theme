@@ -3,31 +3,6 @@
 %}
 
 <footer class="premium-footer">
-  {% if section.settings.show_trust_strip %}
-    <div class="footer-trust">
-      <div class="footer-inner">
-        <div class="ft-trust-grid">
-          <div class="ft-trust-item">
-            <span class="footer-icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h10v9H3z"></path><path d="M13 10h4l3 3v3h-7z"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg></span>
-            <span>{{ section.settings.trust_1 }}</span>
-          </div>
-          <div class="ft-trust-item">
-            <span class="footer-icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c8-2 13-7 14-14-7 1-12 6-14 14Z"></path><path d="M5 19c3-4 7-7 12-10"></path></svg></span>
-            <span>{{ section.settings.trust_2 }}</span>
-          </div>
-          <div class="ft-trust-item">
-            <span class="footer-icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5"></path><path d="m3 17 9 5 9-5"></path></svg></span>
-            <span>{{ section.settings.trust_3 }}</span>
-          </div>
-          <div class="ft-trust-item">
-            <span class="footer-icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
-            <span>{{ section.settings.trust_4 }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endif %}
-
   <div class="footer-inner footer-grid-wrap">
     <div class="footer-grid">
       <div class="footer-col footer-brand-col">
@@ -201,36 +176,6 @@
       "id": "pill_3",
       "label": "Brand pill 3",
       "default": "Natural Ingredients"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_trust_strip",
-      "label": "Show trust strip",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "trust_1",
-      "label": "Trust item 1",
-      "default": "Pakistan-wide COD Delivery"
-    },
-    {
-      "type": "text",
-      "id": "trust_2",
-      "label": "Trust item 2",
-      "default": "Premium Natural Ingredients"
-    },
-    {
-      "type": "text",
-      "id": "trust_3",
-      "label": "Trust item 3",
-      "default": "Freshly Packed"
-    },
-    {
-      "type": "text",
-      "id": "trust_4",
-      "label": "Trust item 4",
-      "default": "Custom Sourcing Support"
     },
     {
       "type": "text",

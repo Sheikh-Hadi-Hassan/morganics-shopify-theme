@@ -1,0 +1,47 @@
+{% liquid
+  assign card_product = ingredient_product
+  assign card_title = title_override | default: card_product.title
+  assign card_category = category_override
+
+  if card_category == blank and card_product.metafields.custom.category != blank
+    assign card_category = card_product.metafields.custom.category.value
+  endif
+
+  if card_category == blank and card_product.collections.first != blank
+    assign card_category = card_product.collections.first.title
+  endif
+
+  if card_category == blank
+    assign card_category = card_product.type | default: card_product.vendor | default: 'Morganics'
+  endif
+
+  assign card_image = image_override | default: card_product.featured_image
+  assign card_alt = alt_override | default: card_title
+  assign card_initials = card_title | slice: 0, 2 | upcase
+%}
+
+{% if card_product != blank %}
+  <a
+    class="ingredient-card"
+    href="{{ card_product.url }}"
+    {% if aria_hidden %}
+      aria-hidden="true"
+      tabindex="-1"
+    {% endif %}
+    {{ block_attributes }}
+  >
+    <span class="ingredient-thumb">
+      {% if card_image != blank %}
+        {{ card_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 120, 180', sizes: '64px', alt: card_alt }}
+      {% else %}
+        <span class="ingredient-thumb-fallback" aria-hidden="true">{{ card_initials }}</span>
+      {% endif %}
+    </span>
+    <span class="ingredient-card-copy">
+      <small>{{ card_category }}</small>
+      <b>{{ card_title }}</b>
+      <em>{% if card_product.price > 0 %}{{ card_product.price | money }}{% else %}View product{% endif %}</em>
+    </span>
+    <span class="ingredient-card-mark" aria-hidden="true">✦</span>
+  </a>
+{% endif %}

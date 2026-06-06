@@ -27,7 +27,7 @@
         "roots_traditional": {
           "type": "category",
           "settings": {
-            "title": "Roots, Botanicals & Traditional Ingredients",
+            "title": "Roots & Botanicals",
             "collection": "roots-adaptogens",
             "kicker": "Shop category",
             "description": "Traditional roots, botanicals and everyday pantry ingredients.",
@@ -38,7 +38,7 @@
         "dry_fruits": {
           "type": "category",
           "settings": {
-            "title": "Dry Fruits & Heritage Mewa",
+            "title": "Dry Fruits & Mewa",
             "collection": "nuts-dry-fruits",
             "kicker": "Shop category",
             "description": "Dates, figs, raisins and heritage mewa for daily use.",
@@ -60,7 +60,7 @@
         "herbs": {
           "type": "category",
           "settings": {
-            "title": "Herbs & Daily Botanicals",
+            "title": "Daily Botanicals",
             "collection": "herbs-botanicals",
             "kicker": "Shop category",
             "description": "Daily herbs and botanicals for Pakistani routines.",
@@ -71,7 +71,7 @@
         "sweeteners": {
           "type": "category",
           "settings": {
-            "title": "Natural Sweeteners & Salts",
+            "title": "Sweeteners & Salts",
             "collection": "natural-sweetners-salts",
             "kicker": "Shop category",
             "description": "Gur, shakar, honey, salts and natural sweetness.",
@@ -93,7 +93,7 @@
         "premium_snacks": {
           "type": "category",
           "settings": {
-            "title": "Premium Snacks & Pantry Staples",
+            "title": "Pantry Snacks",
             "kicker": "Shop category",
             "description": "Clean pantry staples and snacking essentials.",
             "cta": "Explore category",
@@ -104,7 +104,7 @@
         "seeds_grains": {
           "type": "category",
           "settings": {
-            "title": "Seeds & Functional Grains",
+            "title": "Seeds & Grains",
             "collection": "seeds-grains",
             "kicker": "Shop category",
             "description": "Seeds, grains and functional pantry basics.",

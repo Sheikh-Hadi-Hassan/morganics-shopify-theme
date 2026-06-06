@@ -1,18 +1,27 @@
 <form class="shop-tools" method="get" action="{{ collection.url | default: routes.search_url }}" data-collection-tools>
   {% if search_mode %}
-    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ search_placeholder | default: 'Search Morganics products...' }}">
+    <label class="shop-tools-search">
+      <span>Search products</span>
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ search_placeholder | default: 'Search Morganics products...' }}">
+    </label>
     <input type="hidden" name="type" value="product">
   {% else %}
-    <input type="search" name="filter.v.availability" value="" placeholder="{{ search_placeholder | default: 'Use Shopify filters from the sidebar' }}" disabled>
+    <div class="shop-tools-summary">
+      <span>Collection products</span>
+      <strong>{{ collection.products_count }} items</strong>
+    </div>
   {% endif %}
 
   {% if collection.sort_options != blank %}
-    <select name="sort_by" aria-label="Sort products">
-      {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-      {% for option in collection.sort_options %}
-        <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
-      {% endfor %}
-    </select>
+    <label class="shop-tools-sort">
+      <span>Sort by</span>
+      <select name="sort_by" aria-label="Sort products">
+        {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+        {% for option in collection.sort_options %}
+          <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
   {% endif %}
 
   <button class="btn ghost" type="submit">{{ button_label | default: 'Apply' }}</button>

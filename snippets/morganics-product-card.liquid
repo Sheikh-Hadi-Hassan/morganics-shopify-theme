@@ -12,13 +12,27 @@
   endif
 %}
 
-<div class="product-card-wrap">
-  <button class="product-card-wishlist" type="button" aria-label="Add {{ product.title | escape }} to wishlist">
+<div class="product-card-wrap" data-product-card data-product-id="{{ product.id }}">
+  <button
+    class="product-card-wishlist morganics-favorite-toggle"
+    type="button"
+    aria-label="Add {{ product.title | escape }} to wishlist"
+    aria-pressed="false"
+    data-favorite-toggle
+    data-wishlist-product
+    data-product-id="{{ product.id }}"
+    data-product-handle="{{ product.handle }}"
+    data-product-title="{{ product.title | escape }}"
+    data-product-url="{{ product.url }}"
+    data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 500 }}{% endif %}"
+    data-product-price="{{ product.price | money }}"
+    data-variant-id="{{ current_variant.id }}"
+  >
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M20.8 4.6c-1.8-1.8-4.7-1.8-6.5 0L12 6.9 9.7 4.6c-1.8-1.8-4.7-1.8-6.5 0s-1.8 4.7 0 6.5L12 20l8.8-8.9c1.8-1.8 1.8-4.7 0-6.5Z"></path>
     </svg>
   </button>
-  <a class="product-card" href="{{ product.url }}">
+  <a class="product-card morganics-product-card" href="{{ product.url }}">
     <div class="product-img{% if secondary_image != blank %} has-secondary-image{% endif %}">
       {% if product.featured_image %}
         {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title, class: 'product-img-primary' }}

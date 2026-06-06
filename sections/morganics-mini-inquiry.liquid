@@ -4,10 +4,20 @@
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       <p>{{ section.settings.text }}</p>
     </div>
-    <form class="inquiry-form mini-inquiry-form" aria-label="Quick product inquiry" data-whatsapp-form data-whatsapp-base="{{ section.settings.whatsapp_url }}">
-      <input name="name" placeholder="{{ section.settings.name_placeholder }}" required>
-      <input name="phone" placeholder="{{ section.settings.phone_placeholder }}" required>
-      <input name="need" placeholder="{{ section.settings.need_placeholder }}" required>
+    {% assign whatsapp_base = section.settings.whatsapp_url | default: 'https://wa.me/923223338110' %}
+    <form class="inquiry-form mini-inquiry-form" aria-label="Quick product inquiry" data-whatsapp-form data-whatsapp-base="{{ whatsapp_base }}">
+      <label>
+        <span>Name</span>
+        <input name="name" autocomplete="name" placeholder="{{ section.settings.name_placeholder }}" required>
+      </label>
+      <label>
+        <span>Phone / WhatsApp</span>
+        <input name="phone" autocomplete="tel" inputmode="tel" placeholder="{{ section.settings.phone_placeholder }}" required>
+      </label>
+      <label class="mini-inquiry-need">
+        <span>What do you need?</span>
+        <textarea name="need" rows="3" placeholder="{{ section.settings.need_placeholder }}" required></textarea>
+      </label>
       <div class="mini-inquiry-actions">
         <button class="btn" type="submit">{{ section.settings.button_label }}</button>
         {% if section.settings.contact_label != blank %}<a class="btn ghost" href="{{ section.settings.contact_link | default: routes.root_url }}">{{ section.settings.contact_label }}</a>{% endif %}

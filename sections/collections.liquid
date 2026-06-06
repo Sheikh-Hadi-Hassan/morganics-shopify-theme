@@ -1,83 +1,451 @@
 {% comment %}
-  This section is used in the list-collections template to render a list of
-  collections.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
+  Morganics premium list-collections page.
+  Keeps Shopify collection objects and URLs intact while replacing the default
+  plain grid with branded collection banners.
 {% endcomment %}
 
-<h1>{{ 'collections.title' | t }}</h1>
-
-<div
-  class="collections {{ section.settings.grid_item_width }}"
-  style="--grid-gap: {{ section.settings.grid_gap }}px"
->
-  {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}">
-      {% if collection.featured_image %}
-        {% render 'image',
-          class: 'collection-card__image',
-          image: collection.featured_image,
-          width: 600,
-          height: 600,
-          crop: 'center'
-        %}
+<section class="morganics-collections-page">
+  <div class="morganics-collections-container">
+    <header class="morganics-collections-header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="morganics-collections-eyebrow">{{ section.settings.eyebrow }}</span>
       {% endif %}
 
-      <div class="collection-card__content">
-        <p>{{ collection.title }}</p>
+      <h1>{{ section.settings.heading | default: 'Collections' }}</h1>
 
-        {% if collection.description %}
-          <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
-        {% endif %}
-      </div>
-    </a>
-  {% endfor %}
-</div>
+      {% if section.settings.intro != blank %}
+        <p>{{ section.settings.intro }}</p>
+      {% endif %}
+    </header>
+
+    <div class="morganics-collections-grid">
+      {% for collection in collections %}
+        {% liquid
+          assign collection_image = collection.image | default: collection.featured_image
+          if collection_image == blank and collection.products.first.featured_image
+            assign collection_image = collection.products.first.featured_image
+          endif
+
+          assign collection_description = collection.description | strip_html | truncatewords: 18
+        %}
+
+        <a class="morganics-collection-banner" href="{{ collection.url }}" aria-label="Explore {{ collection.title | escape }}">
+          <div class="morganics-collection-banner__media">
+            {% if collection_image != blank %}
+              <img
+                src="{{ collection_image | image_url: width: 900 }}"
+                srcset="
+                  {{ collection_image | image_url: width: 600 }} 600w,
+                  {{ collection_image | image_url: width: 900 }} 900w,
+                  {{ collection_image | image_url: width: 1300 }} 1300w
+                "
+                sizes="(min-width: 901px) 50vw, 100vw"
+                alt="{{ collection_image.alt | default: collection.title | escape }}"
+                width="{{ collection_image.width }}"
+                height="{{ collection_image.height }}"
+                loading="lazy"
+              >
+            {% else %}
+              <div class="morganics-collection-banner__fallback" aria-hidden="true">
+                <span>{{ collection.title | slice: 0, 2 | upcase }}</span>
+              </div>
+            {% endif %}
+          </div>
+
+          <span class="morganics-collection-banner__wash" aria-hidden="true"></span>
+          <span class="morganics-collection-banner__grain" aria-hidden="true"></span>
+
+          <div class="morganics-collection-banner__content">
+            <span class="morganics-collection-banner__label">
+              {{ section.settings.card_label | default: 'Collection' }}
+              {% if section.settings.show_collection_count and collection.products_count != blank %}
+                <em>{{ collection.products_count }} products</em>
+              {% endif %}
+            </span>
+
+            <h2>{{ collection.title }}</h2>
+
+            {% if collection_description != blank %}
+              <p>{{ collection_description }}</p>
+            {% endif %}
+
+            {% if section.settings.show_cta %}
+              <span class="morganics-collection-banner__cta">{{ section.settings.cta_text | default: 'Explore Collection' }}</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 {% stylesheet %}
-  .collections {
+  .morganics-collections-page {
+    --morganics-collections-gutter: clamp(18px, 4vw, 48px);
+    background:
+      radial-gradient(circle at 88% 0%, rgba(223, 165, 36, 0.13), transparent 34%),
+      radial-gradient(circle at 6% 18%, rgba(40, 93, 83, 0.10), transparent 30%),
+      #f7f1e6;
+    padding: clamp(40px, 6vw, 78px) var(--morganics-collections-gutter) clamp(58px, 7vw, 104px);
+  }
+
+  .morganics-collections-container {
+    width: min(100%, 1440px);
+    margin-inline: auto;
+  }
+
+  .morganics-collections-header {
+    max-width: 850px;
+    margin: 0 0 clamp(24px, 3vw, 38px);
+  }
+
+  .morganics-collections-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 16px;
+    border: 1px solid rgba(223, 165, 36, 0.38);
+    border-radius: 14px;
+    background: rgba(223, 165, 36, 0.10);
+    color: #846345;
+    font-size: 12px;
+    font-weight: 950;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .morganics-collections-header h1 {
+    margin: 16px 0 12px;
+    color: #17231f;
+    font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+    font-size: clamp(46px, 6vw, 86px);
+    font-weight: 950;
+    letter-spacing: 0.01em;
+    line-height: 0.92;
+  }
+
+  .morganics-collections-header p {
+    max-width: 760px;
+    margin: 0;
+    color: rgba(31, 41, 38, 0.66);
+    font-family: var(--font-ui, Poppins, system-ui, sans-serif);
+    font-size: clamp(16px, 1.35vw, 20px);
+    font-weight: 650;
+    line-height: 1.65;
+  }
+
+  .morganics-collections-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(var(--collection-card-size), 100%), 1fr));
-    gap: var(--grid-gap);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(18px, 2vw, 32px);
   }
-  .collections--compact {
-    --collection-card-size: 160px;
+
+  .morganics-collection-banner {
+    position: relative;
+    display: block;
+    min-height: clamp(300px, 28vw, 420px);
+    overflow: hidden;
+    isolation: isolate;
+    text-decoration: none;
+    border: 1px solid rgba(132, 99, 69, 0.20);
+    border-radius: 18px;
+    background: #285d53;
+    box-shadow: 0 24px 70px rgba(40, 93, 83, 0.14);
+    transform: translateY(0);
+    transition:
+      transform 320ms cubic-bezier(.22, 1, .36, 1),
+      box-shadow 320ms ease,
+      border-color 320ms ease;
   }
-  .collections--full {
-    --collection-card-size: 280px;
+
+  .morganics-collection-banner,
+  .morganics-collection-banner:hover,
+  .morganics-collection-banner:focus {
+    color: inherit;
+    text-decoration: none;
   }
-  .collection-card {
+
+  .morganics-collection-banner:focus-visible {
+    outline: 3px solid rgba(223, 165, 36, 0.72);
+    outline-offset: 4px;
+  }
+
+  .morganics-collection-banner__media,
+  .morganics-collection-banner__wash,
+  .morganics-collection-banner__grain {
+    position: absolute;
+    inset: 0;
+  }
+
+  .morganics-collection-banner__media {
+    z-index: 1;
+  }
+
+  .morganics-collection-banner__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.01);
+    transition: transform 680ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .morganics-collection-banner__fallback {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 72% 18%, rgba(223, 165, 36, 0.25), transparent 30%),
+      linear-gradient(135deg, #123f36 0%, #285d53 62%, #846345 100%);
+  }
+
+  .morganics-collection-banner__fallback span {
+    color: rgba(247, 241, 230, 0.22);
+    font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+    font-size: clamp(82px, 12vw, 160px);
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .morganics-collection-banner__wash {
+    z-index: 2;
+    background:
+      linear-gradient(90deg, rgba(4, 35, 28, 0.82) 0%, rgba(4, 35, 28, 0.50) 48%, rgba(4, 35, 28, 0.16) 100%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.06));
+  }
+
+  .morganics-collection-banner__grain {
+    z-index: 3;
+    opacity: .24;
+    background-image:
+      linear-gradient(rgba(247, 241, 230, .08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247, 241, 230, .08) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  .morganics-collection-banner__content {
+    position: relative;
+    z-index: 4;
+    min-height: inherit;
+    max-width: min(72%, 520px);
+    padding: clamp(24px, 3vw, 42px);
     display: flex;
     flex-direction: column;
-    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .morganics-collection-banner__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 32px;
+    padding: 0 13px;
+    border: 1px solid rgba(247, 241, 230, 0.30);
+    border-radius: 12px;
+    background: rgba(247, 241, 230, 0.14);
+    color: #f7f1e6;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.10em;
+    line-height: 1;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+  }
+
+  .morganics-collection-banner__label em {
+    color: rgba(247, 241, 230, 0.72);
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .morganics-collection-banner h2 {
+    margin: 14px 0 12px;
+    color: #f7f1e6;
+    font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+    font-size: clamp(28px, 3vw, 46px);
+    font-weight: 950;
+    letter-spacing: 0.01em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .morganics-collection-banner p {
+    max-width: 480px;
+    margin: 0 0 18px;
+    color: rgba(247, 241, 230, 0.78);
+    font-size: clamp(13px, 1vw, 15px);
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .morganics-collection-banner__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 13px;
+    background: #dfa524;
+    color: #163d35;
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1;
+    box-shadow: 0 12px 28px rgba(223, 165, 36, 0.22);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .morganics-collection-banner:hover {
+      transform: translateY(-4px);
+      border-color: rgba(223, 165, 36, 0.35);
+      box-shadow: 0 30px 80px rgba(40, 93, 83, 0.18);
+    }
+
+    .morganics-collection-banner:hover img {
+      transform: scale(1.08);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .morganics-collections-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .morganics-collection-banner {
+      min-height: 300px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .morganics-collections-page {
+      --morganics-collections-gutter: 14px;
+      padding-top: 28px;
+      padding-bottom: 68px;
+    }
+
+    .morganics-collections-header {
+      margin-bottom: 20px;
+    }
+
+    .morganics-collections-eyebrow {
+      min-height: 30px;
+      padding-inline: 12px;
+      border-radius: 12px;
+      font-size: 10px;
+    }
+
+    .morganics-collections-header h1 {
+      margin-top: 13px;
+      font-size: clamp(40px, 14vw, 58px);
+    }
+
+    .morganics-collections-header p {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .morganics-collections-grid {
+      gap: 14px;
+    }
+
+    .morganics-collection-banner {
+      min-height: 250px;
+      border-radius: 15px;
+    }
+
+    .morganics-collection-banner__content {
+      max-width: 90%;
+      padding: 20px;
+    }
+
+    .morganics-collection-banner h2 {
+      font-size: clamp(26px, 8vw, 38px);
+      margin-bottom: 10px;
+    }
+
+    .morganics-collection-banner p {
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+
+    .morganics-collection-banner__cta {
+      min-height: 40px;
+      padding-inline: 15px;
+      border-radius: 12px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .morganics-collections-page {
+      --morganics-collections-gutter: 12px;
+    }
+
+    .morganics-collection-banner {
+      min-height: 235px;
+    }
+
+    .morganics-collection-banner__content {
+      padding: 18px;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.collections_grid",
+  "name": "Morganics collections",
   "settings": [
     {
-      "type": "select",
-      "id": "grid_item_width",
-      "label": "t:labels.grid_item_width",
-      "options": [
-        { "value": "collections--compact", "label": "t:options.size.small" },
-        { "value": "collections--full", "label": "t:options.size.large" }
-      ],
-      "default": "collections--full"
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SHOP BY COLLECTION"
     },
     {
-      "type": "range",
-      "id": "grid_gap",
-      "label": "t:labels.grid_gap",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 10
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Explore Morganics pantry essentials, dry fruits, seeds, herbs and wellness ingredients."
+    },
+    {
+      "type": "text",
+      "id": "card_label",
+      "label": "Card label",
+      "default": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_count",
+      "label": "Show collection product count",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Explore Collection"
     }
   ],
-  "presets": [{ "name": "t:general.collections_grid" }]
+  "presets": [
+    {
+      "name": "Morganics collections"
+    }
+  ]
 }
 {% endschema %}

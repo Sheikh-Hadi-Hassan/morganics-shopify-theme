@@ -1,0 +1,19 @@
+<div class="wishlist-backdrop" data-wishlist-backdrop data-wishlist-close aria-hidden="true"></div>
+
+<aside class="wishlist-drawer" data-wishlist-drawer aria-labelledby="WishlistDrawerTitle" aria-hidden="true">
+  <div class="wishlist-head">
+    <div>
+      <span class="eyebrow">Morganics Wishlist</span>
+      <h2 id="WishlistDrawerTitle">Saved Products</h2>
+    </div>
+    <button class="wishlist-close" type="button" data-wishlist-close aria-label="Close wishlist">×</button>
+  </div>
+
+  <div class="wishlist-body" data-wishlist-drawer-body>
+    <div class="empty-wishlist">
+      <h3>No saved products yet.</h3>
+      <p>Tap the heart on any product card to save it here.</p>
+      <a class="btn primary" href="{{ routes.all_products_collection_url }}">Shop Products</a>
+    </div>
+  </div>
+</aside>

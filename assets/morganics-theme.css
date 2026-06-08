@@ -15241,3 +15241,2068 @@ body[data-template="collection"] .morganics-empty-actions {
     padding: 26px 18px !important;
   }
 }
+
+/* Phase 31: premium editable customer stories carousel. */
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 {
+  --story-cream: #fff7e8;
+  --story-muted: rgba(255, 247, 232, 0.72);
+  --story-gold: #e4ad21;
+  --story-forest: #06291f;
+  --story-panel: rgba(255, 247, 232, 0.08);
+  position: relative !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-height: min(980px, 100vh) !important;
+  margin: 0 calc(50% - 50vw) !important;
+  padding: clamp(54px, 6.2vw, 86px) 0 clamp(48px, 6vw, 78px) !important;
+  overflow: hidden !important;
+  color: var(--story-cream) !important;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(226, 172, 33, 0.13), transparent 26%),
+    radial-gradient(circle at 18% 88%, rgba(54, 126, 103, 0.18), transparent 30%),
+    linear-gradient(135deg, #02150f 0%, #08271f 42%, #0a3a2d 100%) !important;
+  isolation: isolate !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.034) 1px, transparent 1px) !important;
+  background-size: 76px 76px !important;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 86%, transparent 100%) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.36), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.34)),
+    radial-gradient(circle at 50% 52%, rgba(255, 247, 232, 0.1), transparent 34%) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 > .story-carousel-v2__shell {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(calc(100% - 32px), 1280px) !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head {
+  width: min(100%, 760px) !important;
+  margin: 0 auto clamp(24px, 3.8vw, 44px) !important;
+  text-align: center !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__eyebrow {
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 18px !important;
+  border: 1px solid rgba(228, 173, 33, 0.52) !important;
+  border-radius: 13px !important;
+  background: rgba(255, 247, 232, 0.07) !important;
+  color: var(--story-gold) !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head h2 {
+  max-width: 790px !important;
+  margin: 16px auto 0 !important;
+  color: var(--story-cream) !important;
+  font-family: var(--font-display, Brownberries, Poppins, sans-serif) !important;
+  font-size: clamp(42px, 5.7vw, 86px) !important;
+  line-height: 0.92 !important;
+  letter-spacing: 0.012em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 10px 34px rgba(0, 0, 0, 0.32) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head p {
+  width: min(100%, 540px) !important;
+  margin: 16px auto 0 !important;
+  color: var(--story-muted) !important;
+  font-size: clamp(14px, 1.15vw, 17px) !important;
+  font-weight: 750 !important;
+  line-height: 1.55 !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__carousel {
+  position: relative !important;
+  width: 100% !important;
+  min-height: clamp(560px, 55vw, 690px) !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__track {
+  position: relative !important;
+  width: 100% !important;
+  height: clamp(500px, 49vw, 620px) !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  width: min(520px, 48vw) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) auto !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(228, 173, 33, 0.34) !important;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, rgba(255, 247, 232, 0.13), rgba(255, 247, 232, 0.045)) !important;
+  box-shadow: 0 30px 86px rgba(0, 0, 0, 0.36) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) scale(0.84) !important;
+  transition:
+    transform 520ms cubic-bezier(0.2, 0.74, 0.2, 1),
+    opacity 320ms ease,
+    filter 320ms ease !important;
+  will-change: transform, opacity !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-active {
+  z-index: 3 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  filter: none !important;
+  transform: translateX(-50%) scale(1) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-prev {
+  z-index: 2 !important;
+  opacity: 0.42 !important;
+  filter: saturate(0.72) brightness(0.66) blur(0.2px) !important;
+  transform: translateX(calc(-50% - min(38vw, 480px))) scale(0.72) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-next {
+  z-index: 2 !important;
+  opacity: 0.42 !important;
+  filter: saturate(0.72) brightness(0.66) blur(0.2px) !important;
+  transform: translateX(calc(-50% + min(38vw, 480px))) scale(0.72) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__media {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  aspect-ratio: 1 / 1 !important;
+  overflow: hidden !important;
+  background: rgba(255, 247, 232, 0.1) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__media::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 0 !important;
+  height: 44% !important;
+  background: linear-gradient(180deg, transparent, rgba(3, 20, 15, 0.84)) !important;
+  pointer-events: none !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transform: scale(1.01) !important;
+  transition: transform 520ms cubic-bezier(0.2, 0.74, 0.2, 1) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-active:hover .story-carousel-v2__img {
+  transform: scale(1.055) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content {
+  position: relative !important;
+  inset: auto !important;
+  display: grid !important;
+  gap: 9px !important;
+  padding: 16px 18px 18px !important;
+  background:
+    linear-gradient(180deg, rgba(7, 39, 31, 0.96), rgba(4, 25, 19, 0.98)) !important;
+  color: var(--story-cream) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__topline,
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__meta {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__topline small {
+  min-height: 26px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0 10px !important;
+  border: 1px solid rgba(228, 173, 33, 0.32) !important;
+  border-radius: 10px !important;
+  background: rgba(228, 173, 33, 0.14) !important;
+  color: #f0c149 !important;
+  font-size: 10px !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__stars {
+  color: var(--story-gold) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.03em !important;
+  white-space: nowrap !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__stars .is-muted {
+  color: rgba(255, 247, 232, 0.22) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content h3 {
+  margin: 0 !important;
+  color: var(--story-cream) !important;
+  font-family: var(--font-display, Brownberries, Poppins, sans-serif) !important;
+  font-size: clamp(24px, 2.4vw, 36px) !important;
+  line-height: 1 !important;
+  letter-spacing: 0.012em !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content p {
+  display: -webkit-box !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  color: rgba(255, 247, 232, 0.82) !important;
+  font-size: clamp(13px, 1vw, 15px) !important;
+  font-weight: 750 !important;
+  line-height: 1.44 !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__meta span {
+  color: rgba(255, 247, 232, 0.68) !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__cta {
+  min-height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 16px !important;
+  border: 1px solid rgba(228, 173, 33, 0.36) !important;
+  border-radius: 12px !important;
+  background: var(--story-gold) !important;
+  color: #08271f !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-shadow: 0 12px 28px rgba(228, 173, 33, 0.18) !important;
+  transition: transform 180ms ease, box-shadow 180ms ease !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__cta:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 16px 34px rgba(228, 173, 33, 0.24) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow {
+  position: absolute !important;
+  top: 50% !important;
+  z-index: 5 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255, 247, 232, 0.22) !important;
+  border-radius: 14px !important;
+  background: rgba(255, 247, 232, 0.1) !important;
+  color: var(--story-cream) !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24) !important;
+  backdrop-filter: blur(16px) !important;
+  cursor: pointer !important;
+  transform: translateY(-50%) !important;
+  transition: background 180ms ease, transform 180ms ease !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow:hover {
+  background: rgba(255, 247, 232, 0.18) !important;
+  transform: translateY(-50%) scale(1.04) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow--prev {
+  left: clamp(4px, 3vw, 58px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow--next {
+  right: clamp(4px, 3vw, 58px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__dots {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 0 !important;
+  z-index: 6 !important;
+  display: inline-flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translateX(-50%) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__dot {
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 8px !important;
+  min-height: 8px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: rgba(255, 247, 232, 0.28) !important;
+  cursor: pointer !important;
+  transition: width 180ms ease, background 180ms ease !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__dot.is-active {
+  width: 30px !important;
+  background: var(--story-gold) !important;
+}
+
+@media (max-width: 900px) {
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 {
+    min-height: auto !important;
+    padding: 48px 0 calc(46px + 82px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head {
+    width: min(calc(100vw - 28px), 620px) !important;
+    margin-bottom: 22px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head h2 {
+    font-size: clamp(34px, 10vw, 52px) !important;
+    line-height: 0.94 !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head p {
+    font-size: 14px !important;
+    line-height: 1.42 !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__carousel {
+    min-height: auto !important;
+    overflow: hidden !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__track {
+    width: 100vw !important;
+    height: clamp(478px, 126vw, 590px) !important;
+    overflow: hidden !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card {
+    left: 50vw !important;
+    width: min(calc(100vw - 30px), 430px) !important;
+    transform: translateX(-50%) scale(0.96) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-active {
+    transform: translateX(-50%) scale(1) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-prev {
+    opacity: 0 !important;
+    transform: translateX(calc(-50% - 92vw)) scale(0.96) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-next {
+    opacity: 0 !important;
+    transform: translateX(calc(-50% + 92vw)) scale(0.96) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content {
+    padding: 14px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content h3 {
+    font-size: clamp(24px, 8vw, 34px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__meta {
+    align-items: stretch !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__cta {
+    min-height: 38px !important;
+    padding-inline: 13px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow {
+    top: auto !important;
+    bottom: 18px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 12px !important;
+    font-size: 28px !important;
+    transform: none !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow:hover {
+    transform: scale(1.04) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow--prev {
+    left: calc(50% - 86px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow--next {
+    right: calc(50% - 86px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__dots {
+    position: relative !important;
+    left: auto !important;
+    bottom: auto !important;
+    margin-top: 14px !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__track {
+    height: clamp(460px, 128vw, 540px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__topline,
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__meta {
+    align-items: flex-start !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__meta {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+  }
+}
+
+/* Phase 31B: compact story carousel proportions after visual QA. */
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 {
+  min-height: auto !important;
+  padding: clamp(42px, 4.8vw, 68px) 0 clamp(40px, 4.8vw, 62px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head {
+  width: min(100%, 680px) !important;
+  margin-bottom: clamp(18px, 2.5vw, 30px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__eyebrow {
+  min-height: 28px !important;
+  padding-inline: 16px !important;
+  border-radius: 12px !important;
+  font-size: 10px !important;
+  letter-spacing: 0.16em !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head h2 {
+  max-width: 700px !important;
+  margin-top: 12px !important;
+  font-size: clamp(38px, 4.8vw, 68px) !important;
+  line-height: 0.91 !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__head p {
+  width: min(100%, 500px) !important;
+  margin-top: 12px !important;
+  font-size: clamp(13px, 1vw, 16px) !important;
+  line-height: 1.45 !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__carousel {
+  min-height: clamp(410px, 40vw, 540px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__track {
+  height: clamp(380px, 36vw, 500px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card {
+  width: min(430px, 34vw) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-prev {
+  opacity: 0.38 !important;
+  transform: translateX(calc(-50% - min(32vw, 400px))) scale(0.76) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-next {
+  opacity: 0.38 !important;
+  transform: translateX(calc(-50% + min(32vw, 400px))) scale(0.76) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content {
+  gap: 7px !important;
+  padding: 13px 14px 14px !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__topline small {
+  min-height: 24px !important;
+  padding-inline: 9px !important;
+  border-radius: 9px !important;
+  font-size: 9.5px !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content h3 {
+  font-size: clamp(22px, 2vw, 30px) !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__content p {
+  font-size: clamp(12.5px, 0.9vw, 14px) !important;
+  line-height: 1.38 !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__cta {
+  min-height: 32px !important;
+  padding-inline: 13px !important;
+  border-radius: 10px !important;
+  font-size: 11px !important;
+}
+
+body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__arrow {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 13px !important;
+  font-size: 29px !important;
+}
+
+@media (min-width: 1500px) {
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__track {
+    height: 470px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card {
+    width: 410px !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card {
+    width: min(420px, 46vw) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-prev {
+    transform: translateX(calc(-50% - min(38vw, 390px))) scale(0.74) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card.is-next {
+    transform: translateX(calc(-50% + min(38vw, 390px))) scale(0.74) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 {
+    padding: 42px 0 calc(38px + 82px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__track {
+    height: clamp(430px, 114vw, 520px) !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#story.story-carousel-v2 .story-carousel-v2__card {
+    width: min(calc(100vw - 34px), 390px) !important;
+  }
+}
+
+/* Phase 14: Morganics design-system typography and layout cleanup.
+   This layer normalizes rhythm without changing section order or behavior. */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-ui, Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  letter-spacing: 0.01em;
+}
+
+body {
+  font-size: var(--type-body-md);
+  line-height: var(--lh-body);
+}
+
+.morganics-main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+.morganics-main :is(p, li, input, select, textarea, summary, label, small) {
+  font-family: var(--font-ui, Poppins, system-ui, sans-serif);
+  line-height: var(--lh-body);
+}
+
+.morganics-main :is(h1, h2, h3, h4, h5, h6) {
+  letter-spacing: 0.012em;
+  text-wrap: balance;
+}
+
+.morganics-main :is(h1, .hero-title, .tagline-lg, .section-title, .featured-products-section h2, .routine-content h2, .daily-rituals h2, .ingredient-library-head h2, .story-carousel-v2__head h2) {
+  font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+  line-height: var(--lh-display);
+}
+
+.morganics-main :is(.product-card, .product-card *, .category-card, .category-card *, .promise-card, .promise-card *, .routine-card, .routine-card *, .ingredient-card, .ingredient-card *, .cart-drawer, .cart-drawer *, .wishlist-drawer, .wishlist-drawer *, .mini-inquiry, .mini-inquiry *, .premium-footer, .premium-footer *) {
+  font-family: var(--font-ui, Poppins, system-ui, sans-serif);
+}
+
+.morganics-main :is(.eyebrow, .badge, .pill, .product-meta, .product-card__meta, .product-card-v2__meta, .product-card-v2__available, .price, .cart-line-title, .wishlist-line-title, .footer-heading) {
+  font-family: var(--font-ui, Poppins, system-ui, sans-serif);
+  line-height: var(--lh-title);
+  letter-spacing: 0.06em;
+}
+
+.morganics-main :is(#categories, #dayCarousel, #featured, #story, #routines, #ingredientLibrary, #customInquiry, .promise-strip, .premium-footer) {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+.morganics-main :is(.category-section, .category-grid-section, .featured-products-section, .daily-rituals, .ingredient-library, .mini-inquiry-section) {
+  padding-block: var(--section-pad-y-compact);
+}
+
+.morganics-main :is(.section-inner, .category-section__inner, .featured-products-section__inner, .daily-rituals__inner, .ingredient-library__inner, .mini-inquiry__inner, .promise-strip__inner) {
+  width: var(--container-width);
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+.morganics-main :is(.category-grid, .product-grid, .promise-grid, .routine-grid, .ingredient-grid, .footer-grid) {
+  gap: var(--grid-gap-normal);
+}
+
+.morganics-main :is(.category-card, .promise-card, .routine-card, .ingredient-card, .product-card, .product-card-v2, .cart-line, .wishlist-line, .mini-inquiry-card, .footer-action-card) {
+  border-radius: var(--radius-card);
+}
+
+.morganics-main :is(.category-card, .promise-card, .routine-card, .ingredient-card, .mini-inquiry-card, .footer-action-card) {
+  padding: var(--card-pad-normal);
+}
+
+.morganics-main :is(.product-card-title, .product-card-v2__title, .category-card-title, .promise-card b, .routine-card h3, .ingredient-card-title) {
+  font-size: var(--type-card-title);
+  line-height: var(--lh-title);
+  letter-spacing: 0.018em;
+}
+
+.morganics-main :is(.product-card-price, .product-card-v2__price, .cart-line-price, .wishlist-line-price) {
+  font-size: var(--type-product-price);
+  line-height: var(--lh-title);
+}
+
+.morganics-main :is(.product-card-copy, .product-card-v2__copy, .category-card-copy, .promise-card p, .routine-card p, .ingredient-card-copy) {
+  font-size: var(--type-card-copy);
+  line-height: var(--lh-body);
+}
+
+.morganics-main :is(.button, .btn, button, .shopify-payment-button__button, .product-card button, .product-card-v2 button, .cart-drawer button, .wishlist-drawer button, .mini-inquiry button, .footer-action-card) {
+  min-height: var(--button-height);
+  border-radius: var(--radius-button);
+  font-size: var(--type-button);
+  line-height: var(--lh-button);
+  white-space: nowrap;
+}
+
+.morganics-main :is(input, select, textarea) {
+  min-height: var(--input-height);
+  border-radius: var(--radius-control);
+  font-size: var(--type-form);
+  line-height: var(--lh-title);
+}
+
+.morganics-main :is(.product-card, .product-card-v2, .category-card, .promise-card, .routine-card, .ingredient-card, .mini-inquiry-card, .footer-action-card, .cart-line, .wishlist-line) {
+  transition:
+    transform 220ms cubic-bezier(.22, 1, .36, 1),
+    border-color 220ms ease,
+    box-shadow 260ms ease,
+    background 220ms ease;
+}
+
+@media (hover: hover) {
+  .morganics-main :is(.product-card, .product-card-v2, .category-card, .promise-card, .routine-card, .ingredient-card, .footer-action-card):hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: var(--shadow-premium-card);
+  }
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  .morganics-main {
+    overflow-x: hidden;
+  }
+
+  .morganics-main :is(#categories, #dayCarousel, #featured, #story, #routines, #ingredientLibrary, #customInquiry) {
+    margin-inline: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .morganics-main :is(.category-section, .category-grid-section, .featured-products-section, .daily-rituals, .ingredient-library, .mini-inquiry-section) {
+    padding-block: clamp(28px, 8vw, 44px);
+  }
+
+  .morganics-main :is(.section-inner, .category-section__inner, .featured-products-section__inner, .daily-rituals__inner, .ingredient-library__inner, .mini-inquiry__inner, .promise-strip__inner) {
+    width: min(calc(100% - 24px), 100%);
+  }
+
+  .morganics-main :is(.category-grid, .product-grid, .promise-grid, .routine-grid, .ingredient-grid) {
+    gap: var(--grid-gap-tight);
+  }
+
+  .morganics-main :is(.category-card, .promise-card, .routine-card, .ingredient-card, .mini-inquiry-card) {
+    padding: var(--card-pad-tight);
+    border-radius: var(--radius-2xl);
+  }
+
+  .morganics-main :is(.featured-products-section h2, .routine-content h2, .daily-rituals h2, .ingredient-library-head h2, .story-carousel-v2__head h2) {
+    font-size: clamp(32px, 12vw, 50px);
+    line-height: .92;
+  }
+
+  .morganics-main :is(.button, .btn, button, .product-card button, .product-card-v2 button, .cart-drawer button, .wishlist-drawer button) {
+    min-height: var(--button-height-sm);
+    font-size: clamp(12px, 3.4vw, 14px);
+  }
+}
+
+/* Phase 14B: bilingual custom inquiry card spacing. */
+body[data-template="index"] main.morganics-main section#customInquiry.mini-inquiry-section > .mini-inquiry-card {
+  padding: clamp(28px, 3.4vw, 46px) !important;
+  gap: clamp(22px, 3vw, 42px) !important;
+  align-items: center !important;
+}
+
+body[data-template="index"] main.morganics-main section#customInquiry .mini-inquiry-left {
+  display: grid !important;
+  align-content: center !important;
+  gap: 12px !important;
+}
+
+body[data-template="index"] main.morganics-main section#customInquiry .mini-inquiry-left p {
+  margin: 0 !important;
+}
+
+body[data-template="index"] main.morganics-main section#customInquiry .mini-inquiry-urdu {
+  max-width: 52ch !important;
+  padding: 12px 14px !important;
+  border: 1px solid rgba(132, 99, 69, .16) !important;
+  border-radius: var(--radius-card, 16px) !important;
+  background: rgba(255, 250, 241, .58) !important;
+  color: rgba(23, 63, 54, .86) !important;
+  font-family: var(--font-ui, Poppins, system-ui, sans-serif) !important;
+  font-size: clamp(14px, 1.08vw, 16px) !important;
+  font-weight: 750 !important;
+  line-height: 1.9 !important;
+  letter-spacing: 0 !important;
+  text-align: right !important;
+}
+
+@media (max-width: 720px) {
+  body[data-template="index"] main.morganics-main section#customInquiry.mini-inquiry-section > .mini-inquiry-card {
+    padding: 18px !important;
+    gap: 16px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#customInquiry .mini-inquiry-urdu {
+    max-width: 100% !important;
+    padding: 11px 12px !important;
+    font-size: 14px !important;
+    line-height: 1.85 !important;
+  }
+}
+
+/* Phase 15: Urdu font, ingredient carousel polish, and drawer-safe cart FAB stacking. */
+:is([lang="ur"], [dir="rtl"], .mini-inquiry-urdu, .hero-spotlight-urdu) {
+  font-family: var(--font-urdu, "Baloo Bhaijaan 2", Poppins, system-ui, sans-serif) !important;
+  letter-spacing: 0 !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-row--1 .ingredient-marquee-track {
+  animation-duration: 92s !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-row--2 .ingredient-marquee-track {
+  animation-duration: 108s !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-row--3 .ingredient-marquee-track {
+  animation-duration: 100s !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library :is(.ingredient-marquee-section, .ingredient-marquees, .ingredient-row):hover .ingredient-marquee-track,
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-marquee-track:hover {
+  animation-play-state: paused !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card {
+  grid-template-columns: 74px minmax(0, 1fr) 14px !important;
+  min-height: 92px !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-thumb {
+  width: 74px !important;
+  height: 74px !important;
+  border-radius: 15px !important;
+  background:
+    radial-gradient(circle at 42% 28%, rgba(255, 250, 241, .25), transparent 52%),
+    linear-gradient(145deg, rgba(247, 241, 230, .18), rgba(40, 93, 83, .18)) !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card-copy {
+  min-width: 0 !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card-copy :is(small, b, em) {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+body.cart-open .cart-fab,
+body.wishlist-open .cart-fab {
+  z-index: 100 !important;
+  pointer-events: none !important;
+  opacity: .24 !important;
+  transform: translate3d(0, 10px, 0) scale(.94) !important;
+}
+
+body.cart-open .cart-backdrop,
+body.wishlist-open .wishlist-backdrop {
+  z-index: 8990 !important;
+}
+
+body.cart-open .cart-drawer,
+body.wishlist-open .wishlist-drawer {
+  z-index: 9000 !important;
+}
+
+/* Phase 15B: ingredient library carousel readability and product-image fallbacks. */
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-hero h2 {
+  max-width: min(100%, 780px) !important;
+  font-size: clamp(38px, 4.8vw, 76px) !important;
+  line-height: .9 !important;
+  letter-spacing: .012em !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-hero p {
+  font-size: clamp(14px, 1.05vw, 17px) !important;
+  line-height: 1.45 !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-row--1 .ingredient-marquee-track {
+  animation-duration: 128s !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-row--2 .ingredient-marquee-track {
+  animation-duration: 148s !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-row--3 .ingredient-marquee-track {
+  animation-duration: 138s !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library:is(:hover, :focus-within) .ingredient-marquee-track {
+  animation-play-state: paused !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card {
+  grid-template-columns: 82px minmax(0, 1fr) 12px !important;
+  min-height: 90px !important;
+  padding: 10px 12px !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-thumb {
+  width: 82px !important;
+  height: 70px !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-thumb img {
+  object-fit: cover !important;
+  transform: scale(1.02) !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card:hover .ingredient-thumb img,
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card:focus-visible .ingredient-thumb img {
+  transform: scale(1.09) !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card-copy small {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card-copy b {
+  font-size: clamp(14px, 1vw, 16px) !important;
+  line-height: 1.08 !important;
+}
+
+body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card-copy em {
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+}
+
+@media (max-width: 740px) {
+  body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-hero h2 {
+    font-size: clamp(34px, 11vw, 48px) !important;
+  }
+
+  body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-card {
+    grid-template-columns: 70px minmax(0, 1fr) 10px !important;
+    min-height: 84px !important;
+  }
+
+  body[data-template="index"] .morganics-main .morganics-ingredient-library .ingredient-thumb {
+    width: 70px !important;
+    height: 64px !important;
+  }
+}
+
+/* Phase 15C: content-pack static trust pages. */
+.morganics-static-page {
+  background: var(--color-cream, #fbf4e6);
+  padding: clamp(42px, 7vw, 92px) var(--section-gutter, clamp(18px, 4vw, 64px));
+}
+
+.morganics-static-page__inner {
+  width: min(100%, var(--container-lg, 1180px));
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(22px, 3vw, 42px);
+}
+
+.morganics-static-page__hero,
+.morganics-static-page__content,
+.morganics-static-page__cta {
+  border: 1px solid rgba(132, 99, 69, .16);
+  border-radius: var(--radius-card, 16px);
+  background: rgba(255, 250, 241, .84);
+  box-shadow: 0 22px 60px rgba(37, 24, 7, .08);
+}
+
+.morganics-static-page__hero {
+  padding: clamp(28px, 4vw, 54px);
+}
+
+.morganics-static-page__hero h1 {
+  margin: 10px 0 0;
+  color: var(--color-forest, #123d34);
+  font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+  font-size: clamp(42px, 6vw, 88px);
+  line-height: .92;
+  letter-spacing: .012em;
+}
+
+.morganics-static-page__hero p {
+  max-width: 74ch;
+  margin: 18px 0 0;
+  color: rgba(20, 47, 41, .78);
+  font: 700 clamp(15px, 1.15vw, 18px) / 1.65 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-static-page__content {
+  padding: clamp(24px, 3.4vw, 44px);
+  color: rgba(20, 47, 41, .84);
+  font: 600 clamp(14px, 1vw, 16px) / 1.72 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-static-page__content :is(h2, h3, p, ul) {
+  margin-top: 0;
+}
+
+.morganics-static-page__content h2 {
+  margin-bottom: 10px;
+  color: var(--color-forest, #123d34);
+  font: 850 clamp(20px, 2vw, 30px) / 1.12 var(--font-ui, Poppins, sans-serif);
+  letter-spacing: .018em;
+}
+
+.morganics-static-page__content h3 {
+  margin-bottom: 8px;
+  color: var(--color-forest, #123d34);
+  font: 820 clamp(16px, 1.35vw, 21px) / 1.25 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-static-page__content :is(p, ul) + h2,
+.morganics-static-page__content :is(p, ul) + h3 {
+  margin-top: clamp(18px, 2.2vw, 30px);
+}
+
+.morganics-static-page__content ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 1.15rem;
+}
+
+.morganics-static-page__content a {
+  color: var(--color-forest, #123d34);
+  font-weight: 850;
+}
+
+.morganics-static-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 36px);
+}
+
+.morganics-static-block + .morganics-static-block,
+.morganics-static-block + .morganics-static-faq,
+.morganics-static-faq + .morganics-static-block {
+  margin-top: clamp(18px, 2.2vw, 30px);
+}
+
+.morganics-static-faq {
+  border: 1px solid rgba(132, 99, 69, .16);
+  border-radius: var(--radius-card, 16px);
+  background: rgba(255, 250, 241, .72);
+  box-shadow: 0 14px 34px rgba(37, 24, 7, .06);
+  overflow: hidden;
+}
+
+.morganics-static-faq + .morganics-static-faq {
+  margin-top: 10px;
+}
+
+.morganics-static-faq summary {
+  cursor: pointer;
+  padding: 16px 18px;
+  color: var(--color-forest, #123d34);
+  font-weight: 850;
+}
+
+.morganics-static-faq > div {
+  padding: 0 18px 16px;
+}
+
+.morganics-static-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.morganics-static-form label {
+  display: grid;
+  gap: 8px;
+  color: rgba(20, 47, 41, .78);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.morganics-static-form label:has(textarea),
+.morganics-static-form button {
+  grid-column: 1 / -1;
+}
+
+.morganics-static-form :is(input, textarea) {
+  width: 100%;
+  border: 1px solid rgba(132, 99, 69, .18);
+  background: rgba(255, 255, 255, .78);
+}
+
+.morganics-static-page__cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.morganics-static-page__cta h2 {
+  margin: 6px 0 6px;
+  color: var(--color-forest, #123d34);
+  font: 850 clamp(22px, 2vw, 32px) / 1.1 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-static-page__cta p {
+  margin: 0;
+  color: rgba(20, 47, 41, .72);
+  font: 650 14px / 1.55 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-collection-guidance {
+  padding: clamp(32px, 4vw, 58px) var(--section-gutter, clamp(18px, 4vw, 64px));
+  background: linear-gradient(180deg, rgba(255, 252, 244, .98), rgba(244, 236, 220, .72));
+}
+
+.morganics-collection-guidance__inner {
+  width: min(100%, var(--container-lg, 1180px));
+  margin-inline: auto;
+}
+
+.morganics-collection-guidance__header {
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+}
+
+.morganics-collection-guidance__header h2 {
+  margin: 10px 0 0;
+  color: var(--color-forest, #123d34);
+  font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+  font-size: clamp(32px, 4vw, 62px);
+  line-height: .96;
+  letter-spacing: .012em;
+}
+
+.morganics-collection-guidance__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.5vw, 18px);
+}
+
+.morganics-collection-guidance__grid article,
+.morganics-collection-guidance__faq details {
+  border: 1px solid rgba(132, 99, 69, .14);
+  border-radius: var(--radius-card, 16px);
+  background: rgba(255, 250, 241, .82);
+  box-shadow: 0 14px 34px rgba(37, 24, 7, .06);
+}
+
+.morganics-collection-guidance__grid article {
+  padding: clamp(16px, 2vw, 24px);
+}
+
+.morganics-collection-guidance__grid h3 {
+  margin: 0 0 8px;
+  color: var(--color-forest, #123d34);
+  font: 850 clamp(15px, 1.2vw, 18px) / 1.18 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-collection-guidance__grid p,
+.morganics-collection-guidance__faq p {
+  margin: 0;
+  color: rgba(20, 47, 41, .72);
+  font: 650 clamp(13px, .95vw, 15px) / 1.55 var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-collection-guidance__faq {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: clamp(14px, 2vw, 22px);
+}
+
+.morganics-collection-guidance__faq summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  color: var(--color-forest, #123d34);
+  font-weight: 850;
+}
+
+.morganics-collection-guidance__faq p {
+  padding: 0 16px 14px;
+}
+
+@media (max-width: 740px) {
+  .morganics-static-page {
+    padding: 22px 14px 96px;
+  }
+
+  .morganics-static-page__hero,
+  .morganics-static-page__content,
+  .morganics-static-page__cta {
+    padding: 18px;
+  }
+
+  .morganics-static-grid,
+  .morganics-static-form,
+  .morganics-collection-guidance__grid,
+  .morganics-collection-guidance__faq,
+  .morganics-static-page__cta {
+    grid-template-columns: 1fr;
+  }
+
+  .morganics-static-page__hero h1 {
+    font-size: clamp(36px, 12vw, 52px);
+  }
+}
+
+/* Phase 16: premium Shopify password / launch page. */
+body:has(.morganics-password) {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #06160f;
+}
+
+.morganics-password {
+  --launch-cream: #fff8e9;
+  --launch-cream-soft: #eadfca;
+  --launch-forest: #06241b;
+  --launch-forest-2: #0d4a3d;
+  --launch-gold: #edb51d;
+  --launch-glass: rgba(15, 64, 51, .62);
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  color: var(--launch-cream);
+  background:
+    radial-gradient(circle at 34% 30%, rgba(237, 181, 29, .38), transparent 28%),
+    radial-gradient(circle at 72% 42%, rgba(67, 128, 67, .28), transparent 34%),
+    linear-gradient(130deg, #05130d 0%, #123720 44%, #071812 100%);
+}
+
+.morganics-password::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image:
+    linear-gradient(rgba(255, 248, 233, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 233, .04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .2));
+}
+
+.morganics-password::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -28% -10%;
+  z-index: -2;
+  height: 54%;
+  background:
+    radial-gradient(ellipse at center, rgba(237, 181, 29, .26), transparent 45%),
+    linear-gradient(to top, rgba(2, 10, 7, .88), transparent);
+}
+
+.morganics-password__bar {
+  position: relative;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(calc(100% - 32px), 1660px);
+  margin: 18px auto 0;
+  padding: 12px 14px 12px 18px;
+  border: 1px solid rgba(255, 248, 233, .22);
+  border-radius: 18px;
+  background: rgba(255, 248, 233, .9);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .22);
+  backdrop-filter: blur(18px);
+}
+
+.morganics-password__brand {
+  display: inline-flex;
+  align-items: center;
+  width: min(220px, 46vw);
+}
+
+.morganics-password__brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.morganics-password__access {
+  position: relative;
+  color: var(--launch-forest);
+  font-family: var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-password__access summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid rgba(16, 68, 56, .16);
+  border-radius: 14px;
+  cursor: pointer;
+  color: var(--launch-forest);
+  background: rgba(255, 255, 255, .58);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+}
+
+.morganics-password__access summary::-webkit-details-marker {
+  display: none;
+}
+
+.morganics-password__access summary:hover,
+.morganics-password__access[open] summary {
+  transform: translateY(-1px);
+  background: #fffaf0;
+  box-shadow: 0 14px 28px rgba(16, 68, 56, .12);
+}
+
+.morganics-password__access summary span:first-child {
+  display: inline-grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 9px;
+  color: transparent;
+  background: rgba(17, 75, 63, .1);
+  position: relative;
+}
+
+.morganics-password__access summary span:first-child::before {
+  content: "";
+  width: 12px;
+  height: 9px;
+  border: 2px solid var(--launch-forest-2);
+  border-radius: 3px;
+  transform: translateY(3px);
+}
+
+.morganics-password__access summary span:first-child::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 8px;
+  border: 2px solid var(--launch-forest-2);
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+  top: 5px;
+}
+
+.morganics-password__access-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(360px, calc(100vw - 36px));
+  padding: 14px;
+  border: 1px solid rgba(16, 68, 56, .16);
+  border-radius: 18px;
+  background: rgba(255, 248, 233, .98);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, .26);
+}
+
+.morganics-password__access-form label {
+  display: block;
+  margin: 0 0 8px;
+  color: rgba(6, 36, 27, .72);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.morganics-password__access-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.morganics-password__access-row input,
+.morganics-password__notify-row input {
+  min-width: 0;
+  border: 1px solid rgba(16, 68, 56, .18);
+  border-radius: 14px;
+  outline: 0;
+  color: var(--launch-forest);
+  background: rgba(255, 255, 255, .78);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-weight: 700;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.morganics-password__access-row input {
+  height: 46px;
+  padding: 0 13px;
+  font-size: 14px;
+}
+
+.morganics-password__access-row input:focus,
+.morganics-password__notify-row input:focus {
+  border-color: rgba(237, 181, 29, .72);
+  background: #fffaf0;
+  box-shadow: 0 0 0 4px rgba(237, 181, 29, .16);
+}
+
+.morganics-password__access-row button,
+.morganics-password__notify-row button {
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #092a21;
+  background: var(--launch-gold);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-weight: 900;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.morganics-password__access-row button {
+  height: 46px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.morganics-password__access-row button:hover,
+.morganics-password__notify-row button:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.04);
+  box-shadow: 0 18px 34px rgba(237, 181, 29, .24);
+}
+
+.morganics-password__content {
+  position: relative;
+  z-index: 4;
+  align-self: center;
+  width: min(calc(100% - 40px), 760px);
+  margin: clamp(34px, 8vh, 90px) auto 0;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.morganics-password__eyebrow,
+.morganics-password__launch-card span {
+  margin: 0;
+  color: var(--launch-gold);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-size: clamp(11px, .9vw, 13px);
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.morganics-password__eyebrow {
+  padding: 9px 16px;
+  border: 1px solid rgba(237, 181, 29, .48);
+  border-radius: 999px;
+  background: rgba(12, 48, 39, .58);
+}
+
+.morganics-password h1 {
+  margin: 0;
+  color: var(--launch-cream);
+  font-family: var(--font-display, Brownberries, Poppins, sans-serif);
+  font-size: clamp(58px, 9vw, 154px);
+  font-weight: 900;
+  line-height: .82;
+  letter-spacing: .01em;
+  text-shadow: 0 24px 70px rgba(0, 0, 0, .36);
+}
+
+.morganics-password__intro {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(255, 248, 233, .78);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-size: clamp(15px, 1.35vw, 20px);
+  font-weight: 650;
+  line-height: 1.58;
+}
+
+.morganics-password__launch-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 9px 18px 9px 14px;
+  border: 1px solid rgba(255, 248, 233, .18);
+  border-radius: 16px;
+  background: var(--launch-glass);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 20px 52px rgba(0, 0, 0, .2);
+  backdrop-filter: blur(16px);
+}
+
+.morganics-password__launch-card strong {
+  color: var(--launch-cream);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-size: clamp(15px, 1.3vw, 20px);
+  font-weight: 900;
+}
+
+.morganics-password__notify-form {
+  width: min(100%, 680px);
+}
+
+.morganics-password__notify-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid rgba(255, 248, 233, .2);
+  border-radius: 18px;
+  background: rgba(255, 248, 233, .94);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, .24);
+}
+
+.morganics-password__notify-row input {
+  height: 56px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.morganics-password__notify-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 154px;
+  height: 56px;
+  padding: 0 22px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.morganics-password__notify-row button span:last-child {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.morganics-password__form-message {
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-size: 13px;
+  font-weight: 750;
+  text-align: left;
+}
+
+.morganics-password__form-message--success {
+  color: #063226;
+  background: rgba(237, 181, 29, .88);
+}
+
+.morganics-password__form-message--error {
+  color: #6b1e12;
+  background: #fff1eb;
+}
+
+.morganics-password__form-message ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.morganics-password__signals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.morganics-password__signals li {
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 248, 233, .13);
+  border-radius: 999px;
+  color: rgba(255, 248, 233, .75);
+  background: rgba(255, 255, 255, .06);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.morganics-password__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.morganics-password__pouch,
+.morganics-password__stone,
+.morganics-password__pile,
+.morganics-password__plant,
+.morganics-password__float {
+  position: absolute;
+  display: block;
+  user-select: none;
+}
+
+.morganics-password__pouch {
+  left: 50%;
+  bottom: clamp(54px, 8vh, 92px);
+  width: min(36vw, 520px);
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 42px 70px rgba(0, 0, 0, .38));
+  opacity: .88;
+  animation: passwordPouchFloat 7s ease-in-out infinite;
+}
+
+.morganics-password__stone {
+  left: 50%;
+  bottom: clamp(-34px, -3vh, -8px);
+  width: min(58vw, 760px);
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 32px 44px rgba(0, 0, 0, .46));
+}
+
+.morganics-password__pile {
+  left: 50%;
+  bottom: clamp(20px, 4vh, 48px);
+  width: min(50vw, 680px);
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, .32));
+}
+
+.morganics-password__plant {
+  opacity: .5;
+  filter: blur(.2px) drop-shadow(0 28px 40px rgba(0, 0, 0, .32));
+}
+
+.morganics-password__plant--left {
+  left: -5%;
+  bottom: -4%;
+  width: min(30vw, 430px);
+  height: auto;
+}
+
+.morganics-password__plant--right {
+  right: -4%;
+  bottom: 4%;
+  width: min(25vw, 360px);
+  height: auto;
+}
+
+.morganics-password__float {
+  z-index: 3;
+  width: clamp(34px, 5vw, 78px);
+  height: auto;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .32));
+  animation: passwordFruitOrbit 9s ease-in-out infinite;
+}
+
+.morganics-password__float--almond {
+  left: 58%;
+  top: 28%;
+}
+
+.morganics-password__float--date {
+  left: 26%;
+  top: 44%;
+  animation-delay: -2s;
+}
+
+.morganics-password__float--fig {
+  right: 22%;
+  top: 46%;
+  animation-delay: -4s;
+}
+
+.morganics-password__float--cashew {
+  left: 35%;
+  bottom: 25%;
+  animation-delay: -6s;
+}
+
+.morganics-password__float--raisin {
+  right: 34%;
+  bottom: 28%;
+  animation-delay: -3s;
+}
+
+@keyframes passwordPouchFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-.6deg); }
+  50% { transform: translateX(-50%) translateY(-14px) rotate(.7deg); }
+}
+
+@keyframes passwordFruitOrbit {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+  50% { transform: translate3d(12px, -18px, 0) rotate(12deg); }
+}
+
+@media (max-width: 1180px) {
+  .morganics-password__content {
+    margin-top: clamp(28px, 5vh, 64px);
+  }
+
+  .morganics-password__pouch {
+    width: min(48vw, 450px);
+  }
+
+  .morganics-password__stone {
+    width: min(76vw, 700px);
+  }
+
+  .morganics-password__pile {
+    width: min(68vw, 620px);
+  }
+}
+
+@media (max-width: 760px) {
+  .morganics-password {
+    min-height: 100svh;
+  }
+
+  .morganics-password__bar {
+    width: min(calc(100% - 20px), 560px);
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .morganics-password__brand {
+    width: min(172px, 48vw);
+  }
+
+  .morganics-password__access summary {
+    min-height: 42px;
+    padding: 0 10px;
+    font-size: 0;
+  }
+
+  .morganics-password__access summary span:first-child {
+    width: 30px;
+    height: 30px;
+  }
+
+  .morganics-password__content {
+    width: min(calc(100% - 24px), 520px);
+    margin-top: 38px;
+    gap: 14px;
+  }
+
+  .morganics-password h1 {
+    max-width: 360px;
+    font-size: clamp(46px, 14vw, 76px);
+    line-height: .88;
+  }
+
+  .morganics-password__intro {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .morganics-password__launch-card {
+    min-height: 50px;
+    padding: 8px 13px;
+    border-radius: 14px;
+  }
+
+  .morganics-password__notify-row {
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+  }
+
+  .morganics-password__notify-row input,
+  .morganics-password__notify-row button {
+    width: 100%;
+    height: 52px;
+  }
+
+  .morganics-password__stage {
+    opacity: .78;
+  }
+
+  .morganics-password__pouch {
+    bottom: 80px;
+    width: min(70vw, 330px);
+  }
+
+  .morganics-password__stone {
+    bottom: 18px;
+    width: min(108vw, 520px);
+  }
+
+  .morganics-password__pile {
+    bottom: 58px;
+    width: min(92vw, 460px);
+  }
+
+  .morganics-password__plant--left {
+    width: 210px;
+    left: -70px;
+    bottom: 18px;
+  }
+
+  .morganics-password__plant--right {
+    width: 185px;
+    right: -62px;
+    bottom: 108px;
+  }
+
+  .morganics-password__float--almond { left: 70%; top: 50%; }
+  .morganics-password__float--date { left: 7%; top: 58%; }
+  .morganics-password__float--fig { right: 7%; top: 60%; }
+  .morganics-password__float--cashew { left: 23%; bottom: 23%; }
+  .morganics-password__float--raisin { right: 25%; bottom: 26%; }
+}
+
+@media (max-width: 420px) {
+  .morganics-password__signals {
+    display: none;
+  }
+
+  .morganics-password__content {
+    margin-top: 28px;
+  }
+
+  .morganics-password h1 {
+    max-width: 320px;
+    font-size: clamp(42px, 13vw, 54px);
+  }
+
+  .morganics-password__intro {
+    max-width: 330px;
+  }
+
+  .morganics-password__pouch {
+    bottom: 92px;
+    width: 76vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morganics-password__pouch,
+  .morganics-password__float {
+    animation: none;
+  }
+}
+
+/* Phase 19: final footer responsive polish.
+   Keeps the existing footer structure, but prevents narrow columns from
+   forcing contact/social/newsletter text into single-letter stacks. */
+.premium-footer {
+  overflow: hidden !important;
+}
+
+.premium-footer,
+.premium-footer * {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.premium-footer .footer-inner,
+.premium-footer .footer-bottom-inner {
+  width: min(calc(100% - clamp(32px, 6vw, 112px)), 1680px) !important;
+  max-width: 1680px !important;
+  margin-inline: auto !important;
+}
+
+.premium-footer .footer-grid {
+  grid-template-columns:
+    minmax(260px, 1.05fr)
+    minmax(170px, .7fr)
+    minmax(210px, .85fr)
+    minmax(360px, 1.18fr) !important;
+  gap: clamp(28px, 4vw, 68px) !important;
+  padding-inline: 0 !important;
+}
+
+.premium-footer .footer-col,
+.premium-footer .footer-connect-col,
+.premium-footer .footer-brand-col {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.premium-footer :is(.footer-links a, .footer-contact-link, .footer-social-pill, .footer-cta, .footer-newsletter-form input, .footer-newsletter-form button) {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+.premium-footer .footer-contact-list {
+  gap: 14px !important;
+}
+
+.premium-footer .footer-contact-link {
+  display: grid !important;
+  grid-template-columns: 34px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 14px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.premium-footer .footer-contact-link span:last-child {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  line-height: 1.24 !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+
+.premium-footer .footer-socials {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(150px, 1fr)) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+.premium-footer .footer-social-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 52px !important;
+  padding: 0 14px !important;
+  border-radius: 16px !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  line-height: 1 !important;
+}
+
+.premium-footer .footer-social-pill span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.premium-footer .footer-newsletter-form {
+  display: grid !important;
+  grid-template-columns: minmax(180px, 1fr) auto !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.premium-footer .footer-newsletter-form input[type="email"] {
+  min-width: 0 !important;
+  width: 100% !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+.premium-footer .footer-newsletter-form button {
+  min-width: 86px !important;
+  white-space: nowrap !important;
+}
+
+.premium-footer .footer-support-bars {
+  margin-inline: 0 !important;
+}
+
+.premium-footer .footer-cta {
+  grid-template-columns: 52px minmax(0, 1fr) auto !important;
+}
+
+.premium-footer .footer-bottom-inner {
+  padding-inline: 0 !important;
+}
+
+@media (max-width: 1180px) {
+  .premium-footer .footer-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+    gap: 38px 32px !important;
+  }
+
+  .premium-footer .footer-connect-col {
+    max-width: 560px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .premium-footer {
+    padding-inline: 16px !important;
+  }
+
+  .premium-footer .footer-inner,
+  .premium-footer .footer-bottom-inner {
+    width: min(calc(100% - 0px), 560px) !important;
+  }
+
+  .premium-footer .footer-grid,
+  .premium-footer .footer-support-bars {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .premium-footer .footer-socials {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .premium-footer .footer-newsletter-form {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+  }
+
+  .premium-footer .footer-social-pill {
+    min-height: 50px !important;
+    padding-inline: 10px !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .premium-footer .footer-socials,
+  .premium-footer .footer-newsletter-form {
+    grid-template-columns: 1fr !important;
+  }
+
+  .premium-footer .footer-social-pill {
+    justify-content: flex-start !important;
+    padding-inline: 16px !important;
+  }
+
+  .premium-footer .footer-contact-link span:last-child {
+    font-size: 14px !important;
+  }
+}

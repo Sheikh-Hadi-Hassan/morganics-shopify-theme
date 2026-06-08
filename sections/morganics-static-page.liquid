@@ -1,0 +1,216 @@
+{% liquid
+  assign page_key = template.suffix | default: page.handle
+  assign heading = section.settings.heading | default: page.title
+  assign eyebrow = section.settings.eyebrow | default: 'Morganics'
+  assign intro = section.settings.intro
+  assign has_blocks = false
+
+  if section.blocks.size > 0
+    assign has_blocks = true
+  endif
+
+  if intro == blank and has_blocks == false
+    assign intro = page.content | strip_html
+  endif
+%}
+
+<section class="morganics-static-page" data-page-key="{{ page_key | escape }}">
+  <div class="morganics-static-page__inner">
+    <div class="morganics-static-page__hero">
+      {% if eyebrow != blank %}
+        <span class="eyebrow">{{ eyebrow }}</span>
+      {% endif %}
+      <h1>{{ heading }}</h1>
+      {% if intro != blank %}
+        <p>{{ intro }}</p>
+      {% endif %}
+    </div>
+
+    <div class="morganics-static-page__content">
+      {% if has_blocks %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'content' %}
+              <article class="morganics-static-block" {{ block.shopify_attributes }}>
+                {% if block.settings.heading != blank %}
+                  <h2>{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.content != blank %}
+                  <div class="morganics-static-richtext">{{ block.settings.content }}</div>
+                {% endif %}
+              </article>
+
+            {% when 'faq_item' %}
+              <details class="morganics-static-faq" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.question }}</summary>
+                <div>{{ block.settings.answer }}</div>
+              </details>
+
+            {% when 'contact_details' %}
+              <div class="morganics-static-grid" {{ block.shopify_attributes }}>
+                <div>
+                  {% if block.settings.heading != blank %}
+                    <h2>{{ block.settings.heading }}</h2>
+                  {% endif %}
+                  {% if block.settings.phone != blank %}
+                    <p><strong>WhatsApp / Phone:</strong> <a href="https://wa.me/{{ block.settings.phone | remove: ' ' | remove: '+' }}">{{ block.settings.phone }}</a></p>
+                  {% endif %}
+                  {% if block.settings.sales_email != blank %}
+                    <p><strong>Sales email:</strong> <a href="mailto:{{ block.settings.sales_email }}">{{ block.settings.sales_email }}</a></p>
+                  {% endif %}
+                  {% if block.settings.support_email != blank %}
+                    <p><strong>Support email:</strong> <a href="mailto:{{ block.settings.support_email }}">{{ block.settings.support_email }}</a></p>
+                  {% endif %}
+                  {% if block.settings.website != blank %}
+                    <p><strong>Website:</strong> {{ block.settings.website }}</p>
+                  {% endif %}
+                </div>
+                <div>
+                  {% if block.settings.support_heading != blank %}
+                    <h2>{{ block.settings.support_heading }}</h2>
+                  {% endif %}
+                  {% if block.settings.support_topics != blank %}
+                    <div class="morganics-static-richtext">{{ block.settings.support_topics }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+            {% when 'contact_form' %}
+              {% form 'contact', class: 'morganics-static-form', id: 'MorganicsStaticContactForm' %}
+                {% if form.posted_successfully? %}
+                  <p class="form-status form-status-success" tabindex="-1" autofocus>{{ block.settings.success_message }}</p>
+                {% endif %}
+
+                {% if form.errors %}
+                  <div class="form-status form-status-error" tabindex="-1" autofocus>
+                    {{ form.errors | default_errors }}
+                  </div>
+                {% endif %}
+
+                <label>
+                  {{ block.settings.name_label }}
+                  <input type="text" name="contact[name]" autocomplete="name" required>
+                </label>
+                <label>
+                  {{ block.settings.phone_label }}
+                  <input type="tel" name="contact[phone]" autocomplete="tel" required>
+                </label>
+                <label>
+                  {{ block.settings.email_label }}
+                  <input type="email" name="contact[email]" autocomplete="email">
+                </label>
+                <label>
+                  {{ block.settings.city_label }}
+                  <input type="text" name="contact[City]" autocomplete="address-level2">
+                </label>
+                <label>
+                  {{ block.settings.product_label }}
+                  <textarea name="contact[body]" rows="5" placeholder="{{ block.settings.placeholder | escape }}"></textarea>
+                </label>
+                <button class="btn primary" type="submit">{{ block.settings.button_label }}</button>
+              {% endform %}
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        {{ page.content }}
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_cta %}
+      <div class="morganics-static-page__cta">
+        <div>
+          {% if section.settings.cta_eyebrow != blank %}
+            <span class="eyebrow">{{ section.settings.cta_eyebrow }}</span>
+          {% endif %}
+          {% if section.settings.cta_heading != blank %}
+            <h2>{{ section.settings.cta_heading }}</h2>
+          {% endif %}
+          {% if section.settings.cta_text != blank %}
+            <p>{{ section.settings.cta_text }}</p>
+          {% endif %}
+        </div>
+        {% if section.settings.cta_primary_label != blank and section.settings.cta_primary_url != blank %}
+          <a class="btn primary" href="{{ section.settings.cta_primary_url }}" {% if section.settings.cta_primary_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ section.settings.cta_primary_label }}</a>
+        {% endif %}
+        {% if section.settings.cta_secondary_label != blank and section.settings.cta_secondary_url != blank %}
+          <a class="btn ghost" href="{{ section.settings.cta_secondary_url }}">{{ section.settings.cta_secondary_label }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morganics static page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Morganics" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "intro", "label": "Intro text" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA", "default": true },
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "Need help?" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Ask Morganics before you order." },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps." },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary CTA label", "default": "WhatsApp Morganics" },
+    { "type": "url", "id": "cta_primary_url", "label": "Primary CTA link" },
+    { "type": "checkbox", "id": "cta_primary_new_tab", "label": "Open primary CTA in new tab", "default": true },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary CTA label", "default": "Contact page" },
+    { "type": "url", "id": "cta_secondary_url", "label": "Secondary CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content block",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Section heading" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Add page content here.</p>" }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer text.</p>" }
+      ]
+    },
+    {
+      "type": "contact_details",
+      "name": "Contact details",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Main contact options" },
+        { "type": "text", "id": "phone", "label": "Phone / WhatsApp", "default": "+92 322 3338110" },
+        { "type": "text", "id": "sales_email", "label": "Sales email", "default": "hello@morganics.store" },
+        { "type": "text", "id": "support_email", "label": "Support email", "default": "support@morganics.store" },
+        { "type": "text", "id": "website", "label": "Website", "default": "www.morganics.store" },
+        { "type": "text", "id": "support_heading", "label": "Support heading", "default": "Support topics" },
+        { "type": "richtext", "id": "support_topics", "label": "Support topics", "default": "<ul><li>Product availability</li><li>Pack size guidance</li><li>Custom sourcing</li><li>Bulk and corporate orders</li><li>Shipping questions</li></ul>" }
+      ]
+    },
+    {
+      "type": "contact_form",
+      "name": "Contact form",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "name_label", "label": "Name label", "default": "Full name" },
+        { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Phone / WhatsApp" },
+        { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
+        { "type": "text", "id": "city_label", "label": "City label", "default": "City" },
+        { "type": "text", "id": "product_label", "label": "Product field label", "default": "Product or ingredient needed" },
+        { "type": "textarea", "id": "placeholder", "label": "Textarea placeholder", "default": "Product/ingredient, quantity, city and preferred payment method" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Send Inquiry" },
+        { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks. Morganics has received your inquiry." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morganics static page",
+      "blocks": [
+        { "type": "content" }
+      ]
+    }
+  ]
+}
+{% endschema %}

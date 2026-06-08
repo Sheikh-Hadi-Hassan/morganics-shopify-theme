@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Eligible cases",
+            "content": "<p>A return, replacement or refund review may apply if:</p><ul><li>You received the wrong product.</li><li>The item was damaged in transit.</li><li>The parcel was incomplete.</li><li>There is a verified packing or fulfillment issue.</li></ul>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Reporting window",
+            "content": "<p>Please contact us as soon as possible after receiving the parcel. Share your order details and clear photos/videos of the issue.</p>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Required proof",
+            "content": "<p>To review a claim, we may request:</p><ul><li>Order number</li><li>Customer name and phone number</li><li>Product photos</li><li>Parcel photos</li><li>Unboxing photo/video if available</li></ul>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Product condition",
+            "content": "<p>Due to the nature of food and pantry products, opened or used products may not be eligible for return unless a verified issue exists.</p>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Non-returnable cases",
+            "content": "<p>Returns may not be accepted for:</p><ul><li>Change of mind after opening the product</li><li>Incorrect storage after delivery</li><li>Natural variation in color, size or texture</li><li>Products damaged after delivery</li><li>Allergy or personal suitability issues not reported before purchase</li></ul>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Refund or replacement method",
+            "content": "<p>If approved, Morganics may offer replacement, store credit or refund depending on the case.</p>"
+          }
+        },
+        "content_07": {
+          "type": "content",
+          "settings": {
+            "heading": "Contact",
+            "content": "<ul><li>WhatsApp: +92 322 3338110</li><li>Support: support@morganics.store</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05",
+        "content_06",
+        "content_07"
+      ],
+      "settings": {
+        "eyebrow": "Customer Care",
+        "heading": "Return & Refund Policy",
+        "intro": "Morganics handles return and refund requests fairly while protecting product safety and freshness.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

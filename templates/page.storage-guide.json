@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Universal storage rule",
+            "content": "<p>Store products in a cool, dry place away from direct sunlight, heat and moisture. Seal tightly after every use.</p>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Dry fruits",
+            "content": "<ul><li>Keep sealed and dry.</li><li>Use clean, dry hands or utensils.</li><li>Refrigerate after opening in hot or humid weather if needed.</li><li>Avoid moisture exposure because it can affect texture and freshness.</li></ul>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Nuts",
+            "content": "<ul><li>Keep in an airtight container after opening.</li><li>Store away from heat and sunlight.</li><li>Refrigerate for longer freshness in hot weather.</li><li>Avoid if allergic to tree nuts.</li></ul>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Seeds and grains",
+            "content": "<ul><li>Keep sealed in a dry place.</li><li>Avoid humidity.</li><li>Use clean spoons to prevent moisture transfer.</li><li>Fiber-rich seeds should be used in sensible portions with adequate water.</li></ul>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Herbs and botanicals",
+            "content": "<ul><li>Keep away from moisture, sunlight and strong odors.</li><li>Do not leave packets open.</li><li>Use with professional guidance if pregnant, nursing, medicated or managing a health condition.</li></ul>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Natural sweeteners",
+            "content": "<ul><li>Keep tightly sealed.</li><li>Protect from ants, moisture and heat.</li><li>Natural sweeteners are still sweet foods; use according to dietary needs.</li></ul>"
+          }
+        },
+        "content_07": {
+          "type": "content",
+          "settings": {
+            "heading": "Signs to check before use",
+            "content": "<p>Do not use if the product has an unusual smell, visible mold, heavy moisture damage or damaged packaging.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05",
+        "content_06",
+        "content_07"
+      ],
+      "settings": {
+        "eyebrow": "Storage Guide",
+        "heading": "Morganics Storage Guide",
+        "intro": "Natural pantry products stay better when stored correctly. Use this guide to protect freshness, aroma, texture and quality after opening.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

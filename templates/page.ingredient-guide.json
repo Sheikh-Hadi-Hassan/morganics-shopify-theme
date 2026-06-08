@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Dry fruits and heritage mewa",
+            "content": "<p>Best for tea-time, family serving, Ramadan tables, breakfast bowls, desserts and gift trays.</p>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Premium nuts",
+            "content": "<p>Best for clean snacking, desserts, trail mixes, breakfast bowls, hospitality and premium gifting.</p>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Seeds and functional grains",
+            "content": "<p>Best for breakfast bowls, soaked drinks, smoothies, salads, baking and modern pantry routines.</p>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Herbs and daily botanicals",
+            "content": "<p>Best for tea, aroma, kitchen use and traditional pantry routines. Use carefully and follow professional guidance where needed.</p>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Roots, botanicals and traditional ingredients",
+            "content": "<p>Best for customers who already understand traditional usage or are seeking guided pantry items. These require more careful usage and precaution language.</p>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Gums and specialties",
+            "content": "<p>Best for cooling drinks, texture, traditional recipes and special-purpose pantry use.</p>"
+          }
+        },
+        "content_07": {
+          "type": "content",
+          "settings": {
+            "heading": "Natural sweeteners and salts",
+            "content": "<p>Best for tea, breakfast, desserts, cooking and family pantry restocking.</p>"
+          }
+        },
+        "content_08": {
+          "type": "content",
+          "settings": {
+            "heading": "Safety note",
+            "content": "<p>Morganics products are food, pantry, herbal or traditional ingredients. They are not medical treatments. Use sensible portions and seek qualified guidance for specialty items.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05",
+        "content_06",
+        "content_07",
+        "content_08"
+      ],
+      "settings": {
+        "eyebrow": "Ingredient Guide",
+        "heading": "Morganics Ingredient Guide",
+        "intro": "The Morganics Ingredient Guide helps customers understand categories, usage ideas, storage needs and safety notes before buying.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

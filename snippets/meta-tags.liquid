@@ -7,6 +7,10 @@
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
   assign og_description = page_description | default: shop.description | default: shop.name
+  assign morganics_page_seo_title = blank
+  assign morganics_page_seo_description = blank
+  assign morganics_collection_seo_title = blank
+  assign morganics_collection_seo_description = blank
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -15,6 +19,98 @@
   elsif request.page_type == 'password'
     assign og_url = request.origin
   endif
+
+  if request.page_type == 'page'
+    case template.suffix
+      when 'about-us'
+        assign morganics_page_seo_title = 'About Morganics | Premium Natural Pantry Products in Pakistan'
+        assign morganics_page_seo_description = 'Learn about Morganics, a Pakistan-based premium natural pantry brand offering dry fruits, nuts, seeds, herbs, botanicals and carefully packed essentials for daily routines.'
+      when 'contact'
+        assign morganics_page_seo_title = 'Contact Morganics | WhatsApp, Sales and Support'
+        assign morganics_page_seo_description = 'Contact Morganics for product questions, sourcing requests, bulk orders, delivery support and premium pantry product guidance in Pakistan.'
+      when 'faq'
+        assign morganics_page_seo_title = 'Morganics FAQ | Products, Delivery, Orders and Storage'
+        assign morganics_page_seo_description = 'Find answers about Morganics products, delivery, cash on delivery, storage, returns, payments, sourcing and order support.'
+      when 'shipping-policy'
+        assign morganics_page_seo_title = 'Shipping Policy | Morganics Pakistan Delivery'
+        assign morganics_page_seo_description = 'Review Morganics shipping details, delivery timelines, order handling, COD availability and delivery support across Pakistan.'
+      when 'return-refund-policy'
+        assign morganics_page_seo_title = 'Return and Refund Policy | Morganics'
+        assign morganics_page_seo_description = 'Read Morganics return, refund, replacement and issue reporting guidance for pantry products delivered in Pakistan.'
+      when 'payment-policy'
+        assign morganics_page_seo_title = 'Payment Policy | Morganics'
+        assign morganics_page_seo_description = 'Learn about Morganics payment methods including cash on delivery, bank transfer, payment confirmation and order support.'
+      when 'privacy-policy'
+        assign morganics_page_seo_title = 'Privacy Policy | Morganics'
+        assign morganics_page_seo_description = 'Understand how Morganics handles customer information, order details, communication data and privacy for online orders.'
+      when 'terms-conditions'
+        assign morganics_page_seo_title = 'Terms and Conditions | Morganics'
+        assign morganics_page_seo_description = 'Read Morganics website terms, product information terms, order handling, pricing, delivery and customer responsibilities.'
+      when 'storage-guide'
+        assign morganics_page_seo_title = 'Storage Guide | Morganics Pantry Products'
+        assign morganics_page_seo_description = 'Learn how to store Morganics dry fruits, nuts, seeds, herbs, botanicals, gums, salts and sweeteners for better freshness.'
+      when 'bulk-corporate-orders'
+        assign morganics_page_seo_title = 'Bulk and Corporate Orders | Morganics'
+        assign morganics_page_seo_description = 'Request bulk, corporate, gifting, office pantry, Ramadan, wedding and custom sourcing orders from Morganics.'
+      when 'ingredient-guide'
+        assign morganics_page_seo_title = 'Ingredient Guide | Morganics'
+        assign morganics_page_seo_description = 'Explore practical Morganics ingredient guidance for dry fruits, nuts, seeds, herbs, botanicals, gums, sweeteners and pantry routines.'
+      when 'guides'
+        assign morganics_page_seo_title = 'Guides | Morganics Pantry and Ingredient Articles'
+        assign morganics_page_seo_description = 'Browse Morganics pantry guides, ingredient explainers, storage notes and routine ideas for premium natural pantry products.'
+    endcase
+  endif
+
+  if request.page_type == 'collection'
+    case collection.handle
+      when 'roots-botanicals-traditional-ingredients', 'roots-adaptogens'
+        assign morganics_collection_seo_title = 'Roots, Botanicals & Traditional Ingredients Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics roots, botanicals and traditional ingredients for guided pantry routines, careful use and specialist ingredient needs in Pakistan.'
+      when 'dry-fruits-heritage-mewa', 'nuts-dry-fruits'
+        assign morganics_collection_seo_title = 'Dry Fruits & Heritage Mewa Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics dry fruits and heritage mewa for tea-time, Ramadan tables, lunch boxes, breakfast bowls and gift trays in Pakistan.'
+      when 'gums-specialties', 'oil-gums-specialties'
+        assign morganics_collection_seo_title = 'Gums & Specialties Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics gums and specialty pantry ingredients for cooling drinks, traditional recipes, texture and guided use in Pakistan.'
+      when 'herbs-daily-botanicals', 'herbs-botanicals'
+        assign morganics_collection_seo_title = 'Herbs & Daily Botanicals Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics herbs and daily botanicals for tea, kitchen, aroma, traditional pantry and careful daily routines in Pakistan.'
+      when 'natural-sweeteners-salts', 'natural-sweetners-salts'
+        assign morganics_collection_seo_title = 'Natural Sweeteners & Salts Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics natural sweeteners and salts for tea, breakfast, desserts, cooking and family pantry restocking in Pakistan.'
+      when 'premium-nuts'
+        assign morganics_collection_seo_title = 'Premium Nuts Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics premium nuts for clean snacking, tea-time serving, breakfast bowls, desserts and premium gifting in Pakistan.'
+      when 'premium-snacks-pantry-staples'
+        assign morganics_collection_seo_title = 'Premium Snacks & Pantry Staples Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics premium snacks and pantry staples for breakfast, family snacking, clean bowls and everyday kitchen routines in Pakistan.'
+      when 'seeds-functional-grains', 'seeds-grains'
+        assign morganics_collection_seo_title = 'Seeds & Functional Grains Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics seeds and functional grains for breakfast bowls, soaked drinks, salads, baking and clean snack portions in Pakistan.'
+      when 'wellness-blends'
+        assign morganics_collection_seo_title = 'Wellness Blends Online in Pakistan | Morganics'
+        assign morganics_collection_seo_description = 'Shop Morganics wellness blends for simple guided pantry routines, familiar ingredients and careful daily use in Pakistan.'
+    endcase
+  endif
+
+  if morganics_page_seo_title != blank
+    assign og_title = morganics_page_seo_title
+  endif
+
+  if morganics_collection_seo_title != blank
+    assign og_title = morganics_collection_seo_title
+  endif
+
+  if morganics_page_seo_description != blank
+    assign og_description = morganics_page_seo_description
+  endif
+
+  if morganics_collection_seo_description != blank
+    assign og_description = morganics_collection_seo_description
+  endif
+
+  assign meta_title = morganics_page_seo_title | default: morganics_collection_seo_title | default: page_title
+  assign meta_description = morganics_page_seo_description | default: morganics_collection_seo_description | default: page_description
 %}
 
 <meta
@@ -86,10 +182,10 @@
 >
 
 <title>
-  {{ page_title }}
+  {{ meta_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless meta_title contains shop.name or page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link
@@ -97,9 +193,9 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if meta_description %}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ meta_description | escape }}"
   >
 {% endif %}

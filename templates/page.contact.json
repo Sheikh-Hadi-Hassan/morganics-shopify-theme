@@ -1,0 +1,63 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "contact_details_01": {
+          "type": "contact_details",
+          "settings": {
+            "heading": "Main contact options",
+            "phone": "+92 322 3338110",
+            "sales_email": "hello@morganics.store",
+            "support_email": "support@morganics.store",
+            "website": "www.morganics.store",
+            "support_heading": "Support topics",
+            "support_topics": "<ul><li>Product availability</li><li>Pack size guidance</li><li>Custom sourcing</li><li>Bulk and corporate orders</li><li>Shipping questions</li><li>COD order confirmation</li><li>Damaged or wrong item support</li></ul>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "WhatsApp message template",
+            "content": "<p>Hello Morganics, I need help with:</p><ul><li>Product/ingredient:</li><li>Quantity:</li><li>City:</li><li>Preferred payment method:</li></ul><p>Please confirm availability and price.</p>"
+          }
+        },
+        "contact_form_03": {
+          "type": "contact_form",
+          "settings": {
+            "name_label": "Full name",
+            "phone_label": "Phone / WhatsApp number",
+            "email_label": "Email",
+            "city_label": "City",
+            "product_label": "Product or ingredient needed",
+            "placeholder": "Product/ingredient, quantity, city and preferred payment method",
+            "button_label": "Send Inquiry",
+            "success_message": "Thanks. Morganics has received your inquiry."
+          }
+        }
+      },
+      "block_order": [
+        "contact_details_01",
+        "content_02",
+        "contact_form_03"
+      ],
+      "settings": {
+        "eyebrow": "Product Inquiry",
+        "heading": "Contact Morganics",
+        "intro": "Need help finding a product, checking availability or placing a custom ingredient request? Send us your details and our team will guide you.",
+        "show_cta": false,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

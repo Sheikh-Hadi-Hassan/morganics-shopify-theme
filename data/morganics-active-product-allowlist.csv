@@ -1,0 +1,69 @@
+english_title,urdu_title,final_title,normalized_key,expected_handle,status,notes
+Honey,خاص شہد,Honey - خاص شہد,honey,honey,active,Exact or normalized match to existing Shopify product.
+Saffron,زعفران,Saffron - زعفران,saffron,saffron,active,Exact or normalized match to existing Shopify product.
+Shakar,دیسی شکر,Shakar - دیسی شکر,shakar,shakar,active,Exact or normalized match to existing Shopify product.
+Cranberry,کرین بیری,Cranberry - کرین بیری,cranberry,cranberry,active,Exact or normalized match to existing Shopify product.
+Mixed Berries,مکس بیریز,Mixed Berries - مکس بیریز,mixed-berries,mixed-berries,active,Exact or normalized match to existing Shopify product.
+Goji Berry,گوجی بیری,Goji Berry - گوجی بیری,goji-berry,goji-berry,active,Exact or normalized match to existing Shopify product.
+Salajeet,سلاجیت,Salajeet - سلاجیت,salajeet,salajeet,active,Exact or normalized match to existing Shopify product.
+Beet Root Powder,بیٹ روٹ پاؤڈر,Beet Root Powder - بیٹ روٹ پاؤڈر,beet-root-powder,beet-root-powder,missing_export_match,No matching handle/title/alias found in current Shopify export or product JSON.
+Ginkgo Biloba Leaves,جنکو,Ginkgo Biloba Leaves - جنکو,ginkgo-biloba-leaves,ginkgo-biloba,active,Matched to existing Ginkgo Biloba handle; title expanded to requested Leaves wording.
+Aqarqara,عقرقرحا,Aqarqara - عقرقرحا,aqarqara,aqarqara,active,Exact or normalized match to existing Shopify product.
+hibiscus herb,گل گڑھل,hibiscus herb - گل گڑھل,hibiscus-herb,hibiscus-herb,active,Matched to existing Hibiscus Herb handle; final title preserves requested lowercase English spelling.
+Maghaz Sunflower Seeds,مغز سورج مکھی,Maghaz Sunflower Seeds - مغز سورج مکھی,maghaz-sunflower-seeds,maghaz-sunflower-seeds,missing_export_match,"No unique matching handle found. Existing sunflower-seeds is used for Sunflower Seeds, so this is left unmatched to avoid duplicate handle/title risk."
+Sunflower Seeds,سورج مکھی کے بیج,Sunflower Seeds - سورج مکھی کے بیج,sunflower-seeds,sunflower-seeds,active,Exact or normalized match to existing Shopify product.
+Khajoor Ajwa,عجوہ کھجور,Khajoor Ajwa - عجوہ کھجور,khajoor-ajwa,ajwa-dates,active,Matched to existing Ajwa Dates handle/alias.
+Mabroom dates,کھجور مبروم,Mabroom dates - کھجور مبروم,mabroom-dates,mabroom-khajoor,active,Matched to existing Mabroom Khajoor handle/alias.
+Banana Dried,خشک کیلا,Banana Dried - خشک کیلا,banana-dried,dried-banana,active,Matched to existing Dried Banana handle.
+Maghaz Akhrot — Walnut,مغز اخروٹ,Maghaz Akhrot — Walnut - مغز اخروٹ,maghaz-akhrot-walnut,maghaz-akhrot,active,Matched to existing Maghaz Akhrot handle.
+Maghaz Chilgoza Full Roasted,چلغوزہ مغز فل روسٹ,Maghaz Chilgoza Full Roasted - چلغوزہ مغز فل روسٹ,maghaz-chilgoza-full-roasted,maghaz-chilgoza-full-roast,active,Exact or normalized match to existing Shopify product.
+Maghaz Chilgoza Half Roasted,چلغوزہ مغز ہاف روسٹ,Maghaz Chilgoza Half Roasted - چلغوزہ مغز ہاف روسٹ,maghaz-chilgoza-half-roasted,maghaz-chilgoza-half-roast,active,Exact or normalized match to existing Shopify product.
+Anjeer — Fig,انجیر,Anjeer — Fig - انجیر,anjeer-fig,anjeer,active,Exact or normalized match to existing Shopify product.
+Goond Katira,گوند کتیرا,Goond Katira - گوند کتیرا,goond-katira,goond-katira,active,Exact or normalized match to existing Shopify product.
+Phool Makhana,پھول مکھانہ,Phool Makhana - پھول مکھانہ,phool-makhana,phool-makhana,active,Exact or normalized match to existing Shopify product.
+Dar Chini Gol,دارچینی,Dar Chini Gol - دارچینی,dar-chini-gol,dar-chini-cigar-gol,active,Matched to existing Dar Chini Cigar Gol handle/alias.
+Salab Misri,ثعلب مصری,Salab Misri - ثعلب مصری,salab-misri,salab-misri,active,Exact or normalized match to existing Shopify product.
+Ginseng Root red,جنسنگ لال,Ginseng Root red - جنسنگ لال,ginseng-root-red,ginseng-root-red,active,Matched to existing Ginseng Root Red handle.
+American almond,مغز بادام امریکن,American almond - مغز بادام امریکن,american-almond,california-almonds-maghaz-badam,active,Matched to existing California Almonds Maghaz Badam handle as closest American almond product.
+Ajwain,اجوائن,Ajwain - اجوائن,ajwain,ajwain,active,Exact or normalized match to existing Shopify product.
+Alsi,السی,Alsi - السی,alsi,alsi,active,Exact or normalized match to existing Shopify product.
+Kalonji,کلونجی,Kalonji - کلونجی,kalonji,kalonji,active,Exact or normalized match to existing Shopify product.
+Quinoa,کینوا,Quinoa - کینوا,quinoa,quinoa,active,Exact or normalized match to existing Shopify product.
+Salab Punja,ثعلب پنجہ,Salab Punja - ثعلب پنجہ,salab-punja,salab-punja,active,Exact or normalized match to existing Shopify product.
+Bheray,بھیرے,Bheray - بھیرے,bheray,bheray,active,Exact or normalized match to existing Shopify product.
+Rosemary Leaves,روزمیری,Rosemary Leaves - روزمیری,rosemary-leaves,rosemary-leaves,active,Exact or normalized match to existing Shopify product.
+Guggul,گوگل,Guggul - گوگل,guggul,guggul,active,Exact or normalized match to existing Shopify product.
+Maghaz Badam Gurbandi,بادام گربندی,Maghaz Badam Gurbandi - بادام گربندی,maghaz-badam-gurbandi,maghaz-badam-desi-gurbandi,active,Exact or normalized match to existing Shopify product.
+Multani Mitti,ملتانی مٹی,Multani Mitti - ملتانی مٹی,multani-mitti,multani-mitti,active,Exact or normalized match to existing Shopify product.
+Mustard seeds,سرسوں سفید,Mustard seeds - سرسوں سفید,mustard-seeds,sarson-yellow,active,Matched to existing Sarson Yellow / Mustard Seeds handle; Urdu differs from source export alias.
+Tukhm Methi,تخم میتھی دانہ,Tukhm Methi - تخم میتھی دانہ,tukhm-methi,tukhm-methi,active,Exact or normalized match to existing Shopify product.
+Moosli White,موصلی سفید,Moosli White - موصلی سفید,moosli-white,moosli-white,active,Exact or normalized match to existing Shopify product.
+Sogi Gol Mewa,سوگی گول میوہ,Sogi Gol Mewa - سوگی گول میوہ,sogi-gol-mewa,sogi-big-kishmish-mewa,active,Matched to existing Sogi Big Kishmish Mewa handle as closest Sogi mewa product; review before import.
+Char maghaz,چار مغز,Char maghaz - چار مغز,char-maghaz,four-seeds,active,Matched to existing Four Seeds handle/alias.
+Pista Namkeen,مغز پستہ,Pista Namkeen - مغز پستہ,pista-namkeen,pista-namkeen-roasted,active,Matched to existing Pista Namkeen Roasted handle.
+Elaichi Sabz,الائچی,Elaichi Sabz - الائچی,elaichi-sabz,sabz-elaichi,active,Matched to existing Sabz Elaichi handle.
+Chilka Ispaghol,چھلکا اسپغول,Chilka Ispaghol - چھلکا اسپغول,chilka-ispaghol,chilka-ispaghol,active,Exact or normalized match to existing Shopify product.
+Til Black,تل,Til Black - تل,til-black,til-black,active,Exact or normalized match to existing Shopify product.
+Fruit Salt,فروٹ سالٹ,Fruit Salt - فروٹ سالٹ,fruit-salt,fruit-salt,active,Exact or normalized match to existing Shopify product.
+Satawar,ستاور,Satawar - ستاور,satawar,satawar,active,Exact or normalized match to existing Shopify product.
+Moringa,مورنگا,Moringa - مورنگا,moringa,moringa,active,Exact or normalized match to existing Shopify product.
+Amla,آملہ,Amla - آملہ,amla,amla,active,Exact or normalized match to existing Shopify product.
+Harmal,حرمل,Harmal - حرمل,harmal,harmal,active,Exact or normalized match to existing Shopify product.
+Sikakai,سکاکائی,Sikakai - سکاکائی,sikakai,sikakai,active,Exact or normalized match to existing Shopify product.
+Kajo Plain,کاجو سادہ,Kajo Plain - کاجو سادہ,kajo-plain,kajo-sada,active,Matched to existing Kajo Sada handle/alias.
+Pista Maghaz,پستہ مغز,Pista Maghaz - پستہ مغز,pista-maghaz,pista-maghaz,active,Exact or normalized match to existing Shopify product.
+Sogi Sundarhani Mewa,سوگی سندرہانی میوہ,Sogi Sundarhani Mewa - سوگی سندرہانی میوہ,sogi-sundarhani-mewa,sogi-small-kishmish-mewa,active,Matched to existing Sogi Small Kishmish Mewa handle as closest Sogi mewa product; review before import.
+Badam Abdul Wihidi,بادام عبدالوحیدی,Badam Abdul Wihidi - بادام عبدالوحیدی,badam-abdul-wihidi,badam-abdul-wahidi,active,Matched to existing Badam Abdul Wahidi handle; requested title spelling preserved.
+Kali Darakh,کالی دارک,Kali Darakh - کالی دارک,kali-darakh,kali-darakh,missing_export_match,No matching handle/title/alias found in current Shopify export or product JSON.
+Musabbar,مصبر,Musabbar - مصبر,musabbar,musabbar,active,Exact or normalized match to existing Shopify product.
+Luban,لوبان,Luban - لوبان,luban,luban,active,Exact or normalized match to existing Shopify product.
+Sarson Black,سرسوں سیاہ,Sarson Black - سرسوں سیاہ,sarson-black,sarson-black,active,Exact or normalized match to existing Shopify product.
+Konch White,کونچ سفید,Konch White - کونچ سفید,konch-white,konch,active,Matched to existing Konch handle; title expanded to requested White wording.
+Gur,گڑ,Gur - گڑ,gur,gur,active,Exact or normalized match to existing Shopify product.
+Ashwagandha,اشوگندھا,Ashwagandha - اشوگندھا,ashwagandha,ashwagandha,active,Exact or normalized match to existing Shopify product.
+Ginseng White,جنسنگ روٹ,Ginseng White - جنسنگ روٹ,ginseng-white,ginseng-white,active,Exact or normalized match to existing Shopify product.
+Chasko Herb,چسکو ہرب,Chasko Herb - چسکو ہرب,chasko-herb,chasko-herb,active,Exact or normalized match to existing Shopify product.
+Kajo Fry,کاجو فرائی,Kajo Fry - کاجو فرائی,kajo-fry,kajo-fry,active,Exact or normalized match to existing Shopify product.
+Hareer Sabaz,ہریر سبز,Hareer Sabaz - ہریر سبز,hareer-sabaz,hareer-sabaz,active,Exact or normalized match to existing Shopify product.
+Kajo Roasted,کاجو روسٹڈ,Kajo Roasted - کاجو روسٹڈ,kajo-roasted,kajo-roasted,active,Exact or normalized match to existing Shopify product.
+Zarishk,زرشک,Zarishk - زرشک,zarishk,zarishk-imported,active,Matched to existing Zarishk Imported handle; Zarishk Pakistani remains draft as duplicate risk.

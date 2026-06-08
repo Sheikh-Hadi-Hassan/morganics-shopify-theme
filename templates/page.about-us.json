@@ -1,0 +1,68 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Our philosophy",
+            "content": "<p>We believe premium does not mean overcomplicated. It means careful selection, clear information, honest presentation and products packed with respect for their natural texture, aroma and use.</p>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "What we offer",
+            "content": "<ul><li>Premium nuts and dry fruits for daily snacking, tea-time and gifting.</li><li>Seeds and functional grains for breakfast bowls, salads, smoothies and practical routines.</li><li>Herbs, botanicals and specialty ingredients for traditional pantry use with careful guidance.</li><li>Natural sweeteners, salts and pantry staples for everyday Pakistani kitchens.</li><li>Custom sourcing support when customers need an ingredient not listed online.</li></ul>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Why Morganics exists",
+            "content": "<p>Many customers know the ingredient name but do not know how to choose it, store it or use it responsibly. Morganics bridges that gap with product education, clear categories, safe usage guidance and support through WhatsApp.</p>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Freshness-led packing",
+            "content": "<p>Our products are packed to help preserve natural quality, aroma and texture. We recommend keeping every product sealed, dry and away from sunlight, heat and moisture.</p>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Pakistan-wide support",
+            "content": "<p>Morganics serves customers across Pakistan with online ordering, Cash on Delivery where available and direct support for sourcing questions.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05"
+      ],
+      "settings": {
+        "eyebrow": "About Us",
+        "heading": "About Morganics",
+        "intro": "Morganics is built for Pakistani homes that want natural pantry products with cleaner presentation, better guidance and freshness-led packing. From dry fruits and nuts to seeds, herbs, botanicals and traditional ingredients, our goal is simple: make trusted pantry essentials easier to understand, easier to buy and easier to use.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Need help choosing?",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

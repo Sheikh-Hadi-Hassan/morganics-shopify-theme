@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Best for",
+            "content": "<ul><li>Corporate gifting</li><li>Ramadan boxes</li><li>Eid gifts</li><li>Wedding hospitality packs</li><li>Office pantry restocking</li><li>Family bulk buying</li><li>Custom dry fruit and nut mixes</li><li>Specialty ingredient sourcing</li></ul>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Available product types",
+            "content": "<ul><li>Premium nuts</li><li>Dry fruits and mewa</li><li>Dates and gifting staples</li><li>Seeds and grains</li><li>Natural sweeteners</li><li>Herbs and specialty ingredients</li></ul>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "How to request a quote",
+            "content": "<p>Send us:</p><ul><li>Product names</li><li>Quantity or budget</li><li>Required pack size</li><li>Delivery city</li><li>Deadline</li><li>Branding/customization requirement if any</li></ul>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Custom sourcing",
+            "content": "<p>If a product is not listed, share its name, quantity and intended use. We will check availability and guide you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04"
+      ],
+      "settings": {
+        "eyebrow": "Business Orders",
+        "heading": "Bulk & Corporate Orders",
+        "intro": "Morganics supports bulk orders, corporate gifting and custom pantry requirements for teams, families, events and seasonal occasions.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Message Morganics for bulk pricing.",
+        "cta_text": "Send product names, quantity or budget, required pack size, delivery city, deadline and any branding or customization requirement.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

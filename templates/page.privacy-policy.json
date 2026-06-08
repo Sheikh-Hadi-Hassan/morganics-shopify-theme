@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Information we collect",
+            "content": "<p>We may collect:</p><ul><li>Name</li><li>Phone number</li><li>Email address</li><li>Delivery address</li><li>Order details</li><li>Payment-related confirmation details</li><li>Support messages or inquiry details</li></ul>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "How we use information",
+            "content": "<p>Customer information is used to process orders, confirm delivery details, provide customer support, handle returns or complaints, improve website experience and send order or marketing communication where allowed.</p>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Payment privacy",
+            "content": "<p>Morganics does not ask customers to share sensitive banking passwords or private account credentials.</p>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Data sharing",
+            "content": "<p>Customer information may be shared with courier/payment partners only where needed to complete order delivery or payment processing.</p>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Marketing communication",
+            "content": "<p>Customers may receive updates through email, SMS or WhatsApp where permitted. Customers can request to stop promotional communication.</p>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Data protection",
+            "content": "<p>We aim to keep customer data safe and use it only for legitimate business purposes.</p>"
+          }
+        },
+        "content_07": {
+          "type": "content",
+          "settings": {
+            "heading": "Contact",
+            "content": "<p>For privacy questions, contact support@morganics.store.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05",
+        "content_06",
+        "content_07"
+      ],
+      "settings": {
+        "eyebrow": "Privacy",
+        "heading": "Privacy Policy",
+        "intro": "Morganics respects customer privacy. This page explains how we collect and use information needed to process orders and support customers.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -36,11 +36,22 @@
                 {% if block.settings.heading contains 'Care' %}
                   <a href="/pages/contact">Contact Morganics</a>
                   <a href="/pages/faq">FAQ</a>
-                  <a href="/pages/delivery-information">Delivery Information</a>
-                  <a href="/policies/refund-policy">Return Policy</a>
-                  <a href="/policies/terms-of-service">Payment Policy</a>
-                  <a href="/pages/contact">Bulk Orders</a>
+                  <a href="/pages/shipping-policy">Shipping Policy</a>
+                  <a href="/pages/return-refund-policy">Return &amp; Refund Policy</a>
+                  <a href="/pages/payment-policy">Payment Policy</a>
                   <a href="/pages/contact">Custom Sourcing</a>
+                {% elsif block.settings.heading contains 'Trust' %}
+                  <a href="/pages/about-us">About Us</a>
+                  <a href="/pages/privacy-policy">Privacy Policy</a>
+                  <a href="/pages/terms-conditions">Terms &amp; Conditions</a>
+                  <a href="/pages/storage-guide">Storage Guide</a>
+                  <a href="/pages/ingredient-guide">Ingredient Guide</a>
+                  <a href="/pages/guides">Guides</a>
+                {% elsif block.settings.heading contains 'Business' %}
+                  <a href="/pages/bulk-corporate-orders">Bulk / Corporate Orders</a>
+                  <a href="/pages/contact">Custom Sourcing</a>
+                  <a href="mailto:hello@morganics.store">Sales Email</a>
+                  <a href="https://wa.me/923223338110" target="_blank" rel="noopener">WhatsApp Quote</a>
                 {% else %}
                   <a href="{{ routes.all_products_collection_url }}">All Products</a>
                   <a href="{{ routes.collections_url }}/nuts">Nuts</a>
@@ -124,7 +135,7 @@
           <em aria-hidden="true">&rarr;</em>
         </a>
       {% endif %}
-      <a class="footer-cta" href="/pages/contact">
+      <a class="footer-cta" href="/pages/bulk-corporate-orders">
         <span class="footer-icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"></path><path d="m12 8 4 2.3v4.4L12 17l-4-2.3v-4.4L12 8Z"></path></svg></span>
         <span><b>Bulk & Custom Sourcing</b><small>Wholesale & special requirements</small></span>
         <em aria-hidden="true">&rarr;</em>
@@ -136,9 +147,9 @@
     <div class="footer-inner footer-bottom-inner">
       <span class="footer-copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text }}</span>
       <nav class="footer-policy-links" aria-label="Footer policies">
-        <a href="/policies/privacy-policy">Privacy Policy</a>
-        <a href="/policies/terms-of-service">Terms</a>
-        <a href="/policies/shipping-policy">Shipping</a>
+        <a href="/pages/privacy-policy">Privacy Policy</a>
+        <a href="/pages/terms-conditions">Terms</a>
+        <a href="/pages/shipping-policy">Shipping</a>
       </nav>
     </div>
   </div>

@@ -1,5 +1,9 @@
+{% liquid
+  assign fallback_images = 'morganics/review-images/ayesha-kitchen.jpg,morganics/review-images/ali-athlete.jpg,morganics/review-images/dr-hira-nutritionist.jpg,morganics/review-images/iqra-tennis.jpg,morganics/review-images/mother-son.jpg,morganics/review-images/elder-couple.jpg' | split: ','
+%}
+
 <section
-  class="ritual-film-section"
+  class="ritual-film-section story-carousel-v2"
   id="story"
   data-journey-id="customer-stories"
   aria-label="{{ section.settings.aria_label | escape }}"
@@ -7,89 +11,131 @@
   data-autoplay="{{ section.settings.enable_autoplay }}"
   data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
 >
-  <div class="ritual-film-glow" aria-hidden="true"></div>
-  <div class="ritual-film-shell">
-    <div class="ritual-film-head reveal">
-      <span class="ritual-film-eyebrow">{{ section.settings.eyebrow }}</span>
-      <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.text }}</p>
-    </div>
-    <div class="ritual-film-carousel" aria-live="polite">
-      <button class="ritual-film-arrow ritual-film-arrow--prev" type="button" data-carousel-prev aria-label="Previous customer story">‹</button>
-      <div class="ritual-film-track">
+  <div class="story-carousel-v2__backdrop" aria-hidden="true"></div>
+
+  <div class="ritual-film-shell story-carousel-v2__shell">
+    <header class="ritual-film-head story-carousel-v2__head reveal">
+      {% if section.settings.eyebrow != blank %}
+        <span class="ritual-film-eyebrow story-carousel-v2__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <p>{{ section.settings.text }}</p>
+      {% endif %}
+    </header>
+
+    <div class="ritual-film-carousel story-carousel-v2__carousel" aria-live="polite" aria-roledescription="carousel">
+      <button class="ritual-film-arrow ritual-film-arrow--prev story-carousel-v2__arrow story-carousel-v2__arrow--prev" type="button" data-carousel-prev aria-label="Previous customer story">
+        <span aria-hidden="true">‹</span>
+      </button>
+
+      <div class="ritual-film-track story-carousel-v2__track">
         {% if section.blocks.size > 0 %}
           {% for block in section.blocks %}
-            {% assign fallback_image = 'morganics/review-images/ayesha-kitchen.jpg' %}
-            {% if forloop.index == 2 %}
-              {% assign fallback_image = 'morganics/review-images/ali-athlete.jpg' %}
-            {% elsif forloop.index == 3 %}
-              {% assign fallback_image = 'morganics/review-images/dr-hira-nutritionist.jpg' %}
-            {% endif %}
+            {% liquid
+              assign fallback_index = forloop.index0 | modulo: fallback_images.size
+              assign fallback_image = fallback_images[fallback_index]
+              assign slide_title = block.settings.product_label | default: block.settings.customer_name
+              assign image_alt = block.settings.image_alt | default: block.settings.customer_name | append: ' Morganics routine'
+            %}
             <article
-              class="ritual-film-card{% if forloop.first %} is-active{% endif %}"
+              class="ritual-film-card story-carousel-v2__card{% if forloop.first %} is-active{% endif %}"
               data-carousel-slide
               aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
               {{ block.shopify_attributes }}
             >
-              <div class="ritual-film-media">
+              <div class="ritual-film-media story-carousel-v2__media">
                 {% if block.settings.image != blank %}
-                  {{ block.settings.image | image_url: width: 1400 | image_tag: class: 'ritual-film-img', loading: 'lazy', widths: '360, 520, 700, 900, 1200, 1400', sizes: '(min-width: 990px) 620px, 86vw', alt: block.settings.customer_name }}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1400
+                    | image_tag:
+                      class: 'ritual-film-img story-carousel-v2__img',
+                      loading: 'lazy',
+                      widths: '360, 520, 700, 900, 1200, 1400',
+                      sizes: '(min-width: 1100px) 520px, (min-width: 720px) 64vw, 88vw',
+                      alt: image_alt
+                  }}
                 {% else %}
-                  <img class="ritual-film-img" src="{{ fallback_image | asset_url }}" alt="{{ block.settings.customer_name | escape }}" width="700" height="860" loading="lazy">
+                  <img
+                    class="ritual-film-img story-carousel-v2__img"
+                    src="{{ fallback_image | asset_url }}"
+                    alt="{{ image_alt | escape }}"
+                    width="900"
+                    height="900"
+                    loading="lazy"
+                  >
                 {% endif %}
               </div>
-              <div class="ritual-film-content">
-                <small>{{ block.settings.routine_title }}</small>
-                <h3>{{ block.settings.product_label }}</h3>
-                <p>{{ block.settings.testimonial }}</p>
-                <div class="ritual-film-meta">
-                  <span class="ritual-film-stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+
+              <div class="ritual-film-content story-carousel-v2__content">
+                <div class="story-carousel-v2__topline">
+                  {% if block.settings.routine_title != blank %}
+                    <small>{{ block.settings.routine_title }}</small>
+                  {% endif %}
+                  <span class="ritual-film-stars story-carousel-v2__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
                     {% for index in (1..5) %}
                       <span{% if index > block.settings.rating %} class="is-muted"{% endif %}>★</span>
                     {% endfor %}
                   </span>
-                  <span>{{ block.settings.customer_name }}{% if block.settings.location != blank %} · {{ block.settings.location }}{% endif %}</span>
                 </div>
-                {% if block.settings.button_label != blank and block.settings.button_link != blank %}
-                  <a class="ritual-film-cta" href="{{ block.settings.button_link }}">{{ block.settings.button_label }}</a>
+
+                {% if slide_title != blank %}
+                  <h3>{{ slide_title }}</h3>
                 {% endif %}
+
+                {% if block.settings.testimonial != blank %}
+                  <p>{{ block.settings.testimonial }}</p>
+                {% endif %}
+
+                <div class="ritual-film-meta story-carousel-v2__meta">
+                  <span>{{ block.settings.customer_name }}{% if block.settings.location != blank %} · {{ block.settings.location }}{% endif %}</span>
+                  {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                    <a class="ritual-film-cta story-carousel-v2__cta" href="{{ block.settings.button_link }}">{{ block.settings.button_label }}</a>
+                  {% endif %}
+                </div>
               </div>
             </article>
           {% endfor %}
         {% else %}
-          <article class="ritual-film-card is-active" data-carousel-slide aria-hidden="false">
-            <div class="ritual-film-media"><img class="ritual-film-img" src="{{ 'morganics/review-images/ayesha-kitchen.jpg' | asset_url }}" alt="Ayesha Malik daily wellness routine" width="700" height="860" loading="lazy"></div>
-            <div class="ritual-film-content"><small>Daily wellness</small><h3>Maghaz Akhrot</h3><p>Clean taste. Fresh feel. Daily use.</p><div class="ritual-film-meta"><span class="ritual-film-stars">★★★★★</span><span>Ayesha Malik · Lahore</span></div><a class="ritual-film-cta" href="{{ routes.all_products_collection_url }}">View Product</a></div>
-          </article>
-          <article class="ritual-film-card" data-carousel-slide aria-hidden="true">
-            <div class="ritual-film-media"><img class="ritual-film-img" src="{{ 'morganics/review-images/ali-athlete.jpg' | asset_url }}" alt="Ali active lifestyle routine" width="700" height="860" loading="lazy"></div>
-            <div class="ritual-film-content"><small>Active lifestyle</small><h3>Pista Maghaz</h3><p>Easy clean snacking before training and family errands.</p><div class="ritual-film-meta"><span class="ritual-film-stars">★★★★★</span><span>Ali Khan · Islamabad</span></div><a class="ritual-film-cta" href="{{ routes.all_products_collection_url }}">View Product</a></div>
-          </article>
-          <article class="ritual-film-card" data-carousel-slide aria-hidden="true">
-            <div class="ritual-film-media"><img class="ritual-film-img" src="{{ 'morganics/review-images/dr-hira-nutritionist.jpg' | asset_url }}" alt="Dr Hira nutrition guidance routine" width="700" height="860" loading="lazy"></div>
-            <div class="ritual-film-content"><small>Nutrition guidance</small><h3>Pumpkin Seeds</h3><p>Simple ingredients and clear pantry choices for everyday routines.</p><div class="ritual-film-meta"><span class="ritual-film-stars">★★★★★</span><span>Dr. Hira · Karachi</span></div><a class="ritual-film-cta" href="{{ routes.all_products_collection_url }}">View Product</a></div>
-          </article>
+          {% for fallback_image in fallback_images limit: 3 %}
+            <article class="ritual-film-card story-carousel-v2__card{% if forloop.first %} is-active{% endif %}" data-carousel-slide aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+              <div class="ritual-film-media story-carousel-v2__media">
+                <img class="ritual-film-img story-carousel-v2__img" src="{{ fallback_image | asset_url }}" alt="Morganics customer routine" width="900" height="900" loading="lazy">
+              </div>
+              <div class="ritual-film-content story-carousel-v2__content">
+                <div class="story-carousel-v2__topline"><small>Daily wellness</small><span class="ritual-film-stars story-carousel-v2__stars">★★★★★</span></div>
+                <h3>Real Morganics routine</h3>
+                <p>Clean pantry ingredients for daily family routines.</p>
+                <div class="ritual-film-meta story-carousel-v2__meta"><span>Morganics customer</span><a class="ritual-film-cta story-carousel-v2__cta" href="{{ routes.all_products_collection_url }}">View Product</a></div>
+              </div>
+            </article>
+          {% endfor %}
         {% endif %}
       </div>
-      <button class="ritual-film-arrow ritual-film-arrow--next" type="button" data-carousel-next aria-label="Next customer story">›</button>
-      <div class="ritual-film-dots" role="tablist" aria-label="Customer story slides">
-        {% if section.blocks.size > 0 %}
-          {% for block in section.blocks %}
-            <button
-              class="ritual-film-dot{% if forloop.first %} is-active{% endif %}"
-              type="button"
-              role="tab"
-              data-carousel-dot
-              data-slide-index="{{ forloop.index0 }}"
-              aria-label="Show customer story {{ forloop.index }}"
-              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-            ></button>
-          {% endfor %}
-        {% else %}
-          <button class="ritual-film-dot is-active" type="button" role="tab" data-carousel-dot data-slide-index="0" aria-label="Show customer story 1" aria-selected="true"></button>
-          <button class="ritual-film-dot" type="button" role="tab" data-carousel-dot data-slide-index="1" aria-label="Show customer story 2" aria-selected="false"></button>
-          <button class="ritual-film-dot" type="button" role="tab" data-carousel-dot data-slide-index="2" aria-label="Show customer story 3" aria-selected="false"></button>
+
+      <button class="ritual-film-arrow ritual-film-arrow--next story-carousel-v2__arrow story-carousel-v2__arrow--next" type="button" data-carousel-next aria-label="Next customer story">
+        <span aria-hidden="true">›</span>
+      </button>
+
+      <div class="ritual-film-dots story-carousel-v2__dots" role="tablist" aria-label="Customer story slides">
+        {% assign dot_count = section.blocks.size %}
+        {% if dot_count == 0 %}
+          {% assign dot_count = 3 %}
         {% endif %}
+        {% for index in (1..dot_count) %}
+          <button
+            class="ritual-film-dot story-carousel-v2__dot{% if forloop.first %} is-active{% endif %}"
+            type="button"
+            role="tab"
+            data-carousel-dot
+            data-slide-index="{{ forloop.index0 }}"
+            aria-label="Show customer story {{ forloop.index }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          ></button>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -104,7 +150,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Real routines. Real Morganics" },
     { "type": "textarea", "id": "text", "label": "Text", "default": "Daily wellness, family snacks and clean energy through products people actually use." },
     { "type": "checkbox", "id": "enable_autoplay", "label": "Auto-play carousel", "default": true },
-    { "type": "range", "id": "autoplay_speed", "label": "Auto-play speed", "min": 3, "max": 12, "step": 1, "unit": "s", "default": 9 }
+    { "type": "range", "id": "autoplay_speed", "label": "Auto-play speed", "min": 4, "max": 14, "step": 1, "unit": "s", "default": 8 }
   ],
   "blocks": [
     {
@@ -112,6 +158,7 @@
       "name": "Story",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Customer image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
         { "type": "text", "id": "customer_name", "label": "Customer name", "default": "Ayesha Malik" },
         { "type": "text", "id": "location", "label": "Location", "default": "Lahore" },
         { "type": "text", "id": "routine_title", "label": "Routine title", "default": "Daily wellness" },
@@ -130,7 +177,10 @@
       "blocks": [
         { "type": "story", "settings": { "customer_name": "Ayesha Malik", "location": "Lahore", "routine_title": "Daily wellness", "product_label": "Maghaz Akhrot", "testimonial": "Clean taste. Fresh feel. Daily use." } },
         { "type": "story", "settings": { "customer_name": "Ali Khan", "location": "Islamabad", "routine_title": "Active lifestyle", "product_label": "Pista Maghaz", "testimonial": "Easy clean snacking before training and family errands." } },
-        { "type": "story", "settings": { "customer_name": "Dr. Hira", "location": "Karachi", "routine_title": "Nutrition guidance", "product_label": "Pumpkin Seeds", "testimonial": "Simple ingredients and clear pantry choices for everyday routines." } }
+        { "type": "story", "settings": { "customer_name": "Dr. Hira", "location": "Karachi", "routine_title": "Nutrition guidance", "product_label": "Pumpkin Seeds", "testimonial": "Simple ingredients and clear pantry choices for everyday routines." } },
+        { "type": "story", "settings": { "customer_name": "Iqra Shah", "location": "Karachi", "routine_title": "Active routine", "product_label": "Seeds Mix", "testimonial": "A simple snack box that fits busy days." } },
+        { "type": "story", "settings": { "customer_name": "Mahnoor", "location": "Lahore", "routine_title": "Family table", "product_label": "Dry Fruits", "testimonial": "Fresh pantry staples for chai time and gifting." } },
+        { "type": "story", "settings": { "customer_name": "Umar Farooq", "location": "Islamabad", "routine_title": "Office snack", "product_label": "Premium Nuts", "testimonial": "Easy clean energy between meetings." } }
       ]
     }
   ]

@@ -2015,3 +2015,187 @@ body[data-template="product"] .mob-product-bar-btn {
     font-size: 14px !important;
   }
 }
+
+/* Phase 14: header and mobile navigation design-system rhythm cleanup. */
+body .mrg-site-header,
+body .mrg-site-header *,
+body .mobile-drawer,
+body .mobile-drawer *,
+body .mob-bottom-nav,
+body .mob-bottom-nav *,
+body .mob-product-bar,
+body .mob-product-bar * {
+  font-family: var(--font-ui, Poppins, system-ui, sans-serif) !important;
+}
+
+body .mrg-site-header :is(.header-nav a, .header-shop-cta, .cart-header-btn, .header-search-btn, .header-wishlist-btn, .mobile-menu-btn) {
+  min-height: var(--button-height, 42px) !important;
+  border-radius: var(--radius-button, 12px) !important;
+  font-size: var(--type-nav, 14px) !important;
+  line-height: var(--lh-button, 1) !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap !important;
+}
+
+body .mrg-site-header :is(.header-search-panel, .header-search-results, .mobile-drawer, .mega-menu) {
+  border-radius: var(--radius-panel, 16px) !important;
+}
+
+body .mrg-site-header :is(.search-result-row, .search-empty-state, .search-result-footer, .mobile-drawer a, .mobile-drawer button) {
+  border-radius: var(--radius-card, 16px) !important;
+}
+
+body .mrg-site-header :is(.search-result-copy b, .search-result-copy span, .search-result-aside, .mobile-drawer a, .mega-menu a) {
+  font-size: var(--type-card-copy, 14px) !important;
+  line-height: var(--lh-title, 1.18) !important;
+}
+
+body .mob-bottom-nav {
+  gap: var(--grid-gap-tight, 10px) !important;
+  padding: 8px !important;
+}
+
+body .mob-bottom-nav :is(a, button) {
+  border-radius: var(--radius-card, 16px) !important;
+  line-height: var(--lh-title, 1.18) !important;
+}
+
+@media (max-width: 740px) {
+  body .mrg-header-shell {
+    width: min(calc(100% - 20px), 100%) !important;
+    margin-inline: auto !important;
+  }
+
+  body .mrg-site-header :is(.header-search-btn, .header-wishlist-btn, .mobile-menu-btn) {
+    width: 52px !important;
+    min-width: 52px !important;
+    height: 52px !important;
+    min-height: 52px !important;
+  }
+
+  body .mrg-site-header :is(.header-search-panel, .header-search-results) {
+    width: min(calc(100vw - 22px), 560px) !important;
+    left: 11px !important;
+    right: 11px !important;
+    margin-inline: auto !important;
+  }
+}
+
+/* Phase 19: final mega-menu polish for readable cards and stable alignment. */
+@media (min-width: 901px) {
+  body .mrg-site-header .mega-menu {
+    top: calc(100% + 10px) !important;
+    width: min(1120px, calc(100vw - 48px)) !important;
+    border-radius: 20px !important;
+    overflow: visible !important;
+  }
+
+  body .mrg-site-header .mega-panel {
+    grid-template-columns: minmax(300px, 330px) minmax(0, 1fr) !important;
+    gap: 18px !important;
+    padding: 18px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  body .mrg-site-header .mega-intro {
+    min-height: 100% !important;
+    border-radius: 18px !important;
+    padding: clamp(22px, 2vw, 30px) !important;
+  }
+
+  body .mrg-site-header .mega-cats {
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+    gap: 12px !important;
+    align-content: start !important;
+    overflow: visible !important;
+  }
+
+  body .mrg-site-header .mega-cat {
+    grid-template-columns: 84px minmax(0, 1fr) !important;
+    min-height: 94px !important;
+    gap: 14px !important;
+    padding: 10px 16px 10px 10px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    background: rgba(255, 250, 241, .96) !important;
+  }
+
+  body .mrg-site-header .mega-cat-icon {
+    width: 84px !important;
+    height: 74px !important;
+    min-width: 84px !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+  }
+
+  body .mrg-site-header .mega-cat-icon img {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 4px !important;
+    object-fit: contain !important;
+  }
+
+  body .mrg-site-header .mega-cat-copy {
+    display: grid !important;
+    gap: 4px !important;
+    align-content: center !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  body .mrg-site-header .mega-cat b,
+  body .mrg-site-header .mega-cat small {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  body .mrg-site-header .mega-cat b {
+    font-size: clamp(14px, .95vw, 16px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: .005em !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+  }
+
+  body .mrg-site-header .mega-cat small {
+    font-size: clamp(11px, .78vw, 13px) !important;
+    line-height: 1.25 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  body .mrg-site-header .mega-menu {
+    width: min(1010px, calc(100vw - 32px)) !important;
+  }
+
+  body .mrg-site-header .mega-panel {
+    grid-template-columns: 292px minmax(0, 1fr) !important;
+    gap: 14px !important;
+    padding: 14px !important;
+  }
+
+  body .mrg-site-header .mega-cats {
+    gap: 10px !important;
+  }
+
+  body .mrg-site-header .mega-cat {
+    grid-template-columns: 76px minmax(0, 1fr) !important;
+    min-height: 88px !important;
+    gap: 12px !important;
+    padding: 9px 13px 9px 9px !important;
+  }
+
+  body .mrg-site-header .mega-cat-icon {
+    width: 76px !important;
+    height: 68px !important;
+    min-width: 76px !important;
+  }
+}

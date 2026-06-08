@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Delivery coverage",
+            "content": "<p>We aim to deliver across Pakistan where courier service is available. Delivery availability may vary by city, address and courier route.</p>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Order confirmation",
+            "content": "<p>Orders may be confirmed by call, WhatsApp, SMS or email before dispatch, especially for Cash on Delivery orders.</p>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Delivery timeline",
+            "content": "<p>Delivery time depends on:</p><ul><li>City and courier route</li><li>Order confirmation timing</li><li>Stock availability</li><li>Public holidays or weather/courier delays</li></ul>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Cash on Delivery",
+            "content": "<p>COD is available where supported. The customer must provide an active phone number and complete address for confirmation.</p>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Shipping charges",
+            "content": "<p>Shipping charges, if applicable, will be shown at checkout or confirmed before dispatch.</p>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Failed delivery",
+            "content": "<p>If the courier cannot reach the customer, the parcel may be returned. Morganics may reconfirm details before resending.</p>"
+          }
+        },
+        "content_07": {
+          "type": "content",
+          "settings": {
+            "heading": "Damaged parcel",
+            "content": "<p>If the parcel arrives visibly damaged, take clear photos before opening and contact support quickly.</p>"
+          }
+        },
+        "content_08": {
+          "type": "content",
+          "settings": {
+            "heading": "Contact",
+            "content": "<ul><li>WhatsApp: +92 322 3338110</li><li>Support: support@morganics.store</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05",
+        "content_06",
+        "content_07",
+        "content_08"
+      ],
+      "settings": {
+        "eyebrow": "Delivery",
+        "heading": "Shipping Policy",
+        "intro": "Morganics ships premium dry fruits, nuts, seeds, herbs, botanicals and pantry products across Pakistan through available courier services.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

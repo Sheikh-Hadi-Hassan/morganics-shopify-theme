@@ -3,6 +3,9 @@
     <div class="mini-inquiry-left">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       <p>{{ section.settings.text }}</p>
+      {% if section.settings.urdu_text != blank %}
+        <p class="mini-inquiry-urdu" dir="rtl" lang="ur">{{ section.settings.urdu_text }}</p>
+      {% endif %}
     </div>
     {% assign whatsapp_base = section.settings.whatsapp_url | default: 'https://wa.me/923223338110' %}
     <form class="inquiry-form mini-inquiry-form" aria-label="Quick product inquiry" data-whatsapp-form data-whatsapp-base="{{ whatsapp_base }}">
@@ -33,6 +36,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Can't Find It?" },
     { "type": "textarea", "id": "text", "label": "Text", "default": "Need a herb, seed, dry fruit or specialty ingredient not listed? Send your name, number and what you need - we will check availability and guide you." },
+    { "type": "textarea", "id": "urdu_text", "label": "Urdu text", "default": "کیا کوئی جڑی بوٹی، بیج، خشک میوہ یا خاص اجزا ہماری فہرست میں موجود نہیں؟ اپنا نام، نمبر اور مطلوبہ چیز ہمیں بھیجیں - ہم دستیابی چیک کر کے آپ کی رہنمائی کریں گے۔" },
     { "type": "text", "id": "name_placeholder", "label": "Name placeholder", "default": "Your name" },
     { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "default": "Phone / WhatsApp" },
     { "type": "text", "id": "need_placeholder", "label": "Need placeholder", "default": "What do you need? (e.g. Tukhm-e-Malanga)" },

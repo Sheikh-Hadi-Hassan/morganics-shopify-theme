@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Product information",
+            "content": "<p>We try to keep product information accurate, including names, prices, images, variants and descriptions. Natural products may vary in shape, size, color, texture and aroma.</p>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Product availability",
+            "content": "<p>Product availability may change due to sourcing, season, quality checks or stock limitations. If an item is unavailable after order placement, Morganics may contact you for alternatives or cancellation.</p>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Pricing",
+            "content": "<p>Prices may change without prior notice due to market conditions, sourcing costs, packaging costs or seasonal availability.</p>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Orders",
+            "content": "<p>Morganics may confirm orders before dispatch. Orders with incomplete information, unreachable phone numbers or unsupported delivery areas may be delayed or cancelled.</p>"
+          }
+        },
+        "content_05": {
+          "type": "content",
+          "settings": {
+            "heading": "Use of products",
+            "content": "<p>Products should be used responsibly according to common food/pantry use or qualified guidance where required. Herbs, botanicals and specialty items are not medical treatments.</p>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Customer responsibility",
+            "content": "<p>Customers are responsible for providing correct order, contact and delivery information.</p>"
+          }
+        },
+        "content_07": {
+          "type": "content",
+          "settings": {
+            "heading": "Limitation",
+            "content": "<p>Morganics is not responsible for misuse, incorrect storage, allergy issues or use against professional advice.</p>"
+          }
+        },
+        "content_08": {
+          "type": "content",
+          "settings": {
+            "heading": "Contact",
+            "content": "<p>For order or policy questions, contact support@morganics.store.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04",
+        "content_05",
+        "content_06",
+        "content_07",
+        "content_08"
+      ],
+      "settings": {
+        "eyebrow": "Terms",
+        "heading": "Terms & Conditions",
+        "intro": "By using the Morganics website or placing an order, you agree to these terms and conditions.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

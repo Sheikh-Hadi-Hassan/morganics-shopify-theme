@@ -47,10 +47,12 @@
   --font-ui: Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-hero: var(--font-display);
   --font-editorial: var(--font-ui);
-  --font-urdu: var(--font-ui);
+  --font-urdu: "Baloo Bhaijaan 2", Poppins, system-ui, sans-serif;
   --font-primary--family: var(--font-ui);
   --font-primary--style: normal;
   --font-primary--weight: 400;
+  --mrg-font-display: var(--font-display);
+  --mrg-font-ui: var(--font-ui);
 
   --type-hero: clamp(58px, 8vw, 142px);
   --type-display-xl: clamp(38px, 8vw, 108px);
@@ -70,6 +72,12 @@
   --type-product-title: clamp(14px, 1.2vw, 17px);
   --type-product-price: clamp(13px, 1vw, 15px);
   --type-badge: clamp(10px, .8vw, 11px);
+  --type-section-title: clamp(30px, 4.1vw, 64px);
+  --type-section-copy: clamp(14px, 1.2vw, 18px);
+  --type-card-title: clamp(14px, 1.05vw, 17px);
+  --type-card-copy: clamp(12.5px, .95vw, 15px);
+  --type-form: clamp(13px, 1vw, 15px);
+  --type-footer-title: clamp(13px, .95vw, 15px);
 
   --lh-display: .9;
   --lh-heading: 1.04;
@@ -98,10 +106,23 @@
   --section-pad-x: clamp(18px, 5vw, 72px);
   --card-pad: clamp(14px, 1.8vw, 24px);
   --grid-gap: clamp(12px, 1.5vw, 18px);
+  --section-pad-y-compact: clamp(32px, 5vw, 58px);
+  --section-pad-y-roomy: clamp(52px, 8vw, 96px);
+  --section-gutter: clamp(16px, 4.5vw, 72px);
+  --container-width: min(calc(100% - (var(--section-gutter) * 2)), var(--container-max));
+  --card-pad-tight: clamp(10px, 1vw, 14px);
+  --card-pad-normal: clamp(14px, 1.4vw, 20px);
+  --grid-gap-tight: clamp(10px, 1vw, 14px);
+  --grid-gap-normal: clamp(14px, 1.5vw, 22px);
+  --grid-gap-wide: clamp(18px, 2vw, 30px);
   --content-gap: var(--space-24);
   --heading-gap: var(--space-16);
   --button-gap: var(--space-12);
   --form-gap: var(--space-16);
+  --button-height-sm: 36px;
+  --button-height: 42px;
+  --button-height-lg: 48px;
+  --input-height: 46px;
 
   --radius-2xs: 4px;
   --radius-xs: 6px;

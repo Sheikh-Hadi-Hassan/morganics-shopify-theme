@@ -18,11 +18,27 @@
             "heading": "Customer Care",
             "menu": "footer"
           }
+        },
+        "trust_menu": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Trust & Policies",
+            "menu": "footer"
+          }
+        },
+        "business_menu": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Business",
+            "menu": "footer"
+          }
         }
       },
       "block_order": [
         "shop_menu",
-        "care_menu"
+        "care_menu",
+        "trust_menu",
+        "business_menu"
       ],
       "settings": {
         "brand_text": "Premium natural pantry essentials for Pakistani homes, sourced with care and packed with purity.",

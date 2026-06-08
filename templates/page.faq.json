@@ -1,0 +1,180 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Ordering and delivery",
+            "content": "<p>Delivery, COD and order confirmation basics for Morganics customers.</p>"
+          }
+        },
+        "faq_item_02": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you deliver across Pakistan?",
+            "answer": "<p>Yes. Morganics offers Pakistan-wide delivery where courier service is available.</p>"
+          }
+        },
+        "faq_item_03": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer Cash on Delivery?",
+            "answer": "<p>Yes, Cash on Delivery is available where supported by courier and store settings.</p>"
+          }
+        },
+        "faq_item_04": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Delivery time depends on your city, courier route and order confirmation. Major cities are usually faster than remote areas.</p>"
+          }
+        },
+        "faq_item_05": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I order through WhatsApp?",
+            "answer": "<p>Yes. You can send product names, quantities and your city on WhatsApp for guidance.</p>"
+          }
+        },
+        "content_06": {
+          "type": "content",
+          "settings": {
+            "heading": "Products",
+            "content": "<p>Product selection, natural variation and sourcing guidance.</p>"
+          }
+        },
+        "faq_item_07": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are Morganics products medicines?",
+            "answer": "<p>No. Morganics products are food, pantry, herbal or traditional ingredients. They are not medicines and do not diagnose, treat, cure or prevent disease.</p>"
+          }
+        },
+        "faq_item_08": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I choose the right product?",
+            "answer": "<p>Start with your routine: snacking, breakfast, tea-time, gifting, summer drinks, cooking or traditional pantry use. You can also contact us for guidance.</p>"
+          }
+        },
+        "faq_item_09": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are product colors and shapes always the same?",
+            "answer": "<p>Natural products may vary in shape, size, color and texture. This is normal and does not always indicate a quality issue.</p>"
+          }
+        },
+        "faq_item_10": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you sell products not listed on the website?",
+            "answer": "<p>If a herb, seed, dry fruit or specialty ingredient is not listed, send us the name and quantity. We will check availability.</p>"
+          }
+        },
+        "content_11": {
+          "type": "content",
+          "settings": {
+            "heading": "Storage and safety",
+            "content": "<p>Basic guidance before using and storing natural pantry products.</p>"
+          }
+        },
+        "faq_item_12": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I store dry fruits and nuts?",
+            "answer": "<p>Keep them sealed in a cool, dry place away from sunlight, heat and moisture. Refrigerate after opening in hot or humid weather if needed.</p>"
+          }
+        },
+        "faq_item_13": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I store herbs and botanicals?",
+            "answer": "<p>Keep them sealed, dry and away from strong odors, moisture and direct sunlight.</p>"
+          }
+        },
+        "faq_item_14": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are nuts safe for everyone?",
+            "answer": "<p>Nuts may not suit customers with nut allergies. Avoid products that conflict with your allergy or dietary advice.</p>"
+          }
+        },
+        "faq_item_15": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Should pregnant, nursing or medicated customers use botanicals?",
+            "answer": "<p>Use herbs, botanicals and specialty ingredients with professional guidance if pregnant, nursing, medicated, allergic or managing a health condition.</p>"
+          }
+        },
+        "content_16": {
+          "type": "content",
+          "settings": {
+            "heading": "Returns and support",
+            "content": "<p>How Morganics handles damaged parcels, wrong items and bulk requests.</p>"
+          }
+        },
+        "faq_item_17": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if my parcel is damaged?",
+            "answer": "<p>Contact support with order details and clear photos of the parcel/product as soon as possible.</p>"
+          }
+        },
+        "faq_item_18": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I receive the wrong item?",
+            "answer": "<p>Contact Morganics support with your order number and product photos. We will review and guide you.</p>"
+          }
+        },
+        "faq_item_19": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer bulk orders?",
+            "answer": "<p>Yes. Contact us for corporate gifting, Ramadan/Eid boxes, pantry restocking or custom packs.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "faq_item_02",
+        "faq_item_03",
+        "faq_item_04",
+        "faq_item_05",
+        "content_06",
+        "faq_item_07",
+        "faq_item_08",
+        "faq_item_09",
+        "faq_item_10",
+        "content_11",
+        "faq_item_12",
+        "faq_item_13",
+        "faq_item_14",
+        "faq_item_15",
+        "content_16",
+        "faq_item_17",
+        "faq_item_18",
+        "faq_item_19"
+      ],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Frequently Asked Questions",
+        "intro": "Here are the most common questions customers ask before ordering Morganics products.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

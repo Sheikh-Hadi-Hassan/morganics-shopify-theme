@@ -1,6 +1,99 @@
 {% liquid
   assign fallback_copy = section.settings.fallback_copy
   assign fallback_banner = section.settings.fallback_banner_asset | default: 'morganics/banners/nuts-dry-fruits.jpg'
+  assign collection_intro_heading = section.settings.intro_heading
+  assign collection_intro_text = section.settings.intro_text
+  assign collection_benefit_1 = section.settings.benefit_1
+  assign collection_benefit_2 = section.settings.benefit_2
+  assign collection_benefit_3 = section.settings.benefit_3
+  assign collection_usage_guidance = 'Use in sensible quantities according to product type, recipe needs, or qualified professional guidance.'
+  assign collection_storage_guidance = 'Keep sealed in a cool, dry place away from sunlight, heat and moisture. Use clean, dry utensils. Refrigerate sensitive opened packs in hot or humid weather when needed.'
+  assign collection_safety_note = 'These are food, pantry, herbal or traditional ingredients, not medical treatments.'
+  assign collection_faq_use = 'It is used for practical Pakistani pantry routines, family serving, gifting where relevant, and product-specific recipes or preparations.'
+
+  case collection.handle
+    when 'roots-botanicals-traditional-ingredients', 'roots-adaptogens'
+      assign collection_intro_heading = 'Traditional pantry routines and guided ingredient use.'
+      assign collection_intro_text = 'Selected roots, botanicals and traditional ingredients for Pakistani homes that need clear usage, storage and precaution guidance without exaggerated promises.'
+      assign collection_benefit_1 = 'Traditional Pantry'
+      assign collection_benefit_2 = 'Guided Use'
+      assign collection_benefit_3 = 'Careful Storage'
+      assign collection_usage_guidance = 'Use only in sensible quantities according to familiar traditional practice or professional guidance.'
+      assign collection_safety_note = 'Use botanicals with professional guidance if pregnant, nursing, medicated, allergic or managing a health condition.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as traditional pantry routines, guided wellness use and specialist ingredient needs.'
+    when 'dry-fruits-heritage-mewa', 'nuts-dry-fruits'
+      assign collection_intro_heading = 'Tea-time, Ramadan tables, breakfast bowls and gift trays.'
+      assign collection_intro_text = 'Choose dry fruits and heritage mewa for daily serving, family hospitality, gifting and breakfast routines with freshness-led packing.'
+      assign collection_benefit_1 = 'Tea-time'
+      assign collection_benefit_2 = 'Gifting'
+      assign collection_benefit_3 = 'Family Pantry'
+      assign collection_usage_guidance = 'Eat as a snack, pair with nuts, add to breakfast, serve at tea-time, or use in desserts and gift boxes.'
+      assign collection_safety_note = 'Use sensible portions, especially if managing sugar intake or specific dietary advice.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as tea-time, Ramadan tables, lunch boxes, breakfast bowls and gift trays.'
+    when 'gums-specialties', 'oil-gums-specialties'
+      assign collection_intro_heading = 'Cooling drinks, texture and specialty pantry needs.'
+      assign collection_intro_text = 'Explore gums, resins and specialty ingredients for traditional recipes, summer drinks and careful pantry use.'
+      assign collection_benefit_1 = 'Cooling Drinks'
+      assign collection_benefit_2 = 'Specialty Pantry'
+      assign collection_benefit_3 = 'Recipe Use'
+      assign collection_usage_guidance = 'Use according to familiar recipes or qualified guidance; some specialty ingredients need soaking or preparation.'
+      assign collection_safety_note = 'Specialty products may not suit everyone. Use carefully and seek professional guidance when needed.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as cooling drinks, desserts, texture and traditional pantry use.'
+    when 'herbs-daily-botanicals', 'herbs-botanicals'
+      assign collection_intro_heading = 'Herbs and botanicals for tea, kitchen and daily routines.'
+      assign collection_intro_text = 'Shop daily botanicals for aroma, tea, kitchen use and traditional pantry routines with sensible-use guidance.'
+      assign collection_benefit_1 = 'Tea'
+      assign collection_benefit_2 = 'Kitchen Use'
+      assign collection_benefit_3 = 'Daily Botanicals'
+      assign collection_usage_guidance = 'Use in tea, cooking, infusions or traditional preparations in small sensible amounts.'
+      assign collection_safety_note = 'Herbs may not suit every body; ask a qualified professional if pregnant, nursing, medicated or managing a condition.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as tea, kitchen, aroma, traditional pantry and careful daily routines.'
+    when 'natural-sweeteners-salts', 'natural-sweetners-salts'
+      assign collection_intro_heading = 'Natural sweetness and pantry salts for everyday kitchens.'
+      assign collection_intro_text = 'Use in tea, breakfast, desserts, cooking and family pantry restocking according to your taste and dietary needs.'
+      assign collection_benefit_1 = 'Tea'
+      assign collection_benefit_2 = 'Desserts'
+      assign collection_benefit_3 = 'Kitchen Pantry'
+      assign collection_usage_guidance = 'Use in tea, milk, desserts, breakfast, baking or everyday kitchen recipes as preferred.'
+      assign collection_safety_note = 'Natural sweeteners are still sweet foods; use according to your dietary needs.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as tea, breakfast, desserts, cooking and family pantry restocking.'
+    when 'premium-nuts'
+      assign collection_intro_heading = 'Premium nuts for snacking, desserts and gifting.'
+      assign collection_intro_text = 'Select almonds, cashews, pistachios, walnuts and premium nuts for clean snacking, tea-time serving and gift-ready routines.'
+      assign collection_benefit_1 = 'Snacking'
+      assign collection_benefit_2 = 'Desserts'
+      assign collection_benefit_3 = 'Gift-ready'
+      assign collection_usage_guidance = 'Snack directly, add to desserts, breakfast bowls, trail mixes, kheer, halwa or gift boxes.'
+      assign collection_safety_note = 'Contains tree nuts and may not suit customers with nut allergies.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as clean snacking, tea-time serving, breakfast bowls, desserts and premium gifting.'
+    when 'premium-snacks-pantry-staples'
+      assign collection_intro_heading = 'Premium snacks and pantry staples for practical daily use.'
+      assign collection_intro_text = 'Build breakfast bowls, family snack trays and everyday pantry routines with clean, easy-to-use staples.'
+      assign collection_benefit_1 = 'Breakfast'
+      assign collection_benefit_2 = 'Snacking'
+      assign collection_benefit_3 = 'Pantry Staples'
+      assign collection_usage_guidance = 'Use as snacks, breakfast additions, bowl toppings, lunch prep or pantry restocking items.'
+      assign collection_safety_note = 'Check product-specific storage and suitability before use.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as healthy snacking, breakfast, lunch bowls and family pantry.'
+    when 'seeds-functional-grains', 'seeds-grains'
+      assign collection_intro_heading = 'Seeds and functional grains for bowls, drinks and modern pantry routines.'
+      assign collection_intro_text = 'Use seeds and grains in breakfast bowls, soaked drinks, smoothies, salads and baking with sensible portions.'
+      assign collection_benefit_1 = 'Breakfast Bowls'
+      assign collection_benefit_2 = 'Soaked Drinks'
+      assign collection_benefit_3 = 'Clean Portions'
+      assign collection_usage_guidance = 'Sprinkle on bowls or salads, mix into yogurt or smoothies, or soak where the product is commonly used that way.'
+      assign collection_safety_note = 'Use moderate portions and drink enough water when using fiber-rich seeds.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as breakfast bowls, soaked drinks, salads, baking and clean snack portions.'
+    when 'wellness-blends'
+      assign collection_intro_heading = 'Simple guided pantry blends for easy daily routines.'
+      assign collection_intro_text = 'Choose familiar blends and specialty mixes with clear storage and precaution guidance. These are pantry products, not medical treatments.'
+      assign collection_benefit_1 = 'Guided Routine'
+      assign collection_benefit_2 = 'Pantry Blends'
+      assign collection_benefit_3 = 'Sensible Use'
+      assign collection_usage_guidance = 'Use according to pack instructions or qualified guidance where specialty ingredients are included.'
+      assign collection_safety_note = 'Blends are not medicines. Use with professional guidance if pregnant, nursing, medicated or managing a health condition.'
+      assign collection_faq_use = 'It is used for practical Pakistani routines such as simple guided pantry routines and easy daily use.'
+  endcase
 %}
 
 {% render 'morganics-collection-hero', collection: collection, fallback_copy: fallback_copy, fallback_banner: fallback_banner %}
@@ -49,13 +142,13 @@
   <div class="intro-card">
     <div>
       <span class="eyebrow">{{ section.settings.intro_eyebrow }}</span>
-      <h2>{{ collection.metafields.custom.ritual | default: section.settings.intro_heading }}</h2>
-      <p>{{ collection.metafields.custom.usage | default: section.settings.intro_text }}</p>
+      <h2>{{ collection.metafields.custom.ritual | default: collection_intro_heading }}</h2>
+      <p>{{ collection.metafields.custom.usage | default: collection_intro_text }}</p>
     </div>
     <div class="intro-benefits" aria-label="Collection benefits">
-      {% if section.settings.benefit_1 != blank %}<span>{{ section.settings.benefit_1 }}</span>{% endif %}
-      {% if section.settings.benefit_2 != blank %}<span>{{ section.settings.benefit_2 }}</span>{% endif %}
-      {% if section.settings.benefit_3 != blank %}<span>{{ section.settings.benefit_3 }}</span>{% endif %}
+      {% if collection_benefit_1 != blank %}<span>{{ collection_benefit_1 }}</span>{% endif %}
+      {% if collection_benefit_2 != blank %}<span>{{ collection_benefit_2 }}</span>{% endif %}
+      {% if collection_benefit_3 != blank %}<span>{{ collection_benefit_3 }}</span>{% endif %}
     </div>
   </div>
 </section>
@@ -161,6 +254,49 @@
   </section>
 {% endpaginate %}
 
+{% if section.settings.show_collection_guidance %}
+  <section class="morganics-collection-guidance" aria-label="{{ collection.title | escape }} guidance">
+    <div class="morganics-collection-guidance__inner">
+      <div class="morganics-collection-guidance__header">
+        <span class="eyebrow">{{ section.settings.guidance_eyebrow }}</span>
+        <h2>{{ collection.title }} guidance</h2>
+      </div>
+      <div class="morganics-collection-guidance__grid">
+        <article>
+          <h3>How to use</h3>
+          <p>{{ collection.metafields.custom.usage_guidance | default: collection_usage_guidance }}</p>
+        </article>
+        <article>
+          <h3>Storage</h3>
+          <p>{{ collection.metafields.custom.storage_guidance | default: collection_storage_guidance }}</p>
+        </article>
+        <article>
+          <h3>Safety note</h3>
+          <p>{{ collection.metafields.custom.safety_note | default: collection_safety_note }}</p>
+        </article>
+      </div>
+      <div class="morganics-collection-guidance__faq">
+        <details>
+          <summary>What is this category used for?</summary>
+          <p>{{ collection_faq_use }}</p>
+        </details>
+        <details>
+          <summary>How should I choose a product from this category?</summary>
+          <p>Compare pack size, freshness needs, taste, use case, storage needs and any personal dietary restrictions.</p>
+        </details>
+        <details>
+          <summary>Are these products medicines?</summary>
+          <p>These are food, pantry, herbal or traditional ingredients, not medical treatments.</p>
+        </details>
+        <details>
+          <summary>How should I store these products?</summary>
+          <p>{{ collection_storage_guidance }}</p>
+        </details>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
 {% schema %}
 {
   "name": "Morganics collection",
@@ -186,6 +322,8 @@
     { "type": "text", "id": "filter_button_label", "label": "Filter button label", "default": "Apply Filters" },
     { "type": "text", "id": "sort_button_label", "label": "Sort button label", "default": "Apply Sort" },
     { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add on cards", "default": true },
+    { "type": "checkbox", "id": "show_collection_guidance", "label": "Show collection guidance and FAQ", "default": true },
+    { "type": "text", "id": "guidance_eyebrow", "label": "Guidance eyebrow", "default": "Collection Guide" },
     { "type": "text", "id": "empty_heading", "label": "Empty heading", "default": "No products found." },
     { "type": "textarea", "id": "empty_text", "label": "Empty text", "default": "This collection is ready for Shopify products. Add products or adjust filters to continue." }
   ]

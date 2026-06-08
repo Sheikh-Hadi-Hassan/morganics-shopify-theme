@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "morganics-static-page",
+      "blocks": {
+        "content_01": {
+          "type": "content",
+          "settings": {
+            "heading": "Buying guides",
+            "content": "<ul><li>How to choose premium dry fruits online in Pakistan</li><li>How to choose nuts for gifting, desserts and daily snacking</li><li>How to compare pack sizes before ordering</li></ul>"
+          }
+        },
+        "content_02": {
+          "type": "content",
+          "settings": {
+            "heading": "Storage guides",
+            "content": "<ul><li>How to store dry fruits in Pakistani weather</li><li>How to store nuts after opening</li><li>How to keep seeds and herbs fresh</li></ul>"
+          }
+        },
+        "content_03": {
+          "type": "content",
+          "settings": {
+            "heading": "Routine guides",
+            "content": "<ul><li>Breakfast bowl ingredients for busy mornings</li><li>Tea-time mewa and dry fruit ideas</li><li>Summer cooling pantry ingredients</li><li>Ramadan and Eid gifting ideas</li></ul>"
+          }
+        },
+        "content_04": {
+          "type": "content",
+          "settings": {
+            "heading": "Safety guides",
+            "content": "<ul><li>How to use herbs and botanicals responsibly</li><li>Allergy and nut safety basics</li><li>Storage signs to check before use</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "content_01",
+        "content_02",
+        "content_03",
+        "content_04"
+      ],
+      "settings": {
+        "eyebrow": "Guides",
+        "heading": "Morganics Guides",
+        "intro": "Practical guides for choosing, storing and using natural pantry ingredients in Pakistani homes.",
+        "show_cta": true,
+        "cta_eyebrow": "Need help?",
+        "cta_heading": "Ask Morganics before you order.",
+        "cta_text": "Message us with the product name, desired quantity and your city. Our team will guide you with availability and next steps.",
+        "cta_primary_label": "WhatsApp Morganics",
+        "cta_primary_url": "https://wa.me/923223338110",
+        "cta_primary_new_tab": true,
+        "cta_secondary_label": "Contact page",
+        "cta_secondary_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

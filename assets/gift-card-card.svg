@@ -1,0 +1,12 @@
+<svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="gift-card-title">
+  <title id="gift-card-title">Gift card</title>
+  <rect width="300" height="200" rx="18" fill="#0B241D"/>
+  <rect x="1" y="1" width="298" height="198" rx="17" stroke="#DFA524" stroke-opacity=".42" stroke-width="2"/>
+  <circle cx="252" cy="38" r="46" fill="#285D53" fill-opacity=".42"/>
+  <circle cx="42" cy="166" r="58" fill="#DFA524" fill-opacity=".16"/>
+  <path d="M40 62h220v76H40V62Z" fill="#F7F1E6" fill-opacity=".08"/>
+  <path d="M72 96h156" stroke="#F7F1E6" stroke-opacity=".68" stroke-width="10" stroke-linecap="round"/>
+  <path d="M72 120h92" stroke="#DFA524" stroke-width="8" stroke-linecap="round"/>
+  <path d="M48 40h64v34H48V40Z" fill="#DFA524" fill-opacity=".92"/>
+  <path d="M80 40v34M48 57h64" stroke="#0B241D" stroke-opacity=".55" stroke-width="4"/>
+</svg>

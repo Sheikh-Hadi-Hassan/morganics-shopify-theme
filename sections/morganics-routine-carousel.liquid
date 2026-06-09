@@ -12,9 +12,44 @@
     <div class="routine-cards">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
-          {% assign icon_file = block.settings.icon_asset | default: 'morganics-category-icons-dry-fruits.png' %}
+          {% liquid
+            assign requested_icon = block.settings.icon_asset | default: 'morganics-category-icons-dry-fruits.png' | split: '?' | first | split: '/' | last | strip
+            assign requested_icon_key = requested_icon | remove: '.png' | remove: '.webp' | remove: '.jpg' | remove: '.jpeg' | remove: 'morganics-category-icons-' | remove: '-icon'
+            assign requested_icon_is_small = false
+            if requested_icon contains '-icon'
+              assign requested_icon_is_small = true
+            endif
+            assign icon_file = ''
+            case requested_icon_key
+              when 'dry-fruits', 'nuts', 'herbs-botanicals', 'seeds-grains', 'natural-sweeteners', 'oils-gums-specialties'
+                if requested_icon_is_small
+                  assign icon_file = 'morganics-category-icons-' | append: requested_icon_key | append: '-icon' | append: '.png'
+                else
+                  assign icon_file = 'morganics-category-icons-' | append: requested_icon_key | append: '.png'
+                endif
+              when 'roots-adaptogens', 'root-botanicals', 'roots-botanicals'
+                if requested_icon_is_small
+                  assign icon_file = 'morganics-category-icons-roots-adaptogens-icon.png'
+                else
+                  assign icon_file = 'morganics-category-icons-roots-adaptogens.png'
+                endif
+              when '8'
+                assign icon_file = 'morganics-category-icons-8.png'
+              when '9'
+                assign icon_file = 'morganics-category-icons-9.png'
+            endcase
+            if icon_file == blank
+              assign icon_file = 'morganics-category-icons-dry-fruits.png'
+            endif
+          %}
           <a class="routine-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-            <span class="rc-thumb"><img src="{{ icon_file | asset_url }}" alt="{{ block.settings.nav | escape }} routine" width="96" height="96" loading="lazy"></span>
+            <span class="rc-thumb">
+              {% if icon_file != blank %}
+                <img src="{{ icon_file | asset_url }}" alt="{{ block.settings.nav | escape }} routine" width="96" height="96" loading="lazy">
+              {% else %}
+                <span class="category-icon-fallback" aria-hidden="true"></span>
+              {% endif %}
+            </span>
             <span class="rc-copy"><small>{{ block.settings.nav }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.text }}</em></span>
             <span class="rc-arrow">→</span>
           </a>

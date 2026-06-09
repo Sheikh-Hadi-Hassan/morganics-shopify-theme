@@ -1,0 +1,13 @@
+{
+  "name": "morganics-shopify-theme",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "audit:images": "node scripts/audit-broken-images.mjs"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3",
+    "playwright": "^1.57.0"
+  }
+}

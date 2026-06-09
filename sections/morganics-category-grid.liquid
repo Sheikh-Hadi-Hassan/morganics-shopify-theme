@@ -9,7 +9,34 @@
       {% for block in section.blocks %}
       {% liquid
         assign block_collection = block.settings.collection
-        assign icon_file = block.settings.icon_asset | default: 'morganics-category-icons-herbs-botanicals.png'
+        assign requested_icon = block.settings.icon_asset | default: 'morganics-category-icons-herbs-botanicals.png' | split: '?' | first | split: '/' | last | strip
+        assign requested_icon_key = requested_icon | remove: '.png' | remove: '.webp' | remove: '.jpg' | remove: '.jpeg' | remove: 'morganics-category-icons-' | remove: '-icon'
+        assign requested_icon_is_small = false
+        if requested_icon contains '-icon'
+          assign requested_icon_is_small = true
+        endif
+        assign icon_file = ''
+        case requested_icon_key
+          when 'dry-fruits', 'nuts', 'herbs-botanicals', 'seeds-grains', 'natural-sweeteners', 'oils-gums-specialties'
+            if requested_icon_is_small
+              assign icon_file = 'morganics-category-icons-' | append: requested_icon_key | append: '-icon' | append: '.png'
+            else
+              assign icon_file = 'morganics-category-icons-' | append: requested_icon_key | append: '.png'
+            endif
+          when 'roots-adaptogens', 'root-botanicals', 'roots-botanicals'
+            if requested_icon_is_small
+              assign icon_file = 'morganics-category-icons-roots-adaptogens-icon.png'
+            else
+              assign icon_file = 'morganics-category-icons-roots-adaptogens.png'
+            endif
+          when '8'
+            assign icon_file = 'morganics-category-icons-8.png'
+          when '9'
+            assign icon_file = 'morganics-category-icons-9.png'
+        endcase
+        if icon_file == blank
+          assign icon_file = 'morganics-category-icons-herbs-botanicals.png'
+        endif
         assign card_title = block.settings.title
         assign card_description = block.settings.description
         assign card_url = block.settings.link | default: routes.collections_url
@@ -26,7 +53,11 @@
       %}
       <a class="category-icon-card" href="{{ card_url }}" {{ block.shopify_attributes }}>
         <span class="category-icon-art">
-          <img src="{{ icon_file | asset_url }}" alt="{{ card_title | escape }} icon" width="260" height="220" loading="lazy">
+          {% if icon_file != blank %}
+            <img src="{{ icon_file | asset_url }}" alt="{{ card_title | escape }} icon" width="260" height="220" loading="lazy">
+          {% else %}
+            <span class="category-icon-fallback" aria-hidden="true"></span>
+          {% endif %}
         </span>
         <span class="category-icon-copy">
           <small>{{ card_kicker }}</small>

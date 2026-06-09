@@ -1551,11 +1551,19 @@ a {
 .urdu-name {
   margin-top: 6px;
   color: var(--earth);
-  font-family: var(--font-ui);
+  font-family: var(--font-urdu, "Baloo Bhaijaan 2", Poppins, system-ui, sans-serif);
   font-size: 20px;
   font-weight: 700;
   direction: rtl;
   text-align: right;
+}
+
+.morganics-urdu {
+  font-family: var(--font-urdu, "Baloo Bhaijaan 2", Poppins, system-ui, sans-serif) !important;
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 .detail-price,

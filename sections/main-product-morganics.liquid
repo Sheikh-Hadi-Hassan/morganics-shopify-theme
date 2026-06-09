@@ -10,12 +10,28 @@
   assign usage = product.metafields.custom.usage
   assign storage = product.metafields.custom.storage
   assign precautions = product.metafields.custom.precautions
-  assign faqs = product.metafields.custom.faqs
+  assign faqs = product.metafields.custom.faq_s | default: product.metafields.custom.faqs
   assign category_copy = product.metafields.custom.category_copy | default: section.settings.category_copy
   assign category_title = product.metafields.custom.category_title | default: category_label
+  assign description_html = product.description
+  assign visible_description = description_html | split: '<h2>FAQs</h2>' | first
+  assign visible_description = visible_description | split: '<h2>FAQ</h2>' | first
+  assign visible_description = visible_description | split: '<h3>FAQs</h3>' | first
+  assign visible_description = visible_description | split: '<h3>FAQ</h3>' | first
+  assign visible_description = visible_description | split: '<h2>Faqs</h2>' | first
+  assign visible_description = visible_description | split: '<h3>Faqs</h3>' | first
+  assign visible_description = visible_description | split: '<p>FAQs</p>' | first
+  assign visible_description = visible_description | split: '<p>FAQ</p>' | first
+  assign visible_description = visible_description | split: 'FAQs' | first
+  assign description_faq_source = description_html | strip_html
 %}
 
-<section class="product-detail" data-morganics-product>
+<section
+  class="product-detail"
+  data-morganics-product
+  data-product-faq-source="{{ faqs.value | default: faqs | escape }}"
+  data-product-description-faq-source="{{ description_faq_source | escape }}"
+>
   <div class="detail-image reveal">
     {% if featured_media %}
       {{ featured_media | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
@@ -33,13 +49,13 @@
 
   <div class="detail-content reveal">
     <span class="eyebrow">{{ category_label }} · {{ sku_label }}</span>
-    <h1>{{ product.title }}</h1>
-    {% if urdu_name != blank %}<div class="urdu-name">{{ urdu_name }}</div>{% endif %}
+    <h1 data-urdu-wrap>{{ product.title }}</h1>
+    {% if urdu_name != blank %}<div class="urdu-name morganics-urdu" lang="ur" dir="rtl">{{ urdu_name }}</div>{% endif %}
 
     <div class="detail-price">{% render 'morganics-price', product: product, variant: current_variant %}</div>
 
     {% if short_description != blank %}
-      <p>{{ short_description }}</p>
+      <p data-urdu-wrap>{{ short_description }}</p>
     {% endif %}
 
     <div class="buy-box">
@@ -93,8 +109,8 @@
       {% render 'morganics-info-box', title: section.settings.precautions_title, content: precautions, fallback: section.settings.precautions_fallback %}
     </div>
 
-    {% if product.description != blank %}
-      <div class="description-html">{{ product.description }}</div>
+    {% if visible_description != blank %}
+      <div class="description-html" data-product-description data-urdu-wrap>{{ visible_description }}</div>
     {% endif %}
 
     {%- render 'morganics-faq-accordion', faqs: faqs, section: section, heading: section.settings.faq_heading -%}

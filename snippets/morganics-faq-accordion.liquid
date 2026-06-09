@@ -1,5 +1,5 @@
 {% liquid
-  assign faq_source = faqs | default: blank
+  assign faq_source = faqs.value | default: faqs | default: blank
   assign fallback_one_q = 'Is this a medicine?'
   assign fallback_one_a = 'No. Morganics product information is for ingredient education and practical ecommerce guidance, not medical advice.'
   assign fallback_two_q = 'How should I store this product?'
@@ -13,20 +13,37 @@
     <div class="product-faq-accordion" data-faq-accordion>
       {% if faq_source != blank %}
         {% assign lines = faq_source | newline_to_br | split: '<br />' %}
+        {% assign pending_question = blank %}
         {% for line in lines %}
           {% assign item = line | strip %}
           {% if item != blank %}
-            {% assign parts = item | split: '|' %}
-            {% assign question = parts[0] | default: item | strip %}
-            {% assign answer = parts[1] | default: fallback_one_a | strip %}
-            <div class="product-faq-item">
-              <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-{{ forloop.index }}">
-                <span>{{ question }}</span><span class="faq-icon" aria-hidden="true"></span>
-              </button>
-              <div class="product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}" hidden>
-                <p>{{ answer }}</p>
+            {% assign item_prefix = item | slice: 0, 2 | downcase %}
+            {% if item_prefix == 'q:' %}
+              {% assign pending_question = item | remove_first: 'Q:' | remove_first: 'q:' | strip %}
+            {% elsif item_prefix == 'a:' and pending_question != blank %}
+              {% assign answer = item | remove_first: 'A:' | remove_first: 'a:' | strip %}
+              <div class="product-faq-item">
+                <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-{{ forloop.index }}">
+                  <span>{{ pending_question }}</span><span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}" hidden>
+                  <p>{{ answer }}</p>
+                </div>
               </div>
-            </div>
+              {% assign pending_question = blank %}
+            {% elsif item contains '|' %}
+              {% assign parts = item | split: '|' %}
+              {% assign question = parts[0] | remove_first: 'Q:' | remove_first: 'q:' | strip %}
+              {% assign answer = parts[1] | remove_first: 'A:' | remove_first: 'a:' | strip %}
+              <div class="product-faq-item">
+                <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-{{ forloop.index }}">
+                  <span>{{ question }}</span><span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}" hidden>
+                  <p>{{ answer }}</p>
+                </div>
+              </div>
+            {% endif %}
           {% endif %}
         {% endfor %}
       {% else %}

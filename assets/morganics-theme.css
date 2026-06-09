@@ -937,7 +937,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("morganics/lifestyle/family-routine.png") center/cover no-repeat;
+  background: url("morganics-lifestyle-family-routine.png") center/cover no-repeat;
   opacity: .22;
 }
 
@@ -3373,7 +3373,7 @@ body.cart-open {
   align-items: center;
   background:
     linear-gradient(115deg, rgba(13,43,37,.94), rgba(13,43,37,.72)),
-    url('morganics/lifestyle/family-routine.png');
+    url('morganics-lifestyle-family-routine.png');
   background-size: cover;
   background-position: center;
   color: var(--cream);
@@ -4895,7 +4895,7 @@ body[data-template="index"] .marquee span {
   align-items: center !important;
   background:
     linear-gradient(90deg, rgba(247,241,230,.95) 0%, rgba(247,241,230,.83) 34%, rgba(247,241,230,.22) 62%, rgba(247,241,230,.05) 100%),
-    url('morganics/lifestyle/family-routine.png') center right / cover no-repeat !important;
+    url('morganics-lifestyle-family-routine.png') center right / cover no-repeat !important;
   color: var(--forest) !important;
 }
 
@@ -5277,7 +5277,7 @@ body[data-template="index"] .marquee span {
     padding: 48px 18px !important;
     background:
       linear-gradient(180deg, rgba(247,241,230,.94), rgba(247,241,230,.74)),
-      url('morganics/lifestyle/family-routine.png') center / cover no-repeat !important;
+      url('morganics-lifestyle-family-routine.png') center / cover no-repeat !important;
   }
 
   .routine-cards {
@@ -16487,7 +16487,7 @@ body:has(.morganics-password) {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background: #06160f;
+  background: #05130d;
 }
 
 .morganics-password {
@@ -16496,18 +16496,21 @@ body:has(.morganics-password) {
   --launch-forest: #06241b;
   --launch-forest-2: #0d4a3d;
   --launch-gold: #edb51d;
-  --launch-glass: rgba(15, 64, 51, .62);
+  --launch-glass: rgba(255, 248, 233, .075);
+  --launch-line: rgba(255, 248, 233, .16);
+  --launch-muted: rgba(255, 248, 233, .74);
   position: relative;
   min-height: 100vh;
   overflow: hidden;
   isolation: isolate;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
   color: var(--launch-cream);
   background:
-    radial-gradient(circle at 34% 30%, rgba(237, 181, 29, .38), transparent 28%),
-    radial-gradient(circle at 72% 42%, rgba(67, 128, 67, .28), transparent 34%),
-    linear-gradient(130deg, #05130d 0%, #123720 44%, #071812 100%);
+    radial-gradient(circle at 16% 22%, rgba(237, 181, 29, .18), transparent 24rem),
+    radial-gradient(circle at 82% 34%, rgba(80, 137, 75, .22), transparent 26rem),
+    radial-gradient(circle at 52% 118%, rgba(237, 181, 29, .12), transparent 34rem),
+    linear-gradient(135deg, #030d09 0%, #0b2c1f 46%, #061610 100%);
 }
 
 .morganics-password::before {
@@ -16516,21 +16519,21 @@ body:has(.morganics-password) {
   inset: 0;
   z-index: -3;
   background-image:
-    linear-gradient(rgba(255, 248, 233, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 248, 233, .04) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .2));
+    linear-gradient(rgba(255, 248, 233, .028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 233, .024) 1px, transparent 1px);
+  background-size: 92px 92px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, .48), transparent 70%);
 }
 
 .morganics-password::after {
   content: "";
   position: absolute;
-  inset: auto -10% -28% -10%;
+  inset: auto -14% -32% -14%;
   z-index: -2;
-  height: 54%;
+  height: 52%;
   background:
-    radial-gradient(ellipse at center, rgba(237, 181, 29, .26), transparent 45%),
-    linear-gradient(to top, rgba(2, 10, 7, .88), transparent);
+    radial-gradient(ellipse at center, rgba(237, 181, 29, .13), transparent 46%),
+    linear-gradient(to top, rgba(2, 10, 7, .92), transparent);
 }
 
 .morganics-password__bar {
@@ -16539,50 +16542,68 @@ body:has(.morganics-password) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(calc(100% - 32px), 1660px);
-  margin: 18px auto 0;
-  padding: 12px 14px 12px 18px;
-  border: 1px solid rgba(255, 248, 233, .22);
-  border-radius: 18px;
-  background: rgba(255, 248, 233, .9);
-  box-shadow: 0 22px 60px rgba(0, 0, 0, .22);
-  backdrop-filter: blur(18px);
+  width: min(calc(100% - clamp(28px, 5vw, 96px)), 1560px);
+  margin: clamp(14px, 2.6vw, 28px) auto 0;
+  padding: 10px 12px 10px 16px;
+  border: 1px solid rgba(255, 248, 233, .095);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 248, 233, .085), rgba(255, 248, 233, .026));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .14);
+  backdrop-filter: blur(18px) saturate(1.08);
 }
 
 .morganics-password__brand {
   display: inline-flex;
   align-items: center;
-  width: min(220px, 46vw);
+  width: min(206px, 48vw);
 }
 
 .morganics-password__brand img {
   display: block;
   width: 100%;
   height: auto;
+  filter: brightness(0) invert(1) sepia(.08) saturate(.8) brightness(1.18);
+  opacity: .95;
 }
 
 .morganics-password__access {
   position: relative;
-  color: var(--launch-forest);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  color: var(--launch-cream);
   font-family: var(--font-ui, Poppins, sans-serif);
+}
+
+.morganics-password .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .morganics-password__access summary {
   list-style: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 46px;
-  padding: 0 16px;
-  border: 1px solid rgba(16, 68, 56, .16);
-  border-radius: 14px;
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 1px solid rgba(255, 248, 233, .18);
+  border-radius: 50%;
   cursor: pointer;
-  color: var(--launch-forest);
-  background: rgba(255, 255, 255, .58);
-  font-size: 13px;
-  font-weight: 800;
-  white-space: nowrap;
-  transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+  color: var(--launch-cream);
+  background: rgba(255, 248, 233, .08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+  transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
 }
 
 .morganics-password__access summary::-webkit-details-marker {
@@ -16591,52 +16612,58 @@ body:has(.morganics-password) {
 
 .morganics-password__access summary:hover,
 .morganics-password__access[open] summary {
-  transform: translateY(-1px);
-  background: #fffaf0;
-  box-shadow: 0 14px 28px rgba(16, 68, 56, .12);
+  transform: translateY(-2px);
+  border-color: rgba(237, 181, 29, .44);
+  background: rgba(255, 248, 233, .12);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+
+.morganics-password__access summary:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(237, 181, 29, .18), 0 14px 30px rgba(0, 0, 0, .2);
 }
 
 .morganics-password__access summary span:first-child {
+  position: relative;
   display: inline-grid;
   place-items: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 9px;
+  width: 20px;
+  height: 20px;
   color: transparent;
-  background: rgba(17, 75, 63, .1);
-  position: relative;
 }
 
 .morganics-password__access summary span:first-child::before {
   content: "";
   width: 12px;
-  height: 9px;
-  border: 2px solid var(--launch-forest-2);
+  height: 10px;
+  border: 1.8px solid currentColor;
   border-radius: 3px;
-  transform: translateY(3px);
+  color: rgba(255, 248, 233, .92);
+  transform: translateY(4px);
 }
 
 .morganics-password__access summary span:first-child::after {
   content: "";
   position: absolute;
-  width: 9px;
-  height: 8px;
-  border: 2px solid var(--launch-forest-2);
+  top: 2px;
+  width: 10px;
+  height: 9px;
+  border: 1.8px solid rgba(255, 248, 233, .92);
   border-bottom: 0;
   border-radius: 9px 9px 0 0;
-  top: 5px;
 }
 
 .morganics-password__access-panel {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 12px);
   right: 0;
-  width: min(360px, calc(100vw - 36px));
+  width: min(374px, calc(100vw - 32px));
   padding: 14px;
-  border: 1px solid rgba(16, 68, 56, .16);
+  border: 1px solid rgba(255, 248, 233, .14);
   border-radius: 18px;
-  background: rgba(255, 248, 233, .98);
-  box-shadow: 0 26px 70px rgba(0, 0, 0, .26);
+  background: rgba(255, 248, 233, .96);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .32);
+  backdrop-filter: blur(18px);
 }
 
 .morganics-password__access-form label {
@@ -16651,7 +16678,7 @@ body:has(.morganics-password) {
 
 .morganics-password__access-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
 }
 
@@ -16659,10 +16686,10 @@ body:has(.morganics-password) {
 .morganics-password__notify-row input {
   min-width: 0;
   border: 1px solid rgba(16, 68, 56, .18);
-  border-radius: 14px;
+  border-radius: 16px;
   outline: 0;
   color: var(--launch-forest);
-  background: rgba(255, 255, 255, .78);
+  background: rgba(255, 255, 255, .82);
   font-family: var(--font-ui, Poppins, sans-serif);
   font-weight: 700;
   transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
@@ -16676,15 +16703,15 @@ body:has(.morganics-password) {
 
 .morganics-password__access-row input:focus,
 .morganics-password__notify-row input:focus {
-  border-color: rgba(237, 181, 29, .72);
+  border-color: rgba(237, 181, 29, .78);
   background: #fffaf0;
-  box-shadow: 0 0 0 4px rgba(237, 181, 29, .16);
+  box-shadow: 0 0 0 4px rgba(237, 181, 29, .17);
 }
 
 .morganics-password__access-row button,
 .morganics-password__notify-row button {
   border: 0;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   color: #092a21;
   background: var(--launch-gold);
@@ -16709,13 +16736,13 @@ body:has(.morganics-password) {
 .morganics-password__content {
   position: relative;
   z-index: 4;
-  align-self: center;
-  width: min(calc(100% - 40px), 760px);
-  margin: clamp(34px, 8vh, 90px) auto 0;
+  align-self: start;
+  width: min(88vw, 620px);
+  margin: clamp(30px, 4.8vh, 58px) auto clamp(28px, 5vh, 56px);
   text-align: center;
   display: grid;
   justify-items: center;
-  gap: 18px;
+  gap: clamp(9px, 1.05vw, 12px);
 }
 
 .morganics-password__eyebrow,
@@ -16725,88 +16752,114 @@ body:has(.morganics-password) {
   font-family: var(--font-ui, Poppins, sans-serif);
   font-size: clamp(11px, .9vw, 13px);
   font-weight: 900;
-  letter-spacing: .18em;
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
 
 .morganics-password__eyebrow {
-  padding: 9px 16px;
-  border: 1px solid rgba(237, 181, 29, .48);
-  border-radius: 999px;
-  background: rgba(12, 48, 39, .58);
+  padding: 8px 14px;
+  border: 1px solid rgba(237, 181, 29, .34);
+  border-radius: 18px;
+  background: rgba(255, 248, 233, .065);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+  backdrop-filter: blur(14px);
 }
 
 .morganics-password h1 {
+  max-width: 620px;
   margin: 0;
   color: var(--launch-cream);
   font-family: var(--font-display, Brownberries, Poppins, sans-serif);
-  font-size: clamp(58px, 9vw, 154px);
+  font-size: clamp(42px, 4vw, 88px);
   font-weight: 900;
-  line-height: .82;
-  letter-spacing: .01em;
-  text-shadow: 0 24px 70px rgba(0, 0, 0, .36);
+  line-height: .95;
+  letter-spacing: 0;
+  text-wrap: balance;
+  text-shadow: 0 22px 60px rgba(0, 0, 0, .32);
 }
 
 .morganics-password__intro {
-  max-width: 620px;
+  max-width: 560px;
   margin: 0;
-  color: rgba(255, 248, 233, .78);
+  color: var(--launch-muted);
   font-family: var(--font-ui, Poppins, sans-serif);
-  font-size: clamp(15px, 1.35vw, 20px);
+  font-size: clamp(12px, .85vw, 15px);
   font-weight: 650;
-  line-height: 1.58;
+  line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .morganics-password__launch-card {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  min-height: 56px;
-  padding: 9px 18px 9px 14px;
-  border: 1px solid rgba(255, 248, 233, .18);
-  border-radius: 16px;
+  gap: 10px;
+  min-height: 46px;
+  padding: 7px 15px 7px 13px;
+  border: 1px solid var(--launch-line);
+  border-radius: 18px;
   background: var(--launch-glass);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 20px 52px rgba(0, 0, 0, .2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 20px 52px rgba(0, 0, 0, .16);
   backdrop-filter: blur(16px);
+  transform: scale(.92);
+  transform-origin: center;
 }
 
 .morganics-password__launch-card strong {
   color: var(--launch-cream);
   font-family: var(--font-ui, Poppins, sans-serif);
-  font-size: clamp(15px, 1.3vw, 20px);
+  font-size: clamp(13px, .95vw, 16px);
   font-weight: 900;
 }
 
 .morganics-password__notify-form {
-  width: min(100%, 680px);
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.morganics-password__notify-form > label.visually-hidden {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 0 4px !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  color: rgba(255, 248, 233, .86);
+  font-family: var(--font-ui, Poppins, sans-serif);
+  font-size: clamp(14px, 1vw, 18px);
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .morganics-password__notify-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
-  padding: 8px;
+  gap: 8px;
+  padding: 6px;
   border: 1px solid rgba(255, 248, 233, .2);
   border-radius: 18px;
-  background: rgba(255, 248, 233, .94);
-  box-shadow: 0 28px 72px rgba(0, 0, 0, .24);
+  background: rgba(255, 248, 233, .12);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .08);
+  backdrop-filter: blur(16px);
 }
 
 .morganics-password__notify-row input {
-  height: 56px;
-  padding: 0 18px;
-  font-size: 15px;
+  height: clamp(48px, 4vw, 52px);
+  padding: 0 16px;
+  font-size: clamp(13px, .9vw, 15px);
 }
 
 .morganics-password__notify-row button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-width: 154px;
-  height: 56px;
-  padding: 0 22px;
-  font-size: 14px;
+  gap: 8px;
+  min-width: 132px;
+  height: clamp(48px, 4vw, 52px);
+  padding: 0 clamp(16px, 1.6vw, 20px);
+  font-size: clamp(13px, .9vw, 14px);
   white-space: nowrap;
 }
 
@@ -16819,16 +16872,17 @@ body:has(.morganics-password) {
   width: 100%;
   margin: 0 0 10px;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   font-family: var(--font-ui, Poppins, sans-serif);
   font-size: 13px;
   font-weight: 750;
   text-align: left;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .16);
 }
 
 .morganics-password__form-message--success {
   color: #063226;
-  background: rgba(237, 181, 29, .88);
+  background: rgba(237, 181, 29, .9);
 }
 
 .morganics-password__form-message--error {
@@ -16849,16 +16903,19 @@ body:has(.morganics-password) {
   margin: 0;
   padding: 0;
   list-style: none;
+  max-width: min(540px, 90vw);
+  transform: scale(.92);
+  transform-origin: center top;
 }
 
 .morganics-password__signals li {
-  padding: 9px 12px;
-  border: 1px solid rgba(255, 248, 233, .13);
-  border-radius: 999px;
-  color: rgba(255, 248, 233, .75);
-  background: rgba(255, 255, 255, .06);
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 248, 233, .12);
+  border-radius: 16px;
+  color: rgba(255, 248, 233, .7);
+  background: rgba(255, 255, 255, .045);
   font-family: var(--font-ui, Poppins, sans-serif);
-  font-size: 12px;
+  font-size: clamp(11px, .72vw, 12px);
   font-weight: 800;
 }
 
@@ -16869,7 +16926,6 @@ body:has(.morganics-password) {
   pointer-events: none;
 }
 
-.morganics-password__pouch,
 .morganics-password__stone,
 .morganics-password__pile,
 .morganics-password__plant,
@@ -16879,116 +16935,106 @@ body:has(.morganics-password) {
   user-select: none;
 }
 
-.morganics-password__pouch {
-  left: 50%;
-  bottom: clamp(54px, 8vh, 92px);
-  width: min(36vw, 520px);
-  height: auto;
-  transform: translateX(-50%);
-  filter: drop-shadow(0 42px 70px rgba(0, 0, 0, .38));
-  opacity: .88;
-  animation: passwordPouchFloat 7s ease-in-out infinite;
-}
-
 .morganics-password__stone {
   left: 50%;
-  bottom: clamp(-34px, -3vh, -8px);
-  width: min(58vw, 760px);
+  bottom: clamp(-70px, -7vh, -34px);
+  width: min(46vw, 620px);
   height: auto;
-  transform: translateX(-50%);
-  filter: drop-shadow(0 32px 44px rgba(0, 0, 0, .46));
+  transform: translateX(-50%) scale(.86);
+  transform-origin: center bottom;
+  z-index: 1;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
 }
 
 .morganics-password__pile {
   left: 50%;
-  bottom: clamp(20px, 4vh, 48px);
-  width: min(50vw, 680px);
+  bottom: clamp(-2px, 1.5vh, 16px);
+  width: min(34vw, 450px);
   height: auto;
-  transform: translateX(-50%);
-  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, .32));
+  transform: translateX(-50%) scale(.86);
+  transform-origin: center bottom;
+  z-index: 2;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
 }
 
 .morganics-password__plant {
-  opacity: .5;
-  filter: blur(.2px) drop-shadow(0 28px 40px rgba(0, 0, 0, .32));
+  opacity: .28;
+  filter: blur(.2px) drop-shadow(0 28px 40px rgba(0, 0, 0, .3));
 }
 
 .morganics-password__plant--left {
-  left: -5%;
-  bottom: -4%;
-  width: min(30vw, 430px);
+  left: -7%;
+  bottom: -7%;
+  width: min(27vw, 390px);
   height: auto;
 }
 
 .morganics-password__plant--right {
-  right: -4%;
-  bottom: 4%;
-  width: min(25vw, 360px);
+  right: -7%;
+  bottom: 0;
+  width: min(23vw, 330px);
   height: auto;
 }
 
 .morganics-password__float {
   z-index: 3;
-  width: clamp(34px, 5vw, 78px);
+  width: clamp(24px, 3.4vw, 48px);
   height: auto;
-  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .32));
-  animation: passwordFruitOrbit 9s ease-in-out infinite;
+  opacity: .48;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .3));
+  animation: passwordFruitDrift 10s ease-in-out infinite;
 }
 
 .morganics-password__float--almond {
-  left: 58%;
+  left: 18%;
   top: 28%;
 }
 
 .morganics-password__float--date {
-  left: 26%;
-  top: 44%;
+  left: 11%;
+  top: 62%;
   animation-delay: -2s;
 }
 
 .morganics-password__float--fig {
-  right: 22%;
-  top: 46%;
+  right: 12%;
+  top: 34%;
   animation-delay: -4s;
 }
 
 .morganics-password__float--cashew {
-  left: 35%;
-  bottom: 25%;
+  left: 23%;
+  bottom: 18%;
   animation-delay: -6s;
 }
 
 .morganics-password__float--raisin {
-  right: 34%;
-  bottom: 28%;
+  right: 22%;
+  bottom: 20%;
   animation-delay: -3s;
 }
 
-@keyframes passwordPouchFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-.6deg); }
-  50% { transform: translateX(-50%) translateY(-14px) rotate(.7deg); }
-}
-
-@keyframes passwordFruitOrbit {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
-  50% { transform: translate3d(12px, -18px, 0) rotate(12deg); }
+@keyframes passwordFruitDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-5deg); }
+  50% { transform: translate3d(8px, -12px, 0) rotate(8deg); }
 }
 
 @media (max-width: 1180px) {
   .morganics-password__content {
-    margin-top: clamp(28px, 5vh, 64px);
-  }
-
-  .morganics-password__pouch {
-    width: min(48vw, 450px);
+    width: min(86vw, 600px);
+    margin-top: clamp(24px, 4vh, 48px);
   }
 
   .morganics-password__stone {
-    width: min(76vw, 700px);
+    width: min(60vw, 560px);
   }
 
   .morganics-password__pile {
-    width: min(68vw, 620px);
+    width: min(46vw, 420px);
   }
 }
 
@@ -17000,51 +17046,56 @@ body:has(.morganics-password) {
   .morganics-password__bar {
     width: min(calc(100% - 20px), 560px);
     margin-top: 10px;
-    padding: 10px;
-    border-radius: 16px;
+    padding: 8px 9px 8px 12px;
   }
 
   .morganics-password__brand {
-    width: min(172px, 48vw);
+    width: min(166px, 52vw);
+  }
+
+  .morganics-password__access {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
   }
 
   .morganics-password__access summary {
-    min-height: 42px;
-    padding: 0 10px;
-    font-size: 0;
-  }
-
-  .morganics-password__access summary span:first-child {
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
   }
 
   .morganics-password__content {
-    width: min(calc(100% - 24px), 520px);
-    margin-top: 38px;
-    gap: 14px;
+    width: min(92vw, 500px);
+    margin-top: 24px;
+    margin-bottom: 42px;
+    gap: 10px;
   }
 
   .morganics-password h1 {
     max-width: 360px;
-    font-size: clamp(46px, 14vw, 76px);
-    line-height: .88;
+    font-size: clamp(38px, 13vw, 56px);
+    line-height: .95;
   }
 
   .morganics-password__intro {
-    font-size: 14px;
-    line-height: 1.5;
+    max-width: 390px;
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .morganics-password__launch-card {
-    min-height: 50px;
-    padding: 8px 13px;
-    border-radius: 14px;
+    min-height: 44px;
+    padding: 7px 12px;
+  }
+
+  .morganics-password__notify-form {
+    width: min(100%, 92vw);
   }
 
   .morganics-password__notify-row {
     grid-template-columns: 1fr;
-    border-radius: 16px;
+    border-radius: 18px;
+    gap: 10px;
   }
 
   .morganics-password__notify-row input,
@@ -17053,42 +17104,39 @@ body:has(.morganics-password) {
     height: 52px;
   }
 
-  .morganics-password__stage {
-    opacity: .78;
-  }
-
-  .morganics-password__pouch {
-    bottom: 80px;
-    width: min(70vw, 330px);
-  }
-
   .morganics-password__stone {
-    bottom: 18px;
-    width: min(108vw, 520px);
+    bottom: -42px;
+    width: min(82vw, 390px);
+    transform: translateX(-50%) scale(.72);
   }
 
   .morganics-password__pile {
-    bottom: 58px;
-    width: min(92vw, 460px);
+    bottom: 6px;
+    width: min(58vw, 300px);
+    transform: translateX(-50%) scale(.72);
   }
 
   .morganics-password__plant--left {
-    width: 210px;
-    left: -70px;
-    bottom: 18px;
+    width: 190px;
+    left: -78px;
+    bottom: 8px;
   }
 
   .morganics-password__plant--right {
-    width: 185px;
-    right: -62px;
-    bottom: 108px;
+    width: 170px;
+    right: -72px;
+    bottom: 74px;
   }
 
-  .morganics-password__float--almond { left: 70%; top: 50%; }
-  .morganics-password__float--date { left: 7%; top: 58%; }
-  .morganics-password__float--fig { right: 7%; top: 60%; }
-  .morganics-password__float--cashew { left: 23%; bottom: 23%; }
-  .morganics-password__float--raisin { right: 25%; bottom: 26%; }
+  .morganics-password__float {
+    opacity: .34;
+  }
+
+  .morganics-password__float--almond { left: 76%; top: 30%; }
+  .morganics-password__float--date { left: 6%; top: 60%; }
+  .morganics-password__float--fig { right: 6%; top: 62%; }
+  .morganics-password__float--cashew { left: 14%; bottom: 18%; }
+  .morganics-password__float--raisin { right: 16%; bottom: 22%; }
 }
 
 @media (max-width: 420px) {
@@ -17097,26 +17145,26 @@ body:has(.morganics-password) {
   }
 
   .morganics-password__content {
-    margin-top: 28px;
+    margin-top: 24px;
   }
 
   .morganics-password h1 {
     max-width: 320px;
-    font-size: clamp(42px, 13vw, 54px);
+    font-size: clamp(40px, 12.6vw, 52px);
   }
 
   .morganics-password__intro {
     max-width: 330px;
   }
 
-  .morganics-password__pouch {
-    bottom: 92px;
-    width: 76vw;
+  .morganics-password__launch-card {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .morganics-password__pouch,
   .morganics-password__float {
     animation: none;
   }

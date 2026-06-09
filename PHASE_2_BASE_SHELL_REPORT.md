@@ -15,13 +15,13 @@ Built the Shopify base shell only. No product page, collection page, cart, check
 - `sections/header.liquid`
   - Replaced starter header with Morganics header shell.
   - Supports editable logo, announcement text, Shopify navigation menu, search link, header CTA, contact info, and mobile menu.
-  - Uses copied fallback logo from `assets/morganics/logos/morganics-logo-header.png`.
+  - Uses copied fallback logo from `assets/morganics-logos-morganics-logo-header.png`.
   - Uses Shopify routes where available.
 
 - `sections/footer.liquid`
   - Replaced starter footer with Morganics footer shell.
   - Supports editable footer logo, trust strip, brand text, menu columns, text columns, contact info, social links, and bottom policy menu.
-  - Uses copied fallback logo from `assets/morganics/logos/morganics-logo-footer.png`.
+  - Uses copied fallback logo from `assets/morganics-logos-morganics-logo-footer.png`.
 
 - `sections/header-group.json`
   - Points the header group at the updated `header` section.

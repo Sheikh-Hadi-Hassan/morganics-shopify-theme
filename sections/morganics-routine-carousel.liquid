@@ -12,7 +12,7 @@
     <div class="routine-cards">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
-          {% assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/dry-fruits.png' %}
+          {% assign icon_file = block.settings.icon_asset | default: 'morganics-category-icons-dry-fruits.png' %}
           <a class="routine-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
             <span class="rc-thumb"><img src="{{ icon_file | asset_url }}" alt="{{ block.settings.nav | escape }} routine" width="96" height="96" loading="lazy"></span>
             <span class="rc-copy"><small>{{ block.settings.nav }}</small><b>{{ block.settings.title }}</b><em>{{ block.settings.text }}</em></span>
@@ -20,11 +20,11 @@
           </a>
         {% endfor %}
       {% else %}
-        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=family"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/dry-fruits.png' | asset_url }}" alt="Family routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Family</small><b>Daily Family Table</b><em>Dates, mewa and nuts for home tables and hospitality</em></span><span class="rc-arrow">→</span></a>
-        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=energy"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/nuts.png' | asset_url }}" alt="Energy routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Energy</small><b>Daily Energy</b><em>Badam, chia and dates for breakfast, office and school</em></span><span class="rc-arrow">→</span></a>
-        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=cooling"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/seeds-grains.png' | asset_url }}" alt="Cooling routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Cooling</small><b>Summer Cooling</b><em>Goond Katira, chia and seeds for hot Pakistani days</em></span><span class="rc-arrow">→</span></a>
-        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=digestive"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/herbs-botanicals.png' | asset_url }}" alt="Digestive routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Digestive</small><b>Digestive Pantry</b><em>Ajwain, isabgol and fruit salt for careful daily use</em></span><span class="rc-arrow">→</span></a>
-        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=gifting"><span class="rc-thumb"><img src="{{ 'morganics/category-icons/natural-sweeteners.png' | asset_url }}" alt="Gifting routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Gifting</small><b>Ramadan &amp; Gifting</b><em>Dates, saffron, honey and mewa for thoughtful occasions</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=family"><span class="rc-thumb"><img src="{{ 'morganics-category-icons-dry-fruits.png' | asset_url }}" alt="Family routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Family</small><b>Daily Family Table</b><em>Dates, mewa and nuts for home tables and hospitality</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=energy"><span class="rc-thumb"><img src="{{ 'morganics-category-icons-nuts.png' | asset_url }}" alt="Energy routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Energy</small><b>Daily Energy</b><em>Badam, chia and dates for breakfast, office and school</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=cooling"><span class="rc-thumb"><img src="{{ 'morganics-category-icons-seeds-grains.png' | asset_url }}" alt="Cooling routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Cooling</small><b>Summer Cooling</b><em>Goond Katira, chia and seeds for hot Pakistani days</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=digestive"><span class="rc-thumb"><img src="{{ 'morganics-category-icons-herbs-botanicals.png' | asset_url }}" alt="Digestive routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Digestive</small><b>Digestive Pantry</b><em>Ajwain, isabgol and fruit salt for careful daily use</em></span><span class="rc-arrow">→</span></a>
+        <a class="routine-card" href="{{ routes.all_products_collection_url }}?q=gifting"><span class="rc-thumb"><img src="{{ 'morganics-category-icons-natural-sweeteners.png' | asset_url }}" alt="Gifting routine" width="96" height="96" loading="lazy"></span><span class="rc-copy"><small>Gifting</small><b>Ramadan &amp; Gifting</b><em>Dates, saffron, honey and mewa for thoughtful occasions</em></span><span class="rc-arrow">→</span></a>
       {% endif %}
     </div>
   </div>
@@ -51,7 +51,7 @@
         { "type": "text", "id": "nav", "label": "Label", "default": "Family" },
         { "type": "text", "id": "title", "label": "Title", "default": "Daily Family Table" },
         { "type": "textarea", "id": "text", "label": "Text", "default": "Dates, mewa and nuts for home tables and hospitality" },
-        { "type": "text", "id": "icon_asset", "label": "Icon asset", "default": "morganics/category-icons/dry-fruits.png" },
+        { "type": "text", "id": "icon_asset", "label": "Icon asset", "default": "morganics-category-icons-dry-fruits.png" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
@@ -60,11 +60,11 @@
     {
       "name": "Morganics routine carousel",
       "blocks": [
-        { "type": "routine", "settings": { "nav": "Family", "title": "Daily Family Table", "text": "Dates, mewa and nuts for home tables and hospitality", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
-        { "type": "routine", "settings": { "nav": "Energy", "title": "Daily Energy", "text": "Badam, chia and dates for breakfast, office and school", "icon_asset": "morganics/category-icons/nuts.png" } },
-        { "type": "routine", "settings": { "nav": "Cooling", "title": "Summer Cooling", "text": "Goond Katira, chia and seeds for hot Pakistani days", "icon_asset": "morganics/category-icons/seeds-grains.png" } },
-        { "type": "routine", "settings": { "nav": "Digestive", "title": "Digestive Pantry", "text": "Ajwain, isabgol and fruit salt for careful daily use", "icon_asset": "morganics/category-icons/herbs-botanicals.png" } },
-        { "type": "routine", "settings": { "nav": "Gifting", "title": "Ramadan & Gifting", "text": "Dates, saffron, honey and mewa for thoughtful occasions", "icon_asset": "morganics/category-icons/natural-sweeteners.png" } }
+        { "type": "routine", "settings": { "nav": "Family", "title": "Daily Family Table", "text": "Dates, mewa and nuts for home tables and hospitality", "icon_asset": "morganics-category-icons-dry-fruits.png" } },
+        { "type": "routine", "settings": { "nav": "Energy", "title": "Daily Energy", "text": "Badam, chia and dates for breakfast, office and school", "icon_asset": "morganics-category-icons-nuts.png" } },
+        { "type": "routine", "settings": { "nav": "Cooling", "title": "Summer Cooling", "text": "Goond Katira, chia and seeds for hot Pakistani days", "icon_asset": "morganics-category-icons-seeds-grains.png" } },
+        { "type": "routine", "settings": { "nav": "Digestive", "title": "Digestive Pantry", "text": "Ajwain, isabgol and fruit salt for careful daily use", "icon_asset": "morganics-category-icons-herbs-botanicals.png" } },
+        { "type": "routine", "settings": { "nav": "Gifting", "title": "Ramadan & Gifting", "text": "Dates, saffron, honey and mewa for thoughtful occasions", "icon_asset": "morganics-category-icons-natural-sweeteners.png" } }
       ]
     }
   ]

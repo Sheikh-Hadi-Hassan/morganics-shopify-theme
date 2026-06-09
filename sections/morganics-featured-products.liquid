@@ -19,7 +19,7 @@
       {% endfor %}
     {% else %}
       {% for block in section.blocks %}
-        {% assign image_file = block.settings.image_asset | default: 'morganics/products/16-pista-maghaz.jpg' %}
+        {% assign image_file = block.settings.image_asset | default: 'morganics-products-16-pista-maghaz.jpg' %}
         <a class="product-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
           <div class="product-img"><img src="{{ image_file | asset_url }}" alt="{{ block.settings.title | escape }}" width="700" height="700" loading="lazy"></div>
           <div class="product-info">
@@ -58,7 +58,7 @@
         { "type": "text", "id": "title", "label": "Title", "default": "Pista Maghaz" },
         { "type": "text", "id": "meta", "label": "Meta", "default": "Nuts" },
         { "type": "text", "id": "price", "label": "Price", "default": "Shop product" },
-        { "type": "text", "id": "image_asset", "label": "Image asset", "default": "morganics/products/16-pista-maghaz.jpg" },
+        { "type": "text", "id": "image_asset", "label": "Image asset", "default": "morganics-products-16-pista-maghaz.jpg" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
@@ -67,10 +67,10 @@
     {
       "name": "Morganics featured products",
       "blocks": [
-        { "type": "placeholder_product", "settings": { "title": "Pista Maghaz", "meta": "Nuts", "image_asset": "morganics/products/16-pista-maghaz.jpg" } },
-        { "type": "placeholder_product", "settings": { "title": "Kajo Sada", "meta": "Nuts", "image_asset": "morganics/products/17-kajo-sada.jpg" } },
-        { "type": "placeholder_product", "settings": { "title": "Khajoor Ajwa", "meta": "Dry Fruits", "image_asset": "morganics/products/58-khajoor-ajwa.jpg" } },
-        { "type": "placeholder_product", "settings": { "title": "Goond Katira", "meta": "Gums & Specialties", "image_asset": "morganics/products/49-goond-katira.jpg" } }
+        { "type": "placeholder_product", "settings": { "title": "Pista Maghaz", "meta": "Nuts", "image_asset": "morganics-products-16-pista-maghaz.jpg" } },
+        { "type": "placeholder_product", "settings": { "title": "Kajo Sada", "meta": "Nuts", "image_asset": "morganics-products-17-kajo-sada.jpg" } },
+        { "type": "placeholder_product", "settings": { "title": "Khajoor Ajwa", "meta": "Dry Fruits", "image_asset": "morganics-products-58-khajoor-ajwa.jpg" } },
+        { "type": "placeholder_product", "settings": { "title": "Goond Katira", "meta": "Gums & Specialties", "image_asset": "morganics-products-49-goond-katira.jpg" } }
       ]
     }
   ]

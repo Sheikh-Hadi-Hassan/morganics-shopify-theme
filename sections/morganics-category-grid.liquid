@@ -9,7 +9,7 @@
       {% for block in section.blocks %}
       {% liquid
         assign block_collection = block.settings.collection
-        assign icon_file = block.settings.icon_asset | default: 'morganics/category-icons/herbs-botanicals.png'
+        assign icon_file = block.settings.icon_asset | default: 'morganics-category-icons-herbs-botanicals.png'
         assign card_title = block.settings.title
         assign card_description = block.settings.description
         assign card_url = block.settings.link | default: routes.collections_url
@@ -46,7 +46,7 @@
               {% if collection.image %}
                 {{ collection.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: collection.title }}
               {% else %}
-                <img src="{{ 'morganics/category-icons/herbs-botanicals.png' | asset_url }}" alt="{{ collection.title | escape }} icon" width="260" height="220" loading="lazy">
+                <img src="{{ 'morganics-category-icons-herbs-botanicals.png' | asset_url }}" alt="{{ collection.title | escape }} icon" width="260" height="220" loading="lazy">
               {% endif %}
             </span>
             <span class="category-icon-copy">
@@ -59,18 +59,18 @@
         {% endunless %}
       {% endfor %}
       {% if rendered_count < 8 %}
-        <a class="category-icon-card" href="{{ routes.all_products_collection_url }}?q=pantry"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/oils-gums-specialties.png' | asset_url }}" alt="Pantry staples icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Pantry Staples</b><em>Everyday Morganics table essentials.</em><span>Explore category</span></span></a>
+        <a class="category-icon-card" href="{{ routes.all_products_collection_url }}?q=pantry"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-oils-gums-specialties.png' | asset_url }}" alt="Pantry staples icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Pantry Staples</b><em>Everyday Morganics table essentials.</em><span>Explore category</span></span></a>
       {% endif %}
       {% if rendered_count < 9 %}
-        <a class="category-icon-card" href="{{ routes.all_products_collection_url }}?q=wellness"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/roots-adaptogens.png' | asset_url }}" alt="Wellness blends icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Wellness Blends</b><em>Traditional pantry picks for daily routines.</em><span>Explore category</span></span></a>
+        <a class="category-icon-card" href="{{ routes.all_products_collection_url }}?q=wellness"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-roots-adaptogens.png' | asset_url }}" alt="Wellness blends icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Wellness Blends</b><em>Traditional pantry picks for daily routines.</em><span>Explore category</span></span></a>
       {% endif %}
     {% else %}
-      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/dry-fruits.png' | asset_url }}" alt="Dry fruits icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Dry Fruits</b><em>Dates, mewa and traditional pantry staples.</em><span>Explore category</span></span></a>
-      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/nuts.png' | asset_url }}" alt="Nuts icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Premium Nuts</b><em>Almonds, cashews, pistachios and walnuts.</em><span>Explore category</span></span></a>
-      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/seeds-grains.png' | asset_url }}" alt="Seeds icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Seeds</b><em>Chia, flax, grains and clean daily pantry portions.</em><span>Explore category</span></span></a>
-      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/herbs-botanicals.png' | asset_url }}" alt="Herbs icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Herbs</b><em>Traditional herbs presented with modern clarity.</em><span>Explore category</span></span></a>
-      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/roots-adaptogens.png' | asset_url }}" alt="Roots icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Roots</b><em>Traditional-use ingredients with careful guidance.</em><span>Explore category</span></span></a>
-      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics/category-icons/natural-sweeteners.png' | asset_url }}" alt="Sweeteners icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Sweeteners</b><em>Gur, shakar, honey and natural sweetness.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-dry-fruits.png' | asset_url }}" alt="Dry fruits icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Dry Fruits</b><em>Dates, mewa and traditional pantry staples.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-nuts.png' | asset_url }}" alt="Nuts icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Premium Nuts</b><em>Almonds, cashews, pistachios and walnuts.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-seeds-grains.png' | asset_url }}" alt="Seeds icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Seeds</b><em>Chia, flax, grains and clean daily pantry portions.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-herbs-botanicals.png' | asset_url }}" alt="Herbs icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Herbs</b><em>Traditional herbs presented with modern clarity.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-roots-adaptogens.png' | asset_url }}" alt="Roots icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Roots</b><em>Traditional-use ingredients with careful guidance.</em><span>Explore category</span></span></a>
+      <a class="category-icon-card" href="{{ routes.all_products_collection_url }}"><span class="category-icon-art"><img src="{{ 'morganics-category-icons-natural-sweeteners.png' | asset_url }}" alt="Sweeteners icon" width="260" height="220" loading="lazy"></span><span class="category-icon-copy"><small>Shop category</small><b>Sweeteners</b><em>Gur, shakar, honey and natural sweetness.</em><span>Explore category</span></span></a>
     {% endif %}
   </div>
 </section>
@@ -93,7 +93,7 @@
         { "type": "text", "id": "kicker", "label": "Kicker", "default": "Shop category" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "Carefully selected Morganics pantry essentials." },
         { "type": "text", "id": "cta", "label": "CTA", "default": "Explore category" },
-        { "type": "text", "id": "icon_asset", "label": "Icon asset", "default": "morganics/category-icons/nuts.png" },
+        { "type": "text", "id": "icon_asset", "label": "Icon asset", "default": "morganics-category-icons-nuts.png" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
@@ -102,12 +102,12 @@
     {
       "name": "Morganics category grid",
       "blocks": [
-        { "type": "category", "settings": { "title": "Dry Fruits & Heritage Mewa", "description": "Dates, mewa and traditional gifting staples.", "icon_asset": "morganics/category-icons/dry-fruits.png" } },
-        { "type": "category", "settings": { "title": "Premium Nuts", "description": "Almonds, cashews, pistachios and walnuts.", "icon_asset": "morganics/category-icons/nuts.png" } },
-        { "type": "category", "settings": { "title": "Seeds & Functional Grains", "description": "Chia, sunflower, flax and clean snack portions.", "icon_asset": "morganics/category-icons/seeds-grains.png" } },
-        { "type": "category", "settings": { "title": "Herbs & Daily Botanicals", "description": "Traditional herbs presented with modern clarity.", "icon_asset": "morganics/category-icons/herbs-botanicals.png" } },
-        { "type": "category", "settings": { "title": "Roots & Botanicals", "description": "Traditional-use ingredients with careful guidance.", "icon_asset": "morganics/category-icons/roots-adaptogens.png" } },
-        { "type": "category", "settings": { "title": "Natural Sweeteners", "description": "Gur, shakar, honey and pantry sweetness.", "icon_asset": "morganics/category-icons/natural-sweeteners.png" } }
+        { "type": "category", "settings": { "title": "Dry Fruits & Heritage Mewa", "description": "Dates, mewa and traditional gifting staples.", "icon_asset": "morganics-category-icons-dry-fruits.png" } },
+        { "type": "category", "settings": { "title": "Premium Nuts", "description": "Almonds, cashews, pistachios and walnuts.", "icon_asset": "morganics-category-icons-nuts.png" } },
+        { "type": "category", "settings": { "title": "Seeds & Functional Grains", "description": "Chia, sunflower, flax and clean snack portions.", "icon_asset": "morganics-category-icons-seeds-grains.png" } },
+        { "type": "category", "settings": { "title": "Herbs & Daily Botanicals", "description": "Traditional herbs presented with modern clarity.", "icon_asset": "morganics-category-icons-herbs-botanicals.png" } },
+        { "type": "category", "settings": { "title": "Roots & Botanicals", "description": "Traditional-use ingredients with careful guidance.", "icon_asset": "morganics-category-icons-roots-adaptogens.png" } },
+        { "type": "category", "settings": { "title": "Natural Sweeteners", "description": "Gur, shakar, honey and pantry sweetness.", "icon_asset": "morganics-category-icons-natural-sweeteners.png" } }
       ]
     }
   ]

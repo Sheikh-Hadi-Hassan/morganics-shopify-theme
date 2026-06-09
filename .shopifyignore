@@ -13,3 +13,7 @@
 #   /(templates|sections)/.*\.json/
 
 archive-unused-shopify-files/
+
+# Shopify does not allow nested files inside /assets.
+# Flat copies are generated as assets/morganics-*. Keep source folders local only.
+assets/morganics/**

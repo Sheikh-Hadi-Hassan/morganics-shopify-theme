@@ -10,7 +10,7 @@
           {% if section.settings.logo != blank %}
             {{ section.settings.logo | image_url: width: 420 | image_tag: class: 'footer-logo', alt: logo_alt, loading: 'lazy' }}
           {% else %}
-            <img class="footer-logo" src="{{ 'morganics/logos/morganics-logo-footer.png' | asset_url }}" alt="Morganics - Chemistry of Nutrients" width="220" height="96" loading="lazy">
+            <img class="footer-logo" src="{{ 'morganics-logos-morganics-logo-footer.png' | asset_url }}" alt="Morganics - Chemistry of Nutrients" width="220" height="96" loading="lazy">
           {% endif %}
         </a>
 

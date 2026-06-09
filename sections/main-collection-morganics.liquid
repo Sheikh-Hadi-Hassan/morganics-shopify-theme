@@ -1,6 +1,6 @@
 {% liquid
   assign fallback_copy = section.settings.fallback_copy
-  assign fallback_banner = section.settings.fallback_banner_asset | default: 'morganics/banners/nuts-dry-fruits.jpg'
+  assign fallback_banner = section.settings.fallback_banner_asset | default: 'morganics-banners-nuts-dry-fruits.jpg'
   assign collection_intro_heading = section.settings.intro_heading
   assign collection_intro_text = section.settings.intro_text
   assign collection_benefit_1 = section.settings.benefit_1
@@ -302,7 +302,7 @@
   "name": "Morganics collection",
   "settings": [
     { "type": "textarea", "id": "fallback_copy", "label": "Fallback collection copy", "default": "Explore Morganics pantry products with practical usage, storage guidance, and careful product information." },
-    { "type": "text", "id": "fallback_banner_asset", "label": "Fallback banner asset", "default": "morganics/banners/nuts-dry-fruits.jpg" },
+    { "type": "text", "id": "fallback_banner_asset", "label": "Fallback banner asset", "default": "morganics-banners-nuts-dry-fruits.jpg" },
     { "type": "checkbox", "id": "show_categories", "label": "Show all categories", "default": true },
     { "type": "text", "id": "category_eyebrow", "label": "Category eyebrow", "default": "Shop categories" },
     { "type": "text", "id": "category_heading", "label": "Category heading", "default": "Browse Morganics categories" },

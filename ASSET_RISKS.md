@@ -63,7 +63,7 @@ No theme templates were updated, so these risks are preparation notes only.
    - These should not automatically create published Shopify products.
 
 6. Hero video is large.
-   - `assets/morganics/video/pouch-reveal.mp4` is about 9.7 MB.
+   - `assets/morganics-video-pouch-reveal.mp4` is about 9.7 MB.
    - Confirm it is still required before launch; if used, compress and test mobile loading.
 
 ## Low Priority

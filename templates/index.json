@@ -32,7 +32,7 @@
             "kicker": "Shop category",
             "description": "Traditional roots, botanicals and everyday pantry ingredients.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/roots-adaptogens-icon.png"
+            "icon_asset": "morganics-category-icons-roots-adaptogens-icon.png"
           }
         },
         "dry_fruits": {
@@ -43,7 +43,7 @@
             "kicker": "Shop category",
             "description": "Dates, figs, raisins and heritage mewa for daily use.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/dry-fruits-icon.png"
+            "icon_asset": "morganics-category-icons-dry-fruits-icon.png"
           }
         },
         "gums": {
@@ -54,7 +54,7 @@
             "kicker": "Shop category",
             "description": "Gums, resins and specialty pantry ingredients.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/oils-gums-specialties-icon.png"
+            "icon_asset": "morganics-category-icons-oils-gums-specialties-icon.png"
           }
         },
         "herbs": {
@@ -65,7 +65,7 @@
             "kicker": "Shop category",
             "description": "Daily herbs and botanicals for Pakistani routines.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/herbs-botanicals-icon.png"
+            "icon_asset": "morganics-category-icons-herbs-botanicals-icon.png"
           }
         },
         "sweeteners": {
@@ -76,7 +76,7 @@
             "kicker": "Shop category",
             "description": "Gur, shakar, honey, salts and natural sweetness.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/natural-sweeteners-icon.png"
+            "icon_asset": "morganics-category-icons-natural-sweeteners-icon.png"
           }
         },
         "premium_nuts": {
@@ -87,7 +87,7 @@
             "kicker": "Shop category",
             "description": "Almonds, cashews, pistachios and walnuts.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/nuts-icon.png"
+            "icon_asset": "morganics-category-icons-nuts-icon.png"
           }
         },
         "premium_snacks": {
@@ -97,7 +97,7 @@
             "kicker": "Shop category",
             "description": "Clean pantry staples and snacking essentials.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/seeds-grains-icon.png",
+            "icon_asset": "morganics-category-icons-seeds-grains-icon.png",
             "link": "/collections/all?q=snacks"
           }
         },
@@ -109,7 +109,7 @@
             "kicker": "Shop category",
             "description": "Seeds, grains and functional pantry basics.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/seeds-grains-icon.png"
+            "icon_asset": "morganics-category-icons-seeds-grains-icon.png"
           }
         },
         "wellness_blends": {
@@ -119,7 +119,7 @@
             "kicker": "Shop category",
             "description": "Daily wellness blends and routine-friendly pantry picks.",
             "cta": "Explore category",
-            "icon_asset": "morganics/category-icons/oils-gums-specialties-icon.png",
+            "icon_asset": "morganics-category-icons-oils-gums-specialties-icon.png",
             "link": "/collections/all?q=wellness"
           }
         }

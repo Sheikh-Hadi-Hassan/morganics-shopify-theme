@@ -53,6 +53,8 @@
       .replace(/<\/(p|li|h2|h3|div)>/gi, '\n')
       .replace(/<[^>]+>/g, ' ')
       .replace(/\r/g, '\n')
+      .replace(/\s+(\d+[\).:-]\s*Q(?:uestion)?\s*[:：-])/gi, '\n$1')
+      .replace(/\s+(Q(?:uestion)?\s*[:：-])/gi, '\n$1')
       .replace(/\u00a0/g, ' ')
       .trim();
 
@@ -88,20 +90,22 @@
     if (!accordion) return;
     const faqSource = root.dataset.productFaqSource || '';
     const descriptionSource = root.dataset.productDescriptionFaqSource || '';
-    const faqs = parseFaqSource(faqSource).length ? parseFaqSource(faqSource) : parseFaqSource(descriptionSource);
+    const metafieldFaqs = parseFaqSource(faqSource);
+    const descriptionFaqs = parseFaqSource(descriptionSource);
+    const faqs = metafieldFaqs.length ? metafieldFaqs : descriptionFaqs;
     if (!faqs.length) return;
 
     accordion.innerHTML = faqs.map((faq, index) => {
       const id = `product-faq-js-${index + 1}`;
       return `
-        <div class="product-faq-item">
-          <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="${id}">
+        <details class="product-faq__item product-faq-item">
+          <summary class="product-faq__summary product-faq-question">
             <span data-urdu-wrap>${escapeHtml(faq.question)}</span><span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="product-faq-answer" id="${id}" hidden>
+          </summary>
+          <div class="product-faq__answer product-faq-answer" id="${id}">
             <p data-urdu-wrap>${escapeHtml(faq.answer)}</p>
           </div>
-        </div>
+        </details>
       `;
     }).join('');
     accordion.dataset.faqSource = faqSource ? 'metafield' : 'description';
@@ -114,10 +118,20 @@
     const children = Array.from(description.children);
     let faqIndex = children.findIndex((child) => /^FAQs?$/i.test(child.textContent.trim()));
     if (faqIndex === -1) {
-      faqIndex = children.findIndex((child) => /FAQs?/i.test(child.textContent.trim()) && /Q(?:uestion)?\s*[:：-]/i.test(description.textContent));
+      faqIndex = children.findIndex((child) => /^(STRONG|B|H2|H3|P|DIV|SUMMARY)$/i.test(child.tagName) && /FAQs?/i.test(child.textContent.trim()));
+    }
+    if (faqIndex === -1) {
+      faqIndex = children.findIndex((child) => /^(OL|UL)$/i.test(child.tagName) && /Q(?:uestion)?\s*[:：-].*A(?:nswer)?\s*[:：-]/is.test(child.textContent.trim()));
+    }
+    if (faqIndex === -1) {
+      faqIndex = children.findIndex((child) => /(?:^|\s)\d+[\).:-]?\s*Q(?:uestion)?\s*[:：-]|(?:^|\s)Q(?:uestion)?\s*[:：-]/i.test(child.textContent.trim()));
     }
     if (faqIndex !== -1) {
       children.slice(faqIndex).forEach((child) => child.remove());
+    } else if (/(?:^|\n|\s)FAQs?/i.test(description.textContent) && /Q(?:uestion)?\s*[:：-]/i.test(description.textContent)) {
+      const text = description.textContent;
+      const faqTextIndex = text.search(/(?:^|\n|\s)FAQs?/i);
+      if (faqTextIndex > -1) description.textContent = text.slice(0, faqTextIndex).trim();
     }
     if (!description.textContent.trim()) description.remove();
   };
@@ -131,12 +145,20 @@
 
   document.querySelectorAll('[data-morganics-product]').forEach((root) => {
     const price = root.querySelector('[data-product-price] .morganics-price__regular');
+    const comparePrice = root.querySelector('[data-product-price] .morganics-price__compare');
     const add = root.querySelector('[data-add-to-cart]');
     const qty = root.querySelector('input[name="quantity"]');
 
     root.querySelectorAll('[data-variant-input]').forEach((input) => {
       input.addEventListener('change', () => {
-        if (price && input.dataset.variantPrice) price.textContent = input.dataset.variantPrice;
+        if (price && input.dataset.variantPrice) {
+          price.textContent = input.dataset.variantPrice;
+          price.classList.toggle('morganics-price__regular--sale', input.dataset.variantHasCompare === 'true');
+        }
+        if (comparePrice) {
+          comparePrice.textContent = input.dataset.variantComparePrice || '';
+          comparePrice.hidden = input.dataset.variantHasCompare !== 'true';
+        }
         if (add) {
           const available = input.dataset.variantAvailable === 'true';
           add.disabled = !available;
@@ -165,7 +187,7 @@
   document.querySelectorAll('[data-faq-accordion]').forEach((accordion) => {
     accordion.addEventListener('click', (event) => {
       const button = event.target.closest('.product-faq-question');
-      if (!button || !accordion.contains(button)) return;
+      if (!button || !accordion.contains(button) || button.tagName === 'SUMMARY') return;
       const panel = document.getElementById(button.getAttribute('aria-controls'));
       if (!panel) return;
       const isOpen = button.getAttribute('aria-expanded') === 'true';

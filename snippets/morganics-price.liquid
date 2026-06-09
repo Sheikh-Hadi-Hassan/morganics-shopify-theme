@@ -5,8 +5,10 @@
 %}
 
 <span class="morganics-price" data-product-price>
-  <span class="morganics-price__regular">{{ price | money }}</span>
+  {% assign show_compare = false %}
   {% if compare_at_price > price %}
-    <s class="morganics-price__compare">{{ compare_at_price | money }}</s>
+    {% assign show_compare = true %}
   {% endif %}
+  <span class="morganics-price__regular{% if show_compare %} morganics-price__regular--sale{% endif %}">{{ price | money }}</span>
+  <s class="morganics-price__compare"{% unless show_compare %} hidden{% endunless %}>{{ compare_at_price | money }}</s>
 </span>

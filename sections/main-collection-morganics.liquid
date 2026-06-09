@@ -98,45 +98,6 @@
 
 {% render 'morganics-collection-hero', collection: collection, fallback_copy: fallback_copy, fallback_banner: fallback_banner %}
 
-{% if section.settings.show_categories %}
-  <section class="morganics-category-strip" aria-label="{{ section.settings.category_heading | escape }}">
-    <div class="morganics-category-strip__head">
-      <span class="eyebrow">{{ section.settings.category_eyebrow }}</span>
-      <h2>{{ section.settings.category_heading }}</h2>
-    </div>
-
-    <div class="morganics-category-list">
-      <a class="morganics-category-chip{% if collection.handle == 'all' %} is-active{% endif %}" href="{{ routes.all_products_collection_url }}">
-        <span class="morganics-category-chip__icon" aria-hidden="true">All</span>
-        <span>All Products</span>
-      </a>
-
-      {% if section.settings.category_menu != blank and linklists[section.settings.category_menu].links.size > 0 %}
-        {% for link in linklists[section.settings.category_menu].links %}
-          <a class="morganics-category-chip{% if link.active or link.current %} is-active{% endif %}" href="{{ link.url }}">
-            <span class="morganics-category-chip__icon" aria-hidden="true">{{ link.title | slice: 0, 2 | upcase }}</span>
-            <span>{{ link.title }}</span>
-          </a>
-        {% endfor %}
-      {% elsif section.settings.fallback_to_all_collections %}
-        {% for category_collection in collections limit: 12 %}
-          <a class="morganics-category-chip{% if category_collection.handle == collection.handle %} is-active{% endif %}" href="{{ category_collection.url }}">
-            <span class="morganics-category-chip__icon" aria-hidden="true">
-              {% assign category_image = category_collection.image | default: category_collection.featured_image %}
-              {% if section.settings.show_category_images and category_image %}
-                {{ category_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: category_collection.title }}
-              {% else %}
-                {{ category_collection.title | slice: 0, 2 | upcase }}
-              {% endif %}
-            </span>
-            <span>{{ category_collection.title }}</span>
-          </a>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </section>
-{% endif %}
-
 {% if section.settings.show_intro_card %}
 <section class="category-intro">
   <div class="intro-card">
@@ -157,46 +118,168 @@
 {% paginate collection.products by section.settings.products_per_page %}
   {% render 'morganics-sort-filter-bar', collection: collection, search_mode: false, button_label: section.settings.sort_button_label %}
 
-  <section class="shop-layout" id="collectionProducts">
-    {% if section.settings.show_filters and collection.filters.size > 0 %}
-      <aside class="filter-panel" id="collectionFilters" aria-label="Collection filters">
-        <h3>{{ section.settings.filter_heading }}</h3>
-        <form method="get" action="{{ collection.url }}">
-          {% if collection.sort_by != blank %}
-            <input type="hidden" name="sort_by" value="{{ collection.sort_by }}">
-          {% endif %}
-          {% for filter in collection.filters %}
-            <details class="filter-group" {% if forloop.first %}open{% endif %}>
-              <summary>{{ filter.label }}</summary>
-              <div class="filter-values">
-                {% case filter.type %}
-                  {% when 'boolean', 'list' %}
-                    {% for value in filter.values %}
-                      <label class="filter-check">
-                        <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
-                        <span>{{ value.label }} <small>{{ value.count }}</small></span>
-                      </label>
-                    {% endfor %}
-                  {% when 'price_range' %}
-                    <label class="filter-price">Min <input name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency }}" inputmode="decimal"></label>
-                    <label class="filter-price">Max <input name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency }}" inputmode="decimal"></label>
-                {% endcase %}
-              </div>
-            </details>
-          {% endfor %}
-          <div class="filter-actions">
-            <button class="btn ghost" type="submit">{{ section.settings.filter_button_label }}</button>
-            <a class="filter-clear-link" href="{{ collection.url }}">Clear all</a>
+  {% liquid
+    assign max_collection_price = 0
+    for filter_product in collection.products
+      if filter_product.price > max_collection_price
+        assign max_collection_price = filter_product.price
+      endif
+    endfor
+    assign max_collection_price_rupees = max_collection_price | divided_by: 100 | plus: 1
+    if max_collection_price_rupees < 1000
+      assign max_collection_price_rupees = 1000
+    endif
+  %}
+
+  <section class="shop-layout" id="collectionProducts" data-collection-filter-root>
+    {% if section.settings.show_filters %}
+      <div class="collection-filter-backdrop" data-filter-close aria-hidden="true"></div>
+      <aside class="filter-panel collection-sidebar" id="collectionFilters" aria-label="Collection filters" data-collection-sidebar>
+        <div class="collection-sidebar__head">
+          <div>
+            <span class="collection-sidebar__eyebrow">Refine</span>
+            <h3>{{ section.settings.filter_heading }}</h3>
           </div>
-        </form>
+          <button class="collection-sidebar__close" type="button" data-filter-close aria-label="Close filters">×</button>
+        </div>
+
+        <label class="filter-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m16.5 16.5 4 4"></path>
+          </svg>
+          <span class="visually-hidden">Search products</span>
+          <input type="search" placeholder="Search products" data-filter-search autocomplete="off">
+        </label>
+
+        <div class="active-filter-row collection-active-filters" data-active-filters hidden></div>
+
+        <div class="filter-group filter-group--categories">
+          <h4 class="filter-group__title">Categories</h4>
+          <div class="category-filter" data-category-filter>
+            <button class="category-filter__item is-active" type="button" data-filter-category="all">
+              <span class="category-filter__fallback" aria-hidden="true">All</span>
+              <span>All Products</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'nuts-dry-fruits' or collection.handle == 'dry-fruits-heritage-mewa' %} is-active{% endif %}" type="button" data-filter-category="berries fruits dry fruits heritage mewa dates munaqqa anjeer zarishk nuts-dry-fruits dry-fruits-heritage-mewa">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-dry-fruits-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Berries &amp; Fruits</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'herbs-botanicals' or collection.handle == 'herbs-daily-botanicals' %} is-active{% endif %}" type="button" data-filter-category="herbs botanicals daily ashwagandha sikakai amla herbs-botanicals herbs-daily-botanicals">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-herbs-botanicals-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Herbs &amp; Botanicals</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'natural-sweeteners-salts' or collection.handle == 'natural-sweetners-salts' %} is-active{% endif %}" type="button" data-filter-category="natural sweeteners salts gur shakar fruit salt honey natural-sweeteners-salts natural-sweetners-salts">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-natural-sweeteners-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Natural Sweeteners &amp; Salts</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'premium-nuts' %} is-active{% endif %}" type="button" data-filter-category="premium nuts almond badam cashew kajo pistachio walnut premium-nuts nuts-dry-fruits">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-nuts-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Nuts &amp; Dry Fruits</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'oil-gums-specialties' or collection.handle == 'gums-specialties' %} is-active{% endif %}" type="button" data-filter-category="oil oils gums specialties luban guggul goond katira oil-gums-specialties gums-specialties">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-oils-gums-specialties-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Oil, Gums &amp; Specialties</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'seeds-grains' or collection.handle == 'seeds-functional-grains' %} is-active{% endif %}" type="button" data-filter-category="seeds functional grains chia flax til sarson methi seeds-grains seeds-functional-grains">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-seeds-grains-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Seeds &amp; Functional Grains</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'wellness-blends' %} is-active{% endif %}" type="button" data-filter-category="wellness blends triphala salajeet roots adaptogens wellness-blends roots-adaptogens">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-9.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Wellness Blends</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'premium-snacks-pantry-staples' %} is-active{% endif %}" type="button" data-filter-category="premium snacks pantry staples makhana kishmish breakfast premium-snacks-pantry-staples">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-8.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Premium Snacks</span>
+            </button>
+            <button class="category-filter__item{% if collection.handle == 'roots-adaptogens' or collection.handle == 'roots-botanicals-traditional-ingredients' %} is-active{% endif %}" type="button" data-filter-category="traditional ingredients roots botanicals adaptogens hareer chasko ginseng roots-adaptogens roots-botanicals-traditional-ingredients">
+              <img class="category-filter__icon" src="{{ 'morganics-category-icons-roots-adaptogens-icon.png' | asset_url }}" alt="" width="60" height="60" loading="lazy">
+              <span>Traditional Ingredients</span>
+            </button>
+          </div>
+        </div>
+
+        <details class="filter-group" open>
+          <summary class="filter-group__title">Availability</summary>
+          <div class="filter-values filter-values--compact">
+            <label class="filter-option"><input type="checkbox" value="true" data-filter-availability><span>In stock</span></label>
+            <label class="filter-option"><input type="checkbox" value="false" data-filter-availability><span>Out of stock</span></label>
+          </div>
+        </details>
+
+        <details class="filter-group" open>
+          <summary class="filter-group__title">Price</summary>
+          <div class="filter-price-range">
+            <div class="filter-price-row">
+              <label>Min <input type="number" min="0" value="0" inputmode="numeric" data-filter-price-min></label>
+              <label>Max <input type="number" min="0" value="{{ max_collection_price_rupees }}" inputmode="numeric" data-filter-price-max></label>
+            </div>
+            <input class="filter-range" type="range" min="0" max="{{ max_collection_price_rupees }}" value="{{ max_collection_price_rupees }}" data-filter-price-range>
+            <output>Up to Rs <span data-filter-price-output>{{ max_collection_price_rupees }}</span></output>
+          </div>
+        </details>
+
+        <details class="filter-group" open>
+          <summary class="filter-group__title">Size / Pack</summary>
+          <div class="filter-chip-list">
+            {% assign size_filters = '50g,100g,200g,250g,500g,1000g,Bundle,Jar,Pouch' | split: ',' %}
+            {% for size_filter in size_filters %}
+              <button class="filter-chip" type="button" data-filter-size="{{ size_filter | downcase }}">{{ size_filter }}</button>
+            {% endfor %}
+          </div>
+        </details>
+
+        <details class="filter-group">
+          <summary class="filter-group__title">Collection</summary>
+          <div class="filter-values filter-values--compact">
+            {% for filter_collection in collections limit: 14 %}
+              {% if filter_collection.products_count > 0 %}
+                <label class="filter-option">
+                  <input type="checkbox" value="{{ filter_collection.handle | escape }}" data-filter-collection>
+                  <span>{{ filter_collection.title }}</span>
+                </label>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </details>
+
+        {% if collection.all_types.size > 0 %}
+          <details class="filter-group">
+            <summary class="filter-group__title">Product Type</summary>
+            <div class="filter-chip-list">
+              {% for product_type in collection.all_types limit: 16 %}
+                {% if product_type != blank %}
+                  <button class="filter-chip" type="button" data-filter-type="{{ product_type | handleize }}">{{ product_type }}</button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </details>
+        {% endif %}
+
+        {% if collection.all_tags.size > 0 %}
+          <details class="filter-group">
+            <summary class="filter-group__title">Tags</summary>
+            <div class="filter-chip-list">
+              {% for tag in collection.all_tags limit: 24 %}
+                <button class="filter-chip" type="button" data-filter-tag="{{ tag | handleize }}">{{ tag }}</button>
+              {% endfor %}
+            </div>
+          </details>
+        {% endif %}
+
+        <div class="collection-sidebar__actions">
+          <button class="btn primary" type="button" data-filter-apply>Apply</button>
+          <button class="btn ghost" type="button" data-filter-clear>Clear all</button>
+        </div>
       </aside>
     {% endif %}
 
     <div class="collection-results">
       <div class="collection-results-toolbar">
-        <div class="shop-count">Showing {{ collection.products_count }} products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
-        {% if section.settings.show_filters and collection.filters.size > 0 %}
-          <a class="morganics-mobile-filter-button" href="#collectionFilters">Filters</a>
+        <div class="shop-count">Showing <span data-filter-count>{{ collection.products.size }}</span> products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
+        {% if section.settings.show_filters %}
+          <button class="morganics-mobile-filter-button" type="button" data-filter-open>Filters</button>
         {% endif %}
       </div>
 
@@ -229,6 +312,14 @@
           {% for product in collection.products %}
             {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
           {% endfor %}
+        </div>
+        <div class="empty-collection morganics-empty-state morganics-filter-empty" data-filter-empty hidden>
+          <span class="morganics-empty-state__icon" aria-hidden="true">M</span>
+          <h2>No products found</h2>
+          <p>Try adjusting your search or filters.</p>
+          <div class="morganics-empty-actions">
+            <button class="btn ghost" type="button" data-filter-clear>Clear all</button>
+          </div>
         </div>
       {% else %}
         <div class="empty-collection morganics-empty-state">

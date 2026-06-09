@@ -6,11 +6,11 @@
   assign fallback_two_a = 'Keep sealed in a cool, dry place away from sunlight, heat and moisture. Use clean, dry utensils.'
 %}
 
-<section class="product-faq-section" id="product-faq">
-  <div class="product-faq-container">
-    <p class="section-eyebrow">{{ eyebrow | default: 'Product FAQ' }}</p>
-    <h2>{{ heading | default: 'Questions about this product' }}</h2>
-    <div class="product-faq-accordion" data-faq-accordion>
+<section class="product-faq product-faq-section" id="product-faq">
+  <div class="product-faq__container product-faq-container">
+    <p class="product-faq__eyebrow section-eyebrow">{{ eyebrow | default: 'Product FAQ' }}</p>
+    <h2 class="product-faq__heading">{{ heading | default: 'Questions about this product' }}</h2>
+    <div class="product-faq__list product-faq-accordion" data-faq-accordion>
       {% if faq_source != blank %}
         {% assign lines = faq_source | newline_to_br | split: '<br />' %}
         {% assign pending_question = blank %}
@@ -22,43 +22,43 @@
               {% assign pending_question = item | remove_first: 'Q:' | remove_first: 'q:' | strip %}
             {% elsif item_prefix == 'a:' and pending_question != blank %}
               {% assign answer = item | remove_first: 'A:' | remove_first: 'a:' | strip %}
-              <div class="product-faq-item">
-                <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-{{ forloop.index }}">
+              <details class="product-faq__item product-faq-item">
+                <summary class="product-faq__summary product-faq-question">
                   <span>{{ pending_question }}</span><span class="faq-icon" aria-hidden="true"></span>
-                </button>
-                <div class="product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}" hidden>
+                </summary>
+                <div class="product-faq__answer product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}">
                   <p>{{ answer }}</p>
                 </div>
-              </div>
+              </details>
               {% assign pending_question = blank %}
             {% elsif item contains '|' %}
               {% assign parts = item | split: '|' %}
               {% assign question = parts[0] | remove_first: 'Q:' | remove_first: 'q:' | strip %}
               {% assign answer = parts[1] | remove_first: 'A:' | remove_first: 'a:' | strip %}
-              <div class="product-faq-item">
-                <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-{{ forloop.index }}">
+              <details class="product-faq__item product-faq-item">
+                <summary class="product-faq__summary product-faq-question">
                   <span>{{ question }}</span><span class="faq-icon" aria-hidden="true"></span>
-                </button>
-                <div class="product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}" hidden>
+                </summary>
+                <div class="product-faq__answer product-faq-answer" id="product-faq-{{ section.id }}-{{ forloop.index }}">
                   <p>{{ answer }}</p>
                 </div>
-              </div>
+              </details>
             {% endif %}
           {% endif %}
         {% endfor %}
       {% else %}
-        <div class="product-faq-item">
-          <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-1">
+        <details class="product-faq__item product-faq-item">
+          <summary class="product-faq__summary product-faq-question">
             <span>{{ fallback_one_q }}</span><span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="product-faq-answer" id="product-faq-{{ section.id }}-1" hidden><p>{{ fallback_one_a }}</p></div>
-        </div>
-        <div class="product-faq-item">
-          <button class="product-faq-question" type="button" aria-expanded="false" aria-controls="product-faq-{{ section.id }}-2">
+          </summary>
+          <div class="product-faq__answer product-faq-answer" id="product-faq-{{ section.id }}-1"><p>{{ fallback_one_a }}</p></div>
+        </details>
+        <details class="product-faq__item product-faq-item">
+          <summary class="product-faq__summary product-faq-question">
             <span>{{ fallback_two_q }}</span><span class="faq-icon" aria-hidden="true"></span>
-          </button>
-          <div class="product-faq-answer" id="product-faq-{{ section.id }}-2" hidden><p>{{ fallback_two_a }}</p></div>
-        </div>
+          </summary>
+          <div class="product-faq__answer product-faq-answer" id="product-faq-{{ section.id }}-2"><p>{{ fallback_two_a }}</p></div>
+        </details>
       {% endif %}
     </div>
   </div>

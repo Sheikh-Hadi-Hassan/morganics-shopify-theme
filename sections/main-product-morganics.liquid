@@ -20,9 +20,17 @@
   assign visible_description = visible_description | split: '<h3>FAQ</h3>' | first
   assign visible_description = visible_description | split: '<h2>Faqs</h2>' | first
   assign visible_description = visible_description | split: '<h3>Faqs</h3>' | first
+  assign visible_description = visible_description | split: '<strong>FAQs</strong>' | first
+  assign visible_description = visible_description | split: '<strong>FAQ</strong>' | first
+  assign visible_description = visible_description | split: '<b>FAQs</b>' | first
+  assign visible_description = visible_description | split: '<b>FAQ</b>' | first
   assign visible_description = visible_description | split: '<p>FAQs</p>' | first
   assign visible_description = visible_description | split: '<p>FAQ</p>' | first
   assign visible_description = visible_description | split: 'FAQs' | first
+  assign visible_description = visible_description | split: 'FAQ' | first
+  assign visible_description = visible_description | split: '1. Q:' | first
+  assign visible_description = visible_description | split: '1) Q:' | first
+  assign visible_description = visible_description | split: 'Q:' | first
   assign description_faq_source = description_html | strip_html
 %}
 

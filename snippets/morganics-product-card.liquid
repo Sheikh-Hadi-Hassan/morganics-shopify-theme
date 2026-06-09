@@ -10,9 +10,42 @@
       endif
     endfor
   endif
+  assign product_tags_filter = product.tags | join: ' '
+  capture product_collections_filter
+    for product_collection in product.collections
+      echo product_collection.handle
+      echo ' '
+      echo product_collection.title
+      echo ' '
+    endfor
+  endcapture
+  capture product_variant_filter
+    for variant in product.variants
+      echo variant.title
+      echo ' '
+      echo variant.sku
+      echo ' '
+    endfor
+  endcapture
+  assign product_size_filter = product_variant_filter | append: ' ' | append: product_tags_filter
 %}
 
-<div class="product-card-wrap" data-product-card data-product-id="{{ product.id }}">
+<div
+  class="product-card-wrap"
+  data-product-card
+  data-filter-card
+  data-product-id="{{ product.id }}"
+  data-title="{{ product.title | escape }}"
+  data-sku="{{ current_variant.sku | escape }}"
+  data-tags="{{ product_tags_filter | escape }}"
+  data-product-type="{{ product.type | handleize }}"
+  data-category="{{ product.title | append: ' ' | append: product.type | append: ' ' | append: product_tags_filter | append: ' ' | append: product_collections_filter | strip | escape }}"
+  data-collections="{{ product_collections_filter | strip | escape }}"
+  data-price="{{ product.price }}"
+  data-available="{% if product.available %}true{% else %}false{% endif %}"
+  data-variants="{{ product_variant_filter | strip | escape }}"
+  data-sizes="{{ product_size_filter | strip | escape }}"
+>
   <button
     class="product-card-wishlist morganics-favorite-toggle"
     type="button"
@@ -50,7 +83,10 @@
         <span class="urdu-line">{{ product.metafields.custom.urdu_name }}</span>
       {% endif %}
       <div class="price-row">
-        <span class="price">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <s class="price-compare">{{ product.compare_at_price | money }}</s>
+        {% endif %}
+        <span class="price{% if product.compare_at_price > product.price %} price-sale{% endif %}">{{ product.price | money }}</span>
         {% if product.available %}
           <span class="chip">Available</span>
         {% else %}

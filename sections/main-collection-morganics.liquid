@@ -116,8 +116,6 @@
 {% endif %}
 
 {% paginate collection.products by section.settings.products_per_page %}
-  {% render 'morganics-sort-filter-bar', collection: collection, search_mode: false, button_label: section.settings.sort_button_label %}
-
   {% liquid
     assign max_collection_price = 0
     for filter_product in collection.products
@@ -131,10 +129,45 @@
     endif
   %}
 
-  <section class="shop-layout" id="collectionProducts" data-collection-filter-root>
+  <section class="morganics-collection-shell" id="collectionProducts" data-collection-filter-root>
+    <div class="morganics-collection-toolbar">
+      <div class="shop-count morganics-collection-count">Showing <span data-filter-count>{{ collection.products.size }}</span> products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
+
+      <label class="morganics-collection-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16.5 16.5 4 4"></path>
+        </svg>
+        <span class="visually-hidden">Search products</span>
+        <input type="search" placeholder="Search products" data-filter-search autocomplete="off">
+      </label>
+
+      {% if collection.sort_options != blank %}
+        <form class="morganics-collection-sort-form" method="get" action="{{ collection.url }}" data-collection-tools>
+          <label class="morganics-collection-sort">
+            <span class="visually-hidden">Sort products</span>
+            <select name="sort_by" aria-label="Sort products">
+              {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+              {% for option in collection.sort_options %}
+                <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </form>
+      {% endif %}
+
+      {% if section.settings.show_filters %}
+        <button class="morganics-mobile-filter-button" type="button" data-filter-open>Filters</button>
+      {% endif %}
+    </div>
+
     {% if section.settings.show_filters %}
       <div class="collection-filter-backdrop" data-filter-close aria-hidden="true"></div>
-      <aside class="filter-panel collection-sidebar" id="collectionFilters" aria-label="Collection filters" data-collection-sidebar>
+    {% endif %}
+
+    <div class="morganics-collection-layout shop-layout">
+    {% if section.settings.show_filters %}
+      <aside class="filter-panel collection-sidebar morganics-collection-sidebar" id="collectionFilters" aria-label="Collection filters" data-collection-sidebar>
         <div class="collection-sidebar__head">
           <div>
             <span class="collection-sidebar__eyebrow">Refine</span>
@@ -142,15 +175,6 @@
           </div>
           <button class="collection-sidebar__close" type="button" data-filter-close aria-label="Close filters">×</button>
         </div>
-
-        <label class="filter-search">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="7"></circle>
-            <path d="m16.5 16.5 4 4"></path>
-          </svg>
-          <span class="visually-hidden">Search products</span>
-          <input type="search" placeholder="Search products" data-filter-search autocomplete="off">
-        </label>
 
         <div class="active-filter-row collection-active-filters" data-active-filters hidden></div>
 
@@ -275,14 +299,7 @@
       </aside>
     {% endif %}
 
-    <div class="collection-results">
-      <div class="collection-results-toolbar">
-        <div class="shop-count">Showing <span data-filter-count>{{ collection.products.size }}</span> products{% if paginate.pages > 1 %} · Page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</div>
-        {% if section.settings.show_filters %}
-          <button class="morganics-mobile-filter-button" type="button" data-filter-open>Filters</button>
-        {% endif %}
-      </div>
-
+    <main class="collection-results morganics-collection-products">
       {% assign active_filter_count = 0 %}
       {% capture active_filter_chips %}
         {% for filter in collection.filters %}
@@ -308,7 +325,7 @@
       {% endif %}
 
       {% if collection.products.size > 0 %}
-        <div class="product-grid shop-grid">
+        <div class="product-grid shop-grid morganics-product-grid">
           {% for product in collection.products %}
             {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
           {% endfor %}
@@ -341,6 +358,7 @@
           {{ paginate | default_pagination }}
         </nav>
       {% endif %}
+    </main>
     </div>
   </section>
 {% endpaginate %}

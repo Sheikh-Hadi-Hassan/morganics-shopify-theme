@@ -78,9 +78,9 @@
     </div>
     <div class="product-info">
       <small class="product-meta">{{ card_meta }}{% if current_variant.sku != blank %} · {{ current_variant.sku }}{% endif %}</small>
-      <b class="product-name">{{ product.title }}</b>
+      <b class="product-name" data-urdu-wrap>{{ product.title }}</b>
       {% if product.metafields.custom.urdu_name != blank %}
-        <span class="urdu-line">{{ product.metafields.custom.urdu_name }}</span>
+        <span class="urdu-line" data-urdu-wrap>{{ product.metafields.custom.urdu_name }}</span>
       {% endif %}
       <div class="price-row">
         {% if product.compare_at_price > product.price %}

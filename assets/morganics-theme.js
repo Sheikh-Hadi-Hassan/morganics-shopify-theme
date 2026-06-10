@@ -9,6 +9,66 @@
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  const urduTextPattern = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]+(?:[\s\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u200C\u200D\u064B-\u065F\u0670.,،؛؟!?()\-–—]+[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]+)*/g;
+  const urduTargetSelector = [
+    '[data-urdu-wrap]',
+    '.morganics-product-card .product-name',
+    '.morganics-product-card .urdu-line',
+    '.product-card .product-name',
+    '.product-card .urdu-line',
+    '.wishlist-line-title',
+    '.description-html',
+    '.product-name'
+  ].join(',');
+
+  const shouldSkipUrduWrap = (node) => {
+    const parent = node.parentElement;
+    return !parent || !!parent.closest('script, style, noscript, template, input, textarea, select, button, .morganics-urdu, .morganics-price, .price-row');
+  };
+
+  const wrapUrduText = (root) => {
+    if (!root || !root.querySelectorAll) return;
+    const filter = window.NodeFilter || { SHOW_TEXT: 4, FILTER_ACCEPT: 1, FILTER_REJECT: 2 };
+    const walker = document.createTreeWalker(root, filter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue || shouldSkipUrduWrap(node)) return filter.FILTER_REJECT;
+        urduTextPattern.lastIndex = 0;
+        return urduTextPattern.test(node.nodeValue) ? filter.FILTER_ACCEPT : filter.FILTER_REJECT;
+      }
+    });
+    const nodes = [];
+    let textNode = walker.nextNode();
+    while (textNode) {
+      nodes.push(textNode);
+      textNode = walker.nextNode();
+    }
+
+    nodes.forEach((node) => {
+      const text = node.nodeValue;
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      urduTextPattern.lastIndex = 0;
+      text.replace(urduTextPattern, (match, offset) => {
+        if (offset > lastIndex) fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+        const span = document.createElement('span');
+        span.className = 'morganics-urdu';
+        span.textContent = match;
+        fragment.appendChild(span);
+        lastIndex = offset + match.length;
+        return match;
+      });
+      if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+      node.parentNode?.replaceChild(fragment, node);
+    });
+  };
+
+  const initUrduWrapping = (scope = document) => {
+    if (scope.matches?.(urduTargetSelector)) wrapUrduText(scope);
+    scope.querySelectorAll?.(urduTargetSelector).forEach(wrapUrduText);
+  };
+
+  initUrduWrapping();
+
   const initStoryCarousel = (carousel) => {
     if (carousel.dataset.carouselReady === 'true') return;
 
@@ -30,15 +90,21 @@
       active = normalize(index);
       const previous = normalize(active - 1);
       const upcoming = normalize(active + 1);
+      const beforePrevious = normalize(active - 2);
+      const afterUpcoming = normalize(active + 2);
 
       slides.forEach((slide, slideIndex) => {
         const isActive = slideIndex === active;
         const isPrev = slides.length > 1 && slideIndex === previous;
         const isNext = slides.length > 1 && slideIndex === upcoming;
+        const isBeforePrev = slides.length > 3 && slideIndex === beforePrevious;
+        const isAfterNext = slides.length > 3 && slideIndex === afterUpcoming;
 
         slide.classList.toggle('is-active', isActive);
         slide.classList.toggle('is-prev', isPrev);
         slide.classList.toggle('is-next', isNext);
+        slide.classList.toggle('is-before-prev', isBeforePrev);
+        slide.classList.toggle('is-after-next', isAfterNext);
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
         slide.tabIndex = isActive ? 0 : -1;
       });
@@ -89,7 +155,10 @@
 
   initStoryCarousels();
 
-  document.addEventListener('shopify:section:load', (event) => initStoryCarousels(event.target));
+  document.addEventListener('shopify:section:load', (event) => {
+    initStoryCarousels(event.target);
+    initUrduWrapping(event.target);
+  });
   document.addEventListener('shopify:block:select', (event) => {
     const slide = event.target?.closest?.('[data-carousel-slide]');
     const carousel = slide?.closest?.('[data-story-carousel]');
@@ -251,6 +320,7 @@
           '</article>'
         ].join('');
       }).join('');
+      initUrduWrapping(body);
     };
 
     const open = () => {

@@ -1940,8 +1940,8 @@ body .mob-product-bar {
   border-radius: 16px !important;
 }
 
-body .mrg-site-header :is(.header-nav a, .header-shop-cta, .cart-header-btn, .header-search-btn, .header-wishlist-btn, .mobile-menu-btn, .header-search-submit, .header-search-close, .search-result-row) {
-  border-radius: 12px !important;
+body .mrg-site-header :is(.header-nav a, .mega-trigger, .header-shop-cta, .cart-header-btn, .header-search-btn, .header-wishlist-btn, .wishlist-header-btn, .mobile-menu-btn, .header-search-submit, .header-search-close, .search-result-row) {
+  border-radius: 18px !important;
 }
 
 body .mrg-site-header :is(.header-count-badge, .cart-count, [data-cart-count], .search-result-aside) {
@@ -2370,7 +2370,7 @@ body .mob-bottom-nav :is(a, button) {
    image crops, and stable placement below the header shell. */
 @media (min-width: 901px) {
   body .mrg-site-header .mega-menu {
-    top: calc(100% + 12px) !important;
+    top: calc(100% + 5px) !important;
     width: min(1160px, calc(100vw - 64px)) !important;
     max-height: min(560px, calc(100vh - 126px)) !important;
     border-radius: 18px !important;
@@ -2415,7 +2415,7 @@ body .mob-bottom-nav :is(a, button) {
   body .mrg-site-header .mega-cat {
     grid-template-columns: 72px minmax(0, 1fr) !important;
     height: 72px !important;
-    min-height: 72px !important;
+    min-height: unset !important;
     padding: 7px 14px 7px 7px !important;
     gap: 12px !important;
     border-radius: 13px !important;
@@ -2431,7 +2431,7 @@ body .mob-bottom-nav :is(a, button) {
   body .mrg-site-header .mega-cat-icon img {
     object-fit: contain !important;
     padding: 1px !important;
-    transform: scale(1.12) !important;
+    transform: scale(0.9) !important;
   }
 
   body .mrg-site-header .mega-cat b {
@@ -2444,6 +2444,48 @@ body .mob-bottom-nav :is(a, button) {
     margin-top: 3px !important;
     font-size: 11px !important;
     line-height: 1.15 !important;
+  }
+}
+
+/* Requested header mega-menu style corrections. */
+body .mrg-site-header .mega-menu {
+  top: calc(100% + 5px) !important;
+}
+
+body[data-template="index"] .header-nav a {
+  padding: 0 9px !important;
+}
+
+body .mrg-site-header :is(
+  .header-nav a,
+  .mega-trigger,
+  .header-shop-cta,
+  .cart-header-btn,
+  .header-search-btn,
+  .header-wishlist-btn,
+  .wishlist-header-btn,
+  .mobile-menu-btn,
+  .header-search-submit,
+  .header-search-close,
+  .search-result-row
+) {
+  border-radius: 18px !important;
+}
+
+body .mrg-site-header .mrg-desktop-nav > .mega-wrap > .mega-trigger {
+  border-radius: 18px !important;
+}
+
+@media (min-width: 901px) {
+  body .mrg-site-header .mega-cat {
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  body .mrg-site-header .mega-cat-icon img {
+    object-fit: contain !important;
+    padding: 1px !important;
+    transform: scale(0.9) !important;
   }
 }
 
@@ -2463,8 +2505,8 @@ body .mob-bottom-nav :is(a, button) {
 
   body .mrg-site-header .mega-cat {
     grid-template-columns: 60px minmax(0, 1fr) !important;
-    height: 64px !important;
-    min-height: 64px !important;
+    height: auto !important;
+    min-height: unset !important;
   }
 
   body .mrg-site-header .mega-cat-icon {
@@ -2472,4 +2514,30 @@ body .mob-bottom-nav :is(a, button) {
     height: 50px !important;
     min-width: 60px !important;
   }
+}
+
+/* Requested header-only radius and mega trigger hover bridge correction. */
+@media (min-width: 901px) {
+  body .mrg-site-header .mega-trigger:after {
+    top: calc(100% + 15px) !important;
+  }
+}
+
+body .mrg-site-header :is(
+  .header-nav a,
+  .header-shop-cta,
+  .cart-header-btn,
+  .header-search-btn,
+  .header-wishlist-btn,
+  .wishlist-header-btn,
+  .mobile-menu-btn,
+  .header-search-submit,
+  .header-search-close,
+  .search-result-row
+) {
+  border-radius: 10px !important;
+}
+
+body .mrg-site-header .mrg-desktop-nav > .mega-wrap > .mega-trigger {
+  border-radius: 10px !important;
 }

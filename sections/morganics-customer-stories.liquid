@@ -1,5 +1,8 @@
 {% liquid
   assign fallback_images = 'morganics-review-images-ayesha-kitchen.jpg,morganics-review-images-ali-athlete.jpg,morganics-review-images-dr-hira-nutritionist.jpg,morganics-review-images-iqra-tennis.jpg,morganics-review-images-mother-son.jpg,morganics-review-images-elder-couple.jpg' | split: ','
+  assign fallback_titles = 'Daily Family Table|Daily Energy|Summer Cooling|Digestive Pantry|Ramadan & Gifting' | split: '|'
+  assign fallback_tags = 'Family Wellness|Clean Energy|Cooling Ritual|Digestive Routine|Heritage Gifting' | split: '|'
+  assign fallback_texts = 'Dates, mewa and pantry essentials for everyday family routines.|Nuts, seeds and dates for breakfast, office and school.|Goond Katira, chia and cooling pantry staples for hot Pakistani days.|Ajwain, isabgol and fruit salt for careful daily use.|Dates, saffron, honey and mewa for thoughtful occasions.' | split: '|'
 %}
 
 <section
@@ -100,15 +103,22 @@
             </article>
           {% endfor %}
         {% else %}
-          {% for fallback_image in fallback_images limit: 3 %}
+          {% for index in (1..5) %}
+            {% liquid
+              assign fallback_index = forloop.index0 | modulo: fallback_images.size
+              assign fallback_image = fallback_images[fallback_index]
+              assign fallback_title = fallback_titles[forloop.index0]
+              assign fallback_tag = fallback_tags[forloop.index0]
+              assign fallback_text = fallback_texts[forloop.index0]
+            %}
             <article class="ritual-film-card story-carousel-v2__card{% if forloop.first %} is-active{% endif %}" data-carousel-slide aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
               <div class="ritual-film-media story-carousel-v2__media">
-                <img class="ritual-film-img story-carousel-v2__img" src="{{ fallback_image | asset_url }}" alt="Morganics customer routine" width="900" height="900" loading="lazy">
+                <img class="ritual-film-img story-carousel-v2__img" src="{{ fallback_image | asset_url }}" alt="{{ fallback_title | escape }} Morganics routine" width="900" height="900" loading="lazy">
               </div>
               <div class="ritual-film-content story-carousel-v2__content">
-                <div class="story-carousel-v2__topline"><small>Daily wellness</small><span class="ritual-film-stars story-carousel-v2__stars">★★★★★</span></div>
-                <h3>Real Morganics routine</h3>
-                <p>Clean pantry ingredients for daily family routines.</p>
+                <div class="story-carousel-v2__topline"><small>{{ fallback_tag }}</small><span class="ritual-film-stars story-carousel-v2__stars">★★★★★</span></div>
+                <h3>{{ fallback_title }}</h3>
+                <p>{{ fallback_text }}</p>
                 <div class="ritual-film-meta story-carousel-v2__meta"><span>Morganics customer</span><a class="ritual-film-cta story-carousel-v2__cta" href="{{ routes.all_products_collection_url }}">View Product</a></div>
               </div>
             </article>
@@ -123,7 +133,7 @@
       <div class="ritual-film-dots story-carousel-v2__dots" role="tablist" aria-label="Customer story slides">
         {% assign dot_count = section.blocks.size %}
         {% if dot_count == 0 %}
-          {% assign dot_count = 3 %}
+          {% assign dot_count = 5 %}
         {% endif %}
         {% for index in (1..dot_count) %}
           <button
@@ -175,12 +185,11 @@
     {
       "name": "Morganics customer stories",
       "blocks": [
-        { "type": "story", "settings": { "customer_name": "Ayesha Malik", "location": "Lahore", "routine_title": "Daily wellness", "product_label": "Maghaz Akhrot", "testimonial": "Clean taste. Fresh feel. Daily use." } },
-        { "type": "story", "settings": { "customer_name": "Ali Khan", "location": "Islamabad", "routine_title": "Active lifestyle", "product_label": "Pista Maghaz", "testimonial": "Easy clean snacking before training and family errands." } },
-        { "type": "story", "settings": { "customer_name": "Dr. Hira", "location": "Karachi", "routine_title": "Nutrition guidance", "product_label": "Pumpkin Seeds", "testimonial": "Simple ingredients and clear pantry choices for everyday routines." } },
-        { "type": "story", "settings": { "customer_name": "Iqra Shah", "location": "Karachi", "routine_title": "Active routine", "product_label": "Seeds Mix", "testimonial": "A simple snack box that fits busy days." } },
-        { "type": "story", "settings": { "customer_name": "Mahnoor", "location": "Lahore", "routine_title": "Family table", "product_label": "Dry Fruits", "testimonial": "Fresh pantry staples for chai time and gifting." } },
-        { "type": "story", "settings": { "customer_name": "Umar Farooq", "location": "Islamabad", "routine_title": "Office snack", "product_label": "Premium Nuts", "testimonial": "Easy clean energy between meetings." } }
+        { "type": "story", "settings": { "customer_name": "Morganics Family", "location": "Pakistan", "routine_title": "Family Wellness", "product_label": "Daily Family Table", "testimonial": "Dates, mewa and pantry essentials for everyday family routines." } },
+        { "type": "story", "settings": { "customer_name": "Morganics Customer", "location": "Pakistan", "routine_title": "Clean Energy", "product_label": "Daily Energy", "testimonial": "Nuts, seeds and dates for breakfast, office and school." } },
+        { "type": "story", "settings": { "customer_name": "Morganics Customer", "location": "Pakistan", "routine_title": "Cooling Ritual", "product_label": "Summer Cooling", "testimonial": "Goond Katira, chia and cooling pantry staples for hot Pakistani days." } },
+        { "type": "story", "settings": { "customer_name": "Morganics Customer", "location": "Pakistan", "routine_title": "Digestive Routine", "product_label": "Digestive Pantry", "testimonial": "Ajwain, isabgol and fruit salt for careful daily use." } },
+        { "type": "story", "settings": { "customer_name": "Morganics Family", "location": "Pakistan", "routine_title": "Heritage Gifting", "product_label": "Ramadan & Gifting", "testimonial": "Dates, saffron, honey and mewa for thoughtful occasions." } }
       ]
     }
   ]

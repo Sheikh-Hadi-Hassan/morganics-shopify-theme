@@ -327,7 +327,64 @@
     ].join('');
   }
 
+  function renderPowderBadge(item) {
+    var props = item.properties || {};
+    var isPowdered = props['Powder Form'] === 'Yes';
+    if (!isPowdered) return '';
+    return '<span class="mrg-powder-badge" aria-label="Powder form selected">' +
+           '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>' +
+           ' Powder Form</span>';
+  }
+
+  function renderVisibleProperties(item) {
+    var props = item.properties || {};
+    var keys = Object.keys(props);
+    var lines = keys.filter(function (k) {
+      // Skip underscore-prefixed internal keys and the Powder Form key (shown as badge)
+      return k.charAt(0) !== '_' && k !== 'Powder Form';
+    }).map(function (k) {
+      return '<span class="cart-line-property"><b>' + escapeHtml(k) + ':</b> ' + escapeHtml(String(props[k])) + '</span>';
+    });
+    return lines.join('');
+  }
+
+  function injectPowderBadgeStyles() {
+    if (document.getElementById('mrg-powder-badge-styles')) return;
+    var style = document.createElement('style');
+    style.id = 'mrg-powder-badge-styles';
+    style.textContent = [
+      '.mrg-powder-badge {',
+      '  display: inline-flex;',
+      '  align-items: center;',
+      '  gap: 5px;',
+      '  font-size: 11px;',
+      '  font-weight: 700;',
+      '  color: #173f36;',
+      '  background: rgba(23,63,54,0.09);',
+      '  border: 1px solid rgba(23,63,54,0.18);',
+      '  border-radius: 999px;',
+      '  padding: 2px 9px 2px 6px;',
+      '  margin-top: 5px;',
+      '  letter-spacing: 0.01em;',
+      '  line-height: 1.4;',
+      '  white-space: nowrap;',
+      '}',
+      '.mrg-powder-badge svg {',
+      '  flex-shrink: 0;',
+      '  color: #2d7a5c;',
+      '}',
+      '.cart-line-property {',
+      '  display: block;',
+      '  font-size: 11px;',
+      '  color: rgba(23,63,54,0.6);',
+      '  margin-top: 2px;',
+      '}'
+    ].join('\n');
+    document.head.appendChild(style);
+  }
+
   function renderLineItem(item) {
+    injectPowderBadgeStyles();
     var imageUrl = imageForLineItem(item);
     var image = imageUrl
       ? '<img src="' + escapeHtml(imageUrl) + '" alt="' + escapeHtml(item.product_title) + '" width="180" height="180" loading="lazy">'
@@ -343,6 +400,8 @@
     var originalPrice = item.original_line_price !== item.final_line_price
       ? '<s>' + formatMoney(item.original_line_price) + '</s>'
       : '';
+    var powderBadge = renderPowderBadge(item);
+    var visibleProps = renderVisibleProperties(item);
 
     return [
       '<div class="cart-line cart-line-drawer" data-cart-line-item data-line-key="' + escapeHtml(item.key) + '">',
@@ -350,6 +409,8 @@
       '<div class="cart-line-info">',
       '<a class="cart-line-title" href="' + escapeHtml(item.url) + '">' + escapeHtml(item.product_title) + '</a>',
       variant,
+      powderBadge,
+      visibleProps,
       discounts,
       '<div class="qty cart-line-qty">',
       '<button type="button" data-cart-qty data-line-key="' + escapeHtml(item.key) + '" data-quantity="' + (item.quantity - 1) + '" aria-label="Decrease quantity">−</button>',
@@ -385,10 +446,7 @@
 
   function renderCart(cart) {
     currentCartState = cart;
-    var powderAddonId = window.morganicsPowderAddonVariantId || "45464500000000";
-    var visibleItems = cart.item_count ? cart.items.filter(function (item) {
-      return String(item.variant_id) !== String(powderAddonId) && item.handle !== 'powdering-service';
-    }) : [];
+    var visibleItems = cart.item_count ? cart.items : [];
 
     body.innerHTML = visibleItems.length ? visibleItems.map(renderLineItem).join('') : renderEmptyCart();
     subtotalNodes.forEach(function (node) {
@@ -426,24 +484,6 @@
     var qty = Math.max(0, Number(quantity) || 0);
     var updates = {};
     updates[key] = qty;
-
-    if (currentCartState && currentCartState.items) {
-      var itemToChange = currentCartState.items.find(function (item) {
-        return item.key === key;
-      });
-      if (itemToChange && itemToChange.properties && itemToChange.properties._powder_link) {
-        var linkId = itemToChange.properties._powder_link;
-        var powderAddonId = window.morganicsPowderAddonVariantId || "45464500000000";
-        var linkedItem = currentCartState.items.find(function (item) {
-          return String(item.variant_id) === String(powderAddonId) &&
-                 item.properties &&
-                 item.properties._powder_link === linkId;
-        });
-        if (linkedItem) {
-          updates[linkedItem.key] = qty;
-        }
-      }
-    }
 
     return fetch('/cart/update.js', {
       method: 'POST',
@@ -605,69 +645,21 @@
     var submitButton = form.querySelector('[type="submit"]');
     if (submitButton) submitButton.disabled = true;
 
-    var powderCheckbox = form.querySelector('input[name="properties[Powder form required]"]');
-    var isPowderChecked = powderCheckbox && powderCheckbox.checked;
-
-    var requestPromise;
-
-    if (isPowderChecked) {
-      var variantId = form.querySelector('[name="id"]').value;
-      var quantity = Number(form.querySelector('[name="quantity"]')?.value || 1);
-      var powderAddonId = window.morganicsPowderAddonVariantId || "47807857328322";
-      var linkId = "pw-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
-
-      var items = [
-        {
-          id: variantId,
-          quantity: quantity,
-          properties: {
-            "Powder Form": "Yes",
-            "_powder_link": linkId
-          }
-        },
-        {
-          id: powderAddonId,
-          quantity: quantity,
-          properties: {
-            "_powder_link": linkId
-          }
-        }
-      ];
-
-      requestPromise = fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify({ items: items })
-      });
-    } else {
-      requestPromise = fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form)
-      });
-    }
-
-    requestPromise
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form)
+    })
       .then(function (response) {
         if (!response.ok) throw new Error('Cart add failed');
         return response.json();
       })
       .then(function () {
-        document.dispatchEvent(new CustomEvent('cart:refresh'));
-        document.dispatchEvent(new CustomEvent('cart:open'));
-        document.dispatchEvent(new CustomEvent('morganics:cart-updated'));
         if (submitButton) submitButton.classList.add('is-success');
         return refreshCart(true);
       })
       .catch(function () {
-        if (!isPowderChecked) {
-          form.submit();
-        } else {
-          console.error('Failed to add items to cart via AJAX');
-        }
+        form.submit();
       })
       .finally(function () {
         if (submitButton) submitButton.disabled = false;

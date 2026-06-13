@@ -151,31 +151,143 @@
     const qty = root.querySelector('input[name="quantity"]');
     const powderCheckbox = root.querySelector('input[name="properties[Powder form required]"]');
 
-    const updateVariantPrice = (priceCents, hasCompare, compareText, isAvailable) => {
-      if (priceWrapper && regularPriceEl && priceCents !== undefined) {
-        priceWrapper.dataset.basePrice = priceCents;
-        regularPriceEl.classList.toggle('morganics-price__regular--sale', hasCompare);
-      }
-      if (comparePrice) {
-        comparePrice.textContent = compareText || '';
-        comparePrice.hidden = !hasCompare;
+    const updateVariantUI = (variant) => {
+      if (!variant) return;
+      if (priceWrapper && regularPriceEl) {
+        priceWrapper.dataset.basePrice = variant.price;
+        const hasCompare = variant.compare_at_price && variant.compare_at_price > variant.price;
+        regularPriceEl.classList.toggle('morganics-price__regular--sale', !!hasCompare);
+        if (comparePrice) {
+          comparePrice.textContent = hasCompare
+            ? (window.Shopify && typeof window.Shopify.formatMoney === 'function'
+                ? window.Shopify.formatMoney(variant.compare_at_price)
+                : 'Rs.' + Math.round(variant.compare_at_price / 100))
+            : '';
+          comparePrice.hidden = !hasCompare;
+        }
       }
       if (add) {
-        add.disabled = !isAvailable;
-        add.textContent = isAvailable ? 'Add to Cart' : 'Sold Out';
+        add.disabled = !variant.available;
+        add.textContent = variant.available ? 'Add to Cart' : 'Sold Out';
       }
     };
 
+    // ── Variant-switching powder logic ───────────────────────────────────────
+    // Powder variants are identified by having an option value that equals
+    // "Powder" (case-insensitive). Their non-powder siblings share all other
+    // option values. This matches structures like:
+    //   Size: 100g  /  Form: Regular   →  regular variant
+    //   Size: 100g  /  Form: Powder    →  powder variant
+    // OR single-option products with titles "100g" and "100g - Powder".
+
+    const allVariants = window.morganicsProductVariants || [];
+
+    const isPowderVariant = (v) =>
+      (v.options || []).some((o) => /^powder$/i.test(String(o).trim()));
+
+    const getNonPowderOptions = (v) =>
+      (v.options || []).filter((o) => !/^powder$/i.test(String(o).trim()));
+
+    const getCurrentVariantId = () => {
+      const checked = root.querySelector('[data-variant-input]:checked, input[name="id"]');
+      return checked ? String(checked.value) : null;
+    };
+
+    const setVariantById = (variantId) => {
+      const strId = String(variantId);
+      // Try radio buttons first (multi-variant products)
+      const radio = root.querySelector(`[data-variant-input][value="${strId}"]`);
+      if (radio) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+        return;
+      }
+      // Fallback: hidden input (single-variant or default-variant products)
+      const hidden = root.querySelector('input[name="id"]');
+      if (hidden) {
+        hidden.value = strId;
+        hidden.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    };
+
+    const findPowderSibling = (currentVariantId) => {
+      const current = allVariants.find((v) => String(v.id) === String(currentVariantId));
+      if (!current || isPowderVariant(current)) return null;
+      const currentNonPowder = getNonPowderOptions(current);
+      return allVariants.find((v) => {
+        if (!isPowderVariant(v)) return false;
+        const vNonPowder = getNonPowderOptions(v);
+        return JSON.stringify(vNonPowder) === JSON.stringify(currentNonPowder);
+      }) || null;
+    };
+
+    const findRegularSibling = (currentVariantId) => {
+      const current = allVariants.find((v) => String(v.id) === String(currentVariantId));
+      if (!current || !isPowderVariant(current)) return null;
+      const currentNonPowder = getNonPowderOptions(current);
+      return allVariants.find((v) => {
+        if (isPowderVariant(v)) return false;
+        const vNonPowder = getNonPowderOptions(v);
+        return JSON.stringify(vNonPowder) === JSON.stringify(currentNonPowder);
+      }) || null;
+    };
+
+    // Sync variant pills → when user changes size, keep powder state consistent
     root.querySelectorAll('[data-variant-input]').forEach((input) => {
       input.addEventListener('change', () => {
-        updateVariantPrice(
-          input.dataset.variantPriceCents,
-          input.dataset.variantHasCompare === 'true',
-          input.dataset.variantComparePrice || '',
-          input.dataset.variantAvailable === 'true'
-        );
+        const variant = allVariants.find((v) => String(v.id) === String(input.value));
+        if (variant) updateVariantUI(variant);
+
+        if (powderCheckbox && powderCheckbox.checked) {
+          // User switched size while powder is checked — find powder sibling of new size
+          const powderSibling = findPowderSibling(input.value);
+          if (powderSibling) {
+            // Switch to the powder variant silently (without re-triggering this listener)
+            const targetRadio = root.querySelector(`[data-variant-input][value="${powderSibling.id}"]`);
+            if (targetRadio && targetRadio !== input) {
+              targetRadio.checked = true;
+              updateVariantUI(powderSibling);
+            }
+          }
+        }
       });
     });
+
+    if (powderCheckbox) {
+      powderCheckbox.addEventListener('change', () => {
+        const currentId = getCurrentVariantId();
+        if (!currentId || !allVariants.length) return;
+
+        if (powderCheckbox.checked) {
+          const powderVariant = findPowderSibling(currentId);
+          if (powderVariant) {
+            setVariantById(powderVariant.id);
+            updateVariantUI(powderVariant);
+          } else {
+            // No powder variant exists for this product — uncheck and warn
+            powderCheckbox.checked = false;
+            const label = powderCheckbox.closest('.powder-toggle');
+            if (label) {
+              const existing = label.querySelector('.powder-unavailable-note');
+              if (!existing) {
+                const note = document.createElement('small');
+                note.className = 'powder-unavailable-note';
+                note.style.cssText = 'color:#c0392b;display:block;margin-top:4px;font-size:11px;';
+                note.textContent = 'Powder option not available for this pack size.';
+                label.appendChild(note);
+                setTimeout(() => note.remove(), 3000);
+              }
+            }
+          }
+        } else {
+          const regularVariant = findRegularSibling(currentId);
+          if (regularVariant) {
+            setVariantById(regularVariant.id);
+            updateVariantUI(regularVariant);
+          }
+        }
+      });
+    }
 
     root.querySelector('[data-qty-minus]')?.addEventListener('click', () => {
       if (!qty) return;

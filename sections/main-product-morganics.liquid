@@ -78,7 +78,11 @@
 
         {% if section.settings.show_powder_option %}
           <label class="powder-toggle">
-            <input type="checkbox" name="properties[Powder form required]" value="Yes">
+            <input type="checkbox"
+              name="properties[Powder Form]"
+              value="Yes"
+              data-powder-toggle
+            >
             <span>{{ section.settings.powder_label }}</span>
             <small>{{ section.settings.powder_help }}</small>
             <small class="powder-help-urdu" dir="rtl" lang="ur">اگر آپ چاہتے ہیں کہ یہ پروڈکٹ پیکنگ سے پہلے پیس دی جائے۔</small>
@@ -100,6 +104,11 @@
         {% endif %}
       {% endform %}
     </div>
+
+<script src="{{ 'morganics-product.js' | asset_url }}" defer></script>
+<script>
+  window.morganicsProductVariants = {{ product.variants | json }};
+</script>
 
     <div class="feature-icons">
       {% for block in section.blocks %}
@@ -152,10 +161,7 @@
   </section>
 {% endif %}
 
-<script>
-  window.morganicsPowderAddonVariantId = "{{ section.settings.powder_addon_variant_id | default: '47807857328322' }}";
-</script>
-<script src="{{ 'morganics-product.js' | asset_url }}" defer></script>
+
 
 {% schema %}
 {

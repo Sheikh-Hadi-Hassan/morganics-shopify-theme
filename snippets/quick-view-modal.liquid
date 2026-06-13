@@ -1,0 +1,21 @@
+{% comment %} Quick View Modal Markup {% endcomment %}
+<div id="quick-view-modal" class="quick-view-modal hidden" aria-hidden="true" role="dialog">
+  <div class="quick-view-overlay" data-action="close-quick-view"></div>
+  <div class="quick-view-content">
+    <button class="quick-view-close" aria-label="Close" data-action="close-quick-view">&times;</button>
+    <div class="quick-view-image">
+      <img src="" alt="" class="quick-view-img" />
+    </div>
+    <div class="quick-view-details">
+      <h2 class="quick-view-title"></h2>
+      <p class="quick-view-price"></p>
+      <select class="quick-view-variant" aria-label="Select variant"></select>
+      <div class="quick-view-quantity">
+        <button class="qty-decrease" type="button" aria-label="Decrease quantity">-</button>
+        <input type="number" class="qty-input" min="1" value="1" aria-label="Quantity" />
+        <button class="qty-increase" type="button" aria-label="Increase quantity">+</button>
+      </div>
+      <button class="quick-view-add-to-cart btn" type="button">Add to Cart</button>
+    </div>
+  </div>
+</div>

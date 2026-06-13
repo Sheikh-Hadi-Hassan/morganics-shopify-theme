@@ -13,6 +13,7 @@
         {% unless variant.available %}disabled{% endunless %}
         data-variant-input
         data-variant-price="{{ variant.price | money }}"
+        data-variant-price-cents="{{ variant.price }}"
         data-variant-compare-price="{{ variant.compare_at_price | money }}"
         data-variant-has-compare="{% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %}"
         data-variant-title="{{ variant.title | escape }}"

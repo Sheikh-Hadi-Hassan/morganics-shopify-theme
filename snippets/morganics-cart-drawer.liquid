@@ -92,6 +92,8 @@
 <div class="cart-backdrop" data-cart-backdrop data-cart-close aria-hidden="true"></div>
 
 <aside class="cart-drawer" data-cart-drawer aria-labelledby="CartDrawerTitle" aria-hidden="true">
+
+  {%- comment -%} ── HEADER ─────────────────────────────────────────────── {%- endcomment -%}
   <div class="cart-head">
     <div>
       <span class="eyebrow">Morganics Cart</span>
@@ -100,31 +102,111 @@
     <button class="cart-close" type="button" data-cart-close aria-label="Close cart">×</button>
   </div>
 
-  <div class="cart-body" data-cart-drawer-body>
-    {% if cart.item_count > 0 %}
-      {% for item in cart.items %}
-        {% render 'morganics-cart-line-item', item: item, drawer: true %}
-      {% endfor %}
-    {% else %}
-      <div class="empty-cart">
-        <h3>Your cart is empty.</h3>
-        <p>Start with pantry essentials, dry fruits, spices, or daily rituals.</p>
-        <a class="btn primary" href="{{ routes.all_products_collection_url }}">Shop Products</a>
-      </div>
-    {% endif %}
+  {%- comment -%} ── STEP PROGRESS INDICATOR ────────────────────────────── {%- endcomment -%}
+  <div class="cart-step-indicator" aria-hidden="true" data-step-indicator>
+    <span class="cart-step-dot active" data-step-dot="1">
+      <span class="cart-step-dot-num">1</span>
+      <span class="cart-step-dot-label">Review</span>
+    </span>
+    <span class="cart-step-connector"></span>
+    <span class="cart-step-dot" data-step-dot="2">
+      <span class="cart-step-dot-num">2</span>
+      <span class="cart-step-dot-label">Payment</span>
+    </span>
+    <span class="cart-step-connector"></span>
+    <span class="cart-step-dot" data-step-dot="3">
+      <span class="cart-step-dot-num">3</span>
+      <span class="cart-step-dot-label">Confirm</span>
+    </span>
   </div>
 
-  <div class="cart-drawer-footer">
-    <div class="cart-summary">
-      <span>Subtotal</span>
-      <strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+  {%- comment -%} ── STEP 1: REVIEW CART ────────────────────────────────── {%- endcomment -%}
+  <div class="cart-step cart-step--1" data-cart-step="1">
+    <div class="cart-body" data-cart-drawer-body>
+      {% if cart.item_count > 0 %}
+        {% for item in cart.items %}
+          {% render 'morganics-cart-line-item', item: item, drawer: true %}
+        {% endfor %}
+      {% else %}
+        <div class="empty-cart">
+          <h3>Your cart is empty.</h3>
+          <p>Start with pantry essentials, dry fruits, spices, or daily rituals.</p>
+          <a class="btn primary" href="{{ routes.all_products_collection_url }}">Shop Products</a>
+        </div>
+      {% endif %}
     </div>
-    <p class="cart-note">Shipping, taxes, and discounts are finalized at Shopify checkout.</p>
-    <div class="cart-actions">
-      <a class="btn ghost" href="{{ routes.all_products_collection_url }}" data-cart-close>Continue Shopping</a>
-      <form action="{{ routes.cart_url }}" method="post">
-        <button class="btn primary" type="submit" name="checkout" {% if cart.item_count == 0 %}disabled{% endif %} data-cart-checkout>Checkout</button>
+
+    <div class="cart-step-subtotal">
+      <div class="cart-summary">
+        <span>Subtotal</span>
+        <strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <p class="cart-note">Shipping, taxes, and discounts are finalized at Shopify checkout.</p>
+    </div>
+  </div>
+
+  {%- comment -%} ── STEP 2: CHOOSE PAYMENT ─────────────────────────────── {%- endcomment -%}
+  <div class="cart-step cart-step--2" data-cart-step="2" hidden>
+    <div class="cart-step-body">
+      {% render 'morganics-payment-options', id_prefix: 'drawer2', step: 'chooser' %}
+    </div>
+  </div>
+
+  {%- comment -%} ── STEP 3: PAYMENT DETAILS + CHECKOUT ────────────────── {%- endcomment -%}
+  <div class="cart-step cart-step--3" data-cart-step="3" hidden>
+    <div class="cart-step-body">
+      <form action="{{ routes.cart_url }}" method="post" data-payment-checkout-form>
+        {% render 'morganics-payment-options', id_prefix: 'drawer3', step: 'details' %}
+        <button
+          class="btn primary cart-checkout-full"
+          type="submit"
+          name="checkout"
+          {% if cart.item_count == 0 %}disabled{% endif %}
+          data-cart-checkout
+          data-payment-checkout
+        >
+          Checkout
+        </button>
       </form>
     </div>
   </div>
+
+  {%- comment -%} ── STICKY FOOTER: context-aware CTAs per step ────────── {%- endcomment -%}
+  <div class="cart-drawer-footer" data-cart-footer>
+
+    {%- comment -%} Step 1 actions {%- endcomment -%}
+    <div class="cart-footer-actions cart-footer-actions--1" data-step-actions="1">
+      <button
+        class="btn primary"
+        type="button"
+        data-step-next="2"
+        {% if cart.item_count == 0 %}disabled{% endif %}
+        data-step-next-requires-items
+      >
+        Continue to Payment
+      </button>
+      <a class="btn ghost" href="{{ routes.all_products_collection_url }}" data-cart-close>
+        Continue Shopping
+      </a>
+    </div>
+
+    {%- comment -%} Step 2 actions {%- endcomment -%}
+    <div class="cart-footer-actions cart-footer-actions--2" data-step-actions="2" hidden>
+      <button class="btn primary" type="button" data-step-next="3">
+        Continue
+      </button>
+      <button class="btn ghost" type="button" data-step-back="1">
+        ← Back
+      </button>
+    </div>
+
+    {%- comment -%} Step 3 actions — checkout button is inside the form above {%- endcomment -%}
+    <div class="cart-footer-actions cart-footer-actions--3" data-step-actions="3" hidden>
+      <button class="btn ghost" type="button" data-step-back="2">
+        ← Back
+      </button>
+    </div>
+
+  </div>
+
 </aside>

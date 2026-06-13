@@ -350,6 +350,12 @@
       if (favoriteButton && favoriteButton.dataset.productId) {
         event.preventDefault();
         event.stopPropagation();
+
+        favoriteButton.classList.add('heart-pulse');
+        favoriteButton.addEventListener('animationend', () => {
+          favoriteButton.classList.remove('heart-pulse');
+        }, { once: true });
+
         const product = collect(favoriteButton);
         const items = read();
         const exists = items.some((item) => String(item.id || item.handle) === String(product.id || product.handle));
@@ -412,5 +418,45 @@
     render();
   };
 
+  const initFooterAccordions = () => {
+    const triggers = document.querySelectorAll('[data-footer-accordion-trigger]');
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        if (window.innerWidth >= 768) return;
+        
+        const content = trigger.nextElementSibling;
+        const parent = trigger.closest('.footer-col');
+        if (!content || !parent) return;
+        
+        const isOpen = parent.classList.contains('accordion-open');
+        parent.classList.toggle('accordion-open', !isOpen);
+        
+        if (!isOpen) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          trigger.setAttribute('aria-expanded', 'true');
+        } else {
+          content.style.maxHeight = '0px';
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+    
+    window.addEventListener('resize', () => {
+      const contents = document.querySelectorAll('[data-footer-accordion-content]');
+      contents.forEach((content) => {
+        if (window.innerWidth >= 768) {
+          content.style.maxHeight = '';
+        } else {
+          const parent = content.closest('.footer-col');
+          if (parent) {
+            const isOpen = parent.classList.contains('accordion-open');
+            content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : '0px';
+          }
+        }
+      });
+    });
+  };
+
   initFavorites();
+  initFooterAccordions();
 })();

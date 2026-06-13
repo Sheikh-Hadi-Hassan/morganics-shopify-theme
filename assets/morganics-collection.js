@@ -13,9 +13,30 @@
     };
   };
 
+  // Set active sorting option label on page load to handle Most Popular vs Best Selling values
+  document.querySelectorAll('select[name="sort_by"]').forEach((select) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sortSelected = urlParams.get('sort_by');
+    if (sortSelected === 'best-selling') {
+      const lastLabel = localStorage.getItem('morganics-last-sort-label') || 'Best Selling';
+      const options = Array.from(select.options);
+      const matched = options.find((opt) => opt.text === lastLabel);
+      if (matched) {
+        options.forEach((opt) => opt.selected = (opt === matched));
+        select.value = matched.value;
+      }
+    }
+  });
+
   document.querySelectorAll('[data-collection-tools]').forEach((form) => {
     form.querySelectorAll('select').forEach((select) => {
-      select.addEventListener('change', () => form.submit());
+      select.addEventListener('change', () => {
+        const option = select.options[select.selectedIndex];
+        if (option) {
+          localStorage.setItem('morganics-last-sort-label', option.text);
+        }
+        form.submit();
+      });
     });
   });
 
@@ -242,7 +263,77 @@
       }
     });
 
+    // Grid / List View Toggle
+    const gridContainer = root.querySelector('.morganics-product-grid');
+    const viewToggleButtons = root.querySelectorAll('.morganics-view-toggle [data-view]');
+    if (gridContainer && viewToggleButtons.length) {
+      const savedView = localStorage.getItem('morganics-shop-view') || 'grid';
+      
+      const setView = (view) => {
+        gridContainer.setAttribute('data-view', view);
+        if (view === 'list') {
+          gridContainer.classList.add('is-list-view');
+        } else {
+          gridContainer.classList.remove('is-list-view');
+        }
+        viewToggleButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.view === view);
+        });
+        localStorage.setItem('morganics-shop-view', view);
+      };
+
+      // Apply saved view on load
+      setView(savedView);
+
+      viewToggleButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          setView(btn.dataset.view);
+        });
+      });
+    }
+
     updatePriceOutput();
     applyFilters();
+  });
+
+  // Global List Row event delegation for both homepage and collection pages
+  document.addEventListener('change', (event) => {
+    const select = event.target.closest('[data-list-row-variant-selector]');
+    if (!select) return;
+    const option = select.options[select.selectedIndex];
+    const row = select.closest('[data-list-row-item]');
+    if (!row) return;
+
+    const variantId = option.value;
+    const priceMoney = option.dataset.priceMoney;
+    
+    // Update form hidden input
+    const formInput = row.querySelector('[data-list-row-form-variant-id]');
+    if (formInput) formInput.value = variantId;
+
+    // Update price display
+    const priceDisplay = row.querySelector('[data-list-row-price-display]');
+    if (priceDisplay && priceMoney) priceDisplay.textContent = priceMoney;
+
+    // Update wishlist button variant dataset
+    const wishlistBtn = row.querySelector('.product-card-wishlist');
+    if (wishlistBtn) wishlistBtn.setAttribute('data-variant-id', variantId);
+  });
+
+  document.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-qty-change]');
+    if (!btn) return;
+    
+    const change = parseInt(btn.dataset.qtyChange, 10);
+    const row = btn.closest('[data-list-row-item]');
+    if (!row) return;
+
+    const qtyInput = row.querySelector('[data-qty-input]');
+    if (qtyInput) {
+      let val = parseInt(qtyInput.value, 10) || 1;
+      val += change;
+      if (val < 1) val = 1;
+      qtyInput.value = val;
+    }
   });
 })();

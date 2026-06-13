@@ -1,6 +1,5 @@
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
-  assign card_meta = product.type | default: product.vendor | default: 'Morganics'
   assign secondary_image = blank
   if product.images.size > 1
     for image in product.images
@@ -45,6 +44,7 @@
   data-available="{% if product.available %}true{% else %}false{% endif %}"
   data-variants="{{ product_variant_filter | strip | escape }}"
   data-sizes="{{ product_size_filter | strip | escape }}"
+  data-created-at="{{ product.created_at | date: '%s' }}"
 >
   <button
     class="product-card-wishlist morganics-favorite-toggle"
@@ -77,21 +77,31 @@
       {% endif %}
     </div>
     <div class="product-info">
-      <small class="product-meta">{{ card_meta }}{% if current_variant.sku != blank %} · {{ current_variant.sku }}{% endif %}</small>
       <b class="product-name" data-urdu-wrap>{{ product.title }}</b>
       {% if product.metafields.custom.urdu_name != blank %}
         <span class="urdu-line" data-urdu-wrap>{{ product.metafields.custom.urdu_name }}</span>
       {% endif %}
+
+      {% if product.variants.size > 1 %}
+        <div class="product-card-variants-row" data-desktop-only>
+          {% for variant in product.variants limit: 2 %}
+            <span class="variant-item-pill">{{ variant.title }} {{ variant.price | money }}</span>
+            {% unless forloop.last %}<span class="variant-separator">•</span>{% endunless %}
+          {% endfor %}
+          {% if product.variants.size > 2 %}
+            <span class="variant-separator">•</span>
+            <span class="variant-more-count">+{{ product.variants.size | minus: 2 }} more</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
       <div class="price-row">
-        {% if product.compare_at_price > product.price %}
-          <s class="price-compare">{{ product.compare_at_price | money }}</s>
-        {% endif %}
-        <span class="price{% if product.compare_at_price > product.price %} price-sale{% endif %}">{{ product.price | money }}</span>
-        {% if product.available %}
-          <span class="chip">Available</span>
-        {% else %}
-          <span class="chip chip-muted">Sold out</span>
-        {% endif %}
+        <div class="price-container">
+          <span class="price{% if product.compare_at_price > product.price %} price-sale{% endif %}">{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <s class="price-compare">{{ product.compare_at_price | money }}</s>
+          {% endif %}
+        </div>
       </div>
     </div>
   </a>
@@ -108,4 +118,5 @@
       <a class="card-view-btn" href="{{ product.url }}">View</a>
     </div>
   {% endif %}
+
 </div>

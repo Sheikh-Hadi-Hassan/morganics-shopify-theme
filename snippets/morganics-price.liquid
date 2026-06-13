@@ -4,7 +4,7 @@
   assign price = target.price | default: product.price
 %}
 
-<span class="morganics-price" data-product-price>
+<span class="morganics-price" data-product-price data-base-price="{{ price }}">
   {% assign show_compare = false %}
   {% if compare_at_price > price %}
     {% assign show_compare = true %}

@@ -1,0 +1,113 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<div class="product-list-row" data-list-row-item>
+  <!-- Image Column -->
+  <div class="list-row-image">
+    <a href="{{ product.url }}">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: product.title, class: 'list-row-img-element' }}
+      {% else %}
+        {% render 'morganics-product-image-fallback', product: product, width: 240, height: 240, loading: 'lazy' %}
+      {% endif %}
+    </a>
+  </div>
+
+  <!-- Info Column -->
+  <div class="list-row-info">
+    <h3 class="list-row-title" data-urdu-wrap>
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    {% if product.metafields.custom.urdu_name != blank %}
+      <span class="list-row-urdu" data-urdu-wrap>{{ product.metafields.custom.urdu_name }}</span>
+    {% endif %}
+    {% if product.description != blank %}
+      <p class="list-row-summary">{{ product.description | strip_html | truncatewords: 15 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Variants Column -->
+  <div class="list-row-variants">
+    {% if product.variants.size > 1 %}
+      <div class="list-row-select-wrapper">
+        <select class="list-row-variant-select" aria-label="Select variant" data-list-row-variant-selector>
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" data-price="{{ variant.price }}" data-price-money="{{ variant.price | money }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }} {% unless variant.available %}(Sold out){% endunless %}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" value="{{ current_variant.id }}" data-list-row-variant-selector>
+    {% endif %}
+  </div>
+
+  <!-- Price Column -->
+  <div class="list-row-price">
+    <div class="price-container">
+      <span class="list-row-price-current {% if product.compare_at_price > product.price %}sale-price{% endif %}" data-list-row-price-display>
+        {{ product.price | money }}
+      </span>
+      {% if product.compare_at_price > product.price %}
+        <s class="list-row-price-compare" data-list-row-compare-price-display>{{ product.compare_at_price | money }}</s>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Actions: Quantity & Add to Cart -->
+  <div class="list-row-actions-container">
+    {% if product.available %}
+      {% form 'product', product, class: 'list-row-form' %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-list-row-form-variant-id>
+        
+        <!-- Quantity Stepper -->
+        <div class="list-row-qty">
+          <button type="button" class="qty-btn minus" data-qty-change="-1" aria-label="Decrease quantity">−</button>
+          <input type="number" name="quantity" value="1" min="1" aria-label="Quantity" data-qty-input>
+          <button type="button" class="qty-btn plus" data-qty-change="1" aria-label="Increase quantity">+</button>
+        </div>
+
+        <!-- Add to Cart Submit Button -->
+        <div class="list-row-action">
+          <button type="submit" class="list-row-add-cart">Add to Cart</button>
+        </div>
+      {% endform %}
+    {% else %}
+      <div class="list-row-form sold-out-wrapper">
+        <div class="list-row-qty disabled">
+          <button type="button" class="qty-btn minus" disabled aria-label="Decrease quantity">−</button>
+          <input type="number" value="1" disabled aria-label="Quantity">
+          <button type="button" class="qty-btn plus" disabled aria-label="Increase quantity">+</button>
+        </div>
+        <div class="list-row-action">
+          <button type="button" class="list-row-add-cart disabled" disabled>Sold Out</button>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Wishlist Column -->
+  <div class="list-row-wishlist">
+    <button
+      class="product-card-wishlist morganics-favorite-toggle"
+      type="button"
+      aria-label="Add {{ product.title | escape }} to wishlist"
+      aria-pressed="false"
+      data-favorite-toggle
+      data-wishlist-product
+      data-product-id="{{ product.id }}"
+      data-product-handle="{{ product.handle }}"
+      data-product-title="{{ product.title | escape }}"
+      data-product-url="{{ product.url }}"
+      data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 500 }}{% endif %}"
+      data-product-price="{{ product.price | money }}"
+      data-variant-id="{{ current_variant.id }}"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.8 4.6c-1.8-1.8-4.7-1.8-6.5 0L12 6.9 9.7 4.6c-1.8-1.8-4.7-1.8-6.5 0s-1.8 4.7 0 6.5L12 20l8.8-8.9c1.8-1.8 1.8-4.7 0-6.5Z"></path>
+      </svg>
+    </button>
+  </div>
+</div>

@@ -18,6 +18,9 @@
   <section class="cart-page">
     <form class="cart-list" action="{{ routes.cart_url }}" method="post" data-cart-page-form>
       {% for item in cart.items %}
+        {% if item.handle == 'powdering-service' or item.sku == 'POWDER-ADDON' %}
+          {% continue %}
+        {% endif %}
         {% render 'morganics-cart-line-item', item: item %}
       {% endfor %}
 
@@ -33,7 +36,13 @@
 
       <div class="summary-row">
         <span>Items</span>
-        <strong>{{ cart.item_count }}</strong>
+        {% assign visible_item_count = 0 %}
+        {% for item in cart.items %}
+          {% unless item.handle == 'powdering-service' or item.sku == 'POWDER-ADDON' %}
+            {% assign visible_item_count = visible_item_count | plus: item.quantity %}
+          {% endunless %}
+        {% endfor %}
+        <strong>{{ visible_item_count }}</strong>
       </div>
       <div class="summary-row">
         <span>Subtotal</span>
@@ -58,8 +67,9 @@
 
       <p>{{ section.settings.checkout_note }}</p>
 
-      <form action="{{ routes.cart_url }}" method="post">
-        <button class="btn primary cart-checkout-btn" type="submit" name="checkout">{{ section.settings.checkout_button_label }}</button>
+      <form action="{{ routes.cart_url }}" method="post" data-payment-checkout-form>
+        {% render 'morganics-payment-options', id_prefix: 'page' %}
+        <button class="btn primary cart-checkout-btn" type="submit" name="checkout" data-payment-checkout>{{ section.settings.checkout_button_label }}</button>
       </form>
     </aside>
   </section>

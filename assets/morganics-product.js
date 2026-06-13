@@ -144,26 +144,36 @@
     .replace(/'/g, '&#39;');
 
   document.querySelectorAll('[data-morganics-product]').forEach((root) => {
-    const price = root.querySelector('[data-product-price] .morganics-price__regular');
+    const priceWrapper = root.querySelector('[data-product-price]');
+    const regularPriceEl = root.querySelector('[data-product-price] .morganics-price__regular');
     const comparePrice = root.querySelector('[data-product-price] .morganics-price__compare');
     const add = root.querySelector('[data-add-to-cart]');
     const qty = root.querySelector('input[name="quantity"]');
+    const powderCheckbox = root.querySelector('input[name="properties[Powder form required]"]');
+
+    const updateVariantPrice = (priceCents, hasCompare, compareText, isAvailable) => {
+      if (priceWrapper && regularPriceEl && priceCents !== undefined) {
+        priceWrapper.dataset.basePrice = priceCents;
+        regularPriceEl.classList.toggle('morganics-price__regular--sale', hasCompare);
+      }
+      if (comparePrice) {
+        comparePrice.textContent = compareText || '';
+        comparePrice.hidden = !hasCompare;
+      }
+      if (add) {
+        add.disabled = !isAvailable;
+        add.textContent = isAvailable ? 'Add to Cart' : 'Sold Out';
+      }
+    };
 
     root.querySelectorAll('[data-variant-input]').forEach((input) => {
       input.addEventListener('change', () => {
-        if (price && input.dataset.variantPrice) {
-          price.textContent = input.dataset.variantPrice;
-          price.classList.toggle('morganics-price__regular--sale', input.dataset.variantHasCompare === 'true');
-        }
-        if (comparePrice) {
-          comparePrice.textContent = input.dataset.variantComparePrice || '';
-          comparePrice.hidden = input.dataset.variantHasCompare !== 'true';
-        }
-        if (add) {
-          const available = input.dataset.variantAvailable === 'true';
-          add.disabled = !available;
-          add.textContent = available ? 'Add to Cart' : 'Sold Out';
-        }
+        updateVariantPrice(
+          input.dataset.variantPriceCents,
+          input.dataset.variantHasCompare === 'true',
+          input.dataset.variantComparePrice || '',
+          input.dataset.variantAvailable === 'true'
+        );
       });
     });
 

@@ -28,89 +28,231 @@
 
     <div class="morganics-static-page__content">
       {% if has_blocks %}
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'content' %}
-              <article class="morganics-static-block" {{ block.shopify_attributes }}>
-                {% if block.settings.heading != blank %}
-                  <h2>{{ block.settings.heading }}</h2>
-                {% endif %}
-                {% if block.settings.content != blank %}
-                  <div class="morganics-static-richtext">{{ block.settings.content }}</div>
-                {% endif %}
-              </article>
+        {% if page_key == 'contact' %}
+          <div class="morganics-contact-layout">
+            <div class="morganics-contact-left-col">
+              {% for block in section.blocks %}
+                {% if block.type != 'contact_form' %}
+                  {% case block.type %}
+                    {% when 'content' %}
+                      <article class="morganics-static-block" {{ block.shopify_attributes }}>
+                        {% if block.settings.heading != blank %}
+                          <h2>{{ block.settings.heading }}</h2>
+                        {% endif %}
+                        {% if block.settings.content != blank %}
+                          <div class="morganics-static-richtext">{{ block.settings.content }}</div>
+                        {% endif %}
+                      </article>
 
-            {% when 'faq_item' %}
-              <details class="morganics-static-faq" {{ block.shopify_attributes }}>
-                <summary>{{ block.settings.question }}</summary>
-                <div>{{ block.settings.answer }}</div>
-              </details>
+                    {% when 'contact_details' %}
+                      <div class="morganics-contact-details-box" {{ block.shopify_attributes }}>
+                        {% if block.settings.heading != blank %}
+                          <h2>{{ block.settings.heading }}</h2>
+                        {% endif %}
+                        <div class="contact-links-list">
+                          {% if block.settings.phone != blank %}
+                            <div class="contact-item contact-whatsapp">
+                              <span class="contact-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 2c-5.514 0-9.989 4.478-9.989 9.993 0 1.763.459 3.483 1.33 5.004L2 22l5.166-1.354c1.47.8 3.119 1.221 4.862 1.221 5.513 0 9.987-4.479 9.987-9.995C22.015 6.478 17.545 2 12.031 2Zm5.795 14.153c-.237.669-1.378 1.222-1.9.1.285-.503-.68-.865-1.921-1.373-.807-.327-1.127-.22-1.62.367-.4.475-.769.897-1.077.771-.309-.126-1.304-.48-2.484-1.533-.918-.819-1.538-1.831-1.718-2.138-.18-.308-.019-.475.134-.627.137-.137.309-.36.463-.54.155-.18.206-.309.309-.515.103-.206.051-.386-.025-.54-.077-.155-.695-1.677-.953-2.296-.252-.602-.508-.521-.695-.53-.18-.009-.386-.01-.592-.01s-.54.077-.824.386c-.283.309-1.082 1.056-1.082 2.575s1.1 2.985 1.256 3.19c.154.207 2.164 3.306 5.245 4.636.733.316 1.304.505 1.748.647.737.234 1.408.201 1.939.122.592-.089 1.821-.745 2.079-1.465Z"/></svg>
+                              </span>
+                              <div>
+                                <strong>WhatsApp Support</strong>
+                                <a href="https://wa.me/{{ block.settings.phone | remove: ' ' | remove: '+' }}" target="_blank" rel="noopener">{{ block.settings.phone }}</a>
+                              </div>
+                            </div>
+                          {% endif %}
+                          {% if block.settings.sales_email != blank %}
+                            <div class="contact-item">
+                              <span class="contact-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                              </span>
+                              <div>
+                                <strong>Sales Inquiry</strong>
+                                <a href="mailto:{{ block.settings.sales_email }}">{{ block.settings.sales_email }}</a>
+                              </div>
+                            </div>
+                          {% endif %}
+                          {% if block.settings.support_email != blank %}
+                            <div class="contact-item">
+                              <span class="contact-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                              </span>
+                              <div>
+                                <strong>Customer Support</strong>
+                                <a href="mailto:{{ block.settings.support_email }}">{{ block.settings.support_email }}</a>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
 
-            {% when 'contact_details' %}
-              <div class="morganics-static-grid" {{ block.shopify_attributes }}>
-                <div>
+                        {% if block.settings.support_heading != blank or block.settings.support_topics != blank %}
+                          <div class="contact-topics-box">
+                            {% if block.settings.support_heading != blank %}
+                              <h3>{{ block.settings.support_heading }}</h3>
+                            {% endif %}
+                            {% if block.settings.support_topics != blank %}
+                              <div class="morganics-static-richtext">{{ block.settings.support_topics }}</div>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </div>
+                  {% endcase %}
+                {% endif %}
+              {% endfor %}
+
+              <div class="morganics-contact-trust-card">
+                <h3>Our Trust Promise</h3>
+                <p>All Morganics products are sourced naturally, tested for purity, and packed under strict hygienic conditions. We guarantee premium quality or your money back.</p>
+                <div class="contact-trust-badges">
+                  <span>🍃 100% Organic</span>
+                  <span>🔬 Tested Purity</span>
+                  <span>📦 Safe Delivery</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="morganics-contact-right-col">
+              {% for block in section.blocks %}
+                {% if block.type == 'contact_form' %}
+                  <div class="morganics-contact-form-card" {{ block.shopify_attributes }}>
+                    <h2>Send Us a Message</h2>
+                    <p class="form-intro-text">Have a question or custom request? Fill out the form and our wellness team will respond within 24 hours.</p>
+                    {% form 'contact', class: 'morganics-static-form contact-redesign-form', id: 'MorganicsStaticContactForm' %}
+                      {% if form.posted_successfully? %}
+                        <div class="form-status form-status-success" tabindex="-1" autofocus style="display: flex; align-items: center; gap: 8px; background: #173f36; color: #fbf4e6; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; border: 1px solid rgba(223, 165, 36, 0.3);">
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                          <span>{{ block.settings.success_message }}</span>
+                        </div>
+                      {% endif %}
+
+                      {% if form.errors %}
+                        <div class="form-status form-status-error" tabindex="-1" autofocus style="background: rgba(186, 45, 45, 0.1); color: #ba2d2d; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; border: 1px solid rgba(186, 45, 45, 0.2);">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                            <span>Please fix the following errors:</span>
+                          </div>
+                          <div style="margin-top: 8px; padding-left: 28px;">{{ form.errors | default_errors }}</div>
+                        </div>
+                      {% endif %}
+
+                      <div class="form-row-two-col">
+                        <label class="form-label-wrap">
+                          <span class="label-text">{{ block.settings.name_label }} <span class="required-star">*</span></span>
+                          <input type="text" name="contact[name]" autocomplete="name" required placeholder="Your full name">
+                        </label>
+                        <label class="form-label-wrap">
+                          <span class="label-text">{{ block.settings.phone_label }} <span class="required-star">*</span></span>
+                          <input type="tel" name="contact[phone]" autocomplete="tel" required placeholder="Phone number (e.g. 0322...)">
+                        </label>
+                      </div>
+
+                      <div class="form-row-two-col">
+                        <label class="form-label-wrap">
+                          <span class="label-text">{{ block.settings.email_label }}</span>
+                          <input type="email" name="contact[email]" autocomplete="email" placeholder="email@example.com">
+                        </label>
+                        <label class="form-label-wrap">
+                          <span class="label-text">{{ block.settings.city_label }}</span>
+                          <input type="text" name="contact[City]" autocomplete="address-level2" placeholder="e.g. Lahore, Karachi">
+                        </label>
+                      </div>
+
+                      <label class="form-label-wrap">
+                        <span class="label-text">{{ block.settings.product_label }}</span>
+                        <textarea name="contact[body]" rows="5" placeholder="{{ block.settings.placeholder | escape }}"></textarea>
+                      </label>
+                      <button class="btn primary contact-submit-btn" type="submit">{{ block.settings.button_label }}</button>
+                    {% endform %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'content' %}
+                <article class="morganics-static-block" {{ block.shopify_attributes }}>
                   {% if block.settings.heading != blank %}
                     <h2>{{ block.settings.heading }}</h2>
                   {% endif %}
-                  {% if block.settings.phone != blank %}
-                    <p><strong>WhatsApp / Phone:</strong> <a href="https://wa.me/{{ block.settings.phone | remove: ' ' | remove: '+' }}">{{ block.settings.phone }}</a></p>
+                  {% if block.settings.content != blank %}
+                    <div class="morganics-static-richtext">{{ block.settings.content }}</div>
                   {% endif %}
-                  {% if block.settings.sales_email != blank %}
-                    <p><strong>Sales email:</strong> <a href="mailto:{{ block.settings.sales_email }}">{{ block.settings.sales_email }}</a></p>
-                  {% endif %}
-                  {% if block.settings.support_email != blank %}
-                    <p><strong>Support email:</strong> <a href="mailto:{{ block.settings.support_email }}">{{ block.settings.support_email }}</a></p>
-                  {% endif %}
-                  {% if block.settings.website != blank %}
-                    <p><strong>Website:</strong> {{ block.settings.website }}</p>
-                  {% endif %}
-                </div>
-                <div>
-                  {% if block.settings.support_heading != blank %}
-                    <h2>{{ block.settings.support_heading }}</h2>
-                  {% endif %}
-                  {% if block.settings.support_topics != blank %}
-                    <div class="morganics-static-richtext">{{ block.settings.support_topics }}</div>
-                  {% endif %}
-                </div>
-              </div>
+                </article>
 
-            {% when 'contact_form' %}
-              {% form 'contact', class: 'morganics-static-form', id: 'MorganicsStaticContactForm' %}
-                {% if form.posted_successfully? %}
-                  <p class="form-status form-status-success" tabindex="-1" autofocus>{{ block.settings.success_message }}</p>
-                {% endif %}
+              {% when 'faq_item' %}
+                <details class="morganics-static-faq" {{ block.shopify_attributes }}>
+                  <summary>{{ block.settings.question }}</summary>
+                  <div>{{ block.settings.answer }}</div>
+                </details>
 
-                {% if form.errors %}
-                  <div class="form-status form-status-error" tabindex="-1" autofocus>
-                    {{ form.errors | default_errors }}
+              {% when 'contact_details' %}
+                <div class="morganics-static-grid" {{ block.shopify_attributes }}>
+                  <div>
+                    {% if block.settings.heading != blank %}
+                      <h2>{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.phone != blank %}
+                      <p><strong>WhatsApp / Phone:</strong> <a href="https://wa.me/{{ block.settings.phone | remove: ' ' | remove: '+' }}">{{ block.settings.phone }}</a></p>
+                    {% endif %}
+                    {% if block.settings.sales_email != blank %}
+                      <p><strong>Sales email:</strong> <a href="mailto:{{ block.settings.sales_email }}">{{ block.settings.sales_email }}</a></p>
+                    {% endif %}
+                    {% if block.settings.support_email != blank %}
+                      <p><strong>Support email:</strong> <a href="mailto:{{ block.settings.support_email }}">{{ block.settings.support_email }}</a></p>
+                    {% endif %}
+                    {% if block.settings.website != blank %}
+                      <p><strong>Website:</strong> {{ block.settings.website }}</p>
+                    {% endif %}
                   </div>
-                {% endif %}
+                  <div>
+                    {% if block.settings.support_heading != blank %}
+                      <h2>{{ block.settings.support_heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.support_topics != blank %}
+                      <div class="morganics-static-richtext">{{ block.settings.support_topics }}</div>
+                    {% endif %}
+                  </div>
+                </div>
 
-                <label>
-                  {{ block.settings.name_label }}
-                  <input type="text" name="contact[name]" autocomplete="name" required>
-                </label>
-                <label>
-                  {{ block.settings.phone_label }}
-                  <input type="tel" name="contact[phone]" autocomplete="tel" required>
-                </label>
-                <label>
-                  {{ block.settings.email_label }}
-                  <input type="email" name="contact[email]" autocomplete="email">
-                </label>
-                <label>
-                  {{ block.settings.city_label }}
-                  <input type="text" name="contact[City]" autocomplete="address-level2">
-                </label>
-                <label>
-                  {{ block.settings.product_label }}
-                  <textarea name="contact[body]" rows="5" placeholder="{{ block.settings.placeholder | escape }}"></textarea>
-                </label>
-                <button class="btn primary" type="submit">{{ block.settings.button_label }}</button>
-              {% endform %}
-          {% endcase %}
-        {% endfor %}
+              {% when 'contact_form' %}
+                {% form 'contact', class: 'morganics-static-form', id: 'MorganicsStaticContactForm' %}
+                  {% if form.posted_successfully? %}
+                    <p class="form-status form-status-success" tabindex="-1" autofocus>{{ block.settings.success_message }}</p>
+                  {% endif %}
+
+                  {% if form.errors %}
+                    <div class="form-status form-status-error" tabindex="-1" autofocus>
+                      {{ form.errors | default_errors }}
+                    </div>
+                  {% endif %}
+
+                  <label>
+                    {{ block.settings.name_label }}
+                    <input type="text" name="contact[name]" autocomplete="name" required>
+                  </label>
+                  <label>
+                    {{ block.settings.phone_label }}
+                    <input type="tel" name="contact[phone]" autocomplete="tel" required>
+                  </label>
+                  <label>
+                    {{ block.settings.email_label }}
+                    <input type="email" name="contact[email]" autocomplete="email">
+                  </label>
+                  <label>
+                    {{ block.settings.city_label }}
+                    <input type="text" name="contact[City]" autocomplete="address-level2">
+                  </label>
+                  <label>
+                    {{ block.settings.product_label }}
+                    <textarea name="contact[body]" rows="5" placeholder="{{ block.settings.placeholder | escape }}"></textarea>
+                  </label>
+                  <button class="btn primary" type="submit">{{ block.settings.button_label }}</button>
+                {% endform %}
+            {% endcase %}
+          {% endfor %}
+        {% endif %}
       {% else %}
         {{ page.content }}
       {% endif %}

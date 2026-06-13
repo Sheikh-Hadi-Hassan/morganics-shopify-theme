@@ -6,18 +6,35 @@
   const qs = (selector, root = document) => root.querySelector(selector);
   const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
+  function updateMegaMenuTop() {
+    // Set CSS var so fixed-position mega-menu always sits just below the header
+    const rect = header.getBoundingClientRect();
+    const top = Math.round(rect.bottom + 6);
+    document.documentElement.style.setProperty('--mega-menu-top', top + 'px');
+  }
+
   function initStickyHeader() {
     const tick = () => {
       const scrolled = window.scrollY > 80;
       header.classList.toggle('is-scrolled', scrolled);
       header.classList.toggle('scrolled', scrolled);
+      updateMegaMenuTop();
     };
     tick();
     window.addEventListener('scroll', tick, { passive: true });
+    window.addEventListener('resize', tick, { passive: true });
   }
 
   function initMegaMenu() {
     const megaWraps = qsa('[data-mega-wrap]');
+    
+    // Track mouse locations for diagonal tracking
+    let mouseLocs = [];
+    document.addEventListener('mousemove', (e) => {
+      mouseLocs.push({ x: e.clientX, y: e.clientY });
+      if (mouseLocs.length > 8) mouseLocs.shift();
+    });
+
     const closeAll = (except = null) => {
       megaWraps.forEach((wrap) => {
         if (wrap === except) return;
@@ -34,29 +51,119 @@
       const trigger = qs('[data-mega-trigger]', wrap);
       const menu = qs('[data-mega-menu]', wrap);
       let leaveTimer = null;
+      let enterTimer = null;
 
-      const show = () => {
+      const show = (delay = 0) => {
         clearTimeout(leaveTimer);
+        clearTimeout(enterTimer);
+        if (delay > 0) {
+          enterTimer = window.setTimeout(() => {
+            doShow();
+          }, delay);
+        } else {
+          doShow();
+        }
+      };
+
+      const doShow = () => {
         closeAll(wrap);
+        updateMegaMenuTop();
         wrap.classList.add('mega-open');
         body.classList.add('mega-menu-open');
         menu?.setAttribute('aria-hidden', 'false');
         trigger?.setAttribute('aria-expanded', 'true');
       };
 
-      const hide = (delay = 120) => {
+      const hide = (delay = 350) => {
         clearTimeout(leaveTimer);
-        leaveTimer = window.setTimeout(() => {
-          wrap.classList.remove('mega-open');
-          menu?.setAttribute('aria-hidden', 'true');
-          trigger?.setAttribute('aria-expanded', 'false');
-          if (!qs('.mega-wrap.mega-open', header)) body.classList.remove('mega-menu-open');
-        }, delay);
+        clearTimeout(enterTimer);
+        if (delay === 0) {
+          doHide();
+        } else {
+          leaveTimer = window.setTimeout(() => {
+            doHide();
+          }, delay);
+        }
       };
 
-      wrap.addEventListener('mouseenter', show);
-      wrap.addEventListener('mouseleave', hide);
-      wrap.addEventListener('focusin', show);
+      const doHide = () => {
+        wrap.classList.remove('mega-open');
+        menu?.setAttribute('aria-hidden', 'true');
+        trigger?.setAttribute('aria-expanded', 'false');
+        if (!qs('.mega-wrap.mega-open', header)) body.classList.remove('mega-menu-open');
+      };
+
+      wrap.addEventListener('mouseenter', () => show(150)); // 150ms hover delay on open to prevent accidental trigger
+      
+      wrap.addEventListener('mouseleave', () => {
+        clearTimeout(enterTimer);
+        if (!menu) {
+          hide(350);
+          return;
+        }
+
+        const menuRect = menu.getBoundingClientRect();
+        
+        // Diagonal tracking algorithm (sign, isPointInTriangle)
+        const sign = (p1, p2, p3) => (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+        const isPointInTriangle = (p, p1, p2, p3) => {
+          const d1 = sign(p, p1, p2);
+          const d2 = sign(p, p2, p3);
+          const d3 = sign(p, p3, p1);
+          const has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+          const has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+          return !(has_neg && has_pos);
+        };
+
+        const checkClose = () => {
+          if (!wrap.classList.contains('mega-open')) return;
+          
+          if (mouseLocs.length >= 1) {
+            const current = mouseLocs[mouseLocs.length - 1];
+            const menuRect = menu.getBoundingClientRect();
+            const triggerRect = trigger.getBoundingClientRect();
+            
+            // Check if mouse is physically inside the mega menu or trigger bounds (with 10px buffer)
+            if (
+              current.x >= menuRect.left - 10 && current.x <= menuRect.right + 10 &&
+              current.y >= menuRect.top - 10 && current.y <= menuRect.bottom + 10
+            ) {
+              leaveTimer = window.setTimeout(checkClose, 100);
+              return;
+            }
+            if (
+              current.x >= triggerRect.left - 10 && current.x <= triggerRect.right + 10 &&
+              current.y >= triggerRect.top - 10 && current.y <= triggerRect.bottom + 10
+            ) {
+              leaveTimer = window.setTimeout(checkClose, 100);
+              return;
+            }
+
+            if (mouseLocs.length >= 2) {
+              const prev = mouseLocs[0];
+              // If mouse is moving downwards towards the mega menu
+              if (current.y > prev.y) {
+                const p1 = prev;
+                const p2 = { x: menuRect.left, y: menuRect.top };
+                const p3 = { x: menuRect.right, y: menuRect.top };
+                
+                if (isPointInTriangle(current, p1, p2, p3)) {
+                  // Diagonal cursor path is inside the aiming triangle, defer closing!
+                  leaveTimer = window.setTimeout(checkClose, 100);
+                  return;
+                }
+              }
+            }
+          }
+          hide(0);
+        };
+
+        // Initial delay to let the user start moving their mouse
+        clearTimeout(leaveTimer);
+        leaveTimer = window.setTimeout(checkClose, 150);
+      });
+
+      wrap.addEventListener('focusin', () => show(0));
       wrap.addEventListener('focusout', (event) => {
         if (event.relatedTarget && wrap.contains(event.relatedTarget)) return;
         hide(100);

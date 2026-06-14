@@ -5,9 +5,21 @@
   var subtotalNodes = document.querySelectorAll('[data-cart-subtotal]');
   var countNodes = document.querySelectorAll('[data-cart-count]');
   var checkoutButtons = document.querySelectorAll('[data-cart-checkout]');
-  var paymentProofStore = new WeakMap();
   var COD_LIMIT_CENTS = 450000;
   var currentCartState = null;
+  var paymentState = {
+    method: 'Cash on Delivery',
+    kind: 'cod',
+    provider: '',
+    proof: null
+  };
+
+  function cartRoute(path) {
+    var root = window.Shopify && window.Shopify.routes && window.Shopify.routes.root
+      ? window.Shopify.routes.root
+      : '/';
+    return root.replace(/\/$/, '') + path;
+  }
 
   if (!drawer || !body) return;
 
@@ -45,47 +57,34 @@
     }
   }
 
-  /**
-   * Read the selected radio from [data-payment-chooser] (step 2)
-   * and activate the matching hidden radio in the [data-payment-panel] (step 3)
-   * so all existing payment validation logic continues to work unchanged.
-   */
   function syncChooserToDetails() {
     var chooser = drawer.querySelector('[data-payment-chooser]');
     var panel   = drawer.querySelector('[data-payment-panel]');
     if (!chooser || !panel) return;
 
     var selectedInput = chooser.querySelector('[data-chooser-method]:checked');
-    var value    = selectedInput ? selectedInput.value : 'Cash on Delivery';
-    var kind     = selectedInput ? selectedInput.dataset.paymentKind : 'cod';
-    var provider = selectedInput ? (selectedInput.dataset.paymentProvider || '') : '';
-
-    // Tick the matching hidden radio in the details panel
-    panel.querySelectorAll('[data-payment-method]').forEach(function (radio) {
-      radio.checked = (radio.value === value);
-    });
-
-    // Update the confirm header label
-    var confirmLabel = panel.querySelector('[data-payment-confirm-label]');
-    if (confirmLabel) confirmLabel.textContent = value;
-
-    // Show / hide the COD confirm block vs online details
-    var codConfirm = panel.querySelector('[data-payment-detail="cod-confirm"]');
-    if (codConfirm) codConfirm.hidden = (kind !== 'cod');
-
-    // Run the existing panel update so QR/proof visibility updates correctly
+    if (selectedInput) setPaymentState(selectedInput);
     updatePaymentPanel(panel, false);
   }
 
-  // Re-sync whenever the chooser selection changes while on step 2
-  function onChooserChange(event) {
-    var method = event.target.closest('[data-chooser-method]');
-    if (!method) return;
-    // If user is on step 2, keep step 3 in sync proactively
-    var chooser = method.closest('[data-payment-chooser]');
-    if (chooser) {
-      // Nothing to do yet — sync happens when user navigates to step 3
-    }
+  function setPaymentState(input) {
+    var nextMethod = input ? input.value : 'Cash on Delivery';
+    var methodChanged = paymentState.method !== nextMethod;
+
+    paymentState.method = nextMethod;
+    paymentState.kind = input ? (input.dataset.paymentKind || 'cod') : 'cod';
+    paymentState.provider = input ? (input.dataset.paymentProvider || '') : '';
+
+    if (!methodChanged) return;
+
+    paymentState.proof = null;
+
+    drawer.querySelectorAll('[data-payment-proof]').forEach(function (proofInput) {
+      proofInput.value = '';
+    });
+    drawer.querySelectorAll('[data-payment-proof-name]').forEach(function (label) {
+      label.textContent = 'No file selected';
+    });
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -128,25 +127,8 @@
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // PAYMENT VALIDATION (unchanged)
+  // PAYMENT VALIDATION
   // ─────────────────────────────────────────────────────────────────────────
-
-  function selectedPayment(panel) {
-    return panel && panel.querySelector('[data-payment-method]:checked');
-  }
-
-  function paymentProviderName(method) {
-    return method ? method.value : 'Cash on Delivery';
-  }
-
-  function paymentProof(panel) {
-    return paymentProofStore.get(panel) || null;
-  }
-
-  function paymentReference(panel) {
-    var input = panel && panel.querySelector('[data-payment-reference]');
-    return input ? String(input.value || '').trim() : '';
-  }
 
   function setPaymentError(panel, message) {
     var node = panel && panel.querySelector('[data-payment-error]');
@@ -160,39 +142,33 @@
   }
 
   function paymentValidationMessage(panel, showSoftMessage) {
-    var method = selectedPayment(panel);
-    var isOnline = method && method.dataset.paymentKind === 'online';
-    var isCod = method && method.dataset.paymentKind === 'cod';
-
-    if (isCod && cartTotalForPanel(panel) > COD_LIMIT_CENTS) {
+    if (paymentState.kind === 'cod' && cartTotalForPanel(panel) > COD_LIMIT_CENTS) {
       return 'Cash on Delivery is unavailable for orders above Rs 4,500.';
     }
 
-    if (!isOnline) return '';
-    if (!paymentProof(panel)) return showSoftMessage ? 'Please upload payment screenshot before checkout.' : '';
-    if (!paymentReference(panel)) return showSoftMessage ? 'Please enter transaction/reference number.' : '';
+    if (paymentState.kind !== 'online') return '';
+    if (!paymentState.proof) return showSoftMessage ? 'Please choose a payment screenshot or PDF receipt before checkout.' : '';
     return '';
   }
 
   function isPaymentReady(panel) {
-    var method = selectedPayment(panel);
-    if (!method) return false;
-    if (method.dataset.paymentKind === 'cod') return cartTotalForPanel(panel) <= COD_LIMIT_CENTS;
-    return !!paymentProof(panel) && !!paymentReference(panel);
+    if (paymentState.kind === 'cod') return cartTotalForPanel(panel) <= COD_LIMIT_CENTS;
+    return paymentState.kind === 'online' && !!paymentState.proof;
   }
 
   function updatePaymentPanel(panel, showSoftMessage) {
     if (!panel) return;
-    var method = selectedPayment(panel);
-    var provider = method && method.dataset.paymentProvider;
     var proofFields = panel.querySelector('[data-payment-proof-fields]');
-    var checkoutButton = panel.closest('form') && panel.closest('form').querySelector('[data-payment-checkout], [data-cart-checkout]');
-    var isOnline = method && method.dataset.paymentKind === 'online';
+    var checkoutButton = drawer.querySelector('[data-payment-checkout]');
+    var isOnline = paymentState.kind === 'online';
+    var confirmLabel = panel.querySelector('[data-payment-confirm-label]');
+
+    if (confirmLabel) confirmLabel.textContent = paymentState.method;
 
     panel.querySelectorAll('[data-payment-detail]').forEach(function (detail) {
-      // Skip the COD confirm block — that is managed by syncChooserToDetails
-      if (detail.dataset.paymentDetail === 'cod-confirm') return;
-      var visible = isOnline && detail.dataset.paymentDetail === provider;
+      var visible = detail.dataset.paymentDetail === 'cod-confirm'
+        ? paymentState.kind === 'cod'
+        : isOnline && detail.dataset.paymentDetail === paymentState.provider;
       detail.hidden = !visible;
     });
 
@@ -211,50 +187,49 @@
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // PROOF SERIALIZATION + SAVE (unchanged)
+  // PAYMENT ATTRIBUTES + NOTE
   // ─────────────────────────────────────────────────────────────────────────
 
-  function serializeProof(panel) {
-    var proof = paymentProof(panel);
-    if (!proof) return {};
-    return {
-      name: proof.name,
-      type: proof.type,
-      size: proof.size,
-      uploadedAt: proof.uploadedAt,
-      dataUrl: proof.dataUrl || ''
-    };
+  function paymentNote(existingNote) {
+    var cleanNote = String(existingNote || '')
+      .replace(/\n*\[Morganics Payment\][\s\S]*?(?=\n\n|$)/, '')
+      .trim();
+    var paymentSection = [
+      '[Morganics Payment]',
+      'Payment Method: ' + paymentState.method,
+      'Payment Proof: ' + (paymentState.kind === 'online' ? 'Customer selected file before checkout' : 'Not required')
+    ].join('\n');
+    return cleanNote ? cleanNote + '\n\n' + paymentSection : paymentSection;
   }
 
-  function savePaymentSelection(panel) {
-    var method = selectedPayment(panel);
-    var proof = serializeProof(panel);
-    var reference = paymentReference(panel);
-    var methodName = paymentProviderName(method);
+  function savePaymentSelection() {
+    var proofSelected = paymentState.kind === 'online' && !!paymentState.proof;
+    var attributes = {
+      'Payment Method': paymentState.method,
+      'Payment Proof Required': paymentState.kind === 'online' ? 'Yes' : 'No',
+      'Payment Proof Status': proofSelected ? 'Customer selected file before checkout' : 'Not Uploaded',
+      'Payment Instructions Shown': paymentState.kind === 'online' ? 'Yes' : 'No'
+    };
 
-    try {
-      window.localStorage.setItem('morganics_payment_proof', JSON.stringify({
-        paymentMethod: methodName,
-        transactionReference: reference,
-        proof: proof,
-        paymentStatus: 'Pending Verification'
-      }));
-    } catch (error) {}
+    if (proofSelected) {
+      attributes['Payment Proof File Name'] = paymentState.proof.name;
+    }
 
-    return fetch('/cart/update.js', {
+    // TODO: Shopify Ajax cart attributes cannot store binary files. Connect an
+    // upload app/backend here and save its returned URL as "Payment Proof URL".
+    return fetch(cartRoute('/cart/update.js'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        attributes: {
-          'Selected Payment Method': methodName,
-          'Transaction Reference': reference,
-          'Payment Proof Upload': proof.name || '',
-          'Payment Status': method && method.dataset.paymentKind === 'online' ? 'Pending Verification' : 'COD Pending'
-        }
+        attributes: attributes,
+        note: paymentNote(currentCartState && currentCartState.note)
       })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Unable to save payment method. Please try again.');
+      return response.json();
     });
   }
 
@@ -299,6 +274,7 @@
       backdrop.classList.add('open');
       backdrop.setAttribute('aria-hidden', 'false');
     }
+    document.documentElement.classList.add('cart-open');
     document.body.classList.add('cart-open');
     goToStep(1); // always start from step 1
   }
@@ -310,6 +286,7 @@
       backdrop.classList.remove('open');
       backdrop.setAttribute('aria-hidden', 'true');
     }
+    document.documentElement.classList.remove('cart-open');
     document.body.classList.remove('cart-open');
   }
 
@@ -469,8 +446,11 @@
   }
 
   function refreshCart(shouldOpen) {
-    return fetch('/cart.js', { headers: { Accept: 'application/json' } })
-      .then(function (response) { return response.json(); })
+    return fetch(cartRoute('/cart.js'), { headers: { Accept: 'application/json' } })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Unable to refresh cart.');
+        return response.json();
+      })
       .then(function (cart) {
         renderCart(cart);
         if (shouldOpen) openCart();
@@ -485,7 +465,7 @@
     var updates = {};
     updates[key] = qty;
 
-    return fetch('/cart/update.js', {
+    return fetch(cartRoute('/cart/update.js'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -493,7 +473,10 @@
       },
       body: JSON.stringify({ updates: updates })
     })
-      .then(function (response) { return response.json(); })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Unable to update cart.');
+        return response.json();
+      })
       .then(function (cart) {
         renderCart(cart);
       })
@@ -561,7 +544,6 @@
   });
 
   document.addEventListener('change', function (event) {
-    var method      = event.target.closest('[data-payment-method]');
     var proofInput  = event.target.closest('[data-payment-proof]');
     var chooser     = event.target.closest('[data-chooser-method]');
     var qtyInput    = event.target.closest('.cart-qty-input');
@@ -571,12 +553,9 @@
       if (form) form.submit();
     }
 
-    if (method) {
-      updatePaymentPanel(method.closest('[data-payment-panel]'), true);
-    }
-
     if (chooser) {
-      onChooserChange(event);
+      setPaymentState(chooser);
+      updatePaymentPanels(false);
     }
 
     if (proofInput) {
@@ -585,55 +564,63 @@
       var label = panel && panel.querySelector('[data-payment-proof-name]');
 
       if (!file) {
-        paymentProofStore.delete(panel);
+        paymentState.proof = null;
         if (label) label.textContent = 'No file selected';
         updatePaymentPanel(panel, true);
         return;
       }
 
-      var proofMeta = {
+      var allowedType = /^image\//.test(file.type) || file.type === 'application/pdf';
+      if (!allowedType || file.size > 10000000) {
+        proofInput.value = '';
+        paymentState.proof = null;
+        if (label) label.textContent = 'No file selected';
+        setPaymentError(panel, allowedType
+          ? 'Payment proof must be smaller than 10 MB.'
+          : 'Please choose an image or PDF receipt.');
+        updatePaymentPanel(panel, true);
+        return;
+      }
+
+      paymentState.proof = {
         name: file.name,
         type: file.type || 'file',
         size: file.size,
-        uploadedAt: new Date().toISOString()
+        selectedAt: new Date().toISOString()
       };
 
-      if (label) label.textContent = file.name;
-      paymentProofStore.set(panel, proofMeta);
+      if (label) label.textContent = 'Selected: ' + file.name;
       updatePaymentPanel(panel, true);
-
-      if (file.size <= 2000000 && window.FileReader) {
-        var reader = new FileReader();
-        reader.onload = function () {
-          proofMeta.dataUrl = reader.result;
-          paymentProofStore.set(panel, proofMeta);
-        };
-        reader.readAsDataURL(file);
-      }
     }
-  });
-
-  document.addEventListener('input', function (event) {
-    var referenceInput = event.target.closest('[data-payment-reference]');
-    if (referenceInput) updatePaymentPanel(referenceInput.closest('[data-payment-panel]'), true);
   });
 
   document.addEventListener('submit', function (event) {
     var checkoutForm = event.target.closest('[data-payment-checkout-form]');
     if (checkoutForm) {
       var panel = checkoutForm.querySelector('[data-payment-panel]');
-      var checkoutButton = checkoutForm.querySelector('[data-payment-checkout], [data-cart-checkout]');
+      var checkoutButton = drawer.querySelector('[data-payment-checkout], [data-cart-checkout]');
 
       event.preventDefault();
       updatePaymentPanel(panel, true);
 
       if (!isPaymentReady(panel)) return;
-      if (checkoutButton) checkoutButton.disabled = true;
+      if (checkoutButton) {
+        checkoutButton.disabled = true;
+        checkoutButton.classList.add('is-loading');
+        checkoutButton.textContent = 'Saving...';
+      }
 
-      savePaymentSelection(panel)
-        .catch(function () {})
-        .finally(function () {
-          window.location.href = '/checkout';
+      savePaymentSelection()
+        .then(function () {
+          window.location.href = cartRoute('/checkout');
+        })
+        .catch(function (error) {
+          setPaymentError(panel, error.message || 'Unable to save payment method. Please try again.');
+          if (checkoutButton) {
+            checkoutButton.disabled = false;
+            checkoutButton.classList.remove('is-loading');
+            checkoutButton.textContent = 'Checkout';
+          }
         });
       return;
     }
@@ -645,7 +632,7 @@
     var submitButton = form.querySelector('[type="submit"]');
     if (submitButton) submitButton.disabled = true;
 
-    fetch('/cart/add.js', {
+    fetch(cartRoute('/cart/add.js'), {
       method: 'POST',
       headers: { Accept: 'application/json' },
       body: new FormData(form)
@@ -685,6 +672,8 @@
   // INIT
   // ─────────────────────────────────────────────────────────────────────────
 
+  var initialChooser = drawer.querySelector('[data-chooser-method]:checked');
+  if (initialChooser) setPaymentState(initialChooser);
   updatePaymentPanels(false);
   goToStep(1); // ensure correct initial state
 

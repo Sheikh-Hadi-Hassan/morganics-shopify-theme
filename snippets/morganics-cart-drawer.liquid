@@ -102,8 +102,9 @@
     <button class="cart-close" type="button" data-cart-close aria-label="Close cart">×</button>
   </div>
 
+  <div class="cart-drawer-main">
   {%- comment -%} ── STEP PROGRESS INDICATOR ────────────────────────────── {%- endcomment -%}
-  <div class="cart-step-indicator" aria-hidden="true" data-step-indicator>
+  <div class="cart-step-indicator" aria-label="Checkout progress" data-step-indicator>
     <span class="cart-step-dot active" data-step-dot="1">
       <span class="cart-step-dot-num">1</span>
       <span class="cart-step-dot-label">Review</span>
@@ -155,20 +156,11 @@
   {%- comment -%} ── STEP 3: PAYMENT DETAILS + CHECKOUT ────────────────── {%- endcomment -%}
   <div class="cart-step cart-step--3" data-cart-step="3" hidden>
     <div class="cart-step-body">
-      <form action="{{ routes.cart_url }}" method="post" data-payment-checkout-form>
+      <form id="MorganicsPaymentCheckout" action="{{ routes.cart_url }}" method="post" data-payment-checkout-form>
         {% render 'morganics-payment-options', id_prefix: 'drawer3', step: 'details' %}
-        <button
-          class="btn primary cart-checkout-full"
-          type="submit"
-          name="checkout"
-          {% if cart.item_count == 0 %}disabled{% endif %}
-          data-cart-checkout
-          data-payment-checkout
-        >
-          Checkout
-        </button>
       </form>
     </div>
+  </div>
   </div>
 
   {%- comment -%} ── STICKY FOOTER: context-aware CTAs per step ────────── {%- endcomment -%}
@@ -185,9 +177,6 @@
       >
         Continue to Payment
       </button>
-      <a class="btn ghost" href="{{ routes.all_products_collection_url }}" data-cart-close>
-        Continue Shopping
-      </a>
     </div>
 
     {%- comment -%} Step 2 actions {%- endcomment -%}
@@ -196,14 +185,25 @@
         Continue
       </button>
       <button class="btn ghost" type="button" data-step-back="1">
-        ← Back
+        Back
       </button>
     </div>
 
-    {%- comment -%} Step 3 actions — checkout button is inside the form above {%- endcomment -%}
+    {%- comment -%} Step 3 actions {%- endcomment -%}
     <div class="cart-footer-actions cart-footer-actions--3" data-step-actions="3" hidden>
+      <button
+        class="btn primary"
+        type="submit"
+        name="checkout"
+        form="MorganicsPaymentCheckout"
+        {% if cart.item_count == 0 %}disabled{% endif %}
+        data-cart-checkout
+        data-payment-checkout
+      >
+        Checkout
+      </button>
       <button class="btn ghost" type="button" data-step-back="2">
-        ← Back
+        Back
       </button>
     </div>
 

@@ -2097,9 +2097,18 @@ body .mob-bottom-nav :is(a, button) {
 
   body .mrg-site-header :is(.header-search-panel, .header-search-results) {
     width: min(calc(100vw - 22px), 560px) !important;
-    left: 11px !important;
-    right: 11px !important;
-    margin-inline: auto !important;
+  }
+
+  body .mrg-site-header .header-search-panel {
+    left: 50% !important;
+    right: auto !important;
+    margin-inline: 0 !important;
+  }
+
+  body .mrg-site-header .header-search-results {
+    left: 0 !important;
+    right: 0 !important;
+    margin-inline: 0 !important;
   }
 }
 

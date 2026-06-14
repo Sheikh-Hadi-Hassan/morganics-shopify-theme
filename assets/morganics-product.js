@@ -321,13 +321,8 @@
     }
 
     if (powderCheckbox) {
-      powderCheckbox.closest('.powder-toggle')?.addEventListener('click', (event) => {
-        event.preventDefault();
-        powderCheckbox.checked = !powderCheckbox.checked;
-        powderCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
-      });
-
-      powderCheckbox.addEventListener('change', () => {
+      const powderLabel = powderCheckbox.closest('.powder-toggle');
+      const updatePowderSelection = () => {
         const currentId = getCurrentVariantId();
         if (!currentId || !allVariants.length) return;
 
@@ -359,7 +354,20 @@
             updateVariantUI(regularVariant);
           }
         }
+      };
+
+      powderLabel?.addEventListener('click', (event) => {
+        const nextChecked = event.target === powderCheckbox
+          ? powderCheckbox.checked
+          : !powderCheckbox.checked;
+        event.preventDefault();
+        window.setTimeout(() => {
+          powderCheckbox.checked = nextChecked;
+          updatePowderSelection();
+        }, 0);
       });
+
+      powderCheckbox.addEventListener('change', updatePowderSelection);
     }
 
     root.querySelector('[data-qty-minus]')?.addEventListener('click', () => {

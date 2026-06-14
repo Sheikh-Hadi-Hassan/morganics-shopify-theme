@@ -46,6 +46,13 @@
 - Drawer line items are re-rendered client-side from Shopify AJAX cart JSON after updates, so advanced Shopify line-item rendering that exists only in Liquid may need mirrored JS support later.
 - Cart drawer money formatting uses Shopify `formatMoney` when available, with a PKR fallback if Shopify's helper is unavailable in the preview.
 - Shipping, taxes, and payment details remain intentionally deferred to Shopify checkout.
+- The theme stores the custom payment selection in Shopify cart attributes and the cart note. Native checkout gateway selection remains controlled by Shopify Admin and checkout settings.
+- Payment proof file selection is validated in the drawer, but theme Ajax APIs cannot upload binary files. A file-upload app or backend endpoint must store the screenshot and return a URL before `Payment Proof URL` can be saved.
+- Automatic native payment-method selection, hiding, or reordering requires Shopify Plus payment customization or an approved app integration. The theme does not attempt to force checkout payment controls.
+
+## Shopify Admin Payment Setup
+
+Enable manual payment methods whose labels match the drawer: `Cash on Delivery`, `EasyPaisa`, `JazzCash`, and `Bank Transfer / Meezan Bank`.
 
 ## Remaining Risks
 

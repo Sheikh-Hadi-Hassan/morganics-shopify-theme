@@ -110,12 +110,12 @@
     {% form 'product', product, class: 'card-actions mrg-product-card__actions' %}
       <input type="hidden" name="id" value="{{ current_variant.id }}">
       <button class="card-cart-btn mrg-product-card__cart" type="submit">Add to Cart</button>
-      <a class="card-view-btn mrg-product-card__view" href="{{ product.url }}">View</a>
+      <a class="card-view-btn mrg-product-card__view" href="{{ product.url }}">{{ view_label | default: 'View' }}</a>
     {% endform %}
   {% elsif show_quick_add %}
     <div class="card-actions mrg-product-card__actions">
       <button class="card-cart-btn mrg-product-card__cart" type="button" disabled>Sold Out</button>
-      <a class="card-view-btn mrg-product-card__view" href="{{ product.url }}">View</a>
+      <a class="card-view-btn mrg-product-card__view" href="{{ product.url }}">{{ view_label | default: 'View' }}</a>
     </div>
   {% endif %}
 

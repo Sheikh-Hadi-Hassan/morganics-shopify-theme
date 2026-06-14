@@ -156,7 +156,7 @@
     <div class="product-grid morganics-product-grid mrg-product-grid mrg-product-grid--related mrg-container">
       {% for related_product in product.collections.first.products limit: 4 %}
         {% unless related_product.id == product.id %}
-          {% render 'morganics-product-card', product: related_product, show_quick_add: false %}
+          {% render 'morganics-product-card', product: related_product, show_quick_add: true, view_label: 'View Details' %}
         {% endunless %}
       {% endfor %}
     </div>

@@ -17,7 +17,8 @@
   <div class="cart-line-info">
     <a class="cart-line-title" href="{{ line_url }}">{{ item.product.title }}</a>
     {% unless item.product.has_only_default_variant %}
-      <span class="cart-line-variant">{{ item.variant.title }}</span>
+      {% assign line_variant_label = item.variant.title | replace: ' / Regular', '' | replace: ' / Powder', '' | replace: 'Regular / ', '' | replace: 'Powder / ', '' | replace: ' - Regular', '' | replace: ' - Powder', '' %}
+      <span class="cart-line-variant">{{ line_variant_label }}</span>
     {% endunless %}
 
     {% if item.properties != blank %}

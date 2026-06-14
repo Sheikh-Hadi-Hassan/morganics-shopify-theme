@@ -102,6 +102,16 @@
   --space-96: 96px;
   --space-120: 120px;
 
+  /* Centralized UI scale for refactored components. */
+  --mrg-space-4: 4px;
+  --mrg-space-8: 8px;
+  --mrg-space-12: 12px;
+  --mrg-space-16: 16px;
+  --mrg-space-24: 24px;
+  --mrg-space-32: 32px;
+  --mrg-space-48: 48px;
+  --mrg-space-64: 64px;
+
   --section-pad-y: clamp(44px, 8vh, 80px);
   --section-pad-x: clamp(18px, 5vw, 72px);
   --card-pad: clamp(14px, 1.8vw, 24px);
@@ -123,6 +133,20 @@
   --button-height: 42px;
   --button-height-lg: 48px;
   --input-height: 46px;
+  --mrg-section-y: var(--mrg-space-48);
+  --mrg-section-y-compact: var(--mrg-space-32);
+  --mrg-section-x: var(--mrg-space-16);
+  --mrg-container-max: 1280px;
+  --mrg-container-narrow: 980px;
+  --mrg-container-text: 760px;
+  --mrg-grid-gap: var(--mrg-space-16);
+  --mrg-grid-gap-mobile: var(--mrg-space-8);
+  --mrg-card-gap: var(--mrg-space-8);
+  --mrg-card-pad: var(--mrg-space-12);
+  --mrg-card-pad-mobile: var(--mrg-space-8);
+  --mrg-button-height: 42px;
+  --mrg-button-height-sm: 36px;
+  --mrg-input-height: 42px;
 
   --radius-2xs: 4px;
   --radius-xs: 6px;
@@ -139,6 +163,14 @@
   --radius-panel: var(--radius-3xl);
   --radius-bar: var(--radius-3xl);
   --radius-badge: var(--radius-sm);
+  --mrg-radius-0: 0;
+  --mrg-radius-badge: 6px;
+  --mrg-radius-control: 8px;
+  --mrg-radius-button: 8px;
+  --mrg-radius-card: 10px;
+  --mrg-radius-panel: 12px;
+  --mrg-radius-media: 12px;
+  --mrg-radius-pill: 999px;
 
   --shadow: 0 24px 70px rgba(31,41,38,.14);
   --shadow2: 0 12px 34px rgba(31,41,38,.10);

@@ -1,11 +1,54 @@
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
+  assign current_is_powder = false
+  for option_value in current_variant.options
+    assign option_key = option_value | strip | downcase
+    if option_key == 'powder'
+      assign current_is_powder = true
+    endif
+  endfor
+  assign rendered_sizes = '|'
 %}
 
-<div class="variant-pills" data-variant-pills>
+<div class="variant-pills mrg-grid" data-variant-pills>
   {% for variant in product.variants %}
-    <label class="{% unless variant.available %}is-disabled{% endunless %}">
+    {% liquid
+      assign is_powder = false
+      assign size_label = ''
+      for option_value in variant.options
+        assign option_key = option_value | strip | downcase
+        if option_key == 'powder'
+          assign is_powder = true
+        elsif option_key == 'regular'
+          continue
+        else
+          if size_label != blank
+            assign size_label = size_label | append: ' / '
+          endif
+          assign size_label = size_label | append: option_value
+        endif
+      endfor
+      if size_label == blank
+        assign size_label = variant.title | replace: ' / Regular', '' | replace: ' / Powder', '' | replace: 'Regular / ', '' | replace: 'Powder / ', '' | replace: ' - Regular', '' | replace: ' - Powder', ''
+      endif
+      assign size_token = '|' | append: size_label | append: '|'
+      assign is_current_size = false
+      for current_option_value in current_variant.options
+        assign current_option_key = current_option_value | strip | downcase
+        unless current_option_key == 'powder' or current_option_key == 'regular'
+          if current_option_value == size_label
+            assign is_current_size = true
+          endif
+        endunless
+      endfor
+      if current_variant.id == variant.id
+        assign is_current_size = true
+      endif
+    %}
+
+    {% if is_powder %}
       <input
+        class="variant-hidden-input"
         type="radio"
         name="id"
         value="{{ variant.id }}"
@@ -16,19 +59,60 @@
         data-variant-price-cents="{{ variant.price }}"
         data-variant-compare-price="{{ variant.compare_at_price | money }}"
         data-variant-has-compare="{% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %}"
-        data-variant-title="{{ variant.title | escape }}"
+        data-variant-title="{{ size_label | escape }}"
+        data-variant-full-title="{{ variant.title | escape }}"
+        data-variant-size="{{ size_label | escape }}"
+        data-variant-form="powder"
         data-variant-available="{{ variant.available }}"
       >
-      <span>
-        {{ variant.title }}
-        <b>
-          {% if variant.compare_at_price > variant.price %}
-            <s>{{ variant.compare_at_price | money }}</s>
-          {% endif %}
-          {{ variant.price | money }}
-        </b>
-        {% unless variant.available %}<em>Sold out</em>{% endunless %}
-      </span>
-    </label>
+    {% elsif rendered_sizes contains size_token %}
+      <input
+        class="variant-hidden-input"
+        type="radio"
+        name="id"
+        value="{{ variant.id }}"
+        {% if variant == current_variant %}checked{% endif %}
+        {% unless variant.available %}disabled{% endunless %}
+        data-variant-input
+        data-variant-price="{{ variant.price | money }}"
+        data-variant-price-cents="{{ variant.price }}"
+        data-variant-compare-price="{{ variant.compare_at_price | money }}"
+        data-variant-has-compare="{% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %}"
+        data-variant-title="{{ size_label | escape }}"
+        data-variant-full-title="{{ variant.title | escape }}"
+        data-variant-size="{{ size_label | escape }}"
+        data-variant-form="regular"
+        data-variant-available="{{ variant.available }}"
+      >
+    {% else %}
+      {% assign rendered_sizes = rendered_sizes | append: size_label | append: '|' %}
+      <label
+        class="variant-size-pill{% if is_current_size %} is-selected{% endif %}{% unless variant.available %} is-disabled{% endunless %}"
+        data-size-pill
+        data-variant-size="{{ size_label | escape }}"
+      >
+      <input
+        type="radio"
+        name="id"
+        value="{{ variant.id }}"
+        {% if variant == current_variant or is_current_size and current_is_powder == false %}checked{% endif %}
+        {% unless variant.available %}disabled{% endunless %}
+        data-variant-input
+        data-variant-price="{{ variant.price | money }}"
+        data-variant-price-cents="{{ variant.price }}"
+        data-variant-compare-price="{{ variant.compare_at_price | money }}"
+        data-variant-has-compare="{% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %}"
+        data-variant-title="{{ size_label | escape }}"
+        data-variant-full-title="{{ variant.title | escape }}"
+        data-variant-size="{{ size_label | escape }}"
+        data-variant-form="regular"
+        data-variant-available="{{ variant.available }}"
+      >
+        <span>
+          {{ size_label }}
+          {% unless variant.available %}<em>Sold out</em>{% endunless %}
+        </span>
+      </label>
+    {% endif %}
   {% endfor %}
 </div>

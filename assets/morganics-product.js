@@ -150,19 +150,25 @@
     const add = root.querySelector('[data-add-to-cart]');
     const qty = root.querySelector('input[name="quantity"]');
     const powderCheckbox = root.querySelector('[data-powder-toggle]');
+    const formatMoney = (cents) => {
+      if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
+        return window.Shopify.formatMoney(cents);
+      }
+      return 'Rs.' + (Number(cents || 0) / 100).toLocaleString('en-PK', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    };
 
     const updateVariantUI = (variant) => {
       if (!variant) return;
       if (priceWrapper && regularPriceEl) {
         priceWrapper.dataset.basePrice = variant.price;
+        regularPriceEl.textContent = formatMoney(variant.price);
         const hasCompare = variant.compare_at_price && variant.compare_at_price > variant.price;
         regularPriceEl.classList.toggle('morganics-price__regular--sale', !!hasCompare);
         if (comparePrice) {
-          comparePrice.textContent = hasCompare
-            ? (window.Shopify && typeof window.Shopify.formatMoney === 'function'
-                ? window.Shopify.formatMoney(variant.compare_at_price)
-                : 'Rs.' + Math.round(variant.compare_at_price / 100))
-            : '';
+          comparePrice.textContent = hasCompare ? formatMoney(variant.compare_at_price) : '';
           comparePrice.hidden = !hasCompare;
         }
       }
@@ -170,6 +176,19 @@
         add.disabled = !variant.available;
         add.textContent = variant.available ? 'Add to Cart' : 'Sold Out';
       }
+      const mobilePrice = document.querySelector('#mobBarPrice');
+      const mobileSize = document.querySelector('#mobBarSize');
+      const mobileButton = document.querySelector('#mobBarAddBtn');
+      if (mobilePrice) mobilePrice.textContent = formatMoney(variant.price);
+      if (mobileSize) {
+        const sizeLabel = getVariantSizeLabel(variant);
+        mobileSize.textContent = sizeLabel ? `${document.querySelector('h1')?.textContent?.trim() || ''} · ${sizeLabel}` : mobileSize.textContent;
+      }
+      if (mobileButton) {
+        mobileButton.disabled = !variant.available;
+        mobileButton.textContent = variant.available ? 'Add to Cart' : 'Sold Out';
+      }
+      syncSelectedSizePills(variant);
     };
 
     // ── Variant-switching powder logic ───────────────────────────────────────
@@ -180,16 +199,49 @@
     //   Size: 100g  /  Form: Powder    →  powder variant
     // OR single-option products with titles "100g" and "100g - Powder".
 
-    const allVariants = window.morganicsProductVariants || [];
+    const parseVariants = () => {
+      try {
+        return JSON.parse(root.dataset.productVariants || '[]');
+      } catch (error) {
+        return window.morganicsProductVariants || [];
+      }
+    };
+
+    const allVariants = parseVariants();
+
+    const getVariantOptions = (v) => {
+      if (Array.isArray(v?.options)) return v.options;
+      return [v?.option1, v?.option2, v?.option3].filter(Boolean);
+    };
+
+    const isFormOption = (value) => /^(regular|powder)$/i.test(String(value || '').trim());
 
     const isPowderVariant = (v) =>
-      (v.options || []).some((o) => /^powder$/i.test(String(o).trim()));
+      getVariantOptions(v).some((o) => /^powder$/i.test(String(o).trim()));
 
     const getNonPowderOptions = (v) =>
-      (v.options || []).filter((o) => !/^powder$/i.test(String(o).trim()));
+      getVariantOptions(v).filter((o) => !isFormOption(o));
+
+    const getVariantSizeKey = (v) => getNonPowderOptions(v).map((o) => String(o).trim()).join(' / ');
+
+    const getVariantSizeLabel = (v) => {
+      const key = getVariantSizeKey(v);
+      if (key) return key;
+      return String(v?.title || '')
+        .replace(/\s*\/\s*(Regular|Powder)\s*/gi, '')
+        .replace(/\s*-\s*(Regular|Powder)\s*/gi, '')
+        .trim();
+    };
+
+    const syncSelectedSizePills = (variant) => {
+      const selectedSize = getVariantSizeLabel(variant);
+      root.querySelectorAll('[data-size-pill]').forEach((pill) => {
+        pill.classList.toggle('is-selected', pill.dataset.variantSize === selectedSize);
+      });
+    };
 
     const getCurrentVariantId = () => {
-      const checked = root.querySelector('[data-variant-input]:checked, input[name="id"]');
+      const checked = root.querySelector('[data-variant-input]:checked');
       return checked ? String(checked.value) : null;
     };
 
@@ -209,6 +261,15 @@
         hidden.dispatchEvent(new Event('change', { bubbles: true }));
       }
     };
+
+    root.querySelectorAll('[data-size-pill]').forEach((pill) => {
+      pill.addEventListener('click', (event) => {
+        event.preventDefault();
+        const input = pill.querySelector('[data-variant-input]');
+        if (!input || input.disabled) return;
+        setVariantById(input.value);
+      });
+    });
 
     const findPowderSibling = (currentVariantId) => {
       const current = allVariants.find((v) => String(v.id) === String(currentVariantId));
@@ -238,7 +299,7 @@
         const variant = allVariants.find((v) => String(v.id) === String(input.value));
         if (variant) updateVariantUI(variant);
 
-        if (powderCheckbox && powderCheckbox.checked) {
+        if (powderCheckbox && powderCheckbox.checked && input.dataset.variantForm !== 'powder') {
           // User switched size while powder is checked — find powder sibling of new size
           const powderSibling = findPowderSibling(input.value);
           if (powderSibling) {
@@ -253,7 +314,19 @@
       });
     });
 
+    const initialVariant = allVariants.find((v) => String(v.id) === getCurrentVariantId());
+    if (initialVariant) {
+      if (powderCheckbox) powderCheckbox.checked = isPowderVariant(initialVariant);
+      updateVariantUI(initialVariant);
+    }
+
     if (powderCheckbox) {
+      powderCheckbox.closest('.powder-toggle')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        powderCheckbox.checked = !powderCheckbox.checked;
+        powderCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+
       powderCheckbox.addEventListener('change', () => {
         const currentId = getCurrentVariantId();
         if (!currentId || !allVariants.length) return;

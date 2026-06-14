@@ -30,7 +30,7 @@
 %}
 
 <div
-  class="product-card-wrap"
+  class="product-card-wrap mrg-product-card"
   data-product-card
   data-filter-card
   data-product-id="{{ product.id }}"
@@ -65,8 +65,8 @@
       <path d="M20.8 4.6c-1.8-1.8-4.7-1.8-6.5 0L12 6.9 9.7 4.6c-1.8-1.8-4.7-1.8-6.5 0s-1.8 4.7 0 6.5L12 20l8.8-8.9c1.8-1.8 1.8-4.7 0-6.5Z"></path>
     </svg>
   </button>
-  <a class="product-card morganics-product-card" href="{{ product.url }}">
-    <div class="product-img{% if secondary_image != blank %} has-secondary-image{% endif %}">
+  <a class="product-card morganics-product-card mrg-product-card__link" href="{{ product.url }}">
+    <div class="product-img mrg-product-card__media{% if secondary_image != blank %} has-secondary-image{% endif %}">
       {% if product.featured_image %}
         {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title, class: 'product-img-primary' }}
         {% if secondary_image != blank %}
@@ -76,8 +76,8 @@
         {% render 'morganics-product-image-fallback', product: product, width: 700, height: 700, loading: 'lazy' %}
       {% endif %}
     </div>
-    <div class="product-info">
-      <b class="product-name" data-urdu-wrap>{{ product.title }}</b>
+    <div class="product-info mrg-product-card__content">
+      <b class="product-name mrg-product-card__title" data-urdu-wrap>{{ product.title }}</b>
       {% if product.metafields.custom.urdu_name != blank %}
         <span class="urdu-line" data-urdu-wrap>{{ product.metafields.custom.urdu_name }}</span>
       {% endif %}
@@ -95,7 +95,7 @@
         </div>
       {% endif %}
 
-      <div class="price-row">
+      <div class="price-row mrg-product-card__price">
         <div class="price-container">
           <span class="price{% if product.compare_at_price > product.price %} price-sale{% endif %}">{{ product.price | money }}</span>
           {% if product.compare_at_price > product.price %}
@@ -107,15 +107,15 @@
   </a>
 
   {% if show_quick_add and product.available %}
-    {% form 'product', product, class: 'card-actions' %}
+    {% form 'product', product, class: 'card-actions mrg-product-card__actions' %}
       <input type="hidden" name="id" value="{{ current_variant.id }}">
-      <button class="card-cart-btn" type="submit">Add to Cart</button>
-      <a class="card-view-btn" href="{{ product.url }}">View</a>
+      <button class="card-cart-btn mrg-product-card__cart" type="submit">Add to Cart</button>
+      <a class="card-view-btn mrg-product-card__view" href="{{ product.url }}">View</a>
     {% endform %}
   {% elsif show_quick_add %}
-    <div class="card-actions">
-      <button class="card-cart-btn" type="button" disabled>Sold Out</button>
-      <a class="card-view-btn" href="{{ product.url }}">View</a>
+    <div class="card-actions mrg-product-card__actions">
+      <button class="card-cart-btn mrg-product-card__cart" type="button" disabled>Sold Out</button>
+      <a class="card-view-btn mrg-product-card__view" href="{{ product.url }}">View</a>
     </div>
   {% endif %}
 

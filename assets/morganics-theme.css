@@ -22179,3 +22179,902 @@ body .premium-footer .footer-support-bars {
     border-radius: 999px !important;
   }
 }
+
+/* Homepage featured products: compact mobile grid, not carousel. */
+@media (max-width: 767px) {
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section {
+    overflow-x: hidden !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section > .product-grid,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section > .product-grid.morganics-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 0 8px !important;
+    gap: 8px !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+    scrollbar-width: auto !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section > .product-grid > .product-card-wrap,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section > .product-grid > .product-card {
+    flex: initial !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    scroll-snap-align: none !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap {
+    border-radius: 12px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .product-img {
+    aspect-ratio: 5 / 3 !important;
+    min-height: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .product-info {
+    padding: 6px 7px 3px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .product-name {
+    font-size: 10.5px !important;
+    line-height: 1.22 !important;
+    -webkit-line-clamp: 1 !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .price-row {
+    margin-top: 2px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .price {
+    font-size: 10.5px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .price-compare {
+    font-size: 9px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-actions {
+    padding: 0 5px 6px !important;
+    gap: 4px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-cart-btn,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-view-btn {
+    min-height: 25px !important;
+    height: 25px !important;
+    font-size: 9px !important;
+    padding: 0 4px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-cart-btn::before,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-view-btn::before {
+    width: 10px !important;
+    height: 10px !important;
+    margin-right: 2px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wishlist {
+    width: 26px !important;
+    height: 26px !important;
+    top: 5px !important;
+    right: 5px !important;
+  }
+
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wishlist svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+
+/* Product cards: square, full-bleed images clipped inside the frame. */
+body .morganics-main .product-card-wrap .product-img,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .product-img {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body .morganics-main .product-card-wrap .product-img img,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .product-img img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Product page: premium simplified variant configurator. */
+body[data-template="product"] .morganics-main .variant-pills {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+body[data-template="product"] .morganics-main .variant-hidden-input {
+  position: absolute !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body[data-template="product"] .morganics-main .variant-size-pill {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+body[data-template="product"] .morganics-main .variant-size-pill span {
+  min-width: 0 !important;
+  min-height: 42px !important;
+  width: 100% !important;
+  padding: 10px 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  background: rgba(255, 252, 245, .88) !important;
+  box-shadow: inset 0 0 0 1px rgba(28, 78, 69, .14) !important;
+}
+
+body[data-template="product"] .morganics-main .variant-size-pill input:checked + span,
+body[data-template="product"] .morganics-main .variant-size-pill.is-selected span {
+  color: #fff !important;
+  background: linear-gradient(135deg, #123d35, #216b5b) !important;
+  border-color: transparent !important;
+  box-shadow: 0 12px 26px rgba(18, 61, 53, .18) !important;
+}
+
+body[data-template="product"] .morganics-main .variant-size-pill em {
+  display: none !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  min-height: 44px !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(28, 78, 69, .14) !important;
+  border-radius: 14px !important;
+  background: rgba(255, 252, 245, .92) !important;
+  cursor: pointer !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  border: 1.5px solid rgba(28, 78, 69, .38) !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 18px !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input::after {
+  content: "" !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 3px !important;
+  transform: scale(0) !important;
+  transition: transform .16s ease !important;
+  background: var(--forest) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input:checked {
+  border-color: var(--forest) !important;
+  background: rgba(33, 107, 91, .08) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input:checked::after {
+  transform: scale(1) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle span {
+  color: var(--forest) !important;
+  font-size: 13px !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+}
+
+@media (max-width: 520px) {
+  body[data-template="product"] .morganics-main .buy-box {
+    padding: 16px !important;
+  }
+
+  body[data-template="product"] .morganics-main .variant-pills {
+    gap: 7px !important;
+  }
+
+  body[data-template="product"] .morganics-main .variant-size-pill span {
+    min-height: 38px !important;
+    padding: 9px 6px !important;
+    font-size: 12px !important;
+  }
+
+  body[data-template="product"] .morganics-main .powder-toggle {
+    min-height: 40px !important;
+    padding: 9px 10px !important;
+  }
+}
+
+/* Mobile product-card actions: compact cart icon + full-width view button. */
+@media (max-width: 767px) {
+  body .morganics-main .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)),
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)),
+  body .morganics-main #collectionProducts .product-grid.shop-grid[data-view="grid"] .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) {
+    grid-template-columns: minmax(24px, 15%) minmax(0, 1fr) !important;
+    align-items: center !important;
+  }
+
+  body .morganics-main .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-cart-btn,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-cart-btn,
+  body .morganics-main #collectionProducts .product-grid.shop-grid[data-view="grid"] .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-cart-btn {
+    width: 100% !important;
+    min-width: 24px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+
+  body .morganics-main .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-cart-btn::before,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-cart-btn::before,
+  body .morganics-main #collectionProducts .product-grid.shop-grid[data-view="grid"] .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-cart-btn::before {
+    width: 13px !important;
+    height: 13px !important;
+    margin-right: 0 !important;
+  }
+
+  body .morganics-main .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-view-btn,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-view-btn,
+  body .morganics-main #collectionProducts .product-grid.shop-grid[data-view="grid"] .product-card-wrap .card-actions:has(.card-cart-btn:not(:disabled)) .card-view-btn {
+    min-width: 0 !important;
+    padding-inline: 8px !important;
+  }
+}
+
+/* Mobile product-card wishlist: slightly smaller container, same heart icon. */
+@media (max-width: 767px) {
+  body .morganics-main .product-card-wrap > .product-card-wishlist,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section .product-card-wrap > .product-card-wishlist,
+  body .morganics-main #collectionProducts .product-grid.shop-grid[data-view="grid"] .product-card-wrap > .product-card-wishlist {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    padding: 0 !important;
+    top: 5px !important;
+    right: 5px !important;
+  }
+}
+
+/* Product page powder option: switch control treatment. */
+body[data-template="product"] .morganics-main .powder-toggle {
+  justify-content: space-between !important;
+  gap: 12px !important;
+  min-height: 52px !important;
+  padding: 9px 10px 9px 14px !important;
+  border-style: solid !important;
+  border-color: rgba(28, 78, 69, .16) !important;
+  border-radius: 18px !important;
+  background: linear-gradient(135deg, rgba(255, 252, 245, .96), rgba(248, 241, 226, .88)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 10px 22px rgba(28, 78, 69, .06) !important;
+}
+
+body[data-template="product"] .morganics-main .buy-box form > label.powder-toggle {
+  border-radius: 18px !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle:has(input:checked) {
+  border-color: rgba(33, 107, 91, .36) !important;
+  background: linear-gradient(135deg, rgba(241, 250, 245, .98), rgba(224, 241, 234, .92)) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle span {
+  order: 1 !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input {
+  order: 2 !important;
+  position: relative !important;
+  width: 50px !important;
+  height: 28px !important;
+  min-width: 50px !important;
+  min-height: 28px !important;
+  flex: 0 0 50px !important;
+  border: 1px solid rgba(28, 78, 69, .22) !important;
+  border-radius: 999px !important;
+  background: #dfd2bc !important;
+  box-shadow: inset 0 2px 5px rgba(55, 38, 22, .14) !important;
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input::after {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 999px !important;
+  background: #fffaf0 !important;
+  box-shadow: 0 3px 8px rgba(28, 78, 69, .22) !important;
+  transform: translateX(-9px) scale(1) !important;
+  transition: transform .18s ease, background .18s ease !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input:checked {
+  border-color: rgba(18, 61, 53, .52) !important;
+  background: linear-gradient(135deg, #123d35, #216b5b) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .12), 0 8px 18px rgba(33, 107, 91, .18) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input:checked::after {
+  background: #fff !important;
+  transform: translateX(9px) scale(1) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input:focus-visible {
+  outline: 2px solid rgba(218, 158, 35, .72) !important;
+  outline-offset: 3px !important;
+}
+
+/* ==========================================================================
+   Morganics centralized UI system
+   Preserve brand colors/fonts; normalize spacing, radius, grids, controls.
+   ========================================================================== */
+
+:root {
+  --mrg-space-4: 4px;
+  --mrg-space-8: 8px;
+  --mrg-space-12: 12px;
+  --mrg-space-16: 16px;
+  --mrg-space-24: 24px;
+  --mrg-space-32: 32px;
+  --mrg-space-48: 48px;
+  --mrg-space-64: 64px;
+  --mrg-radius-0: 0;
+  --mrg-radius-badge: 6px;
+  --mrg-radius-control: 8px;
+  --mrg-radius-button: 8px;
+  --mrg-radius-card: 10px;
+  --mrg-radius-panel: 12px;
+  --mrg-radius-media: 12px;
+  --mrg-radius-pill: 999px;
+  --mrg-section-y: var(--mrg-space-48);
+  --mrg-section-y-compact: var(--mrg-space-32);
+  --mrg-container-max: 1280px;
+  --mrg-container-narrow: 980px;
+  --mrg-container-text: 760px;
+  --mrg-grid-gap: var(--mrg-space-16);
+  --mrg-grid-gap-mobile: var(--mrg-space-8);
+  --mrg-card-pad: var(--mrg-space-12);
+  --mrg-card-pad-mobile: var(--mrg-space-8);
+  --mrg-button-height: 42px;
+  --mrg-button-height-sm: 36px;
+  --mrg-input-height: 42px;
+  --mrg-border-subtle: 1px solid rgba(132, 99, 69, .18);
+  --mrg-control-border: 1px solid rgba(132, 99, 69, .22);
+  --mrg-focus-ring: 0 0 0 3px rgba(223, 165, 36, .22);
+}
+
+.mrg-section {
+  width: 100%;
+  padding: var(--mrg-section-y) var(--mrg-space-16);
+}
+
+.mrg-section--compact {
+  padding-block: var(--mrg-section-y-compact);
+}
+
+.mrg-container,
+.mrg-container--narrow,
+.mrg-container--text {
+  width: min(100%, var(--mrg-container-max));
+  margin-inline: auto;
+}
+
+.mrg-container--narrow {
+  width: min(100%, var(--mrg-container-narrow));
+}
+
+.mrg-container--text {
+  width: min(100%, var(--mrg-container-text));
+}
+
+.mrg-grid {
+  display: grid;
+  gap: var(--mrg-grid-gap);
+}
+
+.mrg-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mrg-space-12);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.mrg-btn,
+.btn,
+.header-shop-cta,
+.mobile-menu-primary {
+  min-height: var(--mrg-button-height) !important;
+  padding: 0 var(--mrg-space-16) !important;
+  border-radius: var(--mrg-radius-button) !important;
+  font-family: var(--font-ui) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--mrg-space-8) !important;
+}
+
+.mrg-btn--primary,
+.btn.primary,
+.btn:not(.ghost):not(.secondary) {
+  background: var(--forest2) !important;
+  border-color: var(--forest2) !important;
+  color: #fff !important;
+}
+
+.mrg-btn--secondary,
+.mrg-btn--ghost,
+.btn.ghost,
+.btn.secondary {
+  background: var(--paper) !important;
+  border-color: var(--line) !important;
+  color: var(--forest) !important;
+  box-shadow: none !important;
+}
+
+.mrg-btn:disabled,
+.btn:disabled,
+.btn[disabled] {
+  opacity: .55 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.mrg-icon-btn,
+.mrg-site-header .mrg-icon-btn,
+.product-card-wishlist {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  border-radius: var(--mrg-radius-pill) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.mrg-field {
+  display: grid;
+  gap: var(--mrg-space-8);
+}
+
+.mrg-label {
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.mrg-input,
+.mrg-select,
+.mrg-textarea,
+.header-search-input,
+.morganics-collection-search input,
+.morganics-collection-sort select,
+.footer-newsletter-form input,
+.qty-row input {
+  min-height: var(--mrg-input-height) !important;
+  border: var(--mrg-control-border) !important;
+  border-radius: var(--mrg-radius-control) !important;
+  background: #fff !important;
+  color: var(--forest) !important;
+  font-family: var(--font-ui) !important;
+}
+
+.mrg-input:focus,
+.mrg-select:focus,
+.mrg-textarea:focus,
+.header-search-input:focus,
+.morganics-collection-search input:focus,
+.morganics-collection-sort select:focus,
+.footer-newsletter-form input:focus,
+.qty-row input:focus {
+  border-color: var(--forest) !important;
+  box-shadow: var(--mrg-focus-ring) !important;
+  outline: none !important;
+}
+
+.mrg-product-grid,
+.morganics-product-grid:not([data-view="list"]),
+.product-grid:not([data-view="list"]),
+.shop-grid:not([data-view="list"]) {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: var(--mrg-grid-gap) !important;
+}
+
+.mrg-product-grid--featured,
+.mrg-product-grid--related {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.mrg-product-grid--collection {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.mrg-product-card,
+.product-card-wrap {
+  border-radius: var(--mrg-radius-card) !important;
+}
+
+.mrg-product-card__media,
+.product-card-wrap .product-img {
+  border-radius: var(--mrg-radius-media) var(--mrg-radius-media) 0 0 !important;
+  overflow: hidden !important;
+}
+
+.mrg-product-card__content,
+.product-card-wrap .product-info {
+  padding: var(--mrg-card-pad) !important;
+  gap: var(--mrg-space-4) !important;
+}
+
+.mrg-product-card__title,
+.product-card-wrap .product-name {
+  line-height: 1.3 !important;
+}
+
+.mrg-product-card__actions,
+.product-card-wrap .card-actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: var(--mrg-space-8) !important;
+  padding: 0 var(--mrg-card-pad) var(--mrg-card-pad) !important;
+}
+
+.mrg-product-card__cart,
+.mrg-product-card__view,
+.card-cart-btn,
+.card-view-btn {
+  min-height: var(--mrg-button-height-sm) !important;
+  height: var(--mrg-button-height-sm) !important;
+  border-radius: var(--mrg-radius-button) !important;
+}
+
+.morganics-collection-toolbar {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  align-items: center !important;
+  gap: var(--mrg-space-12) !important;
+  padding: var(--mrg-space-12) var(--mrg-space-16) !important;
+  background: rgba(255, 250, 241, .96) !important;
+  border-bottom: 1px solid rgba(132, 99, 69, .14) !important;
+  border-radius: var(--mrg-radius-0) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 300 !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+.morganics-collection-toolbar .toolbar-left,
+.morganics-collection-toolbar .toolbar-center,
+.morganics-collection-toolbar .toolbar-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mrg-space-8) !important;
+  min-width: 0 !important;
+}
+
+.morganics-collection-toolbar .toolbar-left { justify-content: flex-start !important; }
+.morganics-collection-toolbar .toolbar-center { justify-content: center !important; }
+.morganics-collection-toolbar .toolbar-right { justify-content: flex-end !important; }
+.morganics-collection-search,
+.morganics-collection-sort,
+.morganics-collection-sort-form { width: 100% !important; min-width: 0 !important; }
+.morganics-collection-search { display: flex !important; align-items: center !important; position: relative !important; }
+.morganics-collection-search .toolbar-search-icon {
+  position: absolute !important;
+  left: var(--mrg-space-12) !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: rgba(23, 63, 54, .5) !important;
+  pointer-events: none !important;
+}
+.morganics-collection-search input { padding: 0 var(--mrg-space-12) 0 var(--mrg-space-32) !important; }
+.morganics-collection-sort select { padding: 0 var(--mrg-space-32) 0 var(--mrg-space-12) !important; }
+.morganics-mobile-filter-button {
+  height: var(--mrg-input-height) !important;
+  padding: 0 var(--mrg-space-16) !important;
+  border-radius: var(--mrg-radius-button) !important;
+  background: var(--forest) !important;
+  color: #fff !important;
+  border: 0 !important;
+  font-weight: 800 !important;
+}
+
+.morganics-product-grid[data-view="list"] {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--mrg-space-12) !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 96px !important;
+  border-radius: var(--mrg-radius-card) !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .product-card,
+.morganics-product-grid[data-view="list"] .product-card-wrap .morganics-product-card {
+  display: flex !important;
+  flex-direction: row !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+  width: 96px !important;
+  min-width: 96px !important;
+  height: 96px !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+  flex: 1 1 auto !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .product-name {
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+  min-height: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .urdu-line,
+.morganics-product-grid[data-view="list"] .product-card-wrap .product-card-variants-row {
+  display: none !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .card-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: var(--mrg-space-12) var(--mrg-space-12) var(--mrg-space-12) 0 !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wrap .card-cart-btn,
+.morganics-product-grid[data-view="list"] .product-card-wrap .card-view-btn {
+  width: auto !important;
+  white-space: nowrap !important;
+}
+
+.morganics-product-grid[data-view="list"] .product-card-wishlist {
+  position: absolute !important;
+  top: var(--mrg-space-8) !important;
+  right: var(--mrg-space-8) !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  z-index: 2 !important;
+}
+
+body[data-template="product"] .morganics-main .buy-box,
+body[data-template="product"] .morganics-main .description-html,
+body[data-template="product"] .morganics-main .info-box,
+body[data-template="product"] .morganics-main .product-faq-item {
+  border-radius: var(--mrg-radius-panel) !important;
+}
+
+body[data-template="product"] .morganics-main .variant-size-pill span,
+body[data-template="product"] .morganics-main .powder-toggle,
+body[data-template="product"] .morganics-main .qty-row,
+body[data-template="product"] .morganics-main .qty-row button,
+body[data-template="product"] .morganics-main .qty-row input {
+  border-radius: var(--mrg-radius-control) !important;
+}
+
+body[data-template="product"] .morganics-main .powder-toggle input,
+body[data-template="product"] .morganics-main .powder-toggle input::after {
+  border-radius: var(--mrg-radius-pill) !important;
+}
+
+.mrg-site-header .mrg-header-shell {
+  gap: var(--mrg-space-12) !important;
+}
+
+.mrg-site-header .mrg-icon-btn,
+.mrg-site-header .cart-header-btn,
+.mrg-site-header .mobile-menu-btn {
+  border-radius: var(--mrg-radius-button) !important;
+}
+
+.mrg-site-header .header-nav,
+.mrg-site-header .mrg-header-actions {
+  gap: var(--mrg-space-8) !important;
+}
+
+.premium-footer .footer-inner,
+.premium-footer .footer-grid {
+  gap: var(--mrg-space-24) !important;
+}
+
+.premium-footer .footer-col,
+.premium-footer .footer-links,
+.premium-footer .footer-contact-list {
+  gap: var(--mrg-space-8) !important;
+}
+
+.premium-footer .footer-cta,
+.premium-footer .footer-newsletter,
+.premium-footer .footer-brand-pills span {
+  border-radius: var(--mrg-radius-panel) !important;
+}
+
+.premium-footer .footer-newsletter-form {
+  gap: var(--mrg-space-8) !important;
+}
+
+.premium-footer .footer-newsletter-form input {
+  padding-inline: var(--mrg-space-12) !important;
+}
+
+.premium-footer .footer-newsletter-form button {
+  min-height: var(--mrg-input-height) !important;
+  padding-inline: var(--mrg-space-16) !important;
+  border-radius: var(--mrg-radius-button) !important;
+}
+
+@media (max-width: 900px) {
+  .mrg-product-grid,
+  .mrg-product-grid--featured,
+  .mrg-product-grid--collection,
+  .mrg-product-grid--related,
+  .morganics-product-grid:not([data-view="list"]),
+  .product-grid:not([data-view="list"]),
+  .shop-grid:not([data-view="list"]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--mrg-grid-gap-mobile) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mrg-section {
+    padding: var(--mrg-section-y-compact) var(--mrg-space-12);
+  }
+
+  .morganics-collection-toolbar {
+    grid-template-columns: 1fr !important;
+    gap: var(--mrg-space-8) !important;
+    padding: var(--mrg-space-8) var(--mrg-space-12) !important;
+  }
+
+  .morganics-collection-toolbar .toolbar-center {
+    justify-content: stretch !important;
+  }
+
+  .morganics-collection-toolbar .toolbar-right {
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+  }
+
+  .mrg-product-card__content,
+  .product-card-wrap .product-info {
+    padding: var(--mrg-card-pad-mobile) !important;
+  }
+
+  .mrg-product-card__actions,
+  .product-card-wrap .card-actions {
+    gap: 5px !important;
+    padding: 0 6px 7px !important;
+  }
+
+  .mrg-product-card__cart,
+  .mrg-product-card__view,
+  .card-cart-btn,
+  .card-view-btn {
+    min-height: 28px !important;
+    height: 28px !important;
+    border-radius: var(--mrg-radius-button) !important;
+  }
+
+  .product-card-wrap .product-card-variants-row,
+  .product-card-wrap .urdu-line {
+    display: none !important;
+  }
+}
+
+/* Final normalization guard for refactored Morganics components. */
+body .morganics-main .mrg-product-grid,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section > .mrg-product-grid,
+body[data-template="collection"] .morganics-main .mrg-product-grid {
+  gap: var(--mrg-grid-gap) !important;
+}
+
+body .morganics-main .mrg-product-card,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section .mrg-product-card,
+body[data-template="collection"] .morganics-main .mrg-product-card {
+  border-radius: var(--mrg-radius-card) !important;
+}
+
+body .morganics-main .mrg-product-card__media,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section .mrg-product-card__media,
+body[data-template="collection"] .morganics-main .mrg-product-card__media {
+  border-radius: var(--mrg-radius-media) var(--mrg-radius-media) 0 0 !important;
+}
+
+body .morganics-main .mrg-product-card__cart,
+body .morganics-main .mrg-product-card__view,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section .mrg-product-card__cart,
+body[data-template="index"] main.morganics-main section#featured.featured-products-section .mrg-product-card__view,
+body[data-template="collection"] .morganics-main .mrg-product-card__cart,
+body[data-template="collection"] .morganics-main .mrg-product-card__view {
+  border-radius: var(--mrg-radius-button) !important;
+}
+
+body[data-template="product"] .morganics-main .buy-box,
+body[data-template="product"] .morganics-main .description-html,
+body[data-template="product"] .morganics-main .detail-grid .info-box,
+body[data-template="product"] .morganics-main .product-faq-item {
+  border-radius: var(--mrg-radius-panel) !important;
+}
+
+@media (max-width: 900px) {
+  body .morganics-main .mrg-product-grid,
+  body[data-template="index"] main.morganics-main section#featured.featured-products-section > .mrg-product-grid,
+  body[data-template="collection"] .morganics-main .mrg-product-grid {
+    gap: var(--mrg-grid-gap-mobile) !important;
+  }
+}

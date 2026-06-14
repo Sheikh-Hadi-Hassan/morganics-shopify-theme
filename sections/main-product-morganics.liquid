@@ -39,6 +39,7 @@
   data-morganics-product
   data-product-faq-source="{{ faqs.value | default: faqs | escape }}"
   data-product-description-faq-source="{{ description_faq_source | escape }}"
+  data-product-variants="{{ product.variants | json | escape }}"
 >
   <div class="detail-image reveal">
     {% if featured_media %}
@@ -66,7 +67,7 @@
       <p data-urdu-wrap>{{ short_description }}</p>
     {% endif %}
 
-    <div class="buy-box">
+    <div class="buy-box mrg-stack">
       {% form 'product', product %}
         <h3>Choose Pack</h3>
 
@@ -77,25 +78,29 @@
         {% endif %}
 
         {% if section.settings.show_powder_option %}
-          <label class="powder-toggle">
+          {% liquid
+            assign powder_label = section.settings.powder_label | default: 'Powder Form'
+            unless powder_label contains '+Rs'
+              assign powder_label = powder_label | append: ' (+Rs.100)'
+            endunless
+          %}
+          <label class="powder-toggle mrg-control">
             <input type="checkbox"
               name="properties[Powder Form]"
               value="Yes"
               data-powder-toggle
             >
-            <span>{{ section.settings.powder_label }}</span>
-            <small>{{ section.settings.powder_help }}</small>
-            <small class="powder-help-urdu" dir="rtl" lang="ur">اگر آپ چاہتے ہیں کہ یہ پروڈکٹ پیکنگ سے پہلے پیس دی جائے۔</small>
+            <span>{{ powder_label }}</span>
           </label>
         {% endif %}
 
-        <div class="qty-row" data-quantity-row>
+        <div class="qty-row mrg-control" data-quantity-row>
           <button type="button" data-qty-minus aria-label="Decrease quantity">−</button>
           <input id="Quantity-{{ section.id }}" name="quantity" value="1" type="number" min="1" inputmode="numeric">
           <button type="button" data-qty-plus aria-label="Increase quantity">+</button>
         </div>
 
-        <button class="btn primary add-cart-btn" type="submit" {% unless current_variant.available %}disabled{% endunless %} data-add-to-cart>
+        <button class="btn primary mrg-btn mrg-btn--primary add-cart-btn" type="submit" {% unless current_variant.available %}disabled{% endunless %} data-add-to-cart>
           {% if current_variant.available %}Add to Cart{% else %}Sold Out{% endif %}
         </button>
 
@@ -106,9 +111,6 @@
     </div>
 
 <script src="{{ 'morganics-product.js' | asset_url }}" defer></script>
-<script>
-  window.morganicsProductVariants = {{ product.variants | json }};
-</script>
 
     <div class="feature-icons">
       {% for block in section.blocks %}
@@ -140,18 +142,18 @@
     <h2>{{ category_title }}</h2>
     <p>{{ category_copy }}</p>
     {% if product.collections.first %}
-      <a class="btn ghost" href="{{ product.collections.first.url }}">Open category</a>
+      <a class="btn ghost mrg-btn mrg-btn--ghost" href="{{ product.collections.first.url }}">Open category</a>
     {% endif %}
   </div>
 </section>
 
 {% if product.collections.first and section.settings.show_related_products %}
-  <section class="section">
-    <div class="section-head">
+  <section class="section mrg-section mrg-section--compact">
+    <div class="section-head mrg-container">
       <span class="eyebrow">{{ section.settings.related_eyebrow }}</span>
       <h2>{{ section.settings.related_heading }} {{ product.collections.first.title }}</h2>
     </div>
-    <div class="product-grid morganics-product-grid">
+    <div class="product-grid morganics-product-grid mrg-product-grid mrg-product-grid--related mrg-container">
       {% for related_product in product.collections.first.products limit: 4 %}
         {% unless related_product.id == product.id %}
           {% render 'morganics-product-card', product: related_product, show_quick_add: false %}
@@ -168,7 +170,7 @@
   "name": "Morganics product",
   "settings": [
     { "type": "checkbox", "id": "show_powder_option", "label": "Show powder form option", "default": true },
-    { "type": "text", "id": "powder_label", "label": "Powder option label", "default": "Powder Form" },
+    { "type": "text", "id": "powder_label", "label": "Powder option label", "default": "Powder Form (+Rs.100)" },
     { "type": "text", "id": "powder_help", "label": "Powder option help", "default": "If you want this product powdered before packing." },
     { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false },
     { "type": "text", "id": "use_cases_title", "label": "Use cases title", "default": "Best Use Cases" },

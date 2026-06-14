@@ -8,40 +8,8 @@
 
 
 
-  <style>
-    /* Featured products grid — matches shop page exactly */
-    #featured .product-grid.morganics-product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-    @media (max-width: 900px) {
-      #featured .product-grid.morganics-product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 12px !important;
-      }
-    }
-    @media (max-width: 767px) {
-      #featured .product-grid.morganics-product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 8px !important;
-      }
-      #featured .product-card-wrap { border-radius: 14px !important; max-width: none !important; margin-inline: 0 !important; }
-      #featured .product-card-wrap .product-info { padding: 7px 8px 5px !important; }
-      #featured .product-card-wrap .product-name { font-size: 11px !important; font-weight: 800 !important; line-height: 1.3 !important; min-height: unset !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
-      #featured .product-card-wrap .urdu-line,
-      #featured .product-card-wrap .product-card-variants-row { display: none !important; }
-      #featured .product-card-wrap .price { font-size: 11px !important; font-weight: 900 !important; }
-      #featured .product-card-wrap .price-compare { font-size: 10px !important; }
-      #featured .product-card-wishlist { width: 30px !important; height: 30px !important; top: 6px !important; right: 6px !important; }
-      #featured .product-card-wishlist svg { width: 14px !important; height: 14px !important; }
-      #featured .card-actions { padding: 0 6px 7px !important; gap: 5px !important; grid-template-columns: 1fr 1fr !important; }
-      #featured .card-cart-btn, #featured .card-view-btn { min-height: 28px !important; height: 28px !important; font-size: 10px !important; padding: 0 5px !important; }
-    }
-  </style>
-
   <div
-    class="product-grid morganics-product-grid"
+    class="product-grid morganics-product-grid mrg-product-grid mrg-product-grid--featured"
     data-view="grid"
   >
     {% if section.settings.products != blank %}

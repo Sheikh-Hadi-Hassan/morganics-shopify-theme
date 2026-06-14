@@ -21,7 +21,7 @@
           "type": "content",
           "settings": {
             "heading": "Bank transfer / wallet payments",
-            "content": "<p>If bank transfer, EasyPaisa or JazzCash options are enabled, payment instructions will be shared at checkout or through official Morganics support channels.</p>"
+            "content": "<p>If Bank Deposit, EasyPaisa or JazzCash options are enabled, payment instructions will be shared at checkout or through official Morganics support channels.</p>"
           }
         },
         "content_04": {

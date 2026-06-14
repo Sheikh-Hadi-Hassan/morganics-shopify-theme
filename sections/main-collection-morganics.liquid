@@ -406,12 +406,36 @@
     });
   }
 
+  function initCollectionStickyToolbar() {
+    const shell = document.getElementById('collectionProducts');
+    const toolbar = shell && shell.querySelector('.morganics-collection-toolbar');
+    if (!shell || !toolbar) return;
+
+    const updateToolbarState = () => {
+      toolbar.classList.toggle('is-stuck', shell.getBoundingClientRect().top <= 0);
+    };
+
+    updateToolbarState();
+    if (toolbar.dataset.collectionStickyReady === 'true') return;
+
+    toolbar.dataset.collectionStickyReady = 'true';
+    window.addEventListener('scroll', updateToolbarState, { passive: true });
+    window.addEventListener('resize', updateToolbarState);
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollectionViewToggle);
+    document.addEventListener('DOMContentLoaded', function() {
+      initCollectionViewToggle();
+      initCollectionStickyToolbar();
+    });
   } else {
     initCollectionViewToggle();
+    initCollectionStickyToolbar();
   }
-  document.addEventListener('shopify:section:load', initCollectionViewToggle);
+  document.addEventListener('shopify:section:load', function() {
+    initCollectionViewToggle();
+    initCollectionStickyToolbar();
+  });
 })();
 </script>
 

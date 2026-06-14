@@ -2781,6 +2781,333 @@ body.cart-open {
   color: var(--forest);
 }
 
+.checkout-card > form[data-payment-checkout-form] {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.checkout-card-note {
+  padding: 12px 14px;
+  border: 1px solid rgba(20, 77, 68, .12);
+  border-radius: 14px;
+  background: rgba(20, 77, 68, .055);
+}
+
+.checkout-card .morganics-payment-panel {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.checkout-card .morganics-payment-head {
+  display: grid;
+  gap: 8px;
+}
+
+.checkout-card .morganics-payment-head h3 {
+  margin: 0;
+  color: var(--forest);
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.18;
+}
+
+.checkout-card .morganics-payment-methods {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.checkout-card .morganics-payment-method {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  min-height: 72px;
+  padding: 12px 14px;
+  overflow: hidden;
+  border: 1px solid rgba(20, 77, 68, .14);
+  border-radius: 16px;
+  background: #fffdf8;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease, transform .18s ease;
+}
+
+.checkout-card .morganics-payment-method:hover,
+.checkout-card .morganics-payment-method:focus-within {
+  border-color: rgba(20, 77, 68, .35);
+  box-shadow: 0 8px 22px rgba(20, 77, 68, .08);
+  transform: translateY(-1px);
+}
+
+.checkout-card .morganics-payment-method:has(input:checked) {
+  border-color: var(--forest);
+  background: rgba(20, 77, 68, .075);
+  box-shadow: 0 0 0 3px rgba(20, 77, 68, .09);
+}
+
+.checkout-card .morganics-payment-method.is-disabled {
+  opacity: .48;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.checkout-card .morganics-payment-method input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--forest);
+}
+
+.checkout-card .morganics-payment-logo {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: var(--forest);
+  color: #fffaf1;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: .04em;
+}
+
+.checkout-card .morganics-payment-method-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.checkout-card .morganics-payment-method-copy b,
+.checkout-card .morganics-payment-method-copy small {
+  display: block;
+  min-width: 0;
+}
+
+.checkout-card .morganics-payment-method-copy b {
+  color: var(--forest);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.checkout-card .morganics-payment-method-copy small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.checkout-card .morganics-payment-detail {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(20, 77, 68, .13);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 253, 248, .98), rgba(244, 238, 226, .82));
+}
+
+.checkout-card .morganics-payment-detail[hidden],
+.checkout-card .morganics-payment-proof[hidden] {
+  display: none;
+}
+
+.checkout-card .morganics-payment-qr {
+  align-self: start;
+  overflow: hidden;
+  border: 1px solid rgba(20, 77, 68, .12);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.checkout-card .morganics-payment-qr img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.checkout-card .morganics-payment-copy {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.checkout-card .morganics-payment-copy h4,
+.checkout-card .morganics-payment-copy p,
+.checkout-card .morganics-payment-copy ol {
+  margin: 0;
+}
+
+.checkout-card .morganics-payment-copy h4 {
+  color: var(--forest);
+  font-size: 18px;
+}
+
+.checkout-card .morganics-payment-copy p {
+  overflow-wrap: anywhere;
+}
+
+.checkout-card .morganics-payment-copy ol {
+  display: grid;
+  gap: 4px;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.checkout-card .morganics-payment-proof {
+  display: grid;
+  gap: 12px;
+}
+
+.checkout-card .morganics-payment-upload,
+.checkout-card .morganics-payment-reference {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  color: var(--forest);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.checkout-card .morganics-payment-reference input {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid rgba(20, 77, 68, .2);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.checkout-card .morganics-payment-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.checkout-card .morganics-payment-field-label {
+  display: block;
+}
+
+.checkout-card .morganics-payment-upload-card {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 76px;
+  padding: 12px;
+  border: 1.5px dashed rgba(20, 77, 68, .34);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(238, 246, 242, .84));
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.checkout-card .morganics-payment-upload:hover .morganics-payment-upload-card,
+.checkout-card .morganics-payment-upload:focus-within .morganics-payment-upload-card {
+  border-color: var(--forest);
+  background: rgba(20, 77, 68, .07);
+  box-shadow: 0 0 0 3px rgba(20, 77, 68, .08);
+  transform: translateY(-1px);
+}
+
+.checkout-card .morganics-payment-upload-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--forest);
+  color: #fffaf1;
+}
+
+.checkout-card .morganics-payment-upload-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.checkout-card .morganics-payment-upload-copy b,
+.checkout-card .morganics-payment-upload-copy small {
+  display: block;
+}
+
+.checkout-card .morganics-payment-upload-copy b {
+  color: var(--forest);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.checkout-card .morganics-payment-upload-copy small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.checkout-card .morganics-payment-upload-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid rgba(20, 77, 68, .2);
+  border-radius: 11px;
+  background: #fffaf1;
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.checkout-card .morganics-payment-file-name {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.checkout-card .morganics-payment-handoff {
+  padding: 11px 12px;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+  background: rgba(212, 154, 33, .08);
+}
+
+.checkout-card .morganics-payment-error {
+  padding: 10px 12px;
+  border: 1px solid rgba(156, 61, 45, .24);
+  border-radius: 12px;
+  background: rgba(156, 61, 45, .08);
+  color: #8a3328;
+}
+
+.checkout-card .cart-checkout-btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
 .summary-row {
   color: var(--ink);
   font-weight: 850;
@@ -2833,9 +3160,55 @@ body.cart-open {
     grid-template-columns: 1fr;
   }
 
+  .checkout-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .checkout-card .morganics-payment-detail {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
+
   .cart-fab {
     right: 14px;
     bottom: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .checkout-card .morganics-payment-method {
+    grid-template-columns: auto 38px minmax(0, 1fr);
+    padding: 11px;
+  }
+
+  .checkout-card .morganics-payment-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .checkout-card .morganics-payment-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-card .morganics-payment-qr {
+    width: min(180px, 100%);
+    margin-inline: auto;
+  }
+
+  .checkout-card .morganics-payment-upload-card {
+    grid-template-columns: 44px minmax(0, 1fr);
+    min-height: 70px;
+  }
+
+  .checkout-card .morganics-payment-upload-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .checkout-card .morganics-payment-upload-action {
+    display: none;
   }
 }
 
@@ -23064,6 +23437,507 @@ body[data-template="collection"] .morganics-main .mrg-product-card__view {
   border-radius: var(--mrg-radius-button) !important;
 }
 
+/* Premium collection list view: one clean product row with image, copy, price and actions. */
+body[data-template="collection"] .morganics-main .product-card-summary {
+  display: none !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+  padding: 0 !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] > .product-card-wrap {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  width: 100% !important;
+  min-height: 142px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(132, 99, 69, .18) !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 246, .98), rgba(247, 241, 230, .94)) !important;
+  box-shadow:
+    0 14px 34px rgba(31, 41, 38, .075),
+    inset 0 1px 0 rgba(255, 255, 255, .82) !important;
+  transform: none !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] > .product-card-wrap:hover,
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] > .product-card-wrap:focus-within {
+  border-color: rgba(33, 81, 72, .28) !important;
+  box-shadow:
+    0 18px 42px rgba(31, 41, 38, .105),
+    inset 0 1px 0 rgba(255, 255, 255, .9) !important;
+  transform: translateY(-1px) !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card,
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .morganics-product-card {
+  display: grid !important;
+  grid-template-columns: clamp(128px, 24vw, 184px) minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  min-width: 0 !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  min-height: 142px !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  border-right: 1px solid rgba(132, 99, 69, .14) !important;
+  background:
+    linear-gradient(145deg, rgba(237, 226, 206, .82), rgba(255, 250, 241, .9)) !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-img img {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 10px !important;
+  object-fit: cover !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+  display: grid !important;
+  align-content: center !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+  padding: 18px 20px !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-name {
+  max-width: 100% !important;
+  min-height: 0 !important;
+  color: #123f36 !important;
+  font-size: clamp(18px, 2vw, 23px) !important;
+  line-height: 1.13 !important;
+  letter-spacing: 0 !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .urdu-line {
+  display: none !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-summary {
+  display: -webkit-box !important;
+  max-width: 64ch !important;
+  margin: 0 !important;
+  color: rgba(18, 63, 54, .68) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  line-height: 1.45 !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-variants-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin-top: 1px !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-item-pill,
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-more-count {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 24px !important;
+  padding: 3px 8px !important;
+  border: 1px solid rgba(132, 99, 69, .18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 250, 241, .72) !important;
+  color: rgba(18, 63, 54, .74) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-separator {
+  display: none !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .price-row {
+  margin-top: 2px !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .price {
+  color: #d49a21 !important;
+  font-size: clamp(17px, 1.6vw, 22px) !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .price-compare {
+  color: rgba(18, 63, 54, .42) !important;
+  font-size: 13px !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .card-actions {
+  display: grid !important;
+  align-content: center !important;
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+  width: clamp(112px, 16vw, 148px) !important;
+  padding: 18px 18px 18px 0 !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .card-cart-btn,
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .card-view-btn {
+  width: 100% !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 0 12px !important;
+  border-radius: 13px !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card-wishlist {
+  display: inline-flex !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 252, 246, .88) !important;
+  z-index: 3 !important;
+}
+
+body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wishlist svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+@media (max-width: 520px) {
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] {
+    gap: 10px !important;
+    padding: 0 2px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] > .product-card-wrap {
+    grid-template-columns: 1fr !important;
+    min-height: 126px !important;
+    border-radius: 14px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card,
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .morganics-product-card {
+    grid-template-columns: 118px minmax(0, 1fr) !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+    min-height: 126px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+    padding: 13px 12px !important;
+    gap: 5px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-name {
+    font-size: 15px !important;
+    line-height: 1.18 !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-summary {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-variants-row {
+    display: none !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .price {
+    font-size: 15px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .card-actions {
+    grid-template-columns: minmax(0, 1fr) minmax(86px, .42fr) !important;
+    width: auto !important;
+    padding: 0 10px 10px 118px !important;
+    gap: 7px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .card-cart-btn,
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .card-view-btn {
+    min-height: 36px !important;
+    height: 36px !important;
+    border-radius: 11px !important;
+    font-size: 11px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card-wishlist {
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card,
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .morganics-product-card {
+    grid-template-columns: 96px minmax(0, 1fr) !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+    min-height: 112px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-summary {
+    display: none !important;
+  }
+
+  body[data-template="collection"] .morganics-main .morganics-product-grid[data-view="list"] .product-card-wrap > .card-actions {
+    padding-left: 96px !important;
+  }
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap {
+  background:
+    linear-gradient(135deg, rgba(255, 252, 246, .98), rgba(247, 241, 230, .94)) !important;
+  border: 1px solid rgba(132, 99, 69, .18) !important;
+  box-shadow:
+    0 14px 34px rgba(31, 41, 38, .075),
+    inset 0 1px 0 rgba(255, 255, 255, .82) !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap:hover,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap:focus-within {
+  border-color: rgba(33, 81, 72, .28) !important;
+  box-shadow:
+    0 18px 42px rgba(31, 41, 38, .105),
+    inset 0 1px 0 rgba(255, 255, 255, .9) !important;
+}
+
+/* Compact collection list view revision: flush 1:1 media, no description, shorter rows. */
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] {
+  gap: 10px !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap {
+  grid-template-columns: minmax(0, 1fr) 122px !important;
+  min-height: 118px !important;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 246, .98), rgba(244, 236, 220, .96)) !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .morganics-product-card {
+  grid-template-columns: 118px minmax(0, 1fr) !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+  width: 118px !important;
+  min-width: 118px !important;
+  height: 118px !important;
+  min-height: 118px !important;
+  aspect-ratio: 1 / 1 !important;
+  align-self: start !important;
+  border-radius: 0 !important;
+  border-right: 1px solid rgba(132, 99, 69, .16) !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img img {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+  align-content: center !important;
+  gap: 5px !important;
+  padding: 11px 14px !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-name {
+  font-size: clamp(17px, 1.9vw, 22px) !important;
+  line-height: 1.12 !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-summary {
+  display: none !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row {
+  display: none !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-item-pill,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-more-count {
+  min-height: 23px !important;
+  padding: 2px 8px !important;
+  font-size: 10.5px !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price-row {
+  margin-top: 4px !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price {
+  font-size: clamp(17px, 1.55vw, 21px) !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .card-actions {
+  width: 116px !important;
+  gap: 6px !important;
+  padding: 12px 12px 12px 0 !important;
+  box-sizing: border-box !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .card-cart-btn,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .card-view-btn {
+  min-height: 34px !important;
+  height: 34px !important;
+  border-radius: 12px !important;
+  font-size: 11px !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card-wishlist {
+  top: 8px !important;
+  right: 8px !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  border-radius: 10px !important;
+}
+
+@media (max-width: 520px) {
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap {
+    grid-template-columns: 1fr !important;
+    min-height: 92px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .morganics-product-card {
+    grid-template-columns: 92px minmax(0, 1fr) !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+    width: 92px !important;
+    min-width: 92px !important;
+    height: 92px !important;
+    min-height: 92px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+    padding: 10px 11px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-name {
+    font-size: 14px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price {
+    font-size: 14px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .card-actions {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 9px 9px 92px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* List-view media must feel built into the card: rounded left, square right, clipped image. */
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap {
+  overflow: hidden !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+  overflow: hidden !important;
+  border-radius: 14px 0 0 14px !important;
+  background: #efe3cf !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img img,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img .product-img-primary,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img .product-img-secondary {
+  border-radius: 14px 0 0 14px !important;
+  clip-path: inset(0 round 14px 0 0 14px) !important;
+}
+
+@media (max-width: 520px) {
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img img,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img .product-img-primary,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img .product-img-secondary {
+    border-radius: 14px 0 0 0 !important;
+    clip-path: inset(0 round 14px 0 0 0) !important;
+  }
+}
+
+/* List-view content balance: left aligned, useful minimal detail, no empty center block. */
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+  justify-items: start !important;
+  justify-content: start !important;
+  text-align: left !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-name,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price-row,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price-container {
+  width: 100% !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  max-width: 100% !important;
+  gap: 6px !important;
+  overflow: hidden !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-item-pill,
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-more-count {
+  flex: 0 1 auto !important;
+  max-width: 168px !important;
+  min-height: 22px !important;
+  padding: 2px 8px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  border-radius: 999px !important;
+  background: rgba(255, 250, 241, .78) !important;
+  border: 1px solid rgba(132, 99, 69, .2) !important;
+  color: rgba(18, 63, 54, .72) !important;
+  font-size: 10.5px !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row .variant-separator {
+  display: none !important;
+}
+
+body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price-row {
+  margin-top: 1px !important;
+}
+
+@media (max-width: 520px) {
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-variants-row {
+    display: none !important;
+  }
+}
+
 body[data-template="product"] .morganics-main .buy-box,
 body[data-template="product"] .morganics-main .description-html,
 body[data-template="product"] .morganics-main .detail-grid .info-box,
@@ -23076,5 +23950,135 @@ body[data-template="product"] .morganics-main .product-faq-item {
   body[data-template="index"] main.morganics-main section#featured.featured-products-section > .mrg-product-grid,
   body[data-template="collection"] .morganics-main .mrg-product-grid {
     gap: var(--mrg-grid-gap-mobile) !important;
+  }
+}
+
+/* Collection toolbar: reads as a normal section until it sticks to the viewport. */
+body[data-template="collection"] .morganics-main #collectionProducts > .morganics-collection-toolbar {
+  top: 0 !important;
+  z-index: 300 !important;
+  width: min(1440px, calc(100% - 40px)) !important;
+  max-width: 1440px !important;
+  margin: 24px auto 18px !important;
+  padding: 14px 18px !important;
+  border: 1px solid rgba(132, 99, 69, .18) !important;
+  border-radius: 20px !important;
+  background: rgba(255, 250, 241, .96) !important;
+  box-shadow: 0 12px 30px rgba(31, 41, 38, .06), inset 0 1px 0 rgba(255, 255, 255, .76) !important;
+  backdrop-filter: blur(16px) !important;
+  transition: border-radius .18s ease, width .18s ease, margin .18s ease, padding .18s ease, box-shadow .18s ease;
+}
+
+body[data-template="collection"] .morganics-main #collectionProducts > .morganics-collection-toolbar.is-stuck {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 0 18px !important;
+  padding: 10px max(18px, calc((100vw - 1440px) / 2 + 32px)) !important;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 10px 28px rgba(31, 41, 38, .1) !important;
+}
+
+@media (max-width: 599px) {
+  body[data-template="collection"] .morganics-main #collectionProducts > .morganics-collection-toolbar {
+    width: calc(100% - 24px) !important;
+    margin: 16px auto 14px !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+  }
+
+  body[data-template="collection"] .morganics-main #collectionProducts > .morganics-collection-toolbar.is-stuck {
+    width: 100% !important;
+    margin: 0 0 14px !important;
+    padding: 8px 12px !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* Mobile collection toolbar: hide sort select, keep search, view toggle, and filters. */
+@media (max-width: 767px) {
+  body[data-template="collection"] .morganics-main #collectionProducts .morganics-collection-sort-form {
+    display: none !important;
+  }
+
+  body[data-template="collection"] .morganics-main #collectionProducts .morganics-collection-toolbar .toolbar-right {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+}
+
+/* Mobile collection list cards: media spans the full card height with no dead space below it. */
+@media (max-width: 520px) {
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] > .product-card-wrap {
+    --mrg-mobile-list-media: clamp(112px, 31vw, 126px);
+    display: grid !important;
+    grid-template-columns: var(--mrg-mobile-list-media) minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    align-items: stretch !important;
+    min-height: var(--mrg-mobile-list-media) !important;
+    overflow: hidden !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .product-card,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .morganics-product-card {
+    display: contents !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img {
+    grid-column: 1 !important;
+    grid-row: 1 / 3 !important;
+    align-self: stretch !important;
+    width: var(--mrg-mobile-list-media) !important;
+    min-width: var(--mrg-mobile-list-media) !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    aspect-ratio: auto !important;
+    border-radius: 14px 0 0 14px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img img,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img .product-img-primary,
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-img .product-img-secondary {
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 14px 0 0 14px !important;
+    clip-path: inset(0 round 14px 0 0 14px) !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-info {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    padding: 12px 11px 5px !important;
+    align-content: start !important;
+    gap: 4px !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .product-name {
+    font-size: 14px !important;
+    line-height: 1.16 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap .price-row {
+    margin-top: 0 !important;
+  }
+
+  body[data-template="collection"] .morganics-main .collection-results .morganics-product-grid[data-view="list"] .product-card-wrap > .card-actions {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(72px, .42fr) !important;
+    align-items: stretch !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 9px 9px 0 !important;
+    gap: 7px !important;
+    box-sizing: border-box !important;
   }
 }

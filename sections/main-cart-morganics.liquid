@@ -65,7 +65,7 @@
         <strong>{{ cart.total_price | money }}</strong>
       </div>
 
-      <p>{{ section.settings.checkout_note }}</p>
+      <p class="checkout-card-note">{{ section.settings.checkout_note }}</p>
 
       <form action="{{ routes.cart_url }}" method="post" data-payment-checkout-form>
         {% render 'morganics-payment-options', id_prefix: 'page' %}

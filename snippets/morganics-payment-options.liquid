@@ -10,7 +10,7 @@
 {%- comment -%}
   step = 'all'     → renders full panel (cart page / checkout-card usage — unchanged)
   step = 'chooser' → renders only the method-selector cards (Step 2 of drawer)
-  step = 'details' → renders only QR/details + proof upload (Step 3 of drawer)
+  step = 'details' → renders QR/details + transaction reference (Step 3 of drawer)
 {%- endcomment -%}
 
 {% if step == 'chooser' %}
@@ -54,7 +54,7 @@
         <span class="morganics-payment-logo morganics-payment-logo--light">EP</span>
         <span>
           <b>EasyPaisa</b>
-          <small>Scan QR, then upload proof.</small>
+          <small>Scan QR, then upload the payment receipt.</small>
         </span>
         <span class="morganics-payment-method-check" aria-hidden="true"></span>
       </label>
@@ -71,7 +71,7 @@
         <span class="morganics-payment-logo morganics-payment-logo--light">JC</span>
         <span>
           <b>JazzCash</b>
-          <small>Scan QR, then upload proof.</small>
+          <small>Scan QR, then upload the payment receipt.</small>
         </span>
         <span class="morganics-payment-method-check" aria-hidden="true"></span>
       </label>
@@ -80,15 +80,15 @@
         <input
           type="radio"
           name="morganics_payment_chooser_{{ id_prefix }}"
-          value="Bank Transfer"
+          value="Bank Deposit"
           data-chooser-method
           data-payment-kind="online"
           data-payment-provider="bank"
         >
         <span class="morganics-payment-logo morganics-payment-logo--light">MB</span>
         <span>
-          <b>Bank Transfer</b>
-          <small>Meezan Bank transfer proof.</small>
+          <b>Bank Deposit</b>
+          <small>Transfer, then upload the payment receipt.</small>
         </span>
         <span class="morganics-payment-method-check" aria-hidden="true"></span>
       </label>
@@ -98,7 +98,7 @@
 
 {% elsif step == 'details' %}
 
-  {%- comment -%} ── STEP 3: PAYMENT DETAILS + PROOF (inside checkout form) ─ {%- endcomment -%}
+  {%- comment -%} ── STEP 3: PAYMENT DETAILS (inside checkout form) ───────── {%- endcomment -%}
   <div class="morganics-payment-panel" data-payment-panel data-cart-total="{{ cart.total_price }}">
 
     {%- comment -%} Hidden inputs mirroring the chooser selection, synced by JS {%- endcomment -%}
@@ -108,7 +108,7 @@
     <input type="radio" name="morganics_payment_method_{{ id_prefix }}" value="Cash on Delivery"  data-payment-method data-payment-kind="cod"    style="position:absolute;opacity:0;pointer-events:none;">
     <input type="radio" name="morganics_payment_method_{{ id_prefix }}" value="EasyPaisa"         data-payment-method data-payment-kind="online"  data-payment-provider="easypaisa" style="position:absolute;opacity:0;pointer-events:none;">
     <input type="radio" name="morganics_payment_method_{{ id_prefix }}" value="JazzCash"          data-payment-method data-payment-kind="online"  data-payment-provider="jazzcash"  style="position:absolute;opacity:0;pointer-events:none;">
-    <input type="radio" name="morganics_payment_method_{{ id_prefix }}" value="Bank Transfer"     data-payment-method data-payment-kind="online"  data-payment-provider="bank"      style="position:absolute;opacity:0;pointer-events:none;">
+    <input type="radio" name="morganics_payment_method_{{ id_prefix }}" value="Bank Deposit"      data-payment-method data-payment-kind="online"  data-payment-provider="bank"      style="position:absolute;opacity:0;pointer-events:none;">
 
     {%- comment -%} Confirmation header — updated by JS to show selected method {%- endcomment -%}
     <div class="morganics-payment-confirm-head" data-payment-confirm-head>
@@ -137,8 +137,8 @@
           <li>Open EasyPaisa app</li>
           <li>Scan QR code</li>
           <li>Complete payment</li>
-          <li>Upload payment screenshot</li>
-          <li>Enter transaction/reference number</li>
+          <li>Upload payment receipt</li>
+          <li>Add transaction/reference number (optional)</li>
           <li>Continue to checkout</li>
         </ol>
       </div>
@@ -156,43 +156,55 @@
           <li>Open JazzCash app</li>
           <li>Scan QR code</li>
           <li>Complete payment</li>
-          <li>Upload payment screenshot</li>
-          <li>Enter transaction/reference number</li>
+          <li>Upload payment receipt</li>
+          <li>Add transaction/reference number (optional)</li>
           <li>Continue to checkout</li>
         </ol>
       </div>
     </div>
 
-    {%- comment -%} Bank Transfer {%- endcomment -%}
+    {%- comment -%} Bank Deposit {%- endcomment -%}
     <div class="morganics-payment-detail" data-payment-detail="bank" hidden>
       <div class="morganics-payment-qr">
         <img src="https://cdn.shopify.com/s/files/1/0749/6636/8450/files/EP.svg?v=1781068674" alt="Meezan Bank payment QR code" width="180" height="180" loading="lazy">
       </div>
       <div class="morganics-payment-copy">
-        <h4>Bank Transfer</h4>
+        <h4>Bank Deposit</h4>
         <p><strong>Account Title:</strong> AMMAR RAZA</p>
         <p><strong>Account Number:</strong> 02280105187541</p>
         <p><strong>IBAN:</strong> PK51MEZN0002280105187541</p>
         <ol>
           <li>Open banking app</li>
           <li>Transfer payment</li>
-          <li>Upload payment screenshot/receipt</li>
-          <li>Enter transaction/reference number</li>
+          <li>Upload payment receipt</li>
+          <li>Add transaction/reference number (optional)</li>
           <li>Continue to checkout</li>
         </ol>
       </div>
     </div>
 
-    {%- comment -%} Proof upload + reference — hidden for COD {%- endcomment -%}
+    {%- comment -%} Receipt and optional reference — hidden for COD {%- endcomment -%}
     <div class="morganics-payment-proof" data-payment-proof-fields>
       <label class="morganics-payment-upload">
-        <span>Upload payment screenshot</span>
-        <input type="file" accept="image/*,.pdf" data-payment-proof>
-        <small data-payment-proof-name>No file selected</small>
+        <span class="morganics-payment-field-label">Upload payment receipt</span>
+        <input class="morganics-payment-file-input" type="file" accept="image/*,.pdf" data-payment-proof>
+        <span class="morganics-payment-upload-card">
+          <span class="morganics-payment-upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 16V4"></path><path d="m7 9 5-5 5 5"></path><path d="M5 20h14"></path>
+            </svg>
+          </span>
+          <span class="morganics-payment-upload-copy">
+            <b>Choose receipt</b>
+            <small>JPG, PNG or PDF up to 2 MB</small>
+          </span>
+          <span class="morganics-payment-upload-action">Browse</span>
+        </span>
+        <small class="morganics-payment-file-name" data-payment-proof-name>No receipt selected</small>
       </label>
       <label class="morganics-payment-reference">
-        <span>Transaction/reference number</span>
-        <input type="text" data-payment-reference autocomplete="off" placeholder="Enter transaction/reference number">
+        <span>Transaction/reference number <small>(optional)</small></span>
+        <input type="text" data-payment-reference autocomplete="off" placeholder="Optional transaction/reference number">
       </label>
     </div>
 
@@ -220,7 +232,7 @@
           {% if cod_available %}checked{% else %}disabled{% endif %}
         >
         <span class="morganics-payment-logo">COD</span>
-        <span><b>Cash on Delivery</b><small>Pay when your order arrives.</small></span>
+        <span class="morganics-payment-method-copy"><b>Cash on Delivery</b><small>Pay when your order arrives.</small></span>
       </label>
 
       <label class="morganics-payment-method">
@@ -234,7 +246,7 @@
           {% unless cod_available %}checked{% endunless %}
         >
         <span class="morganics-payment-logo">EP</span>
-        <span><b>EasyPaisa</b><small>Scan QR, then upload proof.</small></span>
+        <span class="morganics-payment-method-copy"><b>EasyPaisa</b><small>Scan QR, then add payment details.</small></span>
       </label>
 
       <label class="morganics-payment-method">
@@ -247,20 +259,20 @@
           data-payment-provider="jazzcash"
         >
         <span class="morganics-payment-logo">JC</span>
-        <span><b>JazzCash</b><small>Scan QR, then upload proof.</small></span>
+        <span class="morganics-payment-method-copy"><b>JazzCash</b><small>Scan QR, then add payment details.</small></span>
       </label>
 
       <label class="morganics-payment-method">
         <input
           type="radio"
           name="morganics_payment_method_{{ id_prefix }}"
-          value="Bank Transfer"
+          value="Bank Deposit"
           data-payment-method
           data-payment-kind="online"
           data-payment-provider="bank"
         >
         <span class="morganics-payment-logo">MB</span>
-        <span><b>Bank Transfer</b><small>Meezan Bank transfer proof.</small></span>
+        <span class="morganics-payment-method-copy"><b>Bank Deposit</b><small>Pay to Meezan Bank, then add details.</small></span>
       </label>
     </div>
 
@@ -275,8 +287,8 @@
           <li>Open EasyPaisa app</li>
           <li>Scan QR code</li>
           <li>Complete payment</li>
-          <li>Upload payment screenshot</li>
-          <li>Enter transaction/reference number</li>
+          <li>Upload payment receipt</li>
+          <li>Add transaction/reference number (optional)</li>
           <li>Continue to checkout</li>
         </ol>
       </div>
@@ -293,8 +305,8 @@
           <li>Open JazzCash app</li>
           <li>Scan QR code</li>
           <li>Complete payment</li>
-          <li>Upload payment screenshot</li>
-          <li>Enter transaction/reference number</li>
+          <li>Upload payment receipt</li>
+          <li>Add transaction/reference number (optional)</li>
           <li>Continue to checkout</li>
         </ol>
       </div>
@@ -305,15 +317,15 @@
         <img src="https://cdn.shopify.com/s/files/1/0749/6636/8450/files/EP.svg?v=1781068674" alt="Meezan Bank payment QR code" width="180" height="180" loading="lazy">
       </div>
       <div class="morganics-payment-copy">
-        <h4>Bank Transfer</h4>
+        <h4>Bank Deposit</h4>
         <p><strong>Account Title:</strong> AMMAR RAZA</p>
         <p><strong>Account Number:</strong> 02280105187541</p>
         <p><strong>IBAN:</strong> PK51MEZN0002280105187541</p>
         <ol>
           <li>Open banking app</li>
           <li>Transfer payment</li>
-          <li>Upload payment screenshot/receipt</li>
-          <li>Enter transaction/reference number</li>
+          <li>Upload payment receipt</li>
+          <li>Add transaction/reference number (optional)</li>
           <li>Continue to checkout</li>
         </ol>
       </div>
@@ -321,15 +333,31 @@
 
     <div class="morganics-payment-proof" data-payment-proof-fields>
       <label class="morganics-payment-upload">
-        <span>Upload payment screenshot</span>
-        <input type="file" accept="image/*,.pdf" data-payment-proof>
-        <small data-payment-proof-name>No file selected</small>
+        <span class="morganics-payment-field-label">Upload payment receipt</span>
+        <input class="morganics-payment-file-input" type="file" accept="image/*,.pdf" data-payment-proof>
+        <span class="morganics-payment-upload-card">
+          <span class="morganics-payment-upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 16V4"></path><path d="m7 9 5-5 5 5"></path><path d="M5 20h14"></path>
+            </svg>
+          </span>
+          <span class="morganics-payment-upload-copy">
+            <b>Choose receipt</b>
+            <small>JPG, PNG or PDF up to 2 MB</small>
+          </span>
+          <span class="morganics-payment-upload-action">Browse</span>
+        </span>
+        <small class="morganics-payment-file-name" data-payment-proof-name>No receipt selected</small>
       </label>
       <label class="morganics-payment-reference">
-        <span>Transaction/reference number</span>
-        <input type="text" data-payment-reference autocomplete="off" placeholder="Enter transaction/reference number">
+        <span>Transaction/reference number <small>(optional)</small></span>
+        <input type="text" data-payment-reference autocomplete="off" placeholder="Optional transaction/reference number">
       </label>
     </div>
+
+    <p class="morganics-payment-handoff">
+      Your payment selection and receipt filename are saved with this Shopify cart. At checkout, choose the matching payment method to place the order.
+    </p>
 
     <p class="morganics-payment-error" data-payment-error role="alert" hidden></p>
   </div>

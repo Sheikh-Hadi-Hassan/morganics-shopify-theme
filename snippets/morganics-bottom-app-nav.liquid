@@ -14,14 +14,14 @@
     <span class="mob-nav-label">Shop</span>
   </a>
 
-  <button class="mob-nav-item mob-nav-wishlist" type="button" id="mobNavWishlistBtn" aria-label="Wishlist" data-wishlist-toggle>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
-    <span class="mob-nav-wl-badge" data-wishlist-count hidden>0</span>
-    <span class="mob-nav-label">Wishlist</span>
-  </button>
+  <a class="mob-nav-item mob-nav-cart {% if template.name == 'cart' %}active{% endif %}" href="{{ routes.cart_url }}" aria-label="Cart">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-1.5 9h-12z"></path><path d="M6 7 5.2 3H3"></path><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
+    <span class="mobile-nav-badge" data-cart-count>{{ cart.item_count }}</span>
+    <span class="mob-nav-label">Cart</span>
+  </a>
 
-  <button class="mob-nav-item" type="button" id="mobNavMenuBtn" aria-label="Menu" data-bottom-menu-toggle>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
-    <span class="mob-nav-label">Menu</span>
-  </button>
+  <a class="mob-nav-item mob-nav-support" href="https://wa.me/923223338110" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp support">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.8a8.3 8.3 0 0 1-12.2 7.3L4 20l.9-4.1A8.3 8.3 0 1 1 20.5 11.8Z"></path><path d="M9.2 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.4.5c.8 1.4 1.9 2.5 3.3 3.2l.6-.7c.2-.2.4-.2.7-.1l1.6.8c.3.1.4.3.4.6v.5c0 .3-.1.5-.4.7-.5.3-1.2.5-1.9.4-3.2-.4-6.7-3.5-7.3-6.8-.1-.6.1-1.2.5-1.5Z"></path></svg>
+    <span class="mob-nav-label">WhatsApp</span>
+  </a>
 </nav>

@@ -169,8 +169,7 @@
     }
 
     if (!isOnline) return '';
-    if (!paymentProof(panel)) return showSoftMessage ? 'Please upload payment screenshot before checkout.' : '';
-    if (!paymentReference(panel)) return showSoftMessage ? 'Please enter transaction/reference number.' : '';
+    if (!paymentProof(panel)) return showSoftMessage ? 'Please upload payment receipt before checkout.' : '';
     return '';
   }
 
@@ -178,7 +177,7 @@
     var method = selectedPayment(panel);
     if (!method) return false;
     if (method.dataset.paymentKind === 'cod') return cartTotalForPanel(panel) <= COD_LIMIT_CENTS;
-    return !!paymentProof(panel) && !!paymentReference(panel);
+    return !!paymentProof(panel);
   }
 
   function updatePaymentPanel(panel, showSoftMessage) {
@@ -211,7 +210,7 @@
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // PROOF SERIALIZATION + SAVE (unchanged)
+  // PAYMENT SELECTION SAVE
   // ─────────────────────────────────────────────────────────────────────────
 
   function serializeProof(panel) {
@@ -233,7 +232,7 @@
     var methodName = paymentProviderName(method);
 
     try {
-      window.localStorage.setItem('morganics_payment_proof', JSON.stringify({
+      window.localStorage.setItem('morganics_payment_selection', JSON.stringify({
         paymentMethod: methodName,
         transactionReference: reference,
         proof: proof,
@@ -514,6 +513,15 @@
     var pageQtyButton   = event.target.closest('[data-cart-page-qty]');
     var stepNextButton  = event.target.closest('[data-step-next]');
     var stepBackButton  = event.target.closest('[data-step-back]');
+    var paymentCard     = event.target.closest('.morganics-payment-method');
+
+    if (paymentCard && !paymentCard.classList.contains('is-disabled')) {
+      var paymentInput = paymentCard.querySelector('[data-payment-method]');
+      if (paymentInput && !paymentInput.disabled) {
+        paymentInput.checked = true;
+        updatePaymentPanel(paymentInput.closest('[data-payment-panel]'), true);
+      }
+    }
 
     if (openButton) {
       event.preventDefault();
@@ -586,7 +594,7 @@
 
       if (!file) {
         paymentProofStore.delete(panel);
-        if (label) label.textContent = 'No file selected';
+        if (label) label.textContent = 'No receipt selected';
         updatePaymentPanel(panel, true);
         return;
       }
@@ -611,6 +619,7 @@
         reader.readAsDataURL(file);
       }
     }
+
   });
 
   document.addEventListener('input', function (event) {

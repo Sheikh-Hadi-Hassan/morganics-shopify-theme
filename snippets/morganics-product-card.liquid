@@ -82,6 +82,10 @@
         <span class="urdu-line" data-urdu-wrap>{{ product.metafields.custom.urdu_name }}</span>
       {% endif %}
 
+      {% if product.description != blank %}
+        <p class="product-card-summary">{{ product.description | strip_html | truncatewords: 20 }}</p>
+      {% endif %}
+
       {% if product.variants.size > 1 %}
         <div class="product-card-variants-row" data-desktop-only>
           {% for variant in product.variants limit: 2 %}

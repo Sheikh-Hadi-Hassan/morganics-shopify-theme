@@ -149,7 +149,7 @@
     const comparePrice = root.querySelector('[data-product-price] .morganics-price__compare');
     const add = root.querySelector('[data-add-to-cart]');
     const qty = root.querySelector('input[name="quantity"]');
-    const powderCheckbox = root.querySelector('input[name="properties[Powder form required]"]');
+    const powderCheckbox = root.querySelector('[data-powder-toggle]');
 
     const updateVariantUI = (variant) => {
       if (!variant) return;

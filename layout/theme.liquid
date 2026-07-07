@@ -16,6 +16,12 @@
     {{ 'morganics-design-tokens.css' | asset_url | stylesheet_tag }}
     {{ 'morganics-theme.css' | asset_url | stylesheet_tag }}
     {{ 'morganics-header.css' | asset_url | stylesheet_tag }}
+    {% if request.page_type == 'product' %}
+      {{ 'morganics-product-layout.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if request.page_type == 'collection' %}
+      {{ 'morganics-collection-layout.css' | asset_url | stylesheet_tag }}
+    {% endif %}
 
     <style>
       @font-face {
@@ -39,7 +45,7 @@
     {{ content_for_header }}
   </head>
 
-  <body data-template="{{ template.name | escape }}">
+  <body data-template="{{ request.page_type | escape }}">
     <div class="grain" aria-hidden="true"></div>
 
     {% sections 'header-group' %}
@@ -52,7 +58,7 @@
     {% render 'morganics-cart-drawer' %}
     {% render 'morganics-wishlist-drawer' %}
     {% render 'morganics-bottom-app-nav' %}
-    {% if template.name == 'product' %}
+    {% if request.page_type == 'product' %}
       {% render 'morganics-mobile-product-bar' %}
     {% endif %}
 

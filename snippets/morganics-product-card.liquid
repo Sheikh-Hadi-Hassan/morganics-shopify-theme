@@ -86,15 +86,65 @@
         <p class="product-card-summary">{{ product.description | strip_html | truncatewords: 20 }}</p>
       {% endif %}
 
-      {% if product.variants.size > 1 %}
+      {% liquid
+        assign regular_variant_count = 0
+        for variant in product.variants
+          assign card_variant_is_powder = false
+          for option_value in variant.options
+            assign card_option_key = option_value | strip | downcase
+            if card_option_key == 'powder'
+              assign card_variant_is_powder = true
+            endif
+          endfor
+          assign card_variant_title_downcase = variant.title | downcase
+          if card_variant_title_downcase contains 'powder'
+            assign card_variant_is_powder = true
+          endif
+          unless card_variant_is_powder
+            assign regular_variant_count = regular_variant_count | plus: 1
+          endunless
+        endfor
+      %}
+
+      {% if regular_variant_count > 1 %}
         <div class="product-card-variants-row" data-desktop-only>
-          {% for variant in product.variants limit: 2 %}
-            <span class="variant-item-pill">{{ variant.title }} {{ variant.price | money }}</span>
-            {% unless forloop.last %}<span class="variant-separator">•</span>{% endunless %}
+          {% assign displayed_regular_variant_count = 0 %}
+          {% for variant in product.variants %}
+            {% liquid
+              assign card_variant_is_powder = false
+              assign card_variant_label = ''
+              for option_value in variant.options
+                assign card_option_key = option_value | strip | downcase
+                if card_option_key == 'powder'
+                  assign card_variant_is_powder = true
+                elsif card_option_key == 'regular'
+                  continue
+                else
+                  if card_variant_label != blank
+                    assign card_variant_label = card_variant_label | append: ' / '
+                  endif
+                  assign card_variant_label = card_variant_label | append: option_value
+                endif
+              endfor
+              assign card_variant_title_downcase = variant.title | downcase
+              if card_variant_title_downcase contains 'powder'
+                assign card_variant_is_powder = true
+              endif
+              if card_variant_label == blank
+                assign card_variant_label = variant.title | replace: ' / Regular', '' | replace: ' / Powder', '' | replace: 'Regular / ', '' | replace: 'Powder / ', '' | replace: ' - Regular', '' | replace: ' - Powder', ''
+              endif
+            %}
+            {% unless card_variant_is_powder %}
+              {% if displayed_regular_variant_count < 2 %}
+                {% if displayed_regular_variant_count > 0 %}<span class="variant-separator">•</span>{% endif %}
+                <span class="variant-item-pill">{{ card_variant_label }} {{ variant.price | money }}</span>
+                {% assign displayed_regular_variant_count = displayed_regular_variant_count | plus: 1 %}
+              {% endif %}
+            {% endunless %}
           {% endfor %}
-          {% if product.variants.size > 2 %}
+          {% if regular_variant_count > displayed_regular_variant_count %}
             <span class="variant-separator">•</span>
-            <span class="variant-more-count">+{{ product.variants.size | minus: 2 }} more</span>
+            <span class="variant-more-count">+{{ regular_variant_count | minus: displayed_regular_variant_count }} more</span>
           {% endif %}
         </div>
       {% endif %}

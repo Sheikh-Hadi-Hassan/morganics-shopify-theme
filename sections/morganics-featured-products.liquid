@@ -1,4 +1,20 @@
-<section class="section featured-products-section" id="featured" data-journey-id="popular-products" data-homepage-products-section>
+{% liquid
+  assign section_anchor = section.settings.section_anchor | default: section.id | handleize
+  assign section_collection = section.settings.collection
+  assign source_products = blank
+  if section.settings.products != blank
+    assign source_products = section.settings.products
+  elsif section_collection != blank and section_collection.products.size > 0
+    assign source_products = section_collection.products
+  elsif collections.all.products.size > 0
+    assign source_products = collections.all.products
+  endif
+  if section.settings.product_order == 'newest' and source_products != blank
+    assign source_products = source_products | sort: 'created_at' | reverse
+  endif
+%}
+
+<section class="section featured-products-section morganics-product-showcase" id="{{ section_anchor }}" data-journey-id="{{ section_anchor }}" data-homepage-products-section>
   <div class="section-head reveal">
     <span class="eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
@@ -12,16 +28,8 @@
     class="product-grid morganics-product-grid mrg-product-grid mrg-product-grid--featured"
     data-view="grid"
   >
-    {% if section.settings.products != blank %}
-      {% for product in section.settings.products limit: section.settings.limit %}
-        {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
-      {% endfor %}
-    {% elsif section.settings.collection != blank and section.settings.collection.products.size > 0 %}
-      {% for product in section.settings.collection.products limit: section.settings.limit %}
-        {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
-      {% endfor %}
-    {% elsif collections.all.products.size > 0 %}
-      {% for product in collections.all.products limit: section.settings.limit %}
+    {% if source_products != blank %}
+      {% for product in source_products limit: section.settings.limit %}
         {% render 'morganics-product-card', product: product, show_quick_add: section.settings.show_quick_add %}
       {% endfor %}
     {% else %}
@@ -70,11 +78,22 @@
 {
   "name": "Morganics featured",
   "settings": [
+    { "type": "text", "id": "section_anchor", "label": "Section anchor", "default": "featured" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured Products" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Popular Morganics essentials" },
     { "type": "textarea", "id": "text", "label": "Text", "default": "Quick picks for daily use, thoughtful gifting and wellness routines." },
     { "type": "product_list", "id": "products", "label": "Shopify products" },
     { "type": "collection", "id": "collection", "label": "Fallback Shopify collection" },
+    {
+      "type": "select",
+      "id": "product_order",
+      "label": "Product order",
+      "default": "manual",
+      "options": [
+        { "value": "manual", "label": "Manual / collection order" },
+        { "value": "newest", "label": "Newest first" }
+      ]
+    },
     { "type": "range", "id": "limit", "label": "Product limit", "min": 2, "max": 12, "step": 1, "default": 9 },
     { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add", "default": true },
     { "type": "checkbox", "id": "show_toolbar", "label": "Show toolbar (search, sort, view toggle)", "default": false },

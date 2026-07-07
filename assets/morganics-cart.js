@@ -1,4 +1,7 @@
 (function () {
+  function initMorganicsCart() {
+  if (window.MorganicsCart && window.MorganicsCart.__initialized) return;
+
   var drawer = document.querySelector('[data-cart-drawer]');
   var backdrop = document.querySelector('[data-cart-backdrop]');
   var body = document.querySelector('[data-cart-drawer-body]');
@@ -6,7 +9,9 @@
   var countNodes = document.querySelectorAll('[data-cart-count]');
   var checkoutButtons = document.querySelectorAll('[data-cart-checkout]');
   var paymentProofStore = new WeakMap();
+  var paymentProofErrorStore = new WeakMap();
   var COD_LIMIT_CENTS = 450000;
+  var PAYMENT_PROOF_MAX_BYTES = 2000000;
   var currentCartState = null;
 
   if (!drawer || !body) return;
@@ -139,6 +144,14 @@
     return method ? method.value : 'Cash on Delivery';
   }
 
+  function paymentProviderCode(method) {
+    return method && method.dataset.paymentProvider ? method.dataset.paymentProvider : 'cod';
+  }
+
+  function paymentKind(method) {
+    return method && method.dataset.paymentKind ? method.dataset.paymentKind : 'cod';
+  }
+
   function paymentProof(panel) {
     return paymentProofStore.get(panel) || null;
   }
@@ -169,6 +182,7 @@
     }
 
     if (!isOnline) return '';
+    if (paymentProofErrorStore.has(panel)) return paymentProofErrorStore.get(panel);
     if (!paymentProof(panel)) return showSoftMessage ? 'Please upload payment receipt before checkout.' : '';
     return '';
   }
@@ -225,20 +239,12 @@
     };
   }
 
-  function savePaymentSelection(panel) {
-    var method = selectedPayment(panel);
-    var proof = serializeProof(panel);
-    var reference = paymentReference(panel);
-    var methodName = paymentProviderName(method);
+  function persistPaymentChoice(method) {
+    if (!method) return Promise.resolve();
 
-    try {
-      window.localStorage.setItem('morganics_payment_selection', JSON.stringify({
-        paymentMethod: methodName,
-        transactionReference: reference,
-        proof: proof,
-        paymentStatus: 'Pending Verification'
-      }));
-    } catch (error) {}
+    var methodName = paymentProviderName(method);
+    var kind = paymentKind(method);
+    var provider = paymentProviderCode(method);
 
     return fetch('/cart/update.js', {
       method: 'POST',
@@ -249,12 +255,122 @@
       body: JSON.stringify({
         attributes: {
           'Selected Payment Method': methodName,
-          'Transaction Reference': reference,
-          'Payment Proof Upload': proof.name || '',
-          'Payment Status': method && method.dataset.paymentKind === 'online' ? 'Pending Verification' : 'COD Pending'
+          'Payment Gateway Selected In Cart': methodName,
+          'Shopify Checkout Gateway To Select': methodName,
+          'Payment Provider': provider,
+          'Payment Type': kind
         }
       })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Payment method was not saved to Shopify cart.');
+      return response.json();
     });
+  }
+
+  function savePaymentSelection(panel) {
+    var method = selectedPayment(panel);
+    var proof = serializeProof(panel);
+    var reference = paymentReference(panel);
+    var methodName = paymentProviderName(method);
+    var kind = paymentKind(method);
+    var provider = paymentProviderCode(method);
+    var isOnline = kind === 'online';
+    var paymentStatus = isOnline ? 'Pending Verification' : 'COD Pending';
+    var receiptStatus = isOnline && proof.name ? 'Receipt provided' : (isOnline ? 'Receipt missing' : 'Not required for COD');
+    var savedAt = new Date().toISOString();
+    var verificationSummary = [
+      'Method: ' + methodName,
+      'Provider: ' + provider,
+      'Status: ' + paymentStatus,
+      'Reference: ' + (reference || 'Not provided'),
+      'Receipt: ' + (proof.name || receiptStatus)
+    ].join(' | ');
+    var orderNote = [
+      'Morganics cart payment selection',
+      verificationSummary,
+      isOnline ? 'Customer must select the matching manual payment method in Shopify checkout.' : 'Customer selected Cash on Delivery before checkout.'
+    ].join('\n');
+    var attributes = {
+      'Selected Payment Method': methodName,
+      'Payment Gateway Selected In Cart': methodName,
+      'Shopify Checkout Gateway To Select': methodName,
+      'Payment Provider': provider,
+      'Payment Type': kind,
+      'Transaction Reference': reference,
+      'Payment Proof Upload': proof.name || '',
+      'Payment Proof File Type': proof.type || '',
+      'Payment Proof File Size': proof.size ? String(proof.size) : '',
+      'Payment Proof Captured At': proof.uploadedAt || '',
+      'Payment Proof Storage': proof.name ? 'Filename saved with order; image upload requires a Shopify app or upload endpoint.' : '',
+      'Payment Status': paymentStatus,
+      'Payment Receipt Status': receiptStatus,
+      'Admin Verification': isOnline ? 'Required before dispatch' : 'Confirm cash collection on delivery',
+      'Courier Payment Instruction': isOnline ? 'Prepaid - verify receipt before dispatch' : 'Collect cash on delivery',
+      'PostEx Payment Status': paymentStatus,
+      'Payment Record Saved At': savedAt,
+      'Payment Verification Summary': verificationSummary
+    };
+
+    try {
+      window.localStorage.setItem('morganics_payment_selection', JSON.stringify({
+        paymentMethod: methodName,
+        paymentKind: kind,
+        paymentProvider: provider,
+        transactionReference: reference,
+        proof: proof,
+        paymentStatus: paymentStatus,
+        receiptStatus: receiptStatus,
+        savedAt: savedAt
+      }));
+    } catch (error) {}
+
+    return fetch('/cart/update.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        note: orderNote,
+        attributes: attributes
+      })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Payment details were not saved to Shopify cart.');
+      return response.json();
+    });
+  }
+
+  function copyText(value, button) {
+    if (!value) return;
+    var done = function () {
+      if (!button) return;
+      var original = button.dataset.copyOriginal || button.textContent;
+      button.dataset.copyOriginal = original;
+      button.textContent = 'Copied';
+      button.classList.add('is-copied');
+      window.setTimeout(function () {
+        button.textContent = original;
+        button.classList.remove('is-copied');
+      }, 1400);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(done).catch(function () {});
+      return;
+    }
+
+    var input = document.createElement('textarea');
+    input.value = value;
+    input.setAttribute('readonly', '');
+    input.style.position = 'fixed';
+    input.style.top = '-999px';
+    document.body.appendChild(input);
+    input.select();
+    try {
+      document.execCommand('copy');
+      done();
+    } catch (error) {}
+    document.body.removeChild(input);
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -514,12 +630,19 @@
     var stepNextButton  = event.target.closest('[data-step-next]');
     var stepBackButton  = event.target.closest('[data-step-back]');
     var paymentCard     = event.target.closest('.morganics-payment-method');
+    var copyButton      = event.target.closest('[data-copy-value]');
+
+    if (copyButton) {
+      event.preventDefault();
+      copyText(copyButton.dataset.copyValue, copyButton);
+    }
 
     if (paymentCard && !paymentCard.classList.contains('is-disabled')) {
       var paymentInput = paymentCard.querySelector('[data-payment-method]');
       if (paymentInput && !paymentInput.disabled) {
         paymentInput.checked = true;
         updatePaymentPanel(paymentInput.closest('[data-payment-panel]'), true);
+        persistPaymentChoice(paymentInput).catch(function () {});
       }
     }
 
@@ -581,10 +704,12 @@
 
     if (method) {
       updatePaymentPanel(method.closest('[data-payment-panel]'), true);
+      persistPaymentChoice(method).catch(function () {});
     }
 
     if (chooser) {
       onChooserChange(event);
+      persistPaymentChoice(chooser).catch(function () {});
     }
 
     if (proofInput) {
@@ -594,7 +719,17 @@
 
       if (!file) {
         paymentProofStore.delete(panel);
+        paymentProofErrorStore.delete(panel);
         if (label) label.textContent = 'No receipt selected';
+        updatePaymentPanel(panel, true);
+        return;
+      }
+
+      if (file.size > PAYMENT_PROOF_MAX_BYTES) {
+        paymentProofStore.delete(panel);
+        paymentProofErrorStore.set(panel, 'Receipt file must be 2 MB or smaller.');
+        proofInput.value = '';
+        if (label) label.textContent = 'File is larger than 2 MB';
         updatePaymentPanel(panel, true);
         return;
       }
@@ -606,11 +741,12 @@
         uploadedAt: new Date().toISOString()
       };
 
+      paymentProofErrorStore.delete(panel);
       if (label) label.textContent = file.name;
       paymentProofStore.set(panel, proofMeta);
       updatePaymentPanel(panel, true);
 
-      if (file.size <= 2000000 && window.FileReader) {
+      if (window.FileReader) {
         var reader = new FileReader();
         reader.onload = function () {
           proofMeta.dataUrl = reader.result;
@@ -640,9 +776,12 @@
       if (checkoutButton) checkoutButton.disabled = true;
 
       savePaymentSelection(panel)
-        .catch(function () {})
-        .finally(function () {
+        .then(function () {
           window.location.href = '/checkout';
+        })
+        .catch(function () {
+          if (checkoutButton) checkoutButton.disabled = false;
+          setPaymentError(panel, 'Payment details could not be saved. Please try checkout again.');
         });
       return;
     }
@@ -698,9 +837,17 @@
   goToStep(1); // ensure correct initial state
 
   window.MorganicsCart = {
+    __initialized: true,
     open: openCart,
     close: closeCart,
     refresh: refreshCart,
     goToStep: goToStep
   };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMorganicsCart, { once: true });
+  } else {
+    initMorganicsCart();
+  }
 })();

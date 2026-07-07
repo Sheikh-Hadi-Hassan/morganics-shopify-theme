@@ -2,23 +2,661 @@
   "sections": {
     "hero": {
       "type": "morganics-hero",
-      "settings": {}
+      "blocks": {
+        "slide_nature": {
+          "type": "slide",
+          "settings": {
+            "enabled": true,
+            "slide_handle": "nature",
+            "title_line_1": "Rooted in",
+            "title_line_2": "Nature",
+            "description": "Premium nuts, dry fruits and wellness essentials for a healthier tomorrow",
+            "primary_cta_label": "",
+            "primary_cta_link": "shopify://collections/all",
+            "secondary_cta_label": "",
+            "secondary_cta_link": "shopify://pages/ingredient-guide",
+            "duration": 7,
+            "overlay_strength": 30,
+            "pouch_alt": "Morganics premium organic pouch"
+          }
+        },
+        "slide_nourishment": {
+          "type": "slide",
+          "settings": {
+            "enabled": true,
+            "slide_handle": "nourishment",
+            "title_line_1": "Everyday",
+            "title_line_2": "Nourishment",
+            "description": "Thoughtfully sourced dry fruits and pantry staples for every family routine",
+            "primary_cta_label": "",
+            "primary_cta_link": "shopify://collections/nuts-dry-fruits",
+            "secondary_cta_label": "",
+            "secondary_cta_link": "shopify://collections/all",
+            "duration": 7,
+            "overlay_strength": 35,
+            "pouch_alt": "Morganics dry fruit collection pouch"
+          }
+        },
+        "slide_wellness": {
+          "type": "slide",
+          "settings": {
+            "enabled": true,
+            "slide_handle": "wellness",
+            "title_line_1": "Daily",
+            "title_line_2": "Wellness",
+            "description": "Seeds, botanicals and traditional pantry ingredients, selected with modern care",
+            "primary_cta_label": "",
+            "primary_cta_link": "shopify://collections/roots-adaptogens",
+            "secondary_cta_label": "",
+            "secondary_cta_link": "shopify://pages/contact",
+            "duration": 8,
+            "overlay_strength": 35,
+            "pouch_alt": "Morganics wellness essentials pouch"
+          }
+        },
+        "nature_almond": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "almond",
+            "product": "badam-abdul-wahidi",
+            "alt_text": "Badam Sabat",
+            "priority": 10
+          }
+        },
+        "nature_pistachio": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "pistachio",
+            "product": "pista-maghaz",
+            "alt_text": "Pista Maghaz",
+            "priority": 9
+          }
+        },
+        "nature_cashew": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "cashew",
+            "product": "kajo-sada",
+            "alt_text": "Kajo Sada",
+            "priority": 8
+          }
+        },
+        "nature_fig": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "fig",
+            "product": "anjeer",
+            "alt_text": "Anjeer",
+            "priority": 7
+          }
+        },
+        "nature_date": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "date",
+            "product": "ajwa-dates",
+            "alt_text": "Ajwa Khajoor",
+            "priority": 6
+          }
+        },
+        "nature_black_raisin": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "black-raisin",
+            "product": "munaqqa",
+            "alt_text": "Black Munaqqa",
+            "priority": 5
+          }
+        },
+        "nature_golden_raisin": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "golden-raisin",
+            "product": "sogi-small-kishmish-mewa",
+            "alt_text": "Golden Raisin",
+            "priority": 4
+          }
+        },
+        "nature_almond_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "almond",
+            "product": "american-almonds",
+            "alt_text": "American Almond",
+            "priority": 6
+          }
+        },
+        "nature_pistachio_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "pistachio",
+            "product": "pista-maghaz",
+            "alt_text": "Pistachio",
+            "priority": 5
+          }
+        },
+        "nature_cashew_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "cashew",
+            "product": "kajo-roasted",
+            "alt_text": "Roasted Cashew",
+            "priority": 4
+          }
+        },
+        "nature_fig_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "fig",
+            "product": "anjeer",
+            "alt_text": "Fig",
+            "priority": 3
+          }
+        },
+        "nature_date_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nature",
+            "fallback_asset": "date",
+            "product": "mabroom-dates",
+            "alt_text": "Mabroom Date",
+            "priority": 3
+          }
+        },
+        "nourishment_date": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "date",
+            "product": "ajwa-dates",
+            "alt_text": "Ajwa Khajoor",
+            "priority": 10
+          }
+        },
+        "nourishment_fig": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "fig",
+            "product": "anjeer",
+            "alt_text": "Anjeer",
+            "priority": 9
+          }
+        },
+        "nourishment_golden": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "golden-raisin",
+            "product": "sogi-small-kishmish-mewa",
+            "alt_text": "Golden Raisin",
+            "priority": 8
+          }
+        },
+        "nourishment_black": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "black-raisin",
+            "product": "munaqqa",
+            "alt_text": "Black Munaqqa",
+            "priority": 7
+          }
+        },
+        "nourishment_almond": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "almond",
+            "product": "badam-abdul-wahidi",
+            "alt_text": "Badam Sabat",
+            "priority": 6
+          }
+        },
+        "nourishment_cashew": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "cashew",
+            "product": "kajo-sada",
+            "alt_text": "Kajo Sada",
+            "priority": 5
+          }
+        },
+        "nourishment_pistachio": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "pistachio",
+            "product": "pista-maghaz",
+            "alt_text": "Pista Maghaz",
+            "priority": 8
+          }
+        },
+        "nourishment_almond_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "almond",
+            "product": "american-almonds",
+            "alt_text": "American Almond",
+            "priority": 5
+          }
+        },
+        "nourishment_cashew_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "cashew",
+            "product": "kajo-roasted",
+            "alt_text": "Roasted Cashew",
+            "priority": 4
+          }
+        },
+        "nourishment_fig_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "fig",
+            "product": "anjeer",
+            "alt_text": "Fig",
+            "priority": 4
+          }
+        },
+        "nourishment_date_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "date",
+            "product": "mabroom-dates",
+            "alt_text": "Mabroom Date",
+            "priority": 3
+          }
+        },
+        "nourishment_golden_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "nourishment",
+            "fallback_asset": "golden-raisin",
+            "product": "sogi-small-kishmish-mewa",
+            "alt_text": "Golden Raisin",
+            "priority": 3
+          }
+        },
+        "wellness_pistachio": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "pistachio",
+            "product": "pista-maghaz",
+            "alt_text": "Pista Maghaz",
+            "priority": 10
+          }
+        },
+        "wellness_almond": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "almond",
+            "product": "badam-abdul-wahidi",
+            "alt_text": "Badam Sabat",
+            "priority": 9
+          }
+        },
+        "wellness_cashew": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "cashew",
+            "product": "kajo-sada",
+            "alt_text": "Kajo Sada",
+            "priority": 8
+          }
+        },
+        "wellness_fig": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "fig",
+            "product": "anjeer",
+            "alt_text": "Anjeer",
+            "priority": 7
+          }
+        },
+        "wellness_date": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "date",
+            "product": "ajwa-dates",
+            "alt_text": "Ajwa Khajoor",
+            "priority": 6
+          }
+        },
+        "wellness_black": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "black-raisin",
+            "product": "munaqqa",
+            "alt_text": "Black Munaqqa",
+            "priority": 7
+          }
+        },
+        "wellness_golden": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "golden-raisin",
+            "product": "sogi-small-kishmish-mewa",
+            "alt_text": "Golden Raisin",
+            "priority": 6
+          }
+        },
+        "wellness_pistachio_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "pistachio",
+            "product": "pista-maghaz",
+            "alt_text": "Pistachio",
+            "priority": 5
+          }
+        },
+        "wellness_almond_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "almond",
+            "product": "american-almonds",
+            "alt_text": "American Almond",
+            "priority": 5
+          }
+        },
+        "wellness_cashew_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "cashew",
+            "product": "kajo-roasted",
+            "alt_text": "Roasted Cashew",
+            "priority": 4
+          }
+        },
+        "wellness_fig_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "fig",
+            "product": "anjeer",
+            "alt_text": "Fig",
+            "priority": 4
+          }
+        },
+        "wellness_date_2": {
+          "type": "ingredient",
+          "settings": {
+            "slide_handle": "wellness",
+            "fallback_asset": "date",
+            "product": "mabroom-dates",
+            "alt_text": "Mabroom Date",
+            "priority": 3
+          }
+        },
+        "nature_nuts": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "nature",
+            "label": "Premium Nuts",
+            "collection": "nuts-dry-fruits",
+            "category_icon": "nuts"
+          }
+        },
+        "nature_dry_fruits": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "nature",
+            "label": "Dry Fruits",
+            "collection": "nuts-dry-fruits",
+            "category_icon": "dry-fruits"
+          }
+        },
+        "nature_seeds": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "nature",
+            "label": "Seeds & Grains",
+            "collection": "seeds-grains",
+            "category_icon": "seeds"
+          }
+        },
+        "nourishment_dry_fruits": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "nourishment",
+            "label": "Dry Fruits",
+            "collection": "nuts-dry-fruits",
+            "category_icon": "dry-fruits"
+          }
+        },
+        "nourishment_nuts": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "nourishment",
+            "label": "Premium Nuts",
+            "collection": "nuts-dry-fruits",
+            "category_icon": "nuts"
+          }
+        },
+        "nourishment_sweeteners": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "nourishment",
+            "label": "Sweeteners",
+            "collection": "natural-sweetners-salts",
+            "category_icon": "sweeteners"
+          }
+        },
+        "wellness_roots": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "wellness",
+            "label": "Roots & Adaptogens",
+            "collection": "roots-adaptogens",
+            "category_icon": "roots"
+          }
+        },
+        "wellness_herbs": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "wellness",
+            "label": "Herbs & Botanicals",
+            "collection": "herbs-botanicals",
+            "category_icon": "herbs"
+          }
+        },
+        "wellness_oils": {
+          "type": "quicklink",
+          "settings": {
+            "slide_handle": "wellness",
+            "label": "Oils & Specialties",
+            "collection": "oil-gums-specialties",
+            "category_icon": "oils"
+          }
+        }
+      },
+      "block_order": [
+        "slide_nature",
+        "slide_nourishment",
+        "slide_wellness",
+        "nature_almond",
+        "nature_pistachio",
+        "nature_cashew",
+        "nature_fig",
+        "nature_date",
+        "nature_black_raisin",
+        "nature_golden_raisin",
+        "nature_almond_2",
+        "nature_pistachio_2",
+        "nature_cashew_2",
+        "nature_fig_2",
+        "nature_date_2",
+        "nourishment_date",
+        "nourishment_fig",
+        "nourishment_golden",
+        "nourishment_black",
+        "nourishment_almond",
+        "nourishment_cashew",
+        "nourishment_pistachio",
+        "nourishment_almond_2",
+        "nourishment_cashew_2",
+        "nourishment_fig_2",
+        "nourishment_date_2",
+        "nourishment_golden_2",
+        "wellness_pistachio",
+        "wellness_almond",
+        "wellness_cashew",
+        "wellness_fig",
+        "wellness_date",
+        "wellness_black",
+        "wellness_golden",
+        "wellness_pistachio_2",
+        "wellness_almond_2",
+        "wellness_cashew_2",
+        "wellness_fig_2",
+        "wellness_date_2",
+        "nature_nuts",
+        "nature_dry_fruits",
+        "nature_seeds",
+        "nourishment_dry_fruits",
+        "nourishment_nuts",
+        "nourishment_sweeteners",
+        "wellness_roots",
+        "wellness_herbs",
+        "wellness_oils"
+      ],
+      "settings": {
+        "accessibility_label": "Morganics featured collections",
+        "enable_autoplay": true,
+        "default_duration": 7,
+        "transition_speed": 600,
+        "transition_style": "soft",
+        "pause_on_hover": true,
+        "pause_on_focus": true,
+        "enable_parallax": true,
+        "enable_floating_animation": true,
+        "show_tagline": true,
+        "show_ctas": false,
+        "show_controls": true,
+        "reduce_motion": false,
+        "stage_max_width": 980,
+        "stage_safe_margin": 28,
+        "ingredient_safe_margin": 36,
+        "enable_floating_ingredients": true,
+        "enable_ingredient_burst_glow": true,
+        "desktop_ingredient_count": 12,
+        "tablet_ingredient_count": 8,
+        "mobile_ingredient_count": 4,
+        "ingredient_zone_desktop_left": 15,
+        "ingredient_zone_desktop_right": 18,
+        "ingredient_zone_desktop_top": 4,
+        "ingredient_zone_desktop_bottom": 8,
+        "ingredient_zone_mobile_left": 4,
+        "ingredient_zone_mobile_right": 4,
+        "ingredient_zone_mobile_top": 14,
+        "ingredient_zone_mobile_bottom": 18,
+        "ingredient_global_scale": 100,
+        "ingredient_blast_spread": 100,
+        "enable_ingredient_jitter": true
+      }
     },
     "marquee": {
       "type": "morganics-marquee",
       "blocks": {
-        "dry_fruits": { "type": "item", "settings": { "text": "Dry Fruits" } },
-        "nuts": { "type": "item", "settings": { "text": "Nuts" } },
-        "seeds": { "type": "item", "settings": { "text": "Seeds" } },
-        "herbs": { "type": "item", "settings": { "text": "Herbs" } },
-        "botanicals": { "type": "item", "settings": { "text": "Botanicals" } },
-        "honey": { "type": "item", "settings": { "text": "Honey" } },
-        "wellness": { "type": "item", "settings": { "text": "Wellness Blends" } },
-        "snacks": { "type": "item", "settings": { "text": "Premium Snacks" } },
-        "gums": { "type": "item", "settings": { "text": "Gums" } },
-        "sweeteners": { "type": "item", "settings": { "text": "Natural Sweeteners" } }
+        "dry_fruits": {
+          "type": "item",
+          "settings": {
+            "text": "Dry Fruits"
+          }
+        },
+        "nuts": {
+          "type": "item",
+          "settings": {
+            "text": "Nuts"
+          }
+        },
+        "seeds": {
+          "type": "item",
+          "settings": {
+            "text": "Seeds"
+          }
+        },
+        "herbs": {
+          "type": "item",
+          "settings": {
+            "text": "Herbs"
+          }
+        },
+        "botanicals": {
+          "type": "item",
+          "settings": {
+            "text": "Botanicals"
+          }
+        },
+        "honey": {
+          "type": "item",
+          "settings": {
+            "text": "Honey"
+          }
+        },
+        "wellness": {
+          "type": "item",
+          "settings": {
+            "text": "Wellness Blends"
+          }
+        },
+        "snacks": {
+          "type": "item",
+          "settings": {
+            "text": "Premium Snacks"
+          }
+        },
+        "gums": {
+          "type": "item",
+          "settings": {
+            "text": "Gums"
+          }
+        },
+        "sweeteners": {
+          "type": "item",
+          "settings": {
+            "text": "Natural Sweeteners"
+          }
+        }
       },
-      "block_order": ["dry_fruits", "nuts", "seeds", "herbs", "botanicals", "honey", "wellness", "snacks", "gums", "sweeteners"],
+      "block_order": [
+        "dry_fruits",
+        "nuts",
+        "seeds",
+        "herbs",
+        "botanicals",
+        "honey",
+        "wellness",
+        "snacks",
+        "gums",
+        "sweeteners"
+      ],
       "settings": {}
     },
     "categories": {
@@ -169,7 +807,12 @@
           }
         }
       },
-      "block_order": ["cod", "ingredients", "packed", "sourcing"],
+      "block_order": [
+        "cod",
+        "ingredients",
+        "packed",
+        "sourcing"
+      ],
       "settings": {}
     },
     "routine": {
@@ -179,7 +822,41 @@
     "featured": {
       "type": "morganics-featured-products",
       "settings": {
-        "limit": 9
+        "section_anchor": "featured",
+        "eyebrow": "Featured Products",
+        "heading": "Seasonal pantry favorites",
+        "text": "Eight timely dry-fruit, nut and pantry picks selected for family tables, gifting and daily snacking.",
+        "products": [
+          "badam-abdul-wahidi",
+          "pista-maghaz",
+          "kajo-roasted",
+          "chia-seeds",
+          "pumpkin-seeds",
+          "quinoa",
+          "rosemary-leaves",
+          "bheray"
+        ],
+        "collection": "nuts-dry-fruits",
+        "product_order": "manual",
+        "limit": 8,
+        "show_quick_add": true,
+        "button_label": "Shop seasonal picks",
+        "button_link": "shopify://collections/nuts-dry-fruits"
+      }
+    },
+    "new_arrivals": {
+      "type": "morganics-featured-products",
+      "settings": {
+        "section_anchor": "new-arrivals",
+        "eyebrow": "New Arrivals",
+        "heading": "Freshly added to Morganics",
+        "text": "Recently added pantry essentials and wellness ingredients, ready for quick discovery.",
+        "collection": "all",
+        "product_order": "newest",
+        "limit": 8,
+        "show_quick_add": true,
+        "button_label": "View all new arrivals",
+        "button_link": "shopify://collections/all"
       }
     },
     "stories": {
@@ -206,6 +883,7 @@
     "promises",
     "routine",
     "featured",
+    "new_arrivals",
     "stories",
     "rituals",
     "ingredients",

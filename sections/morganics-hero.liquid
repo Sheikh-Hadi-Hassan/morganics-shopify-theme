@@ -1,228 +1,259 @@
 {{ 'morganics-hero.css' | asset_url | stylesheet_tag }}
 
 {% liquid
-  assign nuts_link = section.settings.nuts_link | default: routes.all_products_collection_url
-  assign dry_fruits_link = section.settings.dry_fruits_link | default: routes.all_products_collection_url
-  assign seeds_link = section.settings.seeds_link | default: routes.all_products_collection_url
-
-  assign almond_product = all_products['badam-abdul-wahidi']
-  assign pistachio_product = all_products['pista-maghaz']
-  assign cashew_product = all_products['kajo-sada']
-  assign fig_product = all_products['anjeer']
-  assign date_product = all_products['ajwa-dates']
-  assign black_raisin_product = all_products['munaqqa']
-  assign golden_raisin_product = all_products['sogi-small-kishmish-mewa']
+  assign enabled_slide_count = 0
+  for block in section.blocks
+    if block.type == 'slide' and block.settings.enabled
+      assign enabled_slide_count = enabled_slide_count | plus: 1
+    endif
+  endfor
 %}
 
-<section class="morganics-hero hero-v3" id="hero" aria-label="Morganics — Rooted in Nature" data-morganics-hero="{{ section.id }}">
-  <div class="hero-bg" aria-hidden="true">
-    <img src="{{ 'bg-gradient.png' | asset_url }}" alt="" class="bg-img" width="1600" height="900" loading="eager" fetchpriority="high">
-    <div class="bg-vignette"></div>
-    <div class="bg-tint"></div>
+<section
+  class="morganics-hero hero-v3 morganics-hero-slider morganics-hero-slider--{{ section.settings.transition_style }}"
+  id="MorganicsHero-{{ section.id }}"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+  data-morganics-hero-slider="{{ section.id }}"
+  data-hero-slider
+  data-pause-hover="{{ section.settings.pause_on_hover }}"
+  data-burst-glow="{{ section.settings.enable_ingredient_burst_glow }}"
+  style="--hero-stage-max: {{ section.settings.stage_max_width }}px; --ingredient-safe: {{ section.settings.ingredient_safe_margin }}px; --ingredient-zone-desktop-top: {{ section.settings.ingredient_zone_desktop_top }}%; --ingredient-zone-desktop-right: {{ section.settings.ingredient_zone_desktop_right }}%; --ingredient-zone-desktop-bottom: {{ section.settings.ingredient_zone_desktop_bottom }}%; --ingredient-zone-desktop-left: {{ section.settings.ingredient_zone_desktop_left }}%; --ingredient-zone-mobile-top: {{ section.settings.ingredient_zone_mobile_top }}%; --ingredient-zone-mobile-right: {{ section.settings.ingredient_zone_mobile_right }}%; --ingredient-zone-mobile-bottom: {{ section.settings.ingredient_zone_mobile_bottom }}%; --ingredient-zone-mobile-left: {{ section.settings.ingredient_zone_mobile_left }}%; --slide-overlay-default: {{ section.settings.background_overlay_strength | divided_by: 100.0 }}; --hero-transition-ms: {{ section.settings.transition_speed }}ms;"
+>
+  <div class="mhs-slides" aria-live="off">
+    {% assign rendered_slide_index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == 'slide' and block.settings.enabled %}
+        {% assign slide_handle = block.settings.slide_handle | handleize %}
+        {% if slide_handle == blank %}
+          {% assign slide_handle = 'slide-' | append: block.id %}
+        {% endif %}
+        {% assign rendered_slide_index = rendered_slide_index | plus: 1 %}
+        {% assign is_active = false %}
+        {% if rendered_slide_index == 1 %}{% assign is_active = true %}{% endif %}
+
+        <article
+          class="mhs-slide{% if is_active %} is-active{% endif %}"
+          data-mhs-slide
+          data-slide-index="{{ rendered_slide_index | minus: 1 }}"
+          data-slide-handle="{{ slide_handle }}"
+          data-duration="{{ block.settings.duration }}"
+          data-block-id="{{ block.id }}"
+          aria-hidden="{% if is_active %}false{% else %}true{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="mhs-slide-background" aria-hidden="true">
+            {% if block.settings.background_image != blank %}
+              {{ block.settings.background_image | image_url: width: 2400 | image_tag: class: 'mhs-background-image', loading: 'eager', widths: '960, 1440, 1920, 2400', sizes: '100vw' }}
+            {% else %}
+              <img class="mhs-background-image" src="{{ 'morganics-morganics-hero-bg-gradient.png' | asset_url }}" alt="" width="1672" height="941" loading="eager">
+            {% endif %}
+            <span class="mhs-background-overlay" style="--slide-overlay: {{ block.settings.overlay_strength | divided_by: 100.0 }};"></span>
+          </div>
+
+          <div class="mhs-stage-layer">
+            <div class="mhs-stage" data-mhs-stage>
+              <div class="mhs-stage-safe">
+                <div class="mhs-product-stack" data-product-stack>
+                  {% if block.settings.stone_image != blank %}
+                    {{ block.settings.stone_image | image_url: width: 1600 | image_tag: class: 'mhs-product-layer mhs-stone', loading: 'eager', alt: '' }}
+                  {% else %}
+                    <img class="mhs-product-layer mhs-stone" src="{{ 'morganics-morganics-hero-stone.png' | asset_url }}" alt="" width="2576" height="1374" loading="eager">
+                  {% endif %}
+                  <span class="mhs-contact-shadow" aria-hidden="true"></span>
+                  <span class="mhs-burst-glow" aria-hidden="true"></span>
+                  {% if block.settings.pouch_image != blank %}
+                    {{ block.settings.pouch_image | image_url: width: 1100 | image_tag: class: 'mhs-product-layer mhs-pouch', loading: 'eager', fetchpriority: 'high', alt: block.settings.pouch_alt }}
+                  {% else %}
+                    <img class="mhs-product-layer mhs-pouch" src="{{ 'morganics-morganics-hero-pouch.png' | asset_url }}" alt="{{ block.settings.pouch_alt | escape }}" width="1557" height="2274" loading="eager" fetchpriority="high">
+                  {% endif %}
+                  {% if block.settings.pile_image != blank %}
+                    {{ block.settings.pile_image | image_url: width: 1300 | image_tag: class: 'mhs-product-layer mhs-pile', loading: 'eager', alt: '' }}
+                  {% else %}
+                    <img class="mhs-product-layer mhs-pile" src="{{ 'morganics-morganics-hero-dryfruit-pile.png' | asset_url }}" alt="" width="1536" height="1024" loading="eager">
+                  {% endif %}
+                  {% if block.settings.foreground_image != blank %}
+                    {{ block.settings.foreground_image | image_url: width: 1200 | image_tag: class: 'mhs-product-layer mhs-foreground', loading: 'eager', alt: '' }}
+                  {% endif %}
+                </div>
+
+                <div class="mhs-floating-field hero-ingredients-safe-zone" data-floating-field>
+                  {% assign ingredient_count = 0 %}
+                  {% for ingredient in section.blocks %}
+                    {% assign ingredient_slide_handle = ingredient.settings.slide_handle | handleize %}
+                    {% if ingredient.type == 'ingredient' and ingredient_slide_handle == slide_handle %}
+                      {% assign ingredient_count = ingredient_count | plus: 1 %}
+                      {% assign ingredient_alt = ingredient.settings.alt_text %}
+                      {% if ingredient_alt == blank and ingredient.settings.product != blank %}
+                        {% assign ingredient_alt = ingredient.settings.product.title %}
+                      {% endif %}
+                      {% if ingredient_alt == blank %}
+                        {% assign ingredient_alt = ingredient.settings.fallback_asset | replace: '-', ' ' | capitalize %}
+                      {% endif %}
+                      {% assign ingredient_link = ingredient.settings.custom_link %}
+                      {% if ingredient_link == blank and ingredient.settings.product != blank %}
+                        {% assign ingredient_link = ingredient.settings.product.url %}
+                      {% endif %}
+                      <button
+                        class="mhs-ingredient"
+                        type="button"
+                        data-mhs-ingredient
+                        data-priority="{{ ingredient.settings.priority }}"
+                        data-title="{{ ingredient_alt | escape }}"
+                        data-link="{{ ingredient_link }}"
+                        data-fallback-asset="{{ ingredient.settings.fallback_asset | escape }}"
+                        data-product-image="{% if ingredient.settings.product.featured_image %}{{ ingredient.settings.product.featured_image | image_url: width: 360 }}{% endif %}"
+                        aria-label="View {{ ingredient_alt | escape }}"
+                        {{ ingredient.shopify_attributes }}
+                      >
+                        {% if ingredient.settings.image != blank %}
+                          {{ ingredient.settings.image | image_url: width: 260 | image_tag: class: 'mhs-ingredient-image', loading: 'eager', alt: ingredient_alt }}
+                        {% else %}
+                          <img class="mhs-ingredient-image" src="{{ ingredient.settings.fallback_asset | append: '.png' | asset_url }}" alt="{{ ingredient_alt | escape }}" width="160" height="160" loading="eager">
+                        {% endif %}
+                      </button>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mhs-overlay-ui">
+            <div class="mhs-copy">
+              <div class="mhs-copy-inner">
+                {% if rendered_slide_index == 1 %}
+                  <h1 class="mhs-title{% if block.settings.title_line_2.size > 8 %} mhs-title--long{% endif %}">
+                    <span class="mhs-title-small">{{ block.settings.title_line_1 | escape }}</span>
+                    <span class="mhs-title-large">{{ block.settings.title_line_2 | escape }}</span>
+                  </h1>
+                {% else %}
+                  <h2 class="mhs-title{% if block.settings.title_line_2.size > 8 %} mhs-title--long{% endif %}">
+                    <span class="mhs-title-small">{{ block.settings.title_line_1 | escape }}</span>
+                    <span class="mhs-title-large">{{ block.settings.title_line_2 | escape }}</span>
+                  </h2>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                  <span class="mhs-rule" aria-hidden="true"></span>
+                  <p class="mhs-description">{{ block.settings.description | escape | newline_to_br }}</p>
+                {% endif %}
+                {% if section.settings.show_ctas %}
+                  {% if block.settings.primary_cta_label != blank or block.settings.secondary_cta_label != blank %}
+                    <div class="mhs-ctas">
+                      {% if block.settings.primary_cta_label != blank %}
+                        <a class="mhs-cta mhs-cta--primary" href="{{ block.settings.primary_cta_link | default: routes.all_products_collection_url }}">{{ block.settings.primary_cta_label | escape }}</a>
+                      {% endif %}
+                      {% if block.settings.secondary_cta_label != blank %}
+                        <a class="mhs-cta mhs-cta--secondary" href="{{ block.settings.secondary_cta_link | default: routes.all_products_collection_url }}">{{ block.settings.secondary_cta_label | escape }}</a>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+
+            {% if section.settings.show_tagline %}
+              <div class="mhs-tagline">
+                <span>{{ block.settings.tagline_small | default: 'Driven by' | escape }}</span>
+                <strong>{{ block.settings.tagline_large | default: 'Wellness' | escape }}</strong>
+              </div>
+            {% endif %}
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
   </div>
 
-  <div class="hero-corner-plants stage-plants hero-plants" aria-hidden="true">
-    <div class="plant-el plant-left" data-px="-18" data-py="8">
-      <img src="{{ 'plant-left.png' | asset_url }}" alt="" class="plant-img" width="420" height="420" loading="eager">
-    </div>
-    <div class="plant-el plant-right" data-px="18" data-py="8">
-      <img src="{{ 'plant-right.png' | asset_url }}" alt="" class="plant-img" width="420" height="420" loading="eager">
-    </div>
-    <div class="plant-el plant-top" data-px="0" data-py="-12">
-      <img src="{{ 'plant-left-top.png' | asset_url }}" alt="" class="plant-img plant-img-top" width="360" height="360" loading="eager">
-    </div>
-    <div class="plant-el plant-rb" data-px="14" data-py="10">
-      <img src="{{ 'plant-right-bottom.png' | asset_url }}" alt="" class="plant-img" width="360" height="360" loading="eager">
-    </div>
+  {% if enabled_slide_count > 1 %}
+    <nav class="mhs-slide-nav mhs-slide-nav--{{ section.settings.desktop_navigator_position }}" aria-label="Choose a hero slide">
+      {% assign nav_index = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'slide' and block.settings.enabled %}
+          {% assign nav_label = block.settings.navigator_title %}
+          {% if nav_label == blank or nav_label == 'Use title line 2' %}
+            {% assign nav_label = block.settings.title_line_2 %}
+          {% endif %}
+          <button
+            class="mhs-slide-nav-card{% if nav_index == 0 %} is-active{% endif %}"
+            type="button"
+            data-mhs-nav="{{ nav_index }}"
+            aria-label="Show {{ nav_label | escape }} slide"
+            aria-current="{% if nav_index == 0 %}true{% else %}false{% endif %}"
+          >
+            <span class="mhs-slide-nav-icon" aria-hidden="true">
+              {% if block.settings.navigator_icon != blank %}
+                {{ block.settings.navigator_icon | image_url: width: 160 | image_tag: loading: 'eager', alt: '' }}
+              {% else %}
+                {% case block.settings.navigator_category_icon %}
+                  {% when 'dry-fruits' %}<img src="{{ 'morganics-category-icons-dry-fruits-icon.png' | asset_url }}" alt="" width="72" height="72">
+                  {% when 'roots' %}<img src="{{ 'morganics-category-icons-roots-adaptogens-icon.png' | asset_url }}" alt="" width="72" height="72">
+                  {% when 'seeds' %}<img src="{{ 'morganics-category-icons-seeds-grains-icon.png' | asset_url }}" alt="" width="72" height="72">
+                  {% when 'herbs' %}<img src="{{ 'morganics-category-icons-herbs-botanicals-icon.png' | asset_url }}" alt="" width="72" height="72">
+                  {% when 'sweeteners' %}<img src="{{ 'morganics-category-icons-natural-sweeteners-icon.png' | asset_url }}" alt="" width="72" height="72">
+                  {% when 'oils' %}<img src="{{ 'morganics-category-icons-oils-gums-specialties-icon.png' | asset_url }}" alt="" width="72" height="72">
+                  {% else %}<img src="{{ 'morganics-category-icons-nuts-icon.png' | asset_url }}" alt="" width="72" height="72">
+                {% endcase %}
+              {% endif %}
+            </span>
+            <span class="mhs-slide-nav-label">{{ nav_label | escape }}</span>
+          </button>
+          {% assign nav_index = nav_index | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </nav>
+  {% endif %}
+
+  <div class="mhs-botanicals" aria-hidden="true">
+    <img class="mhs-botanical mhs-botanical--left" src="{{ 'morganics-morganics-hero-plant-left.png' | asset_url }}" alt="" width="577" height="433" loading="eager">
+    <img class="mhs-botanical mhs-botanical--left-top" src="{{ 'morganics-morganics-hero-plant-left-top.png' | asset_url }}" alt="" width="577" height="433" loading="eager">
+    <img class="mhs-botanical mhs-botanical--right" src="{{ 'morganics-morganics-hero-plant-right.png' | asset_url }}" alt="" width="577" height="433" loading="eager">
+    <img class="mhs-botanical mhs-botanical--right-bottom" src="{{ 'morganics-morganics-hero-plant-right-bottom.png' | asset_url }}" alt="" width="577" height="433" loading="eager">
   </div>
 
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="hero-copy-inner">
-        <h1 class="hero-title">
-          <span class="hero-title-sm">{{ section.settings.headline_small | escape }}</span>
-          <span class="hero-title-lg">{{ section.settings.headline_large | escape }}</span>
-        </h1>
-        <div class="hero-rule"></div>
-        <p class="hero-desc">{{ section.settings.description | escape | newline_to_br }}</p>
-      </div>
+  <aside class="mhs-spotlight" data-mhs-spotlight aria-hidden="true" aria-live="polite">
+    <button class="mhs-spotlight-close" type="button" data-spotlight-close aria-label="Close ingredient details">×</button>
+    <img class="mhs-spotlight-image" data-spotlight-image src="{{ 'almond.png' | asset_url }}" alt="" width="180" height="180">
+    <div>
+      <p class="mhs-spotlight-kicker">Featured ingredient</p>
+      <h3 data-spotlight-title></h3>
+      <a class="mhs-spotlight-link" data-spotlight-link href="{{ routes.all_products_collection_url }}">View product</a>
     </div>
+  </aside>
 
-    <div class="hero-stage">
-      <div class="floating-zone floating-left">
-        <div class="floater f-pistachio" data-px="-14" data-py="-12">
-          <img src="{{ 'pistachio.png' | asset_url }}" alt="" class="fi" width="150" height="150" loading="eager">
-          <button class="hero-hotspot" data-spotlight="pistachio" aria-label="View Pista Maghaz"></button>
-        </div>
-        <div class="floater f-cashew" data-px="-13" data-py="6">
-          <img src="{{ 'cashew.png' | asset_url }}" alt="" class="fi" width="150" height="150" loading="eager">
-          <button class="hero-hotspot" data-spotlight="cashew" aria-label="View Kajo Sada"></button>
-        </div>
-        <div class="floater f-golden-raisin" data-px="-10" data-py="-10">
-          <img src="{{ 'golden-raisin.png' | asset_url }}" alt="" class="fi" width="140" height="140" loading="eager">
-          <button class="hero-hotspot" data-spotlight="golden-raisin" aria-label="View Golden Raisin"></button>
-        </div>
-        <div class="floater f-fig" data-px="-8" data-py="10">
-          <img src="{{ 'fig.png' | asset_url }}" alt="" class="fi" width="145" height="145" loading="eager">
-          <button class="hero-hotspot" data-spotlight="fig" aria-label="View Anjeer"></button>
-        </div>
-        <div class="floater f-date-soft" data-px="-7" data-py="8">
-          <img src="{{ 'date.png' | asset_url }}" alt="" class="fi" width="130" height="130" loading="eager">
-          <button class="hero-hotspot" data-spotlight="date" aria-label="View Ajwa Khajoor"></button>
-        </div>
-        <div class="floater f-berry-soft" data-px="-9" data-py="-7">
-          <img src="{{ 'black-raisin.png' | asset_url }}" alt="" class="fi" width="135" height="135" loading="eager">
-          <button class="hero-hotspot" data-spotlight="black-raisin" aria-label="View Black Munaqqa"></button>
-        </div>
-      </div>
-
-      <div class="product-core hero-product-stack">
-        <img src="{{ 'pouch.png' | asset_url }}" alt="Morganics Premium Organic Pouch — Chemistry of Nutrients" class="stage-pouch hero-pouch pouch-img pouch-layer" data-px="0" data-py="-3" width="560" height="680" loading="eager" fetchpriority="high">
-        <div class="stage-shadow contact-shadow contact-shadow-layer" aria-hidden="true"></div>
-        <img src="{{ 'dryfruit-pile.png' | asset_url }}" alt="" class="stage-dryfruits hero-dryfruits pile-img dryfruits-layer" data-px="0" data-py="6" width="780" height="420" loading="eager" aria-hidden="true">
-        <img src="{{ 'stone.png' | asset_url }}" alt="" class="stage-stone hero-stone stone-img stone-layer" data-px="0" data-py="4" width="860" height="300" loading="eager" aria-hidden="true">
-      </div>
-
-      <div class="floating-zone floating-right">
-        <div class="floater f-almond" data-px="12" data-py="-14">
-          <img src="{{ 'almond.png' | asset_url }}" alt="" class="fi" width="145" height="145" loading="eager">
-          <button class="hero-hotspot" data-spotlight="almond" aria-label="View Badam Sabat"></button>
-        </div>
-        <div class="floater f-walnut" data-px="11" data-py="8">
-          <img src="{{ 'fig.png' | asset_url }}" alt="" class="fi" width="138" height="138" loading="eager">
-          <button class="hero-hotspot" data-spotlight="fig" aria-label="View Anjeer"></button>
-        </div>
-        <div class="floater f-date" data-px="9" data-py="12">
-          <img src="{{ 'date.png' | asset_url }}" alt="" class="fi" width="132" height="132" loading="eager">
-          <button class="hero-hotspot" data-spotlight="date" aria-label="View Ajwa Khajoor"></button>
-        </div>
-        <div class="floater f-black-raisin" data-px="10" data-py="-8">
-          <img src="{{ 'black-raisin.png' | asset_url }}" alt="" class="fi" width="135" height="135" loading="eager">
-          <button class="hero-hotspot" data-spotlight="black-raisin" aria-label="View Black Munaqqa"></button>
-        </div>
-        <div class="floater f-golden-soft" data-px="8" data-py="7">
-          <img src="{{ 'golden-raisin.png' | asset_url }}" alt="" class="fi" width="126" height="126" loading="eager">
-          <button class="hero-hotspot" data-spotlight="golden-raisin" aria-label="View Golden Raisin"></button>
-        </div>
-        <div class="floater f-fig-soft" data-px="7" data-py="-6">
-          <img src="{{ 'fig.png' | asset_url }}" alt="" class="fi" width="130" height="130" loading="eager">
-          <button class="hero-hotspot" data-spotlight="fig" aria-label="View Anjeer"></button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="hero-actions">
-      <div class="hero-quicklinks">
-        <a class="benefit-card" href="{{ nuts_link }}" data-slide-target="nuts">
-          <span class="bc-icon" aria-hidden="true">{% render 'morganics-hero-icon-premium-nuts' %}</span>
-          <span class="bc-label">Premium<br>Nuts</span>
-        </a>
-        <a class="benefit-card" href="{{ dry_fruits_link }}" data-slide-target="dry-fruits">
-          <span class="bc-icon" aria-hidden="true">{% render 'morganics-hero-icon-dry-fruits' %}</span>
-          <span class="bc-label">Dry<br>Fruits</span>
-        </a>
-        <a class="benefit-card" href="{{ seeds_link }}" data-slide-target="seeds">
-          <span class="bc-icon" aria-hidden="true">{% render 'morganics-hero-icon-seeds-wellness' %}</span>
-          <span class="bc-label">Seeds &amp;<br>Wellness</span>
-        </a>
-      </div>
-      <div class="hero-tagline" aria-hidden="true">
-        <p class="tagline-sm">Driven by</p>
-        <p class="tagline-lg">Wellness</p>
-      </div>
-    </div>
-  </div>
-
-  <article class="hero-spotlight-card" id="heroSpotlightCard-{{ section.id }}" aria-live="polite" aria-hidden="true">
-    <button class="hero-spotlight-close" type="button" aria-label="Close ingredient spotlight">×</button>
-    <div class="hero-spotlight-media"><img alt="" width="188" height="188"></div>
-    <div class="hero-spotlight-copy">
-      <h3></h3>
-      <span class="hero-spotlight-urdu"></span>
-      <p></p>
-    </div>
-    <div class="hero-spotlight-foot">
-      <strong></strong>
-      <div class="hero-spotlight-actions">
-        <button class="hero-spotlight-add" type="button">Add to Cart</button>
-        <a href="{{ routes.all_products_collection_url }}" class="hero-spotlight-cta">View Details</a>
-      </div>
-    </div>
-  </article>
-
-  <script type="application/json" data-hero-spotlight-products>
+  <script type="application/json" data-hero-config>
     {
-      "almond": {
-        "handle": "badam-abdul-wahidi",
-        "title": "Badam Sabat",
-        "urduTitle": "بادام",
-        "category": "Premium Nuts",
-        "description": "Whole almonds for daily snacking, soaking, family serving, and premium pantry use.",
-        "fallbackImage": {{ 'almond.png' | asset_url | json }},
-        "productImage": {% if almond_product.featured_image %}{{ almond_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-14-almond-with-shell.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if almond_product.selected_or_first_available_variant %}{{ almond_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      "sectionId": {{ section.id | json }},
+      "autoplay": {{ section.settings.enable_autoplay | json }},
+      "defaultDuration": {{ section.settings.default_duration | times: 1000 | json }},
+      "pauseOnHover": {{ section.settings.pause_on_hover | json }},
+      "pauseOnFocus": {{ section.settings.pause_on_focus | json }},
+      "parallax": {{ section.settings.enable_parallax | json }},
+      "floatingIngredients": {{ section.settings.enable_floating_ingredients | json }},
+      "floatingAnimation": {{ section.settings.enable_floating_animation | json }},
+      "burstGlow": {{ section.settings.enable_ingredient_burst_glow | json }},
+      "ingredientCounts": {
+        "desktop": {{ section.settings.desktop_ingredient_count | json }},
+        "tablet": {{ section.settings.tablet_ingredient_count | json }},
+        "mobile": {{ section.settings.mobile_ingredient_count | json }}
       },
-      "pistachio": {
-        "handle": "pista-maghaz",
-        "title": "Pista Maghaz",
-        "urduTitle": "پستہ مغز",
-        "category": "Premium Nuts",
-        "description": "Clean pistachio kernels for premium snacking, gifting, desserts, and everyday family routines.",
-        "fallbackImage": {{ 'pistachio.png' | asset_url | json }},
-        "productImage": {% if pistachio_product.featured_image %}{{ pistachio_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-16-pista-maghaz.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if pistachio_product.selected_or_first_available_variant %}{{ pistachio_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
+      "ingredientSafeZones": {
+        "desktop": { "left": {{ section.settings.ingredient_zone_desktop_left | json }}, "right": {{ section.settings.ingredient_zone_desktop_right | json }}, "top": {{ section.settings.ingredient_zone_desktop_top | json }}, "bottom": {{ section.settings.ingredient_zone_desktop_bottom | json }} },
+        "mobile": { "left": {{ section.settings.ingredient_zone_mobile_left | json }}, "right": {{ section.settings.ingredient_zone_mobile_right | json }}, "top": {{ section.settings.ingredient_zone_mobile_top | json }}, "bottom": {{ section.settings.ingredient_zone_mobile_bottom | json }} }
       },
-      "cashew": {
-        "handle": "kajo-sada",
-        "title": "Kajo Sada",
-        "urduTitle": "سادہ کاجو",
-        "category": "Premium Nuts",
-        "description": "Creamy cashews with a naturally rich bite for clean snacking, serving, and daily energy routines.",
-        "fallbackImage": {{ 'cashew.png' | asset_url | json }},
-        "productImage": {% if cashew_product.featured_image %}{{ cashew_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-17-kajo-sada.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if cashew_product.selected_or_first_available_variant %}{{ cashew_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
-      },
-      "fig": {
-        "handle": "anjeer",
-        "title": "Anjeer",
-        "urduTitle": "انجیر",
-        "category": "Dry Fruits",
-        "description": "Naturally sweet dried figs for clean snacking, breakfast bowls, and everyday nourishment.",
-        "fallbackImage": {{ 'fig.png' | asset_url | json }},
-        "productImage": {% if fig_product.featured_image %}{{ fig_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-50-anjeer-fig.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if fig_product.selected_or_first_available_variant %}{{ fig_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
-      },
-      "date": {
-        "handle": "ajwa-dates",
-        "title": "Ajwa Khajoor",
-        "urduTitle": "عجوہ کھجور",
-        "category": "Dry Fruits",
-        "description": "Soft premium Ajwa dates for daily nourishment, Ramadan tables, gifting, and traditional routines.",
-        "fallbackImage": {{ 'date.png' | asset_url | json }},
-        "productImage": {% if date_product.featured_image %}{{ date_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-58-khajoor-ajwa.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if date_product.selected_or_first_available_variant %}{{ date_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
-      },
-      "black-raisin": {
-        "handle": "munaqqa",
-        "title": "Black Munaqqa",
-        "urduTitle": "منقہ",
-        "category": "Dry Fruits",
-        "description": "Naturally sweet dried grapes for tea-time, family routines, and traditional pantry use.",
-        "fallbackImage": {{ 'black-raisin.png' | asset_url | json }},
-        "productImage": {% if black_raisin_product.featured_image %}{{ black_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-13-munakka-black.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if black_raisin_product.selected_or_first_available_variant %}{{ black_raisin_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
-      },
-      "golden-raisin": {
-        "handle": "sogi-small-kishmish-mewa",
-        "title": "Munaqqa / Golden Raisin",
-        "urduTitle": "کشمش / منقہ",
-        "category": "Dry Fruits",
-        "description": "Naturally sweet golden dried grapes for snacking, breakfast bowls, gifting, and everyday pantry use.",
-        "fallbackImage": {{ 'golden-raisin.png' | asset_url | json }},
-        "productImage": {% if golden_raisin_product.featured_image %}{{ golden_raisin_product.featured_image | image_url: width: 360 | json }}{% else %}{{ 'morganics-products-29-sogi-small-mewa.jpg' | asset_url | json }}{% endif %},
-        "variantId": {% if golden_raisin_product.selected_or_first_available_variant %}{{ golden_raisin_product.selected_or_first_available_variant.id | json }}{% else %}null{% endif %}
-      }
+      "ingredientScale": {{ section.settings.ingredient_global_scale | divided_by: 100.0 | json }},
+      "ingredientSpread": {{ section.settings.ingredient_blast_spread | divided_by: 100.0 | json }},
+      "ingredientJitter": {{ section.settings.enable_ingredient_jitter | json }},
+      "reduceMotion": {{ section.settings.reduce_motion | json }},
+      "slides": [
+        {% assign config_index = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' and block.settings.enabled %}
+            {% if config_index > 0 %},{% endif %}
+            {"handle": {{ block.settings.slide_handle | handleize | json }}, "duration": {{ block.settings.duration | times: 1000 | json }}, "blockId": {{ block.id | json }}}
+            {% assign config_index = config_index | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      ]
     }
   </script>
 </section>
@@ -231,19 +262,109 @@
 
 {% schema %}
 {
-  "name": "Morganics Hero",
+  "name": "Morganics Hero Slider",
   "tag": "section",
-  "class": "shopify-section-morganics-hero",
+  "class": "shopify-section-morganics-hero-slider",
+  "max_blocks": 50,
   "settings": [
-    { "type": "text", "id": "headline_small", "label": "Headline small", "default": "Rooted in" },
-    { "type": "text", "id": "headline_large", "label": "Headline large", "default": "Nature" },
-    { "type": "textarea", "id": "description", "label": "Description", "default": "Premium nuts, dry fruits\nand wellness essentials for\na healthier tomorrow" },
-    { "type": "url", "id": "nuts_link", "label": "Premium Nuts link" },
-    { "type": "url", "id": "dry_fruits_link", "label": "Dry Fruits link" },
-    { "type": "url", "id": "seeds_link", "label": "Seeds & Wellness link" }
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Morganics featured collections" },
+    { "type": "checkbox", "id": "enable_autoplay", "label": "Enable autoplay", "default": true },
+    { "type": "range", "id": "default_duration", "label": "Default slide duration", "min": 5, "max": 10, "step": 1, "unit": "s", "default": 7 },
+    { "type": "range", "id": "transition_speed", "label": "Transition speed", "min": 300, "max": 900, "step": 100, "unit": "ms", "default": 600 },
+    { "type": "select", "id": "transition_style", "label": "Transition style", "default": "soft", "options": [{ "value": "fade", "label": "Fade" }, { "value": "soft", "label": "Fade and soften" }] },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover and focus", "default": true },
+    { "type": "checkbox", "id": "pause_on_focus", "label": "Pause on keyboard focus", "default": true },
+    { "type": "checkbox", "id": "enable_parallax", "label": "Enable subtle stage parallax", "default": true },
+    { "type": "checkbox", "id": "enable_floating_ingredients", "label": "Enable floating ingredients", "default": true },
+    { "type": "checkbox", "id": "enable_floating_animation", "label": "Enable floating ingredient animation", "default": true },
+    { "type": "checkbox", "id": "enable_ingredient_burst_glow", "label": "Enable ingredient burst glow", "default": true },
+    { "type": "range", "id": "desktop_ingredient_count", "label": "Desktop ingredient count", "min": 0, "max": 12, "step": 1, "default": 12 },
+    { "type": "range", "id": "tablet_ingredient_count", "label": "Tablet ingredient count", "min": 0, "max": 8, "step": 1, "default": 8 },
+    { "type": "range", "id": "mobile_ingredient_count", "label": "Mobile ingredient count", "min": 0, "max": 5, "step": 1, "default": 4 },
+    { "type": "range", "id": "ingredient_zone_desktop_left", "label": "Desktop safe zone left", "min": 0, "max": 30, "step": 1, "unit": "%", "default": 15 },
+    { "type": "range", "id": "ingredient_zone_desktop_right", "label": "Desktop safe zone right", "min": 0, "max": 30, "step": 1, "unit": "%", "default": 18 },
+    { "type": "range", "id": "ingredient_zone_desktop_top", "label": "Desktop safe zone top", "min": 0, "max": 20, "step": 1, "unit": "%", "default": 4 },
+    { "type": "range", "id": "ingredient_zone_desktop_bottom", "label": "Desktop safe zone bottom", "min": 0, "max": 25, "step": 1, "unit": "%", "default": 8 },
+    { "type": "range", "id": "ingredient_zone_mobile_left", "label": "Mobile safe zone left", "min": 0, "max": 18, "step": 1, "unit": "%", "default": 4 },
+    { "type": "range", "id": "ingredient_zone_mobile_right", "label": "Mobile safe zone right", "min": 0, "max": 18, "step": 1, "unit": "%", "default": 4 },
+    { "type": "range", "id": "ingredient_zone_mobile_top", "label": "Mobile safe zone top", "min": 0, "max": 30, "step": 1, "unit": "%", "default": 14 },
+    { "type": "range", "id": "ingredient_zone_mobile_bottom", "label": "Mobile safe zone bottom", "min": 0, "max": 30, "step": 1, "unit": "%", "default": 18 },
+    { "type": "range", "id": "ingredient_global_scale", "label": "Global ingredient scale", "min": 70, "max": 140, "step": 5, "unit": "%", "default": 100 },
+    { "type": "range", "id": "ingredient_blast_spread", "label": "Blast spread intensity", "min": 70, "max": 140, "step": 5, "unit": "%", "default": 100 },
+    { "type": "checkbox", "id": "enable_ingredient_jitter", "label": "Enable ingredient random jitter", "default": true },
+    { "type": "checkbox", "id": "show_tagline", "label": "Show slide tagline", "default": true },
+    { "type": "checkbox", "id": "show_ctas", "label": "Show CTA buttons", "default": false },
+    { "type": "select", "id": "desktop_navigator_position", "label": "Desktop navigator position", "default": "right", "options": [{ "value": "right", "label": "Right side" }, { "value": "far-right", "label": "Far right" }] },
+    { "type": "select", "id": "mobile_navigator_style", "label": "Mobile navigator style", "default": "scroll-row", "options": [{ "value": "scroll-row", "label": "Horizontal scroll row" }, { "value": "compact-grid", "label": "Compact grid" }] },
+    { "type": "range", "id": "background_overlay_strength", "label": "Default background overlay strength", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 30 },
+    { "type": "checkbox", "id": "reduce_motion", "label": "Reduce hero motion", "default": false },
+    { "type": "range", "id": "stage_max_width", "label": "Stage maximum width", "min": 520, "max": 1040, "step": 20, "unit": "px", "default": 980 },
+    { "type": "range", "id": "stage_safe_margin", "label": "Stage side safe margin", "min": 20, "max": 40, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "ingredient_safe_margin", "label": "Ingredient edge margin", "min": 20, "max": 44, "step": 2, "unit": "px", "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero slide",
+      "limit": 8,
+      "settings": [
+        { "type": "checkbox", "id": "enabled", "label": "Enable slide", "default": true },
+        { "type": "text", "id": "slide_handle", "label": "Unique slide handle", "info": "Use this exact handle on related ingredient and quicklink blocks.", "default": "nature" },
+        { "type": "text", "id": "title_line_1", "label": "Title line 1", "default": "Rooted in" },
+        { "type": "text", "id": "title_line_2", "label": "Title line 2", "default": "Nature" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Premium nuts, dry fruits and wellness essentials for a healthier tomorrow" },
+        { "type": "text", "id": "primary_cta_label", "label": "Primary CTA label", "default": "Shop now" },
+        { "type": "url", "id": "primary_cta_link", "label": "Primary CTA link" },
+        { "type": "text", "id": "secondary_cta_label", "label": "Secondary CTA label" },
+        { "type": "url", "id": "secondary_cta_link", "label": "Secondary CTA link" },
+        { "type": "text", "id": "navigator_title", "label": "Navigator card title", "info": "Keep the default value to use title line 2.", "default": "Use title line 2" },
+        { "type": "select", "id": "navigator_category_icon", "label": "Navigator card icon", "default": "nuts", "options": [{ "value": "nuts", "label": "Premium nuts" }, { "value": "dry-fruits", "label": "Dry fruits" }, { "value": "roots", "label": "Roots and adaptogens" }, { "value": "seeds", "label": "Seeds and grains" }, { "value": "herbs", "label": "Herbs and botanicals" }, { "value": "sweeteners", "label": "Natural sweeteners" }, { "value": "oils", "label": "Oils and specialties" }] },
+        { "type": "image_picker", "id": "navigator_icon", "label": "Custom navigator icon" },
+        { "type": "text", "id": "tagline_small", "label": "Tagline small text", "default": "Driven by" },
+        { "type": "text", "id": "tagline_large", "label": "Tagline large text", "default": "Wellness" },
+        { "type": "range", "id": "duration", "label": "Slide duration", "min": 0, "max": 10, "step": 1, "unit": "s", "info": "Set to 0 to use the section default.", "default": 0 },
+        { "type": "image_picker", "id": "background_image", "label": "Background image" },
+        { "type": "range", "id": "overlay_strength", "label": "Background overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 30 },
+        { "type": "image_picker", "id": "pouch_image", "label": "Pouch image" },
+        { "type": "text", "id": "pouch_alt", "label": "Pouch alt text", "default": "Morganics premium organic pouch" },
+        { "type": "image_picker", "id": "stone_image", "label": "Base stone image" },
+        { "type": "image_picker", "id": "pile_image", "label": "Dry fruit pile image" },
+        { "type": "image_picker", "id": "foreground_image", "label": "Optional foreground pile" }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Hero ingredient",
+      "limit": 36,
+      "settings": [
+        { "type": "text", "id": "slide_handle", "label": "Slide handle", "default": "nature" },
+        { "type": "image_picker", "id": "image", "label": "Ingredient image" },
+        { "type": "select", "id": "fallback_asset", "label": "Built-in image fallback", "default": "almond", "options": [{ "value": "almond", "label": "Almond" }, { "value": "pistachio", "label": "Pistachio" }, { "value": "cashew", "label": "Cashew" }, { "value": "fig", "label": "Fig" }, { "value": "date", "label": "Date" }, { "value": "black-raisin", "label": "Black raisin" }, { "value": "golden-raisin", "label": "Golden raisin" }] },
+        { "type": "product", "id": "product", "label": "Linked product" },
+        { "type": "url", "id": "custom_link", "label": "Custom link", "info": "Overrides the selected product link." },
+        { "type": "text", "id": "alt_text", "label": "Alt text" },
+        { "type": "range", "id": "priority", "label": "Placement priority", "min": 1, "max": 10, "step": 1, "default": 5 }
+      ]
+    },
+    {
+      "type": "quicklink",
+      "name": "Hero quicklink",
+      "limit": 12,
+      "settings": [
+        { "type": "text", "id": "slide_handle", "label": "Slide handle", "default": "nature" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Premium nuts" },
+        { "type": "collection", "id": "collection", "label": "Category collection" },
+        { "type": "url", "id": "link", "label": "Custom link", "info": "Overrides the selected collection link." },
+        { "type": "select", "id": "category_icon", "label": "Brand category icon", "default": "nuts", "options": [{ "value": "nuts", "label": "Premium nuts" }, { "value": "dry-fruits", "label": "Dry fruits" }, { "value": "roots", "label": "Roots and adaptogens" }, { "value": "seeds", "label": "Seeds and grains" }, { "value": "herbs", "label": "Herbs and botanicals" }, { "value": "sweeteners", "label": "Natural sweeteners" }, { "value": "oils", "label": "Oils and specialties" }] },
+        { "type": "image_picker", "id": "custom_icon", "label": "Custom icon", "info": "Overrides the brand category icon." }
+      ]
+    }
   ],
   "presets": [
-    { "name": "Morganics Hero" }
+    {
+      "name": "Morganics Hero Slider",
+      "blocks": [{ "type": "slide" }, { "type": "ingredient" }, { "type": "ingredient" }, { "type": "ingredient" }, { "type": "quicklink" }]
+    }
   ]
 }
 {% endschema %}

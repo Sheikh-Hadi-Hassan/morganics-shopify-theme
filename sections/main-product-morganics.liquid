@@ -13,6 +13,28 @@
   assign faqs = product.metafields.custom.faq_s | default: product.metafields.custom.faqs
   assign category_copy = product.metafields.custom.category_copy | default: section.settings.category_copy
   assign category_title = product.metafields.custom.category_title | default: category_label
+    assign enable_powder_form = true
+    if product.metafields.custom.enable_powder_form.value == true
+      assign enable_powder_form = true
+    endif
+
+    assign powder_excluded_product = false
+    assign powder_exclusion_title = product.title | downcase
+    if powder_exclusion_title contains 'maghaz badam gurbandi' or powder_exclusion_title contains 'dar chini gol' or powder_exclusion_title contains 'goond katira' or powder_exclusion_title contains 'anjeer' or powder_exclusion_title contains 'fig' or powder_exclusion_title contains 'maghaz chilgoza half roasted' or powder_exclusion_title contains 'maghaz chilgoza full roasted' or powder_exclusion_title contains 'maghaz akhrot' or powder_exclusion_title contains 'walnut' or powder_exclusion_title contains 'banana dried' or powder_exclusion_title contains 'mabroom dates' or powder_exclusion_title contains 'khajoor ajwa' or powder_exclusion_title contains 'mixed berries' or powder_exclusion_title contains 'cranberry' or powder_exclusion_title contains 'honey' or powder_exclusion_title contains 'luban' or powder_exclusion_title contains 'sogi gol mewa' or powder_exclusion_title contains 'pista namkeen' or powder_exclusion_title contains 'sarson black' or powder_exclusion_title contains 'elaichi sabz' or powder_exclusion_title contains 'gur' or powder_exclusion_title contains 'chilka ispaghol' or powder_exclusion_title contains 'kajo fry' or powder_exclusion_title contains 'kajo roasted' or powder_exclusion_title contains 'kajo plain' or powder_exclusion_title contains 'til black' or powder_exclusion_title contains 'zarishk' or powder_exclusion_title contains 'harmal' or powder_exclusion_title contains 'saffron' or powder_exclusion_title contains 'pista maghaz' or powder_exclusion_title contains 'shakar' or powder_exclusion_title contains 'sogi sundarhani mewa' or powder_exclusion_title contains 'badam abdul wahidi' or powder_exclusion_title contains 'kali darakh' or powder_exclusion_title contains 'goji berry' or powder_exclusion_title contains 'musabbar' or powder_exclusion_title contains 'salajeet' or powder_exclusion_title contains 'hibiscus herb' or powder_exclusion_title contains 'sunflower seeds' or powder_exclusion_title contains 'maghaz sunflower seeds'
+      assign powder_excluded_product = true
+    endif
+    if powder_excluded_product
+      assign enable_powder_form = false
+    endif
+  assign has_powder_variants = false
+  for variant in product.variants
+    for option_value in variant.options
+      assign option_key = option_value | strip | downcase
+      if option_key == 'powder'
+        assign has_powder_variants = true
+      endif
+    endfor
+  endfor
   assign description_html = product.description
   assign visible_description = description_html | split: '<h2>FAQs</h2>' | first
   assign visible_description = visible_description | split: '<h2>FAQ</h2>' | first
@@ -41,14 +63,133 @@
   data-product-description-faq-source="{{ description_faq_source | escape }}"
   data-product-variants="{{ product.variants | json | escape }}"
 >
-  <div class="detail-image reveal">
-    {% if featured_media %}
-      {{ featured_media | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
-    {% elsif product.featured_image %}
-      {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: product.title }}
-    {% else %}
-      {% render 'morganics-product-image-fallback', product: product, width: 1200, height: 900, loading: 'eager' %}
+  <div
+    class="detail-image product-media-gallery reveal"
+    data-product-media-gallery
+    aria-label="{{ product.title | escape }} media gallery"
+  >
+    <div class="product-media-gallery__stage" data-gallery-stage tabindex="0">
+      {% if product.media.size > 0 %}
+        {% for media in product.media %}
+          {% liquid
+            assign is_active_media = false
+            assign media_loading = 'lazy'
+            if media.id == featured_media.id
+              assign is_active_media = true
+            elsif featured_media == blank and forloop.first
+              assign is_active_media = true
+            endif
+            if forloop.first
+              assign media_loading = 'eager'
+            endif
+          %}
+          <div
+            class="product-media-gallery__slide{% if is_active_media %} is-active{% endif %}"
+            data-gallery-slide
+            data-media-id="{{ media.id }}"
+            data-media-type="{{ media.media_type }}"
+            role="group"
+            aria-label="{{ forloop.index }} of {{ product.media.size }}"
+            aria-hidden="{% if is_active_media %}false{% else %}true{% endif %}"
+            {% unless is_active_media %}hidden{% endunless %}
+          >
+            {% case media.media_type %}
+              {% when 'image' %}
+                {{
+                  media
+                  | image_url: width: 1800
+                  | image_tag:
+                    loading: media_loading,
+                    widths: '480, 720, 960, 1200, 1500, 1800',
+                    sizes: '(min-width: 1181px) 46vw, 92vw',
+                    alt: media.alt | default: product.title
+                }}
+              {% when 'video' %}
+                {{
+                  media
+                  | video_tag:
+                    controls: false,
+                    autoplay: false,
+                    muted: true,
+                    loop: false,
+                    playsinline: true,
+                    preload: 'metadata',
+                    image_size: '1400x'
+                }}
+                <div class="product-media-gallery__video-controls" data-video-controls>
+                  <button type="button" data-video-play aria-label="Play video">
+                    <span data-play-icon aria-hidden="true">▶</span>
+                  </button>
+                  <button type="button" data-video-mute aria-label="Unmute video">
+                    <span data-mute-icon aria-hidden="true">⌁</span>
+                  </button>
+                </div>
+              {% when 'external_video' %}
+                <div class="product-media-gallery__external-video">
+                  {{ media | external_video_tag: loading: 'lazy' }}
+                </div>
+              {% when 'model' %}
+                {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true }}
+            {% endcase %}
+          </div>
+        {% endfor %}
+
+        {% if product.media.size > 1 %}
+          <button class="product-media-gallery__arrow product-media-gallery__arrow--prev" type="button" data-gallery-prev aria-label="Previous media">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+          </button>
+          <button class="product-media-gallery__arrow product-media-gallery__arrow--next" type="button" data-gallery-next aria-label="Next media">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <span class="product-media-gallery__counter" aria-live="polite">
+            <span data-gallery-current>1</span><span aria-hidden="true">/</span><span>{{ product.media.size }}</span>
+          </span>
+        {% endif %}
+      {% elsif product.featured_image %}
+        {{ product.featured_image | image_url: width: 1800 | image_tag: loading: 'eager', alt: product.title }}
+      {% else %}
+        {% render 'morganics-product-image-fallback', product: product, width: 1200, height: 900, loading: 'eager' %}
+      {% endif %}
+    </div>
+
+    {% if product.media.size > 1 %}
+      <div class="product-media-gallery__thumb-shell">
+        <button class="product-media-gallery__thumb-scroll" type="button" data-thumb-prev aria-label="Scroll thumbnails left">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+        </button>
+        <div class="product-media-gallery__thumbs" data-gallery-thumbs>
+          {% for media in product.media %}
+            <button
+              class="product-media-gallery__thumb{% if media.id == featured_media.id or featured_media == blank and forloop.first %} is-active{% endif %}"
+              type="button"
+              data-gallery-thumb
+              data-media-id="{{ media.id }}"
+              aria-label="Show {{ media.media_type }} {{ forloop.index }} of {{ product.media.size }}"
+              aria-current="{% if media.id == featured_media.id or featured_media == blank and forloop.first %}true{% else %}false{% endif %}"
+            >
+              {{
+                media.preview_image
+                | image_url: width: 180
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '90, 120, 180',
+                  sizes: '72px',
+                  alt: media.alt | default: product.title
+              }}
+              {% unless media.media_type == 'image' %}
+                <span class="product-media-gallery__thumb-type" aria-hidden="true">
+                  {% if media.media_type == 'model' %}3D{% else %}▶{% endif %}
+                </span>
+              {% endunless %}
+            </button>
+          {% endfor %}
+        </div>
+        <button class="product-media-gallery__thumb-scroll" type="button" data-thumb-next aria-label="Scroll thumbnails right">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+      </div>
     {% endif %}
+
     {% if product.collections.first %}
       <a class="back-chip" href="{{ product.collections.first.url }}">← {{ product.collections.first.title }}</a>
     {% else %}
@@ -77,7 +218,13 @@
           {% render 'morganics-variant-pills', product: product %}
         {% endif %}
 
-        {% if section.settings.show_powder_option %}
+        {% comment %}
+          Powder Form visibility is intentionally product-specific.
+          It is controlled by the boolean product metafield custom.enable_powder_form.
+          False, blank, or missing metafield values mean the Powder Form control stays hidden.
+          The product must also include at least one existing Powder variant before this renders.
+        {% endcomment %}
+        {% if enable_powder_form and has_powder_variants %}
           {% liquid
             assign powder_label = section.settings.powder_label | default: 'Powder Form'
             unless powder_label contains '+Rs'
@@ -111,6 +258,7 @@
     </div>
 
 <script src="{{ 'morganics-product.js' | asset_url }}" defer></script>
+<script src="{{ 'morganics-product-gallery.js' | asset_url }}" defer></script>
 
     <div class="feature-icons">
       {% for block in section.blocks %}
@@ -169,7 +317,6 @@
 {
   "name": "Morganics product",
   "settings": [
-    { "type": "checkbox", "id": "show_powder_option", "label": "Show powder form option", "default": true },
     { "type": "text", "id": "powder_label", "label": "Powder option label", "default": "Powder Form (+Rs.100)" },
     { "type": "text", "id": "powder_help", "label": "Powder option help", "default": "If you want this product powdered before packing." },
     { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false },

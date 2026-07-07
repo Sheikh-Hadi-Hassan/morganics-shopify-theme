@@ -1,0 +1,9 @@
+/* Collection grid authority. Loaded after the main theme stylesheet. */
+@media (min-width: 900px) {
+  body[data-template="collection"] #collectionProducts .collection-results .morganics-product-grid[data-view="grid"],
+  body[data-template="collection"] #collectionProducts .collection-results .product-grid.shop-grid[data-view="grid"] {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: var(--mrg-grid-gap, 16px) !important;
+  }
+}
